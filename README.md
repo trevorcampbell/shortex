@@ -13,7 +13,9 @@ To use this in your latex git project, navigate to your git repository and do th
 
 Any time you want to update your local copy of tchdr, navigate to your git repository and do the following:
 
-1. Pull tchdr as a subtree in the tchdr folder: `git subtree pull --prefix tchdr/ tchdr master --squash`
+1. Make sure your current branch is clean; commit all current changes (do not mix project/subproject commits)
+
+2. Pull tchdr as a subtree in the tchdr folder: `git subtree pull --prefix tchdr/ tchdr master --squash`
 
 In order to push your own changes to tchdr:
 
