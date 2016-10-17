@@ -31,10 +31,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Options Declarations %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%hyperref format/color/etc
 \DeclareOption{tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
-\DeclareOption{autonum}{\usepackage{autonum}}
+%autonum
+\newif\ifuseautonum
+\useautonumfalse
+\DeclareOption{autonum}{\useautonumtrue}
+
 \ProcessOptions
+
+\ifuseautonum \usepackage{autonum} \fi
 
 
 %%%%%%%%%%%%%%%%%%
