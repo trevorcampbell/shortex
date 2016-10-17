@@ -6,6 +6,8 @@
 %%  Adapted by Trevor Campbell for personal use.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \usepackage{xspace} %used at the end of macros to automatically determine whether spaces should be eaten or not
 \usepackage[mathscr]{eucal} %use euler script instead of mathcal
 \usepackage{dsfont} %doublestroke fonts (for things like reals, nats, complex numbers, etc)
@@ -24,6 +26,14 @@
 \usepackage{caption,subcaption} %package for sub-environments (figs, tables, etc)
 \usepackage{microtype} %microtypesetting improvements for latex
 \usepackage{booktabs} %professional quality tables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Hyperref/reference format %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareOption{tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
+\DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
+\DeclareOption{autonum}{\usepackage{autonum}}
 
 
 %%%%%%%%%%%%%%%%%%
@@ -81,8 +91,6 @@
 %%% Links %%%
 %%%%%%%%%%%%%
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
-\newcommand{\tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
-\newcommand{\blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%% Align shortcuts %%%

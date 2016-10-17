@@ -1,0 +1,426 @@
+%%
+%% This is file `autonum.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% autonum.dtx  (with options: `package')
+%% ----------------------------------------------------------------
+%% autonum --- Automatic number referenced equations
+%% E-mail: pat_h@web.de
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{autonum}[2015/01/18 v0.3.11 Automatic numbering of equations]
+\PassOptionsToPackage{hypertexnames=false}{hyperref}
+\RequirePackage{etoolbox}
+\makeatletter % The missing \makeatother command is on purpose (as every other combination results in an error).
+\let\autonum@etoolbox@forlistloop\forlistloop
+\RequirePackage{etextools}
+\let\forlistloop\autonum@etoolbox@forlistloop
+\RequirePackage{amsmath}
+\RequirePackage[absolute]{textpos}
+\RequirePackage{letltxmacro}
+
+
+\def\csxdefaux#1#2{%
+\protected@write\@mainaux{}{%
+\csxdef{\detokenize{#1}}{#2}%
+}%
+}
+\protected@write\@mainaux{}{%
+\string\providecommand\string\csxdef[2]{}%
+}
+
+\def\csxdefall#1#2{%
+\csxdefaux{#1}{#2}%
+\csxdef{#1}{#2}%
+}
+
+\newrobustcmd{\CsLetLtxMacro}[2]{%
+\expandafter\LetLtxMacro\csname#1\endcsname#2%
+}
+
+\newrobustcmd{\LetCsLtxMacro}[2]{%
+\ifcsdef{#2}{%
+\expandafter\LetLtxMacro\expandafter#1\csname#2\endcsname
+}{%
+\undef#1%
+}%
+}
+
+\newrobustcmd*{\CsLetCsLtxMacro}[2]{%
+\ifcsdef{#2}{%
+\expandafter\LetLtxMacro\csname#1\expandafter\endcsname\csname#2\endcsname
+}{%
+\csundef{#1}%
+}%
+}
+
+\newrobustcmd{\GlobalCsLetLtxMacro}[2]{%
+\expandafter\GlobalLetLtxMacro\csname#1\endcsname#2%
+}
+
+\newrobustcmd{\GlobalLetCsLtxMacro}[2]{%
+\ifcsdef{#2}{%
+\expandafter\GlobalLetLtxMacro\expandafter#1\csname#2\endcsname
+}{%
+\undef#1%
+}%
+}
+
+\newrobustcmd*{\GlobalCsLetCsLtxMacro}[2]{%
+\ifcsdef{#2}{%
+\expandafter\GlobalLetLtxMacro\csname#1\expandafter\endcsname\csname#2\endcsname
+}{%
+\csundef{#1}%
+}%
+}
+
+\def\vanishprotect{%
+\ifx\protect\@typeset@protect
+\expandafter\@firstofone
+\else
+\expandafter\@gobble
+\fi
+}
+
+\def\ifcsedef#1#2#3{%
+\edef\autonum@ifcsedefTemp{#1}%
+\expandafter\ifcsdef\expandafter{\autonum@ifcsedefTemp}{#2}{#3}%
+\undef{\autonum@ifcsedefTemp}%
+}
+
+\def\newcommandsequence#1{%
+\expandafter\newcommand\csname #1\endcsname
+}
+
+\def\renewcommandsequence#1{%
+\expandafter\renewcommand\csname #1\endcsname
+}
+
+
+
+\def\autonum@debug#1{%
+\PackageWarning{autonum}{#1}%
+}
+
+\def\meaningx#1{%
+\expandafter\ifcsname\string #1\endcsname
+\expandafter\meaning\csname\string #1\endcsname
+\else
+\meaning#1%
+\fi
+}
+
+\def\autonum@debugMacro#1{%
+\autonum@debug{%
+\detokenize{#1}defined as \MessageBreak
+\meaning#1 \expandafter\ifcsname\string #1\endcsname\MessageBreak
+with \expandafter\detokenize\expandafter{\csname\string#1\endcsname}defined as\MessageBreak
+\meaningx#1\fi
+}%
+}
+
+\AtBeginDocument{%
+\newlength{\autonum@environmentWidth}%
+\forcsvlist{\autonum@patchParametrizedFullEnvironment}{alignat}%
+\forcsvlist{\autonum@patchFullEnvironment}{equation,gather,multline,flalign,align}%
+\autonum@patchBlockEnvironment{split}%
+\autonum@generatePatchedReference{ref}%
+\ifdef{\cref}{%
+\autonum@generatePatchedReferenceCSL{cref}%
+}{}%
+}
+
+\def\autonum@patchFullEnvironment#1{%
+\autonum@saveEnvironmentSubcommands{#1}{center}{}%
+\autonum@patchEnvironmentHelper{#1}{0}%
+}
+\def\autonum@patchParametrizedFullEnvironment#1{%
+\autonum@saveEnvironmentSubcommands{#1}{center}{1}%
+\autonum@patchEnvironmentHelper{#1}{1}%
+}
+\def\autonum@patchBlockEnvironment#1{%
+\autonum@renameEnvironment{#1}{0}%
+\autonum@changeEnvironment{#1}{0}%
+}
+\def\autonum@patchEnvironmentHelper#1#2{%
+\autonum@renameEnvironment{#1}{#2}%
+\autonum@changeEnvironment{#1}{#2}%
+\autonum@generatePatchedLabel{#1}%
+\autonum@generatePatchedNewline{#1}%
+}
+
+\def\autonum@saveEnvironmentSubcommands#1#2#3{%
+\begin{textblock}{1}[1,1](0,0)%
+\begin{#2}%
+\begin{#1}#3%
+\deflength{\autonum@environmentWidth}{\linewidth-\multlinegap-\multlinegap}%
+\hspace{\autonum@environmentWidth}%
+\global\cslet{autonum@newline#1}\\%
+\notag
+\ifboolexpr{not test {\ifstrequal{#1}{multline}} or test {\ifcsundef{autonum@label#1}}}{%
+\GlobalCsLetLtxMacro{autonum@label#1}\label
+}{}%
+\end{#1}%
+\end{#2}%
+\end{textblock}%
+}
+
+\def\autonum@renameEnvironment#1#2{%
+\csletcs{autonum@#1Old}{#1}%
+\csletcs{autonum@end#1Old}{end#1}%
+\newenvironment{#1+}[#2]{%
+\csuse{autonum@#1Old}%
+}{%
+\csuse{autonum@end#1Old}%
+}%
+}
+
+\def\autonum@changeEnvironment#1#2{%
+\ifnum #2=0%
+\renewenvironment{#1}{%
+\autonum@startChangeEnvironment{#1}{}%
+}{%
+\autonum@endChangeEnvironment{#1}%
+}%
+\else
+\renewenvironment{#1}[1]{%
+\autonum@startChangeEnvironment{#1}{##1}%
+}{%
+\autonum@endChangeEnvironment{#1}%
+}%
+\fi
+\global\csundef{#1*}%
+\global\csundef{end#1*}%
+}
+
+\def\autonum@startChangeEnvironment#1#2{%
+\ifstrequal{#1}{split}{%
+\GlobalLetLtxMacro\autonum@outerMathEnvironmentLabel\label
+}{%
+\autonum@saveSubcommands
+}%
+\csuse{autonum@#1Old}#2%
+\ifstrequal{#1}{split}{%
+\GlobalLetLtxMacro\label\autonum@outerMathEnvironmentLabel
+}{%
+\autonum@patchSubcommands{#1}%
+}%
+}
+
+\def\autonum@endChangeEnvironment#1{%
+\autonum@possiblyHideNumber
+\csuse{autonum@end#1Old}%
+\ifstrequal{#1}{split}{%
+\renewcommand\label[2][]{%
+\PackageError{autonum}{%
+A label must not be placed between \detokenize{\end{split}}\MessageBreak
+and the end (of a line) of a math environment\MessageBreak
+when using autonum. Wrongly placed label is:\MessageBreak
+##2%
+}{Move the \detokenize{\label}call before \detokenize{\begin{split}}}%
+}%
+\aftergroup@def{\label}%
+}{%
+\autonum@restoreSubcommands
+\global\undef\autonum@currentLabel
+}%
+}
+
+\def\autonum@saveSubcommands{%
+\GlobalLetLtxMacro\autonum@labelNormal\label
+\GlobalLetLtxMacro\autonum@newlineNormal\\%
+}
+
+\def\autonum@patchSubcommands#1{%
+\GlobalLetCsLtxMacro\label{autonum@patched#1Label}%
+\ifstrequal{#1}{multline}{%
+}{%
+\GlobalLetCsLtxMacro\\{autonum@patched#1Newline}%
+}%
+}
+
+\def\autonum@restoreSubcommands{%
+\GlobalLetLtxMacro\label\autonum@labelNormal
+\GlobalLetLtxMacro\\\autonum@newlineNormal
+}
+
+\def\autonum@generatePatchedLabel#1{%
+\newcommandsequence{autonum@patched#1Label}[2][]{%
+\ifmeasuring@
+\else
+\ifdef{\autonum@currentLabel}{%
+\ifmeasuring@
+\PackageError{autonum}{Two succeeding \string\label's detected}{Did you forget a \string\\?}%
+\fi
+}{%
+\ifboolexpr{test {\ifstrequal{#1}{flalign}} or test {\ifstrequal{#1}{alignat}}}{%
+\def\autonum@currentLabel{##2}%
+}{%
+\global\def\autonum@currentLabel{##2}%
+}%
+}%
+\ifcsedef{autonum@##2Referenced}{%
+\let\df@label\@empty%
+\if\relax\detokenize{##1}\relax
+\csuse{autonum@label#1}{##2}%
+\else
+\csuse{autonum@label#1}[##1]{##2}%
+\fi
+}{%
+}%
+\fi
+}%
+}
+
+\def\autonum@generatePatchedNewline#1{%
+\newcommandsequence{autonum@patched#1Newline}{%
+\autonum@possiblyHideNumber
+\global\undef\autonum@currentLabel
+\csuse{autonum@newline#1}%
+}%
+}
+
+\def\autonum@possiblyHideNumber{
+\ifdef{\autonum@currentLabel}{%
+\ifcsedef{autonum@\autonum@currentLabel Referenced}{%
+}{%
+\notag
+}%
+}{%
+\notag
+}%
+}
+
+\def\autonum@generatePatchedReference#1{%
+\autonum@generatePatchedReferenceGeneral{#1}{autonum@use}%
+}
+
+\def\autonum@generatePatchedReferenceCSL#1{%
+\autonum@generatePatchedReferenceGeneral{#1}{forcsvlist}%
+}
+
+\def\skipInPDFTOC#1{%
+\ifdef{\texorpdfstring}{%
+\texorpdfstring{#1}{}%
+}{%
+#1%
+}%
+}
+
+\def\autonum@generatePatchedReferenceGeneral#1#2{%
+\CsLetCsLtxMacro{autonum@reference#1Old}{#1}%
+\csdef{#1}{%
+\protect\autonum@processReference{autonum@reference#1Old}{#2}%
+}%
+}
+
+ % If the reference command supports a starred call, as \cmd{\ref} when loading hyperref does for example, the star must be supported, as well. This macro separates calls using a star from those not using one.
+\def\autonum@processReference#1#2{%
+\@ifstar{%
+\autonum@processReferenceHelper{#1}{#2}{*}%
+}{%
+\autonum@processReferenceHelper{#1}{#2}{}%
+}%
+}%
+\addtocontents{toc}{%
+\string\providecommand\string\autonum@processReference[2]{}%
+}
+\addtocontents{lof}{%
+\string\providecommand\string\autonum@processReference[2]{}%
+}
+
+ % Mark label as referenced and call the old reference command. Do not write in the PDF's TOC, as this would lead to a write inside of a write when, e.g., calling \cmd{\cref} inside of a section command. Also use \cmd{\vanishprotect} to avoid writing \cmd{\autonum@markLabelAsReferenced} into the aux file or similar files. This avoids errors after deactivating the autonum package.
+\def\autonum@processReferenceHelper#1#2#3#4{%
+\skipInPDFTOC{%
+\vanishprotect{%
+\csuse{#2}{\protect\autonum@markLabelAsReferenced}{#4}%
+}%
+}%
+\csuse{#1}#3{#4}%
+}%
+
+\def\autonum@markLabelAsReferenced#1{%
+\csxdefall{autonum@#1Referenced}{}%
+}
+
+\def\autonum@use#1#2{%
+#1{#2}%
+}
+
+\newcounter{autonum@counter}
+\def\autonum@patchShortcutEnvironment{%
+}
+
+\def\autonum@useWithMultipleLineDetection#1#2{%
+\begin{#1}%
+\autonum@patchParentheses
+\GlobalLetLtxMacro\autonum@patchedNewline\\%
+\ifstrequal{#1}{align}{%
+\gdef\\{%
+\autonum@patchedNewline
+\gdef\autonum@multipleLines{}%
+}%
+}{%
+\gdef\\{%
+\gdef\autonum@multipleLines{}%
+}%
+}
+#2%
+\GlobalLetLtxMacro\\\autonum@patchedNewline
+\ifdef{\autonum@multipleLines}{%
+\global\undef{\autonum@multipleLines}%
+}{%
+\csxdefaux{autonum@\Roman{autonum@counter}HasExactlyOneLine}{\Roman{autonum@counter}}%
+}%
+\autonum@restoreParentheses
+\end{#1}%
+}
+
+\global\def\autonum@patchParentheses{%
+\autonum@patchParenthesis{(}{Left}{}%
+\autonum@patchParenthesis{)}{Right}{end}%
+}
+
+\global\def\autonum@patchParenthesis#1#2#3{%
+\ifcsdef{#1}{%
+\global\csletcs{autonum@old#2Parenthesis}{#1}%
+}{}%
+\global\csletcs{#1}{#3split}%
+}
+
+\global\def\autonum@restoreParentheses{%
+\autonum@restoreParenthesis{(}{Left}%
+\autonum@restoreParenthesis{)}{Right}%
+}
+
+\global\def\autonum@restoreParenthesis#1#2{%
+\ifcsdef{autonum@old#2Parenthesis}{%
+\global\csletcs{#1}{autonum@old#2Parenthesis}%
+\global\csundef{autonum@old#2Parenthesis}%
+}{}%
+}
+%% 
+%% Copyright (C) 2012, 2013, 2014, 2015 by Patrick Häcker <pat_h@web.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Patrick Häcker.
+%% 
+%% This work consists of the file  autonum.dtx
+%% and the derived files           autonum.ins,
+%%                                 autonum.pdf and
+%%                                 autonum.sty.
+%% 
+%%
+%% End of file `autonum.sty'.
