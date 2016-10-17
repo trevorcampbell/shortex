@@ -103,9 +103,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %%% Align shortcuts %%%
 %%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{ %necessary to stop clash with autonum package
 \def\[#1\]{\begin{align}#1\end{align}}		% numbered
 \def \<#1\>{\begin{aligned}#1\end{aligned}}
 \def\(#1\){\begin{align*}#1\end{align*}} 	% unnumbered
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
