@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Latex Shortcuts and Redefinitions 
+%%  Latex Shortcuts and Redefinitions
 %%
-%%  Original by Jonathan Huggins, with thanks to Dan Roy and Ryan Adams for allowing the use many of their definitions. 
+%%  Original by Jonathan Huggins, with thanks to Dan Roy and Ryan Adams for allowing the use many of their definitions.
 %%
 %%  Adapted by Trevor Campbell for personal use.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -16,7 +16,7 @@
 \usepackage{hyperref} %typical linking package
 \usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} %math
 \usepackage[capitalize,sort]{cleveref} %nice reference package for automatically choosing names for references
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} 
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \usepackage{import, subfiles} %packages for using subfile/folder structure
 \usepackage{url} %nice URL typesetting
 \usepackage{algpseudocode, algorithm} %typical alg typesetting packages
@@ -34,6 +34,9 @@
 %hyperref format/color/etc
 \DeclareOption{tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
+\def\boldorbar{\bar}
+\DeclareOption{bbold}{\def\boldorbar{\bm}}
+\DeclareOption{bbar}{\def\boldorbar{\bar}}
 %autonum
 \newif\ifuseautonum
 \useautonumfalse
@@ -45,18 +48,18 @@
 
 
 %%%%%%%%%%%%%%%%%%
-%%% Commenting %%% 
+%%% Commenting %%%
 %%%%%%%%%%%%%%%%%%
 
 %% NA: needs attention (rough writing whose correctness needs to be verified)
 %% TBD: instructions for how to fix a gap ("Describe the propagation by ...")
-%% PROBLEM: bug or missing crucial bit 
+%% PROBLEM: bug or missing crucial bit
 
-%% use \fXXX versions of these macros to put additional explanation into a footnote (in the margin).  
-%% The idea is that we don't want to interrupt the flow of the paper or make it 
+%% use \fXXX versions of these macros to put additional explanation into a footnote (in the margin).
+%% The idea is that we don't want to interrupt the flow of the paper or make it
 %% impossible to read because there are a bunch of comments.
 
-%% NA's (and TBDs, those less crucially) should be written so 
+%% NA's (and TBDs, those less crucially) should be written so
 %% that they flow with the text.
 
 \definecolor{WowColor}{rgb}{.75,0,.75}
@@ -138,7 +141,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %%% General Purpose %%%
 %%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\tuple}[1][]{\left\langle #1 \right\rangle} 
+\newcommand{\tuple}[1][]{\left\langle #1 \right\rangle}
 \newcommand{\emptystr}{\text{\o}}
 \newcommand{\ind}{\mathds{1}} % indicator function
 \newcommand{\sgn}{\operatorname{sgn}} % sign function
@@ -209,7 +212,7 @@
 \newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\dist}}
 
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
-\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent 
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
 
 % parametric distributions
 \newcommand{\distNamed}[1]{{\sf{#1}}}
@@ -240,7 +243,7 @@
 \newcommand{\distDP}{\mathrm{DP}}
 \newcommand{\distCRP}{\mathrm{CRP}}
 \newcommand{\distPYP}{\mathrm{PY}}
-%\newcommand{\distGP}{{\mathrm{GP}}} % Gaussian process
+\newcommand{\distGP}{{\mathrm{GP}}} % Gaussian process
 \newcommand{\distPP}{\mathrm{PP}}
 \newcommand{\distBP}{\mathrm{BP}}
 \newcommand{\distBPP}{\mathrm{BPP}}
@@ -281,13 +284,13 @@
 
 %%%%%%%%%%%%%
 %%% Logic %%%
-%%%%%%%%%%%%% 
+%%%%%%%%%%%%%
 \DeclareMathOperator{\notimplies}{\centernot\implies}
 
 
 %%%%%%%%%%%%%%%%%
 %%% Fractions %%%
-%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%
 \newcommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
 \newcommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
 \newcommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
@@ -320,7 +323,7 @@
 
 % Proof definitions
 \theoremstyle{plain}
-\newtheorem{nthm}{Theorem}[section]
+\newtheorem{nthm}{Theorem}
 \newtheorem{nprop}[nthm]{Proposition}
 \newtheorem{nlem}[nthm]{Lemma}
 \newtheorem{ncor}[nthm]{Corollary}
@@ -477,11 +480,6 @@
 \newcommand{\bary}{\bar{y}}
 \newcommand{\barz}{\bar{z}}
 
-% Shortcut to either bold or bar everything
-\def\boldshortcuts{\def\boldorbar{\mathbf}}
-\def\barshortcuts{\def\boldorbar{\bar}}
-
-\barshortcuts
 
 \newcommand{\bA}{\boldorbar{A}}
 \newcommand{\bB}{\boldorbar{B}}
@@ -754,7 +752,6 @@
 \newcommand{\hY}{\hat{Y}}
 \newcommand{\hZ}{\hat{Z}}
 \newcommand{\ha}{\hat{a}}
-\newcommand{\hb}{\hat{b}}
 \newcommand{\hh}{\hat{h}}
 \newcommand{\hc}{\hat{c}}
 \newcommand{\hd}{\hat{d}}
