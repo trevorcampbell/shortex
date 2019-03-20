@@ -196,10 +196,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Algorithms %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\makeatletter
-\algnewcommand{\LineComment}[1]{\Statex \hskip\ALG@thistlm $\triangleright$ #1}
-\makeatother
 
+%properly indented comments
+%usage:
+%\LineComment{X}{Here is the comment},  where X = # additional indents. 
+%right after for / procedure / function calls, for whatever reason need to indent manually...
+\newdimen{\algindent}
+\setlength\algindent{1.5em}
+\makeatletter
+\newcommand{\LineComment}[2][0]{\Statex \hspace{#1\algindent} \hskip\ALG@thistlm $\triangleright$ #2}
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Probability and Statistics %%%
