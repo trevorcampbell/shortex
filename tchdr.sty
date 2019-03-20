@@ -196,7 +196,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Algorithms %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\algnewcommand{\LineComment}[1]{\Statex $\triangleright$ #1 }
+\makeatletter
+\algnewcommand{\LineComment}[1]{\Statex \hskip\ALG@thistlm $\triangleright$ #1}
+\makeatother
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
