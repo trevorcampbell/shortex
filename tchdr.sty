@@ -185,6 +185,20 @@
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Convex Analysis %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\conv}{conv}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Algorithms %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\algnewcommand{\LineComment}[1]{\Statex $\triangleright$ #1 }
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Probability and Statistics %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,8 +276,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Information Theory %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\kl}[2]{\mathrm{D_{KL}}\left(#1 || #2\right)}
+\newcommand{\divergence}[3]{\mathrm{D_{#1}}\left(#2 || #3\right)}
+\newcommand{\distance}[3]{\mathrm{#1}\left(#2, #3\right)}
+\newcommand{\kl}[2]{\divergence{KL}{#1}{#2}}
+\newcommand{\tvd}[2]{\distance{D_{TV}}{#1}{#2}}
 \newcommand{\ent}[1]{\mathcal{H}\left(#1\right)}
+\newcommand{\hell}[2]{\distance{H}{#1}{#2}}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%% Special Funcs %%%
