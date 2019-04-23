@@ -184,6 +184,10 @@
 \newcommand{\splus}{\!+\!}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Optimization               %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\left(#2\right)}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -284,12 +288,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Information Theory %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\divergence}[3]{\mathrm{D_{#1}}\left(#2 || #3\right)}
-\newcommand{\distance}[3]{\mathrm{#1}\left(#2, #3\right)}
-\newcommand{\kl}[2]{\divergence{KL}{#1}{#2}}
-\newcommand{\tvd}[2]{\distance{D_{TV}}{#1}{#2}}
+\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3 || #4\right)}
+\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3, #4\right)}
+\newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
+\newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
 \newcommand{\ent}[1]{\mathcal{H}\left(#1\right)}
-\newcommand{\hell}[2]{\distance{H}{#1}{#2}}
+\newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%% Special Funcs %%%
