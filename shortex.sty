@@ -17,6 +17,12 @@
 \usepackage{hyperref} % typical linking package
 \usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} % math
 \usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
+% ensure that crefs appear correctly in bookmarks 
+\usepackage{crossreftools} % may not be available when uploading to arXiv 
+\pdfstringdefDisableCommands{%
+    \let\Cref\crtCref
+    \let\cref\crtcref
+}
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \usepackage{import, subfiles} % packages for using subfile/folder structure
 \usepackage{url} % nice URL typesetting
