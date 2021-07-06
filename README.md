@@ -30,8 +30,8 @@ Note for those who don't read through the rest of the post: the
 automatic equation numbering
 in shortex **requires you to compile your document 4 times.**
 
-By the way: if, in your travels, you find a really neat package that makes
-LaTeX less annoying to use, let me know and I'll consider adding it to `shortex.sty`!
+If, in your travels, you find a really neat package that makes
+LaTeX less annoying to use, post an issue and we'll consider adding it to `shortex.sty`.
 
 
 ### Automatic reference typing
