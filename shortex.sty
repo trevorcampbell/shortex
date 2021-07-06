@@ -8,24 +8,25 @@
 
 
 \usepackage{xifthen}
-\usepackage{xspace} %used at the end of macros to automatically determine whether spaces should be eaten or not
-\usepackage[mathscr]{eucal} %use euler script instead of mathcal
-\usepackage{dsfont} %doublestroke fonts (for things like reals, nats, complex numbers, etc)
-\usepackage[nice]{nicefrac} %nice fraction typesetting, compact symbols for 1/2, etc
-\usepackage[usenames]{color} %for using colored text
-\usepackage{hyperref} %typical linking package
-\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} %math
-\usepackage[capitalize,sort,compress]{cleveref} %nice reference package for automatically choosing names for references
+\usepackage{xstring}
+\usepackage{xspace} % used at the end of macros to automatically determine whether spaces should be eaten or not
+\usepackage[mathscr]{eucal} % use euler script instead of mathcal
+\usepackage{dsfont} % doublestroke fonts (for things like reals, nats, complex numbers, etc)
+\usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
+\usepackage[usenames]{color} % for using colored text
+\usepackage{hyperref} % typical linking package
+\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} % math
+\usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
-\usepackage{import, subfiles} %packages for using subfile/folder structure
-\usepackage{url} %nice URL typesetting
-\usepackage{algpseudocode, algorithm} %typical alg typesetting packages
-\usepackage{graphicx} %typical graphics package for figures
-\usepackage{multirow} %multirow tables
-\usepackage{wrapfig} %figures wrapped into the text
-\usepackage{caption,subcaption} %package for sub-environments (figs, tables, etc)
-\usepackage{microtype} %microtypesetting improvements for latex
-\usepackage{booktabs} %professional quality tables
+\usepackage{import, subfiles} % packages for using subfile/folder structure
+\usepackage{url} % nice URL typesetting
+\usepackage{algpseudocode, algorithm} % typical alg typesetting packages
+\usepackage{graphicx} % typical graphics package for figures
+\usepackage{multirow} % multirow tables
+\usepackage{wrapfig} % figures wrapped into the text
+\usepackage{caption,subcaption} % package for sub-environments (figs, tables, etc)
+\usepackage{microtype} % microtypesetting improvements for latex
+\usepackage{booktabs} % professional quality tables
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +106,24 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Shortened \left/\right commands %%%
+%%%% Bracket Shorthands %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\lcr}[3]{\left #1 #2 \right #3} % autosize
+\newcommand{\lcrx}[4][{-1}]{
+	\mathchoice{\IfEq{#1}{-1}{\left #2 {{{{#3}}}} \right #4}{
+   	\IfEq{#1}{0}{#2 {{{{#3}}}} #4}{
+	\IfEq{#1}{1}{\bigl #2 {{{{#3}}}} \bigr #4}{
+	\IfEq{#1}{2}{\Bigl #2 {{{{#3}}}} \Bigr #4}{
+	\IfEq{#1}{3}{\biggl #2 {{{{#3}}}} \biggr #4}{
+	\IfEq{#1}{4}{\Biggl #2 {{{{#3}}}} \Biggr #4}{
+    \GenericWarning{"4th argument to lcrx must be -1, 0, 1, 2, 3, or 4"}
+    }}}}}}}  % specify size with {-1,...4} as optional argument
+    {#2 {{{{#3}}}} #4}
+    {#2 {{{{#3}}}} #4}
+    {#2 {{{{#3}}}} #4}}
+    
+
+% Shortened \left/\right commands %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\pp({\left(}
 \def\pp){\right)}
@@ -114,6 +132,22 @@
 \def\cppl{\left\{}
 \def\cppr{\right\}}
 
+% Brackets and bracket-like functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rbra}[2][{-1}]{\lcrx[#1] ( {#2} ) }
+\newcommand{\cbra}[2][{-1}]{\lcrx[#1] \{ {#2} \} }
+\newcommand{\sbra}[2][{-1}]{\lcrx[#1] [ {#2} ] }
+
+\newcommand{\abs}[2][{-1}]{\lcrx[#1] \vert {#2} \vert }
+\newcommand{\set}[2][{-1}]{\lcrx[#1] \{ {#2} \}}
+\newcommand{\floor}[2][{-1}]{\lcrx \lfloor {#2} \rfloor}
+\newcommand{\ceil}[2][{-1}]{\lcrx[#1] \lceil {#2} \rceil}
+\newcommand{\norm}[2][{-1}]{\lcrx[#1] \Vert {#2} \Vert}
+\newcommand{\inner}[3][{-1}]{\lcrx[#1] \langle {{#2},\ {#3}} \rangle}
+\newcommand{\card}[2][{-1}]{\lcrx[#1] \vert {#2} \vert }
+
+\newcommand{\normarg}[3][{-1}]{\norm[#1]{#2}_{#3}}
+\newcommand{\innerarg}[3][{-1}]{\inner[#1]{#2}_{#3}}
 
 
 
@@ -131,10 +165,45 @@
 %%% Important Sets %%%
 %%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\extReals}{\overline{\reals}}
+\newcommand{\posReals}{\reals_+}
+\newcommand{\posExtReals}{{\overline\reals}_+}
+\newcommand{\posPosReals}{\reals_{++}}
+\newcommand{\posPosExtReals}{{\overline\reals}_{++}}
+
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
+\newcommand{\posInts}{\ints_+}
+
 \newcommand{\rats}{\ensuremath{\mathbb{Q}}}
+\newcommand{\posRats}{\rats_+}
+
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
+\newcommand{\natsO}{\nats_{0}}
+
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
+
+\newcommand{\measures}{\mathcal{M}}
+\newcommand{\probMeasures}{\mathcal{M}_1}
+
+
+% Set Operations
+%%%%%%%%%%%%%%%%
+\newcommand{\PowerSet}{\mathcal{P}}
+
+\newcommand{\union}{\cup}
+\newcommand{\Union}{\bigcup}
+\newcommand{\djunion}{\sqcup}
+\newcommand{\djUnion}{\bigsqcup}
+
+\newcommand{\intersect}{\cap}
+\newcommand{\Intersect}{\bigcap}
+
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\closure}{\operatorname{cl}}
+\newcommand{\spann}{\operatorname{span}}
+
+\newcommand{\boundary}{\partial}
 
 
 %%%%%%%%%%%%%%%
@@ -146,11 +215,19 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-%%% Matrix Operators %%%
+%%% Linear Algebra %%%
 %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\diag}{\operatorname{diag}}
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\kron}{\operatorname{\otimes}}
+\newcommand{\adjsym}{\dag} % adjoint symbol
+\newcommand{\adj}{^{\adjsym}} % adjoint
+\DeclareMathOperator{\spec}{\sigma} % spectrum
+\DeclareMathOperator{\diag}{diag} % diagonal
+\DeclareMathOperator{\rank}{rank} % rank
+
+\newcommand{\transposesym}{\top}
+\newcommand{\transpose}{^{\transposesym}}
+\newcommand{\invtranspose}{^{-\transposesym}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -164,10 +241,27 @@
 \newcommand{\sn}[2]{\ensuremath{#1\!\times\!10^{#2}}}	% #1 x 10^{#2}
 
 \newcommand{\st}{\,:\,}
-\newcommand{\given}{\,|\,}
-\newcommand{\closure}{\operatorname{cl}}
-\newcommand{\spann}{\operatorname{span}}
-\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\given}{\mid}
+
+% Words in math
+%%%%%%%%%%%%%%%
+\newcommand{\stT}{\ \text{s.t.}\ }
+\newcommand{\andT}{\ \text{and}\ }
+\newcommand{\orT}{\ \text{or}\ }
+\newcommand{\whereT}{\ \text{where}\ }
+\newcommand{\withT}{\ \text{with}\ }
+
+% Words with special characters
+%%%%%%%%%%%%%%%%
+\def\cadlag{c\`adl\`ag\@\xspace}
+\def\Gronwall{Gr\"onwall\xspace}
+\def\Renyi{R\'enyi\xspace}
+\def\Holder{H\"older\xspace}
+\def\Ito{It\^o\xspace}
+\def\Nystrom{Nystr\"om\xspace}
+\def\Schatten{Sch\"atten\xspace}
+\def\Matern{Mat\'ern\xspace}
+\def\Frechet{Fr\'echet\xspace}
 
 
 % New definition of square root:
@@ -204,7 +298,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Optimization               %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\left(#2\right)}}
+\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\rbra{#2}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -246,7 +340,7 @@
 % unary/functions
 \renewcommand{\Pr}{\mathbb{P}}  % probability
 \newcommand{\EE}{\mathbb{E}}	% expectation
-
+\newcommand{\Law}{\mcL} 
 \newcommand{\var}{\operatorname{Var}}	% variance
 \newcommand{\cov}{\operatorname{Cov}}	% covariance
 \newcommand{\corr}{\operatorname{Corr}}	% correlation
@@ -256,6 +350,11 @@
 \newcommand{\dist}{\sim}
 \newcommand{\distiid}{\overset{\textrm{\tiny\iid}}{\dist}}
 \newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\dist}}
+% maybe use these instead? can keep others for backward compatibility 
+\newcommand{\distas}{\sim}
+\newcommand{\distiidas}{\stk{\distas}{iid}}
+\newcommand{\distindas}{\stk{\distas}{ind}}
+\newcommand{\pushfwdmeas}[2]{{{#1}_{\sharp} #2}}
 
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
 \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
@@ -286,7 +385,7 @@
 \newcommand{\distGeom}{\distNamed{Geom}}
 \newcommand{\distWish}{\mathpzc{W}}
 \newcommand{\distInvWish}{\mathpzc{IW}}
-% non-parametric distribution
+% non-parametric distributions
 \newcommand{\distBeP}{\mathrm{BeP}}
 \newcommand{\distDP}{\mathrm{DP}}
 \newcommand{\distCRP}{\mathrm{CRP}}
@@ -307,11 +406,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Information Theory %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3 || #4\right)}
-\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3, #4\right)}
+\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3 || #4}}
+\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3, #4}}
 \newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
 \newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
-\newcommand{\ent}[1]{\mathcal{H}\left(#1\right)}
+\newcommand{\ent}[1]{\mathcal{H}\rbra{#1}}
 \newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
 
 %%%%%%%%%%%%%%%%%%%%%
