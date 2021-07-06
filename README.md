@@ -12,7 +12,7 @@ Using LaTeX has a number of big benefits when writing papers:
 - it is basically required by every conference/journal in ML/stats
 
 But it also has a number of drawbacks.
-The `tchdr.sty` style file is designed to help make typesetting a 
+The `shortex.sty` style file is designed to help make typesetting a 
 little less painful and LaTeX code a little easier to read. 
 It provides:
 
@@ -24,14 +24,14 @@ It provides:
 - a collection of oft-imported packages
 
 Grab a copy of the style file from 
-[the `tchdr` repository](https://github.com/trevorcampbell/tchdr),
+this repository,
 and use the guide below to learn how to use the package.
 Note for those who don't read through the rest of the post: the 
 automatic equation numbering
-in tchdr **requires you to compile your document 4 times.**
+in shortex **requires you to compile your document 4 times.**
 
 By the way: if, in your travels, you find a really neat package that makes
-LaTeX less annoying to use, let me know and I'll consider adding it to `tchdr.sty`!
+LaTeX less annoying to use, let me know and I'll consider adding it to `shortex.sty`!
 
 
 ### Automatic reference typing
@@ -67,7 +67,7 @@ not to mention starred versions of those environments and `\nonumber`/`\notag` c
 on whether/where you want equation numbers,
 display or in-text math, etc. This leads to verbose, inconsistent code.
 
-The `tchdr` package provides two major improvements. First, we replace 
+The `shortex` package provides two major improvements. First, we replace 
 the `align` environment with a much less verbose `\[ ... \]` syntax,
 ```latex
 \[
@@ -95,7 +95,7 @@ won't get a number. See [the autonum package](https://ctan.org/pkg/autonum?lang=
 **Note: You must compile your document 4 times for this to work properly.** 
 
 ### Convenient math commands
-The `tchdr.sty` file has a huge list of shortened commands for mathematical symbols.
+The `shortex.sty` file has a huge list of shortened commands for mathematical symbols.
 I'll list a few of the most common ones I use here, but please go through the style file
 to see the full list.
 
@@ -110,7 +110,7 @@ X_n \sim \mathcal{N}(\hat{\mu}, \hat{\sigma}).
 \end{align}
 ```
 
-And here is the exact same expression using `tchdr.sty` syntax:
+And here is the exact same expression using `shortex.sty` syntax:
 ```latex
 \[
 X_n &\in \mcX\\
@@ -208,7 +208,7 @@ Math-mode shortcuts:
 \cov        % covariance
 ```
 
-Distributions (there are quite a few more in `tchdr.sty`, and you can define new ones using the `\distNamed` command)
+Distributions (there are quite a few more in `shortex.sty`, and you can define new ones using the `\distNamed` command)
 ```latex
 \distBern
 \distNorm
