@@ -1,4 +1,5 @@
-# Simplifying and automating LaTeX with `tchdr.sty`
+# ShorTeX.sty
+## LaTeX style file for more efficient, more readable math
 
 Using LaTeX has a number of big benefits when writing papers:
 
@@ -268,5 +269,4 @@ To typeset a numbered list, use `\benum...\eenum`:
 \item Here is another
 \eenum
 ```
-
 
