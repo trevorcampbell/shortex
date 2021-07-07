@@ -8,31 +8,38 @@
 
 
 \usepackage{xifthen}
-\usepackage{xspace} %used at the end of macros to automatically determine whether spaces should be eaten or not
-\usepackage[mathscr]{eucal} %use euler script instead of mathcal
-\usepackage{dsfont} %doublestroke fonts (for things like reals, nats, complex numbers, etc)
-\usepackage[nice]{nicefrac} %nice fraction typesetting, compact symbols for 1/2, etc
-\usepackage[usenames]{color} %for using colored text
-\usepackage{hyperref} %typical linking package
-\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} %math
-\usepackage[capitalize,sort,compress]{cleveref} %nice reference package for automatically choosing names for references
+\usepackage{xstring}
+\usepackage{xspace} % used at the end of macros to automatically determine whether spaces should be eaten or not
+\usepackage[mathscr]{eucal} % use euler script instead of mathcal
+\usepackage{dsfont} % doublestroke fonts (for things like reals, nats, complex numbers, etc)
+\usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
+\usepackage[usenames]{color} % for using colored text
+\usepackage{hyperref} % typical linking package
+\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
+\usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
+% ensure that crefs appear correctly in bookmarks 
+\usepackage{crossreftools} % may not be available when uploading to arXiv 
+\pdfstringdefDisableCommands{%
+    \let\Cref\crtCref
+    \let\cref\crtcref
+}
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
-\usepackage{import, subfiles} %packages for using subfile/folder structure
-\usepackage{url} %nice URL typesetting
-\usepackage{algpseudocode, algorithm} %typical alg typesetting packages
-\usepackage{graphicx} %typical graphics package for figures
-\usepackage{multirow} %multirow tables
-\usepackage{wrapfig} %figures wrapped into the text
-\usepackage{caption,subcaption} %package for sub-environments (figs, tables, etc)
-\usepackage{microtype} %microtypesetting improvements for latex
-\usepackage{booktabs} %professional quality tables
+\usepackage{import, subfiles} % packages for using subfile/folder structure
+\usepackage{url} % nice URL typesetting
+\usepackage{algpseudocode, algorithm} % typical alg typesetting packages
+\usepackage{graphicx} % typical graphics package for figures
+\usepackage{multirow} % multirow tables
+\usepackage{wrapfig} % figures wrapped into the text
+\usepackage{caption,subcaption} % package for sub-environments (figs, tables, etc)
+\usepackage{microtype} % microtypesetting improvements for latex
+\usepackage{booktabs} % professional quality tables
 
 \usepackage{xargs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Options Declarations %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %hyperref format/color/etc
-\DeclareOption{tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
+\DeclareOption{colorhypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 \def\boldorbar{\bar}
 \DeclareOption{bbold}{\def\boldorbar{\bm}}
@@ -104,8 +111,31 @@
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
 
 
+% Stacked Relations
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\stk}[2]{\ensuremath{\stackrel{\text{#2}}{#1}}}
+\newcommand{\stkm}[2]{\ensuremath{\stackrel{#2}{#1}}}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Shortened \left/\right commands %%%
+%%%% Bracket Shorthands %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\lcr}[3]{\left #1 #2 \right #3} % autosize
+\newcommand{\lcrx}[4][{-1}]{
+	\mathchoice{\IfEq{#1}{-1}{\left #2 {{{{#3}}}} \right #4}{
+   	\IfEq{#1}{0}{#2 {{{{#3}}}} #4}{
+	\IfEq{#1}{1}{\bigl #2 {{{{#3}}}} \bigr #4}{
+	\IfEq{#1}{2}{\Bigl #2 {{{{#3}}}} \Bigr #4}{
+	\IfEq{#1}{3}{\biggl #2 {{{{#3}}}} \biggr #4}{
+	\IfEq{#1}{4}{\Biggl #2 {{{{#3}}}} \Biggr #4}{
+    \GenericWarning{"4th argument to lcrx must be -1, 0, 1, 2, 3, or 4"}
+    }}}}}}}  % specify size with {-1,...4} as optional argument
+    {#2 {{{{#3}}}} #4}
+    {#2 {{{{#3}}}} #4}
+    {#2 {{{{#3}}}} #4}}
+    
+
+% Shortened \left/\right commands %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\pp({\left(}
 \def\pp){\right)}
@@ -114,6 +144,22 @@
 \def\cppl{\left\{}
 \def\cppr{\right\}}
 
+% Brackets and bracket-like functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rbra}[2][{-1}]{\lcrx[#1] ( {#2} ) }
+\newcommand{\cbra}[2][{-1}]{\lcrx[#1] \{ {#2} \} }
+\newcommand{\sbra}[2][{-1}]{\lcrx[#1] [ {#2} ] }
+
+\newcommand{\abs}[2][{-1}]{\lcrx[#1] \vert {#2} \vert }
+\newcommand{\set}[2][{-1}]{\lcrx[#1] \{ {#2} \}}
+\newcommand{\floor}[2][{-1}]{\lcrx \lfloor {#2} \rfloor}
+\newcommand{\ceil}[2][{-1}]{\lcrx[#1] \lceil {#2} \rceil}
+\newcommand{\norm}[2][{-1}]{\lcrx[#1] \Vert {#2} \Vert}
+\newcommand{\inner}[3][{-1}]{\lcrx[#1] \langle {{#2},\ {#3}} \rangle}
+\newcommand{\card}[2][{-1}]{\lcrx[#1] \vert {#2} \vert }
+
+\newcommand{\normarg}[3][{-1}]{\norm[#1]{#2}_{#3}}
+\newcommand{\innerarg}[3][{-1}]{\inner[#1]{#2}_{#3}}
 
 
 
@@ -131,10 +177,45 @@
 %%% Important Sets %%%
 %%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\extReals}{\overline{\reals}}
+\newcommand{\posReals}{\reals_+}
+\newcommand{\posExtReals}{{\overline\reals}_+}
+\newcommand{\posPosReals}{\reals_{++}}
+\newcommand{\posPosExtReals}{{\overline\reals}_{++}}
+
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
+\newcommand{\posInts}{\ints_+}
+
 \newcommand{\rats}{\ensuremath{\mathbb{Q}}}
+\newcommand{\posRats}{\rats_+}
+
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
+\newcommand{\natsO}{\nats_{0}}
+
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
+
+\newcommand{\measures}{\mathcal{M}}
+\newcommand{\probMeasures}{\mathcal{M}_1}
+
+
+% Set Operations
+%%%%%%%%%%%%%%%%
+\newcommand{\PowerSet}{\mathcal{P}}
+
+\newcommand{\union}{\cup}
+\newcommand{\Union}{\bigcup}
+\newcommand{\djunion}{\sqcup}
+\newcommand{\djUnion}{\bigsqcup}
+
+\newcommand{\intersect}{\cap}
+\newcommand{\Intersect}{\bigcap}
+
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\closure}{\operatorname{cl}}
+\newcommand{\spann}{\operatorname{span}}
+
+\newcommand{\boundary}{\partial}
 
 
 %%%%%%%%%%%%%%%
@@ -146,11 +227,19 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-%%% Matrix Operators %%%
+%%% Linear Algebra %%%
 %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\diag}{\operatorname{diag}}
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\kron}{\operatorname{\otimes}}
+\newcommand{\adjsym}{\dag} % adjoint symbol
+\newcommand{\adj}{^{\adjsym}} % adjoint
+\DeclareMathOperator{\spec}{\sigma} % spectrum
+\DeclareMathOperator{\diag}{diag} % diagonal
+\DeclareMathOperator{\rank}{rank} % rank
+
+\newcommand{\transposesym}{\top}
+\newcommand{\transpose}{^{\transposesym}}
+\newcommand{\invtranspose}{^{-\transposesym}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -164,10 +253,27 @@
 \newcommand{\sn}[2]{\ensuremath{#1\!\times\!10^{#2}}}	% #1 x 10^{#2}
 
 \newcommand{\st}{\,:\,}
-\newcommand{\given}{\,|\,}
-\newcommand{\closure}{\operatorname{cl}}
-\newcommand{\spann}{\operatorname{span}}
-\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\given}{\mid}
+
+% Words in math
+%%%%%%%%%%%%%%%
+\newcommand{\stT}{\ \text{s.t.}\ }
+\newcommand{\andT}{\ \text{and}\ }
+\newcommand{\orT}{\ \text{or}\ }
+\newcommand{\whereT}{\ \text{where}\ }
+\newcommand{\withT}{\ \text{with}\ }
+
+% Words with special characters
+%%%%%%%%%%%%%%%%
+\def\cadlag{c\`adl\`ag\@\xspace}
+\def\Gronwall{Gr\"onwall\xspace}
+\def\Renyi{R\'enyi\xspace}
+\def\Holder{H\"older\xspace}
+\def\Ito{It\^o\xspace}
+\def\Nystrom{Nystr\"om\xspace}
+\def\Schatten{Sch\"atten\xspace}
+\def\Matern{Mat\'ern\xspace}
+\def\Frechet{Fr\'echet\xspace}
 
 
 % New definition of square root:
@@ -189,8 +295,7 @@
 
 % Equality operators
 \mathtoolsset{centercolon}
-%\newcommand{\defined}{\ensuremath{\triangleq}}
-\newcommand{\defined}{:=}
+\newcommand{\defas}{:=}
 \newcommand{\defines}{=:}
 \newcommand{\xapprox}[1]{\underset{#1}{\approx}}
 \newcommand{\medeq}{\!=\!}
@@ -204,7 +309,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Optimization               %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\left(#2\right)}}
+\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\rbra{#2}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -246,16 +351,20 @@
 % unary/functions
 \renewcommand{\Pr}{\mathbb{P}}  % probability
 \newcommand{\EE}{\mathbb{E}}	% expectation
-
+\newcommand{\Law}{\mcL} 
 \newcommand{\var}{\operatorname{Var}}	% variance
 \newcommand{\cov}{\operatorname{Cov}}	% covariance
 \newcommand{\corr}{\operatorname{Corr}}	% correlation
 \newcommand{\supp}{\operatorname{supp}} %support
 
 % binary operators
-\newcommand{\dist}{\sim}
-\newcommand{\distiid}{\overset{\textrm{\tiny\iid}}{\dist}}
-\newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\dist}}
+\newcommand{\distiid}{\overset{\textrm{\tiny\iid}}{\distas}}
+\newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\distas}}
+% maybe use these instead? can keep others for backward compatibility 
+\newcommand{\distas}{\sim}
+\newcommand{\distiidas}{\stk{\distas}{iid}}
+\newcommand{\distindas}{\stk{\distas}{ind}}
+\newcommand{\pushfwdmeas}[2]{{{#1}_{\sharp} #2}}
 
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
 \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
@@ -286,7 +395,7 @@
 \newcommand{\distGeom}{\distNamed{Geom}}
 \newcommand{\distWish}{\mathpzc{W}}
 \newcommand{\distInvWish}{\mathpzc{IW}}
-% non-parametric distribution
+% non-parametric distributions
 \newcommand{\distBeP}{\mathrm{BeP}}
 \newcommand{\distDP}{\mathrm{DP}}
 \newcommand{\distCRP}{\mathrm{CRP}}
@@ -307,11 +416,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Information Theory %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3 || #4\right)}
-\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\left(#3, #4\right)}
+\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3 || #4}}
+\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3, #4}}
 \newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
 \newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
-\newcommand{\ent}[1]{\mathcal{H}\left(#1\right)}
+\newcommand{\ent}[1]{\mathcal{H}\rbra{#1}}
 \newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -374,101 +483,74 @@
 \newcommand{\bprfof}{\begin{proofof}}
 \newcommand{\eprfof}{\end{proofof}}
 
+%%%%%%%%%%%%%%%%%
+% Theorem-like environments
 
-% Proof definitions
-\theoremstyle{plain}
-\newtheorem{nthm}{Theorem}
-\newtheorem{nprop}[nthm]{Proposition}
-\newtheorem{nlem}[nthm]{Lemma}
-\newtheorem{ncor}[nthm]{Corollary}
-\newtheorem{nconj}[nthm]{Conjecture}
-\newtheorem*{thm}{Theorem}
-\newtheorem*{stmt}{Statement}
-\newtheorem*{prop}{Proposition}
-\newtheorem*{lem}{Lemma}
-\newtheorem*{cor}{Corollary}
-\newtheorem*{conj}{Conjecture}
+% numbered
+\declaretheorem[name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[name=Lemma,numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition,numberlike=theorem]{proposition}
+\declaretheorem[name=Corollary,numberlike=theorem]{corollary}
+\declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
+\declaretheorem[name=Definition,numberlike=theorem]{definition}
+\declaretheorem[name=Assumption,numberlike=theorem]{assumption}
+\declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
+\declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
 
-\theoremstyle{definition}
-\newtheorem{ndefn}[nthm]{Definition}
-\newtheorem{nexa}[nthm]{Example}
-\newtheorem{nexer}[nthm]{Exercise}
-\newtheorem{nassum}[nthm]{Assumption}
-\newtheorem*{defn}{Definition}
-\newtheorem*{exa}{Example}
-\newtheorem*{exer}{Exercise}
-\newtheorem*{cond}{Condition}
-\newtheorem*{assum}{Assumption}
+% unnumbered
+\declaretheorem[name=Theorem,numbered=no]{theorem*}
+\declaretheorem[name=Lemma,numbered=no]{lemma*}
+\declaretheorem[name=Proposition,numbered=no]{proposition*}
+\declaretheorem[name=Corollary,numbered=no]{corollary*}
+\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
+\declaretheorem[name=Definition,numbered=no]{definition*}
+\declaretheorem[name=Assumption,numbered=no]{assumption*}
+\declaretheorem[qed=$\triangleleft$,name=Example,numbered=no]{example*}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numbered=no]{remark*}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numbered=no]{fact*}
+\declaretheorem[qed=$\square$,name=Exercise,numbered=no]{exercise*}
 
-\theoremstyle{remark}
-\newtheorem{nrmk}{Remark}
-\newtheorem*{rmk}{Remark}
-\newtheorem*{mynote}{Note}
+% numbered shorthands
+\long\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
+\long\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
+\long\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
+\long\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
+\long\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
+\long\def\bdef#1\edef{\begin{definition}#1\end{definition}}
+\long\def\bassump#1\ebassump{\begin{assumption}#1\end{assumption}}
+\long\def\bexa#1\eexa{\begin{example}#1\end{example}}
+\long\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
+\long\def\bfact#1\efact{\begin{fact}#1\end{fact}}
+\long\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
 
-% Proof shortcuts
-\newcommand{\bthm}{\begin{thm}}
-\newcommand{\ethm}{\end{thm}}
-\newcommand{\bnthm}{\begin{nthm}}
-\newcommand{\enthm}{\end{nthm}}
+% unnumbered shorthands
+\def\bthmnn#1\ethmnn{\begin{theorem*}#1\end{theorem*}}
+\def\blemnn#1\elemnn{\begin{lemma*}#1\end{lemma*}}
+\def\bpropnn#1\epropnn{\begin{proposition*}#1\end{proposition*}}
+\def\bcornn#1\ecornn{\begin{corollary*}#1\end{corollary*}}
+\def\bconjnn#1\econjnn{\begin{conjecture*}#1\end{conjecture*}}
+\def\bdefnn#1\edefnn{\begin{definition*}#1\end{definition*}}
+\def\bassumpnn#1\ebassumpnn{\begin{assumption*}#1\end{assumption*}}
+\def\bexann#1\eexann{\begin{example*}#1\end{example*}}
+\def\brmknn#1\ermknn{\begin{remark*}#1\end{remark*}}
+\def\bfactnn#1\efactnn{\begin{fact*}#1\end{fact*}}
+\def\bexernn#1\eexernn{\begin{exercise*}#1\end{exercise*}}
 
-\newcommand{\bnprop}{\begin{nprop}}
-\newcommand{\enprop}{\end{nprop}}
-\newcommand{\bprop}{\begin{prop}}
-\newcommand{\eprop}{\end{prop}}
-
-\newcommand{\bnlem}{\begin{nlem}}
-\newcommand{\enlem}{\end{nlem}}
-\newcommand{\blem}{\begin{lem}}
-\newcommand{\elem}{\end{lem}}
-
-\newcommand{\bncor}{\begin{ncor}}
-\newcommand{\encor}{\end{ncor}}
-\newcommand{\bcor}{\begin{cor}}
-\newcommand{\ecor}{\end{cor}}
-
-\newcommand{\bnconj}{\begin{nconj}}
-\newcommand{\enconj}{\end{nconj}}
-\newcommand{\bconj}{\begin{conj}}
-\newcommand{\econj}{\end{conj}}
-
-\newcommand{\bnumdefn}{\begin{ndefn}}
-\newcommand{\enumdefn}{\end{ndefn}}
-\newcommand{\bdefn}{\begin{defn}}
-\newcommand{\edefn}{\end{defn}}
-
-\newcommand{\bnexa}{\begin{nexa}}
-\newcommand{\enexa}{\end{nexa}}
-\newcommand{\bexa}{\begin{exa}}
-\newcommand{\eexa}{\end{exa}}
-
-\newcommand{\bnexer}{\begin{nexer}}
-\newcommand{\enexer}{\end{nexer}}
-\newcommand{\bexer}{\begin{exer}}
-\newcommand{\eexer}{\end{exer}}
-
-\newcommand{\bnassum}{\begin{nassum}}
-\newcommand{\enassum}{\end{nassum}}
-\newcommand{\bassum}{\begin{assum}}
-\newcommand{\eassum}{\end{assum}}
-
-\newcommand{\bcond}{\begin{cond}}
-\newcommand{\econd}{\end{cond}}
-
-\newcommand{\bnrmk}{\begin{nrmk}}
-\newcommand{\enrmk}{\end{nrmk}}
-\newcommand{\brmk}{\begin{rmk}}
-\newcommand{\ermk}{\end{rmk}}
-\newcommand{\bnote}{\begin{mynote}}
-\newcommand{\enote}{\end{mynote}}
 
 %Proof clever ref names
-\crefname{nlem}{Lemma}{Lemmas}
-\crefname{nprop}{Proposition}{Propositions}
-\crefname{ncor}{Corollary}{Corollaries}
-\crefname{nthm}{Theorem}{Theorems}
-\crefname{nexa}{Example}{Examples}
-\crefname{ndefn}{Definition}{Definitions}
-\crefname{nassum}{Assumption}{Assumptions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{Assumption}{Assumptions}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+\crefname{fact}{Fact}{Facts}
+\crefname{exercise}{Exercise}{Exercises}
 \crefformat{footnote}{#1\footnotemark[#2]#3}
 
 
