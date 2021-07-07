@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Examples of how to use shortex.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass{article}
+\usepackage[autonum,tchypersetup]{shortex}
+
+\title{Examples of how to use \texttt{shortex.sty}}
+\author{Created by Jonathan Huggins and Trevor Campbell}
+\date{Updated \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Brackets and bracket-like functions}
+
+You can specify a bracket size using $-1,\dots,4$, where $-1$ uses \texttt{\textbackslash left} and \texttt{\textbackslash right}, $0$ uses nothing, and positive numbers 
+use increasingly large fixed sizes. When inline, bracket sizes are not adjusted.
+
+\bitems
+\item Regular brackets:  \verb!\rbra{\frac{x}{y}}!
+    \bitems
+    \item Inline: $\rbra{\frac{x}{y}}$ 
+    \item Display: $\displaystyle\rbra{\frac{x}{y}}$
+    \eitems
+\item Curly brackets: \verb!\cbra[2]{\frac{x}{y}}!
+    \bitems
+    \item Inline: $\cbra[2]{\frac{x}{y}}$
+    \item Display: $\displaystyle\cbra[2]{\frac{x}{y}}$
+    \eitems
+\item Square brackets: \verb!\sbra[4]{\frac{x}{y}}!
+    \bitems
+    \item Inline: $\sbra[4]{\frac{x}{y}}$
+    \item Display: $\displaystyle\sbra[4]{\frac{x}{y}}$
+    \eitems
+\eitems
+Other bracket-like, semantic command are also available, including \verb!\abs!, \verb!\set!, \verb!\floor!, \verb!\ceil!, \verb!\norm!, \verb!\inner!, and \verb!\card!. 
+
+
+\end{document}
+
+
+
