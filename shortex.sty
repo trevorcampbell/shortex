@@ -15,7 +15,7 @@
 \usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
 \usepackage[usenames]{color} % for using colored text
 \usepackage{hyperref} % typical linking package
-\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools} % math
+\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
 \usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
 % ensure that crefs appear correctly in bookmarks 
 \usepackage{crossreftools} % may not be available when uploading to arXiv 
@@ -109,6 +109,12 @@
 %%% Links %%%
 %%%%%%%%%%%%%
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
+
+
+% Stacked Relations
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\stk}[2]{\ensuremath{\stackrel{\text{#2}}{#1}}}
+\newcommand{\stkm}[2]{\ensuremath{\stackrel{#2}{#1}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -289,8 +295,7 @@
 
 % Equality operators
 \mathtoolsset{centercolon}
-%\newcommand{\defined}{\ensuremath{\triangleq}}
-\newcommand{\defined}{:=}
+\newcommand{\defas}{:=}
 \newcommand{\defines}{=:}
 \newcommand{\xapprox}[1]{\underset{#1}{\approx}}
 \newcommand{\medeq}{\!=\!}
@@ -353,9 +358,8 @@
 \newcommand{\supp}{\operatorname{supp}} %support
 
 % binary operators
-\newcommand{\dist}{\sim}
-\newcommand{\distiid}{\overset{\textrm{\tiny\iid}}{\dist}}
-\newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\dist}}
+\newcommand{\distiid}{\overset{\textrm{\tiny\iid}}{\distas}}
+\newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\distas}}
 % maybe use these instead? can keep others for backward compatibility 
 \newcommand{\distas}{\sim}
 \newcommand{\distiidas}{\stk{\distas}{iid}}
@@ -481,99 +485,44 @@
 
 
 % Proof definitions
-\theoremstyle{plain}
-\newtheorem{nthm}{Theorem}
-\newtheorem{nprop}[nthm]{Proposition}
-\newtheorem{nlem}[nthm]{Lemma}
-\newtheorem{ncor}[nthm]{Corollary}
-\newtheorem{nconj}[nthm]{Conjecture}
-\newtheorem*{thm}{Theorem}
-\newtheorem*{stmt}{Statement}
-\newtheorem*{prop}{Proposition}
-\newtheorem*{lem}{Lemma}
-\newtheorem*{cor}{Corollary}
-\newtheorem*{conj}{Conjecture}
+\declaretheorem[name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[name=Lemma,numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition,numberlike=theorem]{proposition}
+\declaretheorem[name=Corollary,numberlike=theorem]{corollary}
+\declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
+\declaretheorem[name=Definition,numberlike=theorem]{definition}
+\declaretheorem[name=Assumption,numberlike=theorem]{assumption}
+\declaretheorem[name=Assumption, numbered=no]{assumption*}
+\declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
+\declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
 
-\theoremstyle{definition}
-\newtheorem{ndefn}[nthm]{Definition}
-\newtheorem{nexa}[nthm]{Example}
-\newtheorem{nexer}[nthm]{Exercise}
-\newtheorem{nassum}[nthm]{Assumption}
-\newtheorem*{defn}{Definition}
-\newtheorem*{exa}{Example}
-\newtheorem*{exer}{Exercise}
-\newtheorem*{cond}{Condition}
-\newtheorem*{assum}{Assumption}
+\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
+\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
+\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
+\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
+\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
+\def\bdef#1\edef{\begin{definition}#1\end{definition}}
+\def\bassump#1\ebassump{\begin{assumption}#1\end{assumption}}
+\def\bexa#1\eexa{\begin{example}#1\end{example}}
+\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
+\def\bfact#1\efact{\begin{fact}#1\end{fact}}
+\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
 
-\theoremstyle{remark}
-\newtheorem{nrmk}{Remark}
-\newtheorem*{rmk}{Remark}
-\newtheorem*{mynote}{Note}
-
-% Proof shortcuts
-\newcommand{\bthm}{\begin{thm}}
-\newcommand{\ethm}{\end{thm}}
-\newcommand{\bnthm}{\begin{nthm}}
-\newcommand{\enthm}{\end{nthm}}
-
-\newcommand{\bnprop}{\begin{nprop}}
-\newcommand{\enprop}{\end{nprop}}
-\newcommand{\bprop}{\begin{prop}}
-\newcommand{\eprop}{\end{prop}}
-
-\newcommand{\bnlem}{\begin{nlem}}
-\newcommand{\enlem}{\end{nlem}}
-\newcommand{\blem}{\begin{lem}}
-\newcommand{\elem}{\end{lem}}
-
-\newcommand{\bncor}{\begin{ncor}}
-\newcommand{\encor}{\end{ncor}}
-\newcommand{\bcor}{\begin{cor}}
-\newcommand{\ecor}{\end{cor}}
-
-\newcommand{\bnconj}{\begin{nconj}}
-\newcommand{\enconj}{\end{nconj}}
-\newcommand{\bconj}{\begin{conj}}
-\newcommand{\econj}{\end{conj}}
-
-\newcommand{\bnumdefn}{\begin{ndefn}}
-\newcommand{\enumdefn}{\end{ndefn}}
-\newcommand{\bdefn}{\begin{defn}}
-\newcommand{\edefn}{\end{defn}}
-
-\newcommand{\bnexa}{\begin{nexa}}
-\newcommand{\enexa}{\end{nexa}}
-\newcommand{\bexa}{\begin{exa}}
-\newcommand{\eexa}{\end{exa}}
-
-\newcommand{\bnexer}{\begin{nexer}}
-\newcommand{\enexer}{\end{nexer}}
-\newcommand{\bexer}{\begin{exer}}
-\newcommand{\eexer}{\end{exer}}
-
-\newcommand{\bnassum}{\begin{nassum}}
-\newcommand{\enassum}{\end{nassum}}
-\newcommand{\bassum}{\begin{assum}}
-\newcommand{\eassum}{\end{assum}}
-
-\newcommand{\bcond}{\begin{cond}}
-\newcommand{\econd}{\end{cond}}
-
-\newcommand{\bnrmk}{\begin{nrmk}}
-\newcommand{\enrmk}{\end{nrmk}}
-\newcommand{\brmk}{\begin{rmk}}
-\newcommand{\ermk}{\end{rmk}}
-\newcommand{\bnote}{\begin{mynote}}
-\newcommand{\enote}{\end{mynote}}
 
 %Proof clever ref names
-\crefname{nlem}{Lemma}{Lemmas}
-\crefname{nprop}{Proposition}{Propositions}
-\crefname{ncor}{Corollary}{Corollaries}
-\crefname{nthm}{Theorem}{Theorems}
-\crefname{nexa}{Example}{Examples}
-\crefname{ndefn}{Definition}{Definitions}
-\crefname{nassum}{Assumption}{Assumptions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{Assumption}{Assumptions}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+\crefname{fact}{Fact}{Facts}
+\crefname{exercise}{Exercise}{Exercises}
 \crefformat{footnote}{#1\footnotemark[#2]#3}
 
 
