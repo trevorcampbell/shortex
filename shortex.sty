@@ -478,12 +478,22 @@
 
 
 \newcommand{\charalphabetmacro}[3]{
+% #1: annotation prefix
+% #2: annotation command (must be a single command!)
+% #3: characters to define annotations for
+% Create a macros of the form
+%   \newcommand{\#1##1}{#2{##1}} for each ##1 in #3
     \def\mydeffoo##1{\expandafter\def\csname #1##1\endcsname{#2{##1}}}
     \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
     \expandafter \mydefallfoo #3\mydefallfoo
 }
 
 \newcommand{\texalphabetmacro}[3]{
+% #1: annotation prefix
+% #2: annotation command (must be a single command!)
+% #3: latex symbol command text to define annotations for
+% Create a macros of the form
+%   \newcommand{\#1##1}{#2{\##1}} for each ##1 in #3
     \def\mydeftex##1{\expandafter\def\csname #1##1\endcsname{#2{\csname ##1\endcsname}}}
     \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
        \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
