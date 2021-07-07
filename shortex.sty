@@ -39,7 +39,7 @@
 %%% Package Options Declarations %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %hyperref format/color/etc
-\DeclareOption{tchypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
+\DeclareOption{colorhypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 \def\boldorbar{\bar}
 \DeclareOption{bbold}{\def\boldorbar{\bm}}
@@ -483,8 +483,10 @@
 \newcommand{\bprfof}{\begin{proofof}}
 \newcommand{\eprfof}{\end{proofof}}
 
+%%%%%%%%%%%%%%%%%
+% Theorem-like environments
 
-% Proof definitions
+% numbered
 \declaretheorem[name=Theorem,numberwithin=section]{theorem}
 \declaretheorem[name=Lemma,numberlike=theorem]{lemma}
 \declaretheorem[name=Proposition,numberlike=theorem]{proposition}
@@ -492,23 +494,49 @@
 \declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
 \declaretheorem[name=Definition,numberlike=theorem]{definition}
 \declaretheorem[name=Assumption,numberlike=theorem]{assumption}
-\declaretheorem[name=Assumption, numbered=no]{assumption*}
 \declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
 \declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
 \declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
 \declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
 
-\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
-\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
-\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
-\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
-\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
-\def\bdef#1\edef{\begin{definition}#1\end{definition}}
-\def\bassump#1\ebassump{\begin{assumption}#1\end{assumption}}
-\def\bexa#1\eexa{\begin{example}#1\end{example}}
-\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
-\def\bfact#1\efact{\begin{fact}#1\end{fact}}
-\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
+% unnumbered
+\declaretheorem[name=Theorem,numbered=no]{theorem*}
+\declaretheorem[name=Lemma,numbered=no]{lemma*}
+\declaretheorem[name=Proposition,numbered=no]{proposition*}
+\declaretheorem[name=Corollary,numbered=no]{corollary*}
+\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
+\declaretheorem[name=Definition,numbered=no]{definition*}
+\declaretheorem[name=Assumption,numbered=no]{assumption*}
+\declaretheorem[qed=$\triangleleft$,name=Example,numbered=no]{example*}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numbered=no]{remark*}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numbered=no]{fact*}
+\declaretheorem[qed=$\square$,name=Exercise,numbered=no]{exercise*}
+
+% numbered shorthands
+\long\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
+\long\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
+\long\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
+\long\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
+\long\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
+\long\def\bdef#1\edef{\begin{definition}#1\end{definition}}
+\long\def\bassump#1\ebassump{\begin{assumption}#1\end{assumption}}
+\long\def\bexa#1\eexa{\begin{example}#1\end{example}}
+\long\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
+\long\def\bfact#1\efact{\begin{fact}#1\end{fact}}
+\long\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
+
+% unnumbered shorthands
+\def\bthmnn#1\ethmnn{\begin{theorem*}#1\end{theorem*}}
+\def\blemnn#1\elemnn{\begin{lemma*}#1\end{lemma*}}
+\def\bpropnn#1\epropnn{\begin{proposition*}#1\end{proposition*}}
+\def\bcornn#1\ecornn{\begin{corollary*}#1\end{corollary*}}
+\def\bconjnn#1\econjnn{\begin{conjecture*}#1\end{conjecture*}}
+\def\bdefnn#1\edefnn{\begin{definition*}#1\end{definition*}}
+\def\bassumpnn#1\ebassumpnn{\begin{assumption*}#1\end{assumption*}}
+\def\bexann#1\eexann{\begin{example*}#1\end{example*}}
+\def\brmknn#1\ermknn{\begin{remark*}#1\end{remark*}}
+\def\bfactnn#1\efactnn{\begin{fact*}#1\end{fact*}}
+\def\bexernn#1\eexernn{\begin{exercise*}#1\end{exercise*}}
 
 
 %Proof clever ref names
