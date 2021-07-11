@@ -7,7 +7,7 @@
 \usepackage[autonum,colorhypersetup]{shortex}
 
 \title{Examples of how to use \texttt{shortex.sty}}
-\author{Created by Jonathan Huggins and Trevor Campbell}
+\author{Created by Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
 \date{Updated \today}
 
 
@@ -17,8 +17,10 @@
 
 \section{Brackets and bracket-like functions}
 
-You can specify a bracket size using $-1,\dots,4$, where $-1$ uses \texttt{\textbackslash left} and \texttt{\textbackslash right}, $0$ uses nothing, and positive numbers 
-use increasingly large fixed sizes. When inline, bracket sizes are not adjusted.
+You can specify a bracket size using $-1,\dots,4$, where $-1$ uses \verb!\left! and \verb!\right!, 
+$0$ uses nothing, and positive numbers use increasingly large fixed sizes. 
+The default behavior is $0$ when in text mode
+and $-1$ when in display mode.
 
 \bitems
 \item Regular brackets:  \verb!\rbra{\frac{x}{y}}!
@@ -37,7 +39,7 @@ use increasingly large fixed sizes. When inline, bracket sizes are not adjusted.
     \item Display: $\displaystyle\sbra[4]{\frac{x}{y}}$
     \eitems
 \eitems
-Other bracket-like, semantic command are also available, including \verb!\abs!, \verb!\set!, \verb!\floor!, \verb!\ceil!, \verb!\norm!, \verb!\inner!, and \verb!\card!. 
+Other bracket-like, semantic commands are also available, including \verb!\abs!, \verb!\set!, \verb!\floor!, \verb!\ceil!, \verb!\norm!, \verb!\inner!, and \verb!\card!. 
 
 
 \section{annotation commands}
