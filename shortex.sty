@@ -121,48 +121,42 @@
 %%%% Bracket Shorthands %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\lcr}[3]{\left #1 #2 \right #3} % autosize
-\newcommand{\lcrx}[4][{-1}]{
+\makeatletter
+\newcommand{\@lcrx}[4][{-1}]{
           \IfEq{#1}{-1}{\left #2 {{{{#3}}}} \right #4}{
    	\IfEq{#1}{0}{#2 {{{{#3}}}} #4}{
 	\IfEq{#1}{1}{\bigl #2 {{{{#3}}}} \bigr #4}{
 	\IfEq{#1}{2}{\Bigl #2 {{{{#3}}}} \Bigr #4}{
 	\IfEq{#1}{3}{\biggl #2 {{{{#3}}}} \biggr #4}{
 	\IfEq{#1}{4}{\Biggl #2 {{{{#3}}}} \Biggr #4}{
-    \GenericWarning{"4th argument to lcrx must be -1, 0, 1, 2, 3, or 4"}
+    \GenericWarning{"4th argument to @lcrx must be -1, 0, 1, 2, 3, or 4"}
     }}}}}}}  % specify size with {-1,...4} as optional argument
-\newcommand{\lcrxx}[4][{-2}]{
-	\IfEq{#1}{-2}{\mathchoice{\lcrx[-1]{#2}{#3}{#4}}
-				 {\lcrx[0]{#2}{#3}{#4}}
-				 {\lcrx[0]{#2}{#3}{#4}}
-				 {\lcrx[0]{#2}{#3}{#4}}}
-		     {\lcrx[#1]{#2}{#3}{#4}}}
-    
-
-% Shortened \left/\right commands %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\pp({\left(}
-\def\pp){\right)}
-\def\pp[{\left[}
-\def\pp]{\right]}
-\def\cppl{\left\{}
-\def\cppr{\right\}}
+\newcommand{\lcrx}[4][{-2}]{
+	\IfEq{#1}{-2}{\mathchoice{\@lcrx[-1]{#2}{#3}{#4}}
+				 {\@lcrx[0]{#2}{#3}{#4}}
+				 {\@lcrx[0]{#2}{#3}{#4}}
+				 {\@lcrx[0]{#2}{#3}{#4}}}
+		     {\@lcrx[#1]{#2}{#3}{#4}}}
+\makeatother    
 
 % Brackets and bracket-like functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\rbra}[2][{-2}]{\lcrxx[#1] ( {#2} ) }
-\newcommand{\cbra}[2][{-2}]{\lcrxx[#1] \{ {#2} \} }
-\newcommand{\sbra}[2][{-2}]{\lcrxx[#1] [ {#2} ] }
+\newcommand{\rbra}[2][{-2}]{\lcrx[#1] ( {#2} ) }
+\newcommand{\cbra}[2][{-2}]{\lcrx[#1] \{ {#2} \} }
+\newcommand{\sbra}[2][{-2}]{\lcrx[#1] [ {#2} ] }
 
-\newcommand{\abs}[2][{-1}]{\lcrxx[#1] \vert {#2} \vert }
-\newcommand{\set}[2][{-1}]{\lcrxx[#1] \{ {#2} \}}
-\newcommand{\floor}[2][{-1}]{\lcrxx[#1] \lfloor {#2} \rfloor}
-\newcommand{\ceil}[2][{-1}]{\lcrxx[#1] \lceil {#2} \rceil}
-\newcommand{\norm}[2][{-1}]{\lcrxx[#1] \Vert {#2} \Vert}
-\newcommand{\inner}[3][{-1}]{\lcrxx[#1] \langle {{#2},\ {#3}} \rangle}
-\newcommand{\card}[2][{-1}]{\lcrxx[#1] \vert {#2} \vert }
+\newcommand{\abs}[2][{-2}]{\lcrx[#1] \vert {#2} \vert }
+\newcommand{\set}[2][{-2}]{\lcrx[#1] \{ {#2} \}}
+\newcommand{\floor}[2][{-2}]{\lcrx[#1] \lfloor {#2} \rfloor}
+\newcommand{\ceil}[2][{-2}]{\lcrx[#1] \lceil {#2} \rceil}
+\newcommand{\norm}[2][{-2}]{\lcrx[#1] \Vert {#2} \Vert}
+\newcommand{\inner}[3][{-2}]{\lcrx[#1] \langle {{#2},\ {#3}} \rangle}
+\newcommand{\card}[2][{-2}]{\lcrx[#1] \vert {#2} \vert }
 
-\newcommand{\normarg}[3][{-1}]{\norm[#1]{#2}_{#3}}
-\newcommand{\innerarg}[3][{-1}]{\inner[#1]{#2}_{#3}}
+\newcommand{\normarg}[3][{-2}]{\lcrx[#1]{\Vert}{#2}{\Vert_{#3}}}
+\newcommand{\innerarg}[4][{-2}]{\lcrx[#1]{\langle}{{#2},\ {#3}}{\rangle_{#4}}}
+
+
 
 
 
@@ -227,6 +221,17 @@
 \newcommand{\bone}{\mathbf{1}}
 \newcommand{\bzero}{\mathbf{0}}
 \newcommand{\bell}{\mathbf{\ell}}
+
+
+%%%%%%%%%%%%%%%%%%
+%%% Lp spaces and operators %%%
+%%%%%%%%%%%%%%%%%%
+\newcommand{\Lp}[1]{L_{#1}}
+\newcommand{\Lparg}[3][{-2}]{\Lp{#2}\rbra[#1]{#3}}
+\newcommand{\Lpnorm}[3][{-2}]{\normarg[#1]{#2}{\Lp{#3}}}
+\newcommand{\Lpnormarg}[4][{-2}]{\normarg[#1]{#2}{\Lparg{#3}{#4}}}
+\newcommand{\Lpinner}[4][{-2}]{\innerarg[#1]{#2}{#3}{\Lp{#4}}}
+\newcommand{\Lpinnerarg}[5][{-2}]{\innerarg[#1]{#2}{#3}{\Lparg{#4}{#5}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
