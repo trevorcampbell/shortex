@@ -53,14 +53,27 @@ Cardinality 				& \verb!\card{\whA}!       		& $\norm{\whA}$ 			& $\displaystyle
 \end{tabular}
 \end{center}
 
+Some examples of each size option:
+\begin{center}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+					& -1 					& 0					& 1					& 2					& 3					& 4 \\ \midrule
+
+\verb!\abs{\frac{x}{y}}!        	& $\abs[-1]{\frac{x}{y}}$ 	& $\abs[0]{\frac{x}{y}}$ 	& $\abs[1]{\frac{x}{y}}$ 	& $\abs[2]{\frac{x}{y}}$ 	& $\abs[3]{\frac{x}{y}}$ 	& $\abs[4]{\frac{x}{y}}$ \\[10pt]
+\verb!\floor{\frac{x}{y}}!        	& $\floor[-1]{\frac{x}{y}}$	& $\floor[0]{\frac{x}{y}}$	& $\floor[1]{\frac{x}{y}}$	& $\floor[2]{\frac{x}{y}}$	& $\floor[3]{\frac{x}{y}}$	& $\floor[4]{\frac{x}{y}}$ \\[10pt]
+\verb!\norm{\frac{x}{y}}!       	& $\norm[-1]{\frac{x}{y}}$	& $\norm[0]{\frac{x}{y}}$	& $\norm[1]{\frac{x}{y}}$	& $\norm[2]{\frac{x}{y}}$	& $\norm[3]{\frac{x}{y}}$	& $\norm[4]{\frac{x}{y}}$ \\[10pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
 The norm and inner product commands also have versions with a subscript argument:
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
 Description				& Example 					& Text style 				& Display style \\ \midrule
-Norm	with subscript				& \verb!\normarg{\frac{x}{y}}{2}!       	& $\normarg{\frac{x}{y}}{2}$ 	& $\displaystyle\normarg{\frac{x}{y}}{2}$ \\[10pt]
-Inner product with subscript			& \verb!\innerarg{\frac{x}{y}}{\frac{y}{z}}{2}!       	& $\innerarg{\frac{x}{y}}{\frac{y}{z}}{2}$ 	& $\displaystyle\innerarg{\frac{x}{y}}{\frac{y}{z}}{2}$ \\[10pt]
+Norm	with subscript				& \verb!\normsub{\frac{x}{y}}{2}!       	& $\normsub{\frac{x}{y}}{2}$ 	& $\displaystyle\normsub{\frac{x}{y}}{2}$ \\[10pt]
+Inner product with subscript			& \verb!\innersub{\frac{x}{y}}{z}{2}!       	& $\innersub{\frac{x}{y}}{z}{2}$ 	& $\displaystyle\innersub{\frac{x}{y}}{z}{2}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
@@ -73,16 +86,16 @@ Inner product with subscript			& \verb!\innerarg{\frac{x}{y}}{\frac{y}{z}}{2}!  
 \toprule
 Description						& Example 				& Text style 				& Display style \\ \midrule
 $\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 				& $\displaystyle\Lp{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lparg{2}{\hmu}!	& $\Lparg{2}{\hmu}$ 		& $\displaystyle\Lparg{2}{\hmu}$ \\[10pt]
-							& \verb!\Lparg[1]{2}{\hmu}!	& $\Lparg[1]{2}{\hmu}$ 	& $\displaystyle\Lparg[1]{2}{\hmu}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpmeas{2}{\hmu}!	& $\Lpmeas{2}{\hmu}$ 		& $\displaystyle\Lpmeas{2}{\hmu}$ \\[10pt]
+							& \verb!\Lpmeas[1]{2}{\hmu}!	& $\Lpmeas[1]{2}{\hmu}$ 	& $\displaystyle\Lpmeas[1]{2}{\hmu}$ \\[10pt]
 $\Lp{p}$ norm					& \verb!\Lpnorm{\hGamma}{2}!        & $\Lpnorm{\hGamma}{2}$ 		& $\displaystyle\Lpnorm{\hGamma}{2}$ \\[10pt]
 							& \verb!\Lpnorm[-1]{\hGamma}{2}!        & $\Lpnorm[-1]{\hGamma}{2}$ 		& $\displaystyle\Lpnorm[-1]{\hGamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpnormarg{\hGamma}{2}{\hmu}!        & $\Lpnormarg{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpnormarg{\hGamma}{2}{\hmu}$ \\[10pt]
-							& \verb!\Lpnormarg[1]{\hGamma}{2}{\hmu}!        & $\Lpnormarg[1]{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpnormarg[1]{\hGamma}{2}{\hmu}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmeasnorm{\hGamma}{2}{\hmu}!        & $\Lpmeasnorm{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasnorm{\hGamma}{2}{\hmu}$ \\[10pt]
+							& \verb!\Lpmeasnorm[1]{\hGamma}{2}{\hmu}!        & $\Lpmeasnorm[1]{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasnorm[1]{\hGamma}{2}{\hmu}$ \\[10pt]
 $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinner{\hGamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner{\hGamma}{\Gamma}{2}$ \\[10pt]
 							& \verb!\Lpinner[-1]{\hGamma}{\Gamma}{2}!        & $\Lpinner[-1]{\hGamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner[-1]{\hGamma}{\Gamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpinnerarg{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpinnerarg{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpinnerarg{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
-							& \verb!\Lpinnerarg[1]{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpinnerarg[1]{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpinnerarg[1]{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
+							& \verb!\Lpmeasinner[1]{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpmeasinner[1]{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasinner[1]{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}

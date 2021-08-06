@@ -141,6 +141,13 @@
 
 % Brackets and bracket-like functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\pp({\left(}
+\def\pp){\right)}
+\def\pp[{\left[}
+\def\pp]{\right]}
+\def\cppl{\left\{}
+\def\cppr{\right\}}
+
 \newcommand{\rbra}[2][{-2}]{\lcrx[#1] ( {#2} ) }
 \newcommand{\cbra}[2][{-2}]{\lcrx[#1] \{ {#2} \} }
 \newcommand{\sbra}[2][{-2}]{\lcrx[#1] [ {#2} ] }
@@ -153,8 +160,8 @@
 \newcommand{\inner}[3][{-2}]{\lcrx[#1] \langle {{#2},\ {#3}} \rangle}
 \newcommand{\card}[2][{-2}]{\lcrx[#1] \vert {#2} \vert }
 
-\newcommand{\normarg}[3][{-2}]{\lcrx[#1]{\Vert}{#2}{\Vert_{#3}}}
-\newcommand{\innerarg}[4][{-2}]{\lcrx[#1]{\langle}{{#2},\ {#3}}{\rangle_{#4}}}
+\newcommand{\normsub}[3][{-2}]{\lcrx[#1]{\Vert}{#2}{\Vert_{#3}}}
+\newcommand{\innersub}[4][{-2}]{\lcrx[#1]{\langle}{{#2},\ {#3}}{\rangle_{#4}}}
 
 
 
@@ -227,11 +234,11 @@
 %%% Lp spaces and operators %%%
 %%%%%%%%%%%%%%%%%%
 \newcommand{\Lp}[1]{L_{#1}}
-\newcommand{\Lparg}[3][{-2}]{\Lp{#2}\rbra[#1]{#3}}
-\newcommand{\Lpnorm}[3][{-2}]{\normarg[#1]{#2}{\Lp{#3}}}
-\newcommand{\Lpnormarg}[4][{-2}]{\normarg[#1]{#2}{\Lparg{#3}{#4}}}
-\newcommand{\Lpinner}[4][{-2}]{\innerarg[#1]{#2}{#3}{\Lp{#4}}}
-\newcommand{\Lpinnerarg}[5][{-2}]{\innerarg[#1]{#2}{#3}{\Lparg{#4}{#5}}}
+\newcommand{\Lpmeas}[3][{-2}]{\Lp{#2}\rbra[#1]{#3}}
+\newcommand{\Lpnorm}[3][{-2}]{\normsub[#1]{#2}{\Lp{#3}}}
+\newcommand{\Lpmeasnorm}[4][{-2}]{\normsub[#1]{#2}{\Lpmeas{#3}{#4}}}
+\newcommand{\Lpinner}[4][{-2}]{\innersub[#1]{#2}{#3}{\Lp{#4}}}
+\newcommand{\Lpmeasinner}[5][{-2}]{\innersub[#1]{#2}{#3}{\Lpmeas{#4}{#5}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
