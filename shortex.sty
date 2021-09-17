@@ -332,6 +332,8 @@
 %%% Algorithms %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1} % fixes \Comment
+
 %properly indented comments
 %usage:
 %\LineComment{X}{Here is the comment},  where X = # additional indents. 
@@ -600,6 +602,7 @@
 
 
 \newcommand{\lowerCaseGreekLetters}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
+\newcommand{\lowerCaseGreekLettersNoEta}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
 \newcommand{\upperCaseGreekLettersInLaTeX}{{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Psi}{Omega}}
 
 % Bar everything shortcuts
@@ -609,7 +612,8 @@
 \charalphabetmacro{b}{\boldorbar}{\upperCaseRomanLetters}
 \charalphabetmacro{b}{\boldorbar}{\lowerCaseRomanLettersNoM}
 
-\texalphabetmacro{b}{\boldorbar}{\lowerCaseGreekLetters}
+\texalphabetmacro{b}{\boldorbar}{\lowerCaseGreekLettersNoEta} % avoid \beta <-> \bar{\eta} clash
+\newcommand{\bareta}{\boldorbar{\eta}}
 \texalphabetmacro{b}{\boldorbar}{\upperCaseGreekLettersInLaTeX}
 
 % Mathcal shortcuts
