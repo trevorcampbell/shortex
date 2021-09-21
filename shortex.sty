@@ -599,6 +599,7 @@
 \newcommand{\lowerCaseRomanLettersNoM}{abcdefghijklnopqrstuvwxyz}
 \newcommand{\lowerCaseRomanLettersNoMHT}{abcdefgijklnopqrsuvwxyz}
 \newcommand{\lowerCaseRomanLettersNoG}{abcdefhijklmnopqrstuvwxyz}
+\newcommand{\lowerCaseRomanLettersNoMF}{abcdeghijklnopqrstuvwxyz}
 
 
 \newcommand{\lowerCaseGreekLetters}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
@@ -610,7 +611,8 @@
 \charalphabetmacro{bar}{\bar}{\lowerCaseRomanLetters}
 
 \charalphabetmacro{b}{\boldorbar}{\upperCaseRomanLetters}
-\charalphabetmacro{b}{\boldorbar}{\lowerCaseRomanLettersNoM}
+\charalphabetmacro{b}{\boldorbar}{\lowerCaseRomanLettersNoMF} % avoid clash with \bm and \bf
+\newcommand{\boldf}{\bm{f}} % only need \boldf, since \barf already defined above
 
 \texalphabetmacro{b}{\boldorbar}{\lowerCaseGreekLettersNoEta} % avoid \beta <-> \bar{\eta} clash
 \newcommand{\bareta}{\bar{\eta}}
