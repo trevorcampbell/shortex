@@ -119,47 +119,24 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Bracket Shorthands %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\lcr}[3]{\left #1 #2 \right #3} % autosize
-\makeatletter
-\newcommand{\@lcrx}[4][{-1}]{
-          \IfEq{#1}{-1}{\left #2 {{{{#3}}}} \right #4}{
-   	\IfEq{#1}{0}{#2 {{{{#3}}}} #4}{
-	\IfEq{#1}{1}{\bigl #2 {{{{#3}}}} \bigr #4}{
-	\IfEq{#1}{2}{\Bigl #2 {{{{#3}}}} \Bigr #4}{
-	\IfEq{#1}{3}{\biggl #2 {{{{#3}}}} \biggr #4}{
-	\IfEq{#1}{4}{\Biggl #2 {{{{#3}}}} \Biggr #4}{
-    \GenericWarning{"4th argument to @lcrx must be -1, 0, 1, 2, 3, or 4"}
-    }}}}}}}  % specify size with {-1,...4} as optional argument
-\newcommand{\lcrx}[4][{-2}]{
-	\IfEq{#1}{-2}{\mathchoice{\@lcrx[-1]{#2}{#3}{#4}}
-				 {\@lcrx[0]{#2}{#3}{#4}}
-				 {\@lcrx[0]{#2}{#3}{#4}}
-				 {\@lcrx[0]{#2}{#3}{#4}}}
-		     {\@lcrx[#1]{#2}{#3}{#4}}}
-\makeatother    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Brackets and bracket-like functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\rbra}[2][{-2}]{\lcrx[#1] ( {#2} ) }
-\newcommand{\cbra}[2][{-2}]{\lcrx[#1] \{ {#2} \} }
-\newcommand{\sbra}[2][{-2}]{\lcrx[#1] [ {#2} ] }
+\DeclarePairedDelimiter\rbra{(}{)}
+\DeclarePairedDelimiter\cbra{\{}{\}}
+\DeclarePairedDelimiter\sbra{[}{]}
 
-\newcommand{\abs}[2][{-2}]{\lcrx[#1] \vert {#2} \vert }
-\newcommand{\set}[2][{-2}]{\lcrx[#1] \{ {#2} \}}
-\newcommand{\floor}[2][{-2}]{\lcrx[#1] \lfloor {#2} \rfloor}
-\newcommand{\ceil}[2][{-2}]{\lcrx[#1] \lceil {#2} \rceil}
-\newcommand{\norm}[2][{-2}]{\lcrx[#1] \Vert {#2} \Vert}
-\newcommand{\inner}[3][{-2}]{\lcrx[#1] \langle {{#2},\ {#3}} \rangle}
-\newcommand{\card}[2][{-2}]{\lcrx[#1] \vert {#2} \vert }
-
-\newcommand{\normsub}[3][{-2}]{\lcrx[#1]{\Vert}{#2}{\Vert_{#3}}}
-\newcommand{\innersub}[4][{-2}]{\lcrx[#1]{\langle}{{#2},\ {#3}}{\rangle_{#4}}}
-
-
-
-
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiterXPP\normsub[2]{}{\lVert}{\rVert}{_{#2}}{#1}
+\DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiterXPP\innersub[3]{}{\langle}{\rangle}{_{#3}}{#1,#2}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%% Align shortcuts %%%
@@ -235,11 +212,15 @@
 %%% Lp spaces and operators %%%
 %%%%%%%%%%%%%%%%%%
 \newcommand{\Lp}[1]{L_{#1}}
-\newcommand{\Lpmeas}[3][{-2}]{\Lp{#2}\rbra[#1]{#3}}
-\newcommand{\Lpnorm}[3][{-2}]{\normsub[#1]{#2}{\Lp{#3}}}
-\newcommand{\Lpmeasnorm}[4][{-2}]{\normsub[#1]{#2}{\Lpmeas{#3}{#4}}}
-\newcommand{\Lpinner}[4][{-2}]{\innersub[#1]{#2}{#3}{\Lp{#4}}}
-\newcommand{\Lpmeasinner}[5][{-2}]{\innersub[#1]{#2}{#3}{\Lpmeas{#4}{#5}}}
+\DeclarePairedDelimiterXPP\Lpmeas[2]{\Lp{#1}}{(}{)}{}{#2}
+\DeclarePairedDelimiterXPP\Lpnorm[2]{}{\lVert}{\rVert}{_{\Lp{#2}}}{#1}
+\DeclarePairedDelimiterXPP\Lpmeasnorm[3]{}{\lVert}{\rVert}{_{\Lpmeas{#2}{#3}}}{#1}
+%\newcommand{\Lpnorm}[3][*]{\normsub#1{#2}{\Lp{#3}}}
+%\newcommand{\Lpmeasnorm}[4][{-2}]{\normsub[#1]{#2}{\Lpmeas{#3}{#4}}}
+\DeclarePairedDelimiterXPP\Lpinner[3]{}{\langle}{\rangle}{_{\Lp{#3}}}{#1,#2}
+\DeclarePairedDelimiterXPP\Lpmeasinner[4]{}{\langle}{\rangle}{_{\Lpmeas{#3}{#4}}}{#1,#2}
+%\newcommand{\Lpinner}[4][{-2}]{\innersub[#1]{#2}{#3}{\Lp{#4}}}
+%\newcommand{\Lpmeasinner}[5][{-2}]{\innersub[#1]{#2}{#3}{\Lpmeas{#4}{#5}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
