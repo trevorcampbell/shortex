@@ -139,7 +139,50 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinn
 \end{tabular}
 
 
+\section{new approach to annotation commands}
+Out of the box we can get all sorts of cool fonts in math mode using \texttt{\textbackslash f[<fontcodestring>]{A}}.
+For the time being I only implemented 2 fonts and 1 accent. These can be expanded once everything else is set.
+We see the effect of single font codes:
+
+\begin{tabular}{ll}
+    \verb!\f[b]A! & $\f[b]A$ \\
+	\verb!\f[k]A! & $\f[k]A$ \\
+	% \verb!\f[c]A! & $\f[c]A$ \\
+	% \verb!\f[f]A! & $\f[f]A$ \\
+	% \verb!\f[y]A! & $\f[y]A$ \\
+	%
+	\verb!\f[h]A! & $\f[h]A$ \\
+	% \verb!\f[u]A! & $\f[u]A$ \\
+	% \verb!\f[o]A! & $\f[o]A$ \\
+	% \verb!\f[d]A! & $\f[d]A$ \\
+	% \verb!\f[t]A! & $\f[t]A$ \\
+\end{tabular}
+
+And multiple font codes:
+
+\begin{tabular}{ll}
+    \verb!\f[bh]A! & $\f[bh]A$ \\
+	\verb!\f[hb]A! & $\f[hb]A$ \\
+	\verb!\f[hk]A! & $\f[hk]A$ \\
+	\verb!\f[kh]A! & $\f[ka]A$ \\
+\end{tabular}
+
+Note that these are expanded in the reverse of the order they appear: the font code furthest to the right is applied first. This natches the order that the corresponding commands would appear in TeX code.
+
+We can also avoid typing \texttt{[]} for some combinations of font codes we sue frequently.
+To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,$\{$<fcstr2>$\}$,...$\}\{$<alphabet>$\}$} as demonstrated below. For ``ease of use'' we have implemented \texttt{\textbackslash upperCaseRomanLetters} and \texttt{\textbackslash lowerCaseRomanLetters}
+\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}. 
+\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}. 
+
+\begin{tabular}{ll}
+	\verb!\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}! & ...\\
+	\verb!\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}! & ...\\
+    \verb!\fhbA! & $\fhbA$ \\
+	\verb!\fhkB! & $\fhkB$ \\
+	\verb!\fhbx! & $\fhbx$ \\
+	\verb!\fhby! & $\fhby$ \\
+	\verb!\fhkz! & $\fhkz$ \\
+\end{tabular}
+
+Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
 \end{document}
-
-
-
