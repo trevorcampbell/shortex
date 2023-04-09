@@ -1,38 +1,47 @@
 # ShorTeX.sty
-## LaTeX style file for more efficient, more readable math
+## LaTeX style file for more efficient, more readable mathematical documents
 
-Using LaTeX has a number of big benefits when writing papers:
+Standard LaTeX syntax can be quite painful to read and type, especially when it comes to typesetting math:
+```latex
+See Equation \ref{eq:foo}.
+\begin{align}
+X_n &\in \mathcal{X} \notag\\
+X_n &\overset{\text{p}}{\to} X \label{eq:foo}\\
+\mathbb{E}\left[X\right] &= \int_0^1 6\frac{\mathrm{d} 4y^2}{\mathrm{d} y}\mathrm{d}y \notag\\
+\mathbb{P}\left(X_n \in \mathcal{A}\right) &= \hat{\mathbb{C}} \notag\\
+X_n &\sim \mathcal{N}(\hat{\mu}, \hat{\sigma}). \notag
+\end{align}
+```
 
-- it separates *content* (your words) and *format* (how they are laid out on a page)
-- it is stored in plaintext, which is useful for version control
-- it is extendable, a huge base of helpful packages exists
-- it keeps track of references, bibliography citations, links
-- it is currently the only decent option for typesetting math
-- it makes professional-looking papers by default
-- it is basically required by every conference/journal in ML/stats
+The `shortex.sty` style file includes a number of packages and macros to help make typesetting
+mathematical documents in LaTeX less painful and LaTeX code easier to read. 
+For example, here is the same expression as above in `shortex.sty` syntax:
+```latex
+See \cref{eq:foo}.
+\[
+X_n &\in \mcX\\
+X_n &\convp X \label{eq:foo}\\
+\EE\left[X\right] &= \int_0^1 6\der{4y^2}{y}\dee y\\
+\Pr\left(X_n \in \mcA\right) &= \bhC\\
+X_n &\dist \distNorm(\hmu, \hSigma)
+\]
+```
 
-But it also has a number of drawbacks.
-The `shortex.sty` style file is designed to help make typesetting a 
-little less painful and LaTeX code a little easier to read. 
-It provides:
+## Suggested usage
 
-- automatic reference typing using `cleveref`
-- automatic equation numbering using `autonum`
-- a few nice commands for adding comments inline or in the margins
-- shortened commands for `align` environments
-- short commands for commonly used math symbols
-- a collection of oft-imported packages
+The best way to use ShorTeX is to download a copy of `shortex.sty` and put it
+in your document's root folder. Then in your document's preamble, type:
+```latex
+\usepackage[autonum]{shortex}
+```
+**Note: ShorTeX requires you to compile your document 4 times.**
 
-Grab a copy of the style file from 
-this repository,
-and use the guide below to learn how to use the package.
-Note for those who don't read through the rest of the post: the 
-automatic equation numbering
-in shortex **requires you to compile your document 4 times.**
+Do not install ShorTeX system-wide (yet). This repository has not reached
+a stable v1.0, and we updating things regularly without any guarantee of 
+backwards compatibility. So to avoid accidentally breaking old documents, just
+include a self-contained copy of `shortex.sty` with each document.
 
-If, in your travels, you find a really neat package that makes
-LaTeX less annoying to use, post an issue and we'll consider adding it to `shortex.sty`.
-
+## Features
 
 ### Automatic reference typing
 
