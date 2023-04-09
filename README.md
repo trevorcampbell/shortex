@@ -1,5 +1,5 @@
 # ShorTeX.sty
-## LaTeX style file for more efficient, more readable mathematical documents
+## LaTeX style file for more efficient, more readable math
 
 Standard LaTeX syntax can be quite painful to read and type, especially when it comes to typesetting math:
 ```latex
