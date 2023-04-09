@@ -1,11 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Latex Shortcuts and Redefinitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  shortex.sty
+%%  Latex packages and macros for
+%%  more efficient, readable math
 %%
-%%  Original by Jonathan Huggins, with thanks to Dan Roy and Ryan Adams for allowing the use many of their definitions.
+%%  Copyright (c) 2023 Trevor Campbell
 %%
-%%  Adapted by Trevor Campbell for personal use.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Useful Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xifthen}
 \usepackage{xstring}
@@ -33,11 +37,19 @@
 \usepackage{caption,subcaption} % package for sub-environments (figs, tables, etc)
 \usepackage{microtype} % microtypesetting improvements for latex
 \usepackage{booktabs} % professional quality tables
-
 \usepackage{xargs}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Options Declarations %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Colors 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{WowColor}{rgb}{.75,0,.75}
+\definecolor{SubtleColor}{rgb}{0,0,.50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Option Declarations 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %hyperref format/color/etc
 \DeclareOption{colorhypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
@@ -53,10 +65,9 @@
 
 \ifuseautonum \usepackage{autonum} \fi
 
-
-%%%%%%%%%%%%%%%%%%
-%%% Commenting %%%
-%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Commenting 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% NA: needs attention (rough writing whose correctness needs to be verified)
 %% TBD: instructions for how to fix a gap ("Describe the propagation by ...")
@@ -68,9 +79,6 @@
 
 %% NA's (and TBDs, those less crucially) should be written so
 %% that they flow with the text.
-
-\definecolor{WowColor}{rgb}{.75,0,.75}
-\definecolor{SubtleColor}{rgb}{0,0,.50}
 
 % inline
 \newcommand{\NA}[1]{\textcolor{SubtleColor}{ {\tiny \bf ($\star$)} #1}}
@@ -99,11 +107,6 @@
 \renewcommand{\fPROBLEM}[1]{}
 \renewcommand{\NA}[1]{##1}  %% Note, NA's pass through!
 }
-
-% shorten paper -- the higher shortenval, the shorter the paper
-\newcommand{\setshortness}[1]{\def\shortnessval{#1}}
-\setshortness{0}
-\newcommand{\condcomment}[2][1]{\ifnum#1>\shortnessval #2\fi}
 
 %%%%%%%%%%%%%
 %%% Links %%%
