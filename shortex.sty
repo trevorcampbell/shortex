@@ -8,18 +8,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Useful Packages
+%%% Package Imports
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{xifthen}
-\usepackage{xstring}
-\usepackage{xspace} % used at the end of macros to automatically determine whether spaces should be eaten or not
-\usepackage[mathscr]{eucal} % use euler script instead of mathcal
-\usepackage{dsfont} % doublestroke fonts (for things like reals, nats, complex numbers, etc)
-\usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
+\usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
+\usepackage{xstring} % string manipulation (needed internally for StrLeft, StrGobbleLeft, IfStrEqCase, etc in font/style macro expansions)
+\usepackage{xspace} % defines \xspace command that automatically determine whether spaces should be eaten (needed internally for many defns)
+\usepackage{xargs} % more flexible \newcommand etc for multiple optional arguments
 \usepackage[usenames]{color} % for using colored text
 \usepackage{hyperref} % typical linking package
-\usepackage{amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
+\usepackage{mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
+\usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
 \usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
 % ensure that crefs appear correctly in bookmarks 
 \usepackage{crossreftools} % may not be available when uploading to arXiv 
@@ -27,9 +26,6 @@
     \let\Cref\crtCref
     \let\cref\crtcref
 }
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
-\usepackage{import, subfiles} % packages for using subfile/folder structure
-\usepackage{url} % nice URL typesetting
 \usepackage{algpseudocode, algorithm} % typical alg typesetting packages
 \usepackage{graphicx} % typical graphics package for figures
 \usepackage{multirow} % multirow tables
@@ -37,14 +33,21 @@
 \usepackage{caption,subcaption} % package for sub-environments (figs, tables, etc)
 \usepackage{microtype} % microtypesetting improvements for latex
 \usepackage{booktabs} % professional quality tables
-\usepackage{xargs}
+\usepackage{import, subfiles} % packages for using subfile/folder structure
+\usepackage{url} % nice URL typesetting
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Colors 
+%%% Color Definitions 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \definecolor{WowColor}{rgb}{.75,0,.75}
 \definecolor{SubtleColor}{rgb}{0,0,.50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Math Alphabet Definitions 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Option Declarations 
