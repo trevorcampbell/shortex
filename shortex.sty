@@ -56,9 +56,9 @@
 \ProcessOptions
 \ifuseautonum \usepackage{autonum} \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Bookmarks
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ensures that hyperref generates correct 
 % bookmarks when using cleveref
@@ -67,9 +67,9 @@
     \let\cref\crtcref
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcounter{margincounter}
 \newcommand{\displaycounter}{{\arabic{margincounter}}}
 \newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
@@ -81,17 +81,11 @@
 \newcommand{\mRMK}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
 \newcommand{\mPRB}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% URLs
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
-
-% Stacked Relations
-%%%%%%%%%%%%%%%%%%%
-\newcommand{\stk}[2]{\ensuremath{\stackrel{\text{#2}}{#1}}}
-\newcommand{\stkm}[2]{\ensuremath{\stackrel{#2}{#1}}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Bracket Shorthands %%%
@@ -337,8 +331,8 @@
 \newcommand{\distind}{\overset{\textrm{\tiny\textrm{indep}}}{\distas}}
 % maybe use these instead? can keep others for backward compatibility 
 \newcommand{\distas}{\sim}
-\newcommand{\distiidas}{\stk{\distas}{iid}}
-\newcommand{\distindas}{\stk{\distas}{ind}}
+\newcommand{\distiidas}{\overset{\text{iid}}{\distas}}
+\newcommand{\distindas}{\overset{\text{ind}}{\distas}}
 \newcommand{\pushfwdmeas}[2]{{{#1}_{\sharp} #2}}
 
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
