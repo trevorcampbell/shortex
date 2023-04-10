@@ -49,12 +49,17 @@
 \def\boldorbar{\bar}
 \DeclareOption{bbold}{\def\boldorbar{\bm}}
 \DeclareOption{bbar}{\def\boldorbar{\bar}}
-%autonum
-\newif\ifuseautonum
-\useautonumfalse
-\DeclareOption{autonum}{\useautonumtrue}
+
+% use autonum by default 
+\newif\ifusemanualnum
+\usemanualnumfalse
+\DeclareOption{manualnumbering}{\usemanualnumtrue}
+
+% process the package options
 \ProcessOptions
-\ifuseautonum \usepackage{autonum} \fi
+
+% act on the selected options
+\ifusemanualnum \else \usepackage{autonum} \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Bookmarks
