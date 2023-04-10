@@ -12,11 +12,15 @@
 \maketitle
 
 \begin{abstract}
-The purpose of the ShorTeX (meta)package is to make the process of typesetting typical mathematical documents in \LaTeX
-more efficient, and the resulting code easier to read. 
-It achieves this primarily by (1) providing an extensive, internally consistent, and easy to learn set of macro shorthands,
-and (2) incorporating a collection of packages that are dedicated to reducing manual coding effort while providing 
-the full suite of usual typesetting capabilities.
+The purpose of the ShorTeX (meta)package is to make the process of typesetting
+typical mathematical documents in \LaTeX~more efficient, and the resulting
+code easier to read.  It achieves this by 
+(1) providing an
+extensive, internally consistent, and easy to learn set of macro
+shorthands, 
+(2) incorporating a set of packages that are
+dedicated to reducing manual coding effort, and
+(3) incorporating a collection of very common / standard boilerplate packages.
 \end{abstract}
 
 \section{Usage and package options}\label{sec:usage}
@@ -25,22 +29,31 @@ the full suite of usual typesetting capabilities.
 Include ShorTeX by adding \verb!\usepackage{shortex}! to the preamble of your document.
 ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx, subcaption, hyperref, algorithm, algpseudocode, amsmath}, among others),
 so you do not need to explicitly include and set these up yourself.
-The package has a few options:
+If you are writing a document that must use a specific style file (e.g., for a conference or journal) that itself
+includes some of these packages, we recommend editing those style files to remove the package imports.
+
+The ShorTeX package has a few options:
 \bdesc
 \item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \edesc
-You must compile your document 4 times when using ShorTeX to ensure that equation
+\textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
 numbers and references update properly.
 
 \section{Packages included in ShorTeX}
 \subsection{Internal packages}
+The following packages provide features that are used internally in ShorTeX for 
+macro definitions etc.
 \bdesc
 \item[xifthen, xstring, xspace, xargs] asdf
 \edesc
 \subsection{Typical packages}
+We include a set of typical packages to avoid the problem of having to remember precisely
+what order to import each one, which options, compatibility, etc
+
 It is worth noting that we did not include a standard bibliography package in ShorTeX (e.g., \verb!natbib.sty!).
 This is because...
+
 \bdesc
 \item[mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools] asdf
 \item[hyperref] asdf
@@ -50,23 +63,7 @@ This is because...
 \edesc
 \subsection{Improvement packages}
 \bdesc
-\item[cleveref] asdf
-\item[autonum] asdf
-\item[nicefrac] asdf
-\item[crossreftools] asdf
-\item[multirow] asdf
-\item[wrapfig] asdf
-\item[caption,subcaption] asdf
-\item[microtype] asdf
-\item[booktabs] asdf
-\item[import,subfiles] asdf
-\item[url] asdf
-\edesc
-
-\section{Features and Examples}
-
-\subsection{\texttt{Cleveref}: Automated reference typing}
-Typically to use a reference in \LaTeX, you have to write the name of the type of reference
+\item[cleveref] Typically to use a reference in \LaTeX, you have to write the name of the type of reference
 yourself. For example, if you want to reference a figure, you would have to write something like:
 \begin{verbatim}
 In Figure \ref{fig:first}, you can see...
@@ -93,8 +90,7 @@ and can be extended if needed. See the \texttt{cleveref} documentation
 at \url{https://ctan.org/pkg/cleveref?lang=en} and the homepage at \url{https://www.dr-qubit.org/cleveref.html} 
 for more information.
 
-\subsection{\texttt{Autonum}: Automatic equation numbering}
-
+\item[autonum] 
 Typically when you typeset equations, you have to choose between 
 \verb!$...$!, \verb!$$...$$!, 
 \verb!\begin{align}...\end{align}!, 
@@ -105,33 +101,75 @@ and \verb!\nonumber!/\verb!\notag! commands, depending
 on whether/where you want equation numbers,
 display or in-text math, etc. This leads to verbose, inconsistent code.
 
-ShorTeX provides two major improvements. First, we replace 
-the \verb!align! environment with a much less verbose \verb!\[ ... \]! syntax,
-\begin{verbatim}
-\[
-   A &= B + C\\
-   D &\leq E
-\]
-\end{verbatim}
-And second, there are \textit{only two commands} you need to use:
-single dollar signs for in-text math,
-\begin{verbatim}
-This is some in-text math $a+b=c$
-\end{verbatim}
-and square brackets for display math mode,
+The \texttt{autonum} package automatically decides which equations to provide
+numbers based on \textit{which equations you reference}. So when using ShorTeX,
+you only need two commands for math mode: single dollar signs \verb!$...$! for
+inline math, and \texttt{align} environments (redefined in ShorTeX to be
+\verb!\[...\]!) for display math.\footnote{Note that there are minor
+differences between \texttt{align} and the other display math environments like
+\texttt{equation}. But after 10+ years of using \LaTeX, I have not ever
+encountered a case where it mattered much. That being said, ShorTeX does not
+\emph{disable} any functionality, so you can use other environments anywhere
+you feel it is necessary.}
+
+For example, if you create 
+the following display math,
 \begin{verbatim}
 \[
    a+b = c \label{eq:the_equation}
 \]
 \end{verbatim}
-The \texttt{autonum} package automatically decides which equations to provide numbers based 
-on \textit{which equations you reference}. For example, in the above display math, I used
-the label \verb!eq:the_equation!. If I use the command \verb!\cref{eq:the_equation}! somewhere
+then if you use the command \verb!\cref{eq:the_equation}! somewhere
 in the document, that equation will automatically be assigned a number. If not, it
 won't get a number. See the \texttt{autonum} package 
 documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
-\textbf{Note: You must compile your document 4 times.}
+\item[nicefrac] asdf
+\item[crossreftools] asdf
+\item[multirow] asdf
+\item[wrapfig] asdf
+\item[caption,subcaption] asdf
+\item[microtype] asdf
+\item[booktabs] asdf
+\item[import,subfiles] asdf
+\item[url] asdf
+\edesc
+
+\section{Shortened commands and macros}
+
+\subsection{Environments}
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+Environment Name & Syntax \\ \midrule
+algorithm & \verb!\balg...\ealg!\\
+algorithmic & \verb!\balgc...\ealgc!\\ \midrule
+table & \verb!\btab...\etab!\\
+subtable & \verb!\bsubtab...\esubtab!\\
+tabular & \verb!\btabr...\etabr!\\ \midrule
+figure & \verb!\bfig...\efig!\\
+figure* & \verb!\bfigs...\efigs!\\
+subfigure & \verb!\bsubfig...\esubfig!\\ \midrule
+centering & \verb!\bcent...\ecent!\\ \midrule
+align & \verb!\[...\]!\\
+aligned & \verb!\<...\>!\\ \midrule
+theorem & \verb!\bthm...\ethm!\\
+lemma & \verb!\blem...\elem!\\
+proposition & \verb!\bprop...\eprop!\\
+corollary & \verb!\bcor...\ecor!\\
+conjecture & \verb!\bconj...\econj!\\
+definition & \verb!\bdef...\edef!\\
+assumption & \verb!\bassump...\eassump!\\
+example & \verb!\bexa...\eexa!\\
+remark & \verb!\brmk...\ermk!\\
+fact & \verb!\bfact...\efact!\\
+exercise & \verb!\bexer...\eexer!\\
+proof & \verb!\bprf...\eprf!\\
+proof of & \verb!\bprfof{\cref{proof_label}}...\eprfof!\\
+\etabr
+\ecent
+
 
 \subsection{Brackets and bracket-like functions}
 
@@ -303,4 +341,11 @@ To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,
 \end{tabular}
 
 Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
+
+
+\section{Example Document}
+
+TODO: a full example in basic latex versus shortex
+
 \end{document}
+
