@@ -11,7 +11,7 @@
 
 \maketitle
 
-\begin{abstract}
+\babs
 The purpose of the ShorTeX (meta)package is to make the process of typesetting
 typical mathematical documents in \LaTeX~more efficient, and the resulting
 code easier to read.  It achieves this by 
@@ -21,7 +21,7 @@ shorthands,
 (2) incorporating a set of packages that are
 dedicated to reducing manual coding effort, and
 (3) incorporating a collection of very common / standard boilerplate packages.
-\end{abstract}
+\eabs
 
 \section{Usage and package options}\label{sec:usage}
 
@@ -106,10 +106,10 @@ numbers based on \textit{which equations you reference}. So when using ShorTeX,
 you only need two commands for math mode: single dollar signs \verb!$...$! for
 inline math, and \texttt{align} environments (redefined in ShorTeX to be
 \verb!\[...\]!) for display math.\footnote{Note that there are minor
-differences between \texttt{align} and the other display math environments like
-\texttt{equation}. But after 10+ years of using \LaTeX, I have not ever
+differences between how \texttt{align} and 
+\texttt{equation} display equations. But after 10+ years of using \LaTeX, I have not ever
 encountered a case where it mattered much. That being said, ShorTeX does not
-\emph{disable} any functionality, so you can use other environments anywhere
+\emph{disable} any functionality, so you can use the usual environments anywhere
 you feel it is necessary.}
 
 For example, if you create 
@@ -139,10 +139,19 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
 \subsection{Environments}
 
+\LaTeX~documents often includes a lot of verbose code
+related to creating environments (\verb!\begin{blah}...\end{blah}!). ShorTeX provides a set of 
+shortened macros for common environments.
+Note that all theorem-like environments (theorem, lemma, proposition, etc.) 
+are numbered by default; unnumbered versions can be obtained by appending a \verb!u!. For example,
+\verb!\bthmu...\ethmu! creates an unnumbered theorem environment, while
+\verb!\blemu...\elemu! creates an unnumbered lemma environment.
+
 \bcent
 \btabr{@{}ll@{}}
 \toprule
-Environment Name & Syntax \\ \midrule
+Environment & Syntax \\ \midrule
+abstract & \verb!\babs...\eabs!\\ \midrule
 algorithm & \verb!\balg...\ealg!\\
 algorithmic & \verb!\balgc...\ealgc!\\ \midrule
 table & \verb!\btab...\etab!\\
@@ -152,9 +161,11 @@ figure & \verb!\bfig...\efig!\\
 figure* & \verb!\bfigs...\efigs!\\
 subfigure & \verb!\bsubfig...\esubfig!\\ \midrule
 center & \verb!\bcent...\ecent!\\ \midrule
-align & \verb!\[...\]!\\
-aligned & \verb!\<...\>!\\ \midrule
-theorem & \verb!\bthm...\ethm!\\
+align & \verb!\[...\]!\\ 
+inline math & \verb!$...$!\\ \midrule
+\multicolumn{2}{c}{\emph{Note: These are numbered theorem-like environments.}}\\
+\multicolumn{2}{c}{\emph{For unnumbered, append a \texttt{u}: e.g.,} \texttt{bthmu...ethmu}.}\\
+theorem & \verb!\bthm...\ethm!\\ 
 lemma & \verb!\blem...\elem!\\
 proposition & \verb!\bprop...\eprop!\\
 corollary & \verb!\bcor...\ecor!\\
@@ -171,7 +182,7 @@ proofof & \verb!\bprfof{\cref{proof_label}}...\eprfof!\\
 \ecent
 
 
-\subsection{Brackets and bracket-like functions}
+\subsection{Delimiters}
 
 You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
 
