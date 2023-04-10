@@ -335,7 +335,6 @@
 
 \newcommand{\bone}{\mathbf{1}}
 \newcommand{\bzero}{\mathbf{0}}
-\newcommand{\bell}{\mathbf{\ell}}
 \newcommand{\bpmat}{\begin{pmatrix}}
 \newcommand{\epmat}{\end{pmatrix}}
 \newcommand{\bbmat}{\begin{bmatrix}}
@@ -351,11 +350,13 @@
 \newcommand{\grad}{\nabla}
 \newcommand{\der}[2]{\ensuremath{\frac{\dee #1}{\dee #2}}}
 \newcommand{\dder}[2]{\ensuremath{\frac{\dee^2 #1}{\dee #2^2}}}
-\newcommand{\D}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
-\newcommand{\DD}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
-\newcommand{\Di}[2]{\ensuremath{\frac{\partial^i #1}{\partial #2^i}}}
-\newcommand{\prt}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
-\newcommand{\hes}[2]{\ensuremath{\frac{\partial^2}{\partial #1 \partial #2}}}
+\newcommand{\derwrt}[1]{\ensuremath{\frac{\dee}{\dee #1}}}
+\newcommand{\pder}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\pdder}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
+\newcommand{\pderi}[2]{\ensuremath{\frac{\partial^i #1}{\partial #2^i}}}
+\newcommand{\pderwrt}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
+\newcommand{\hes}[3]{\ensuremath{\frac{\partial^2 #1}{\partial #2 \partial #3}}}
+\newcommand{\heswrt}[2]{\ensuremath{\frac{\partial^2 }{\partial #2 \partial #3}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% General Purpose Mathematics
