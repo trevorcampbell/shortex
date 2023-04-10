@@ -135,7 +135,34 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 \item[url] asdf
 \edesc
 
-\section{Shortened commands and macros}
+\section{Custom definitions}
+
+\subsection{Commenting}
+ShorTeX defines two types of comments that can be used 
+(\emph{remarks} and \emph{problems}), and provides an inline and margin
+style for each.
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+Comment Type & Syntax \\ \midrule
+remark & \verb!\RMK{Example remark}!\\ 
+margin remark & \verb!\mRMK{Example margin remark}!\\ 
+problem & \verb!\PRB{Example problem}!\\ 
+margin problem & \verb!\mPRB{Example margin problem}!\\ 
+\bottomrule
+\etabr
+\ecent
+
+Here is an example of how these look in a typical paragraph:\\
+\\
+
+Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt...
+
 
 \subsection{Environments}
 
