@@ -4,19 +4,73 @@
 
 
 \documentclass{article}
-\usepackage[colorhypersetup]{shortex}
+\usepackage[subtlehypersetup]{shortex}
 
-\title{Examples of how to use \texttt{shortex.sty}}
-\author{Created by Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
+\title{The \texttt{ShorTeX} package}
+\author{Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
 \date{Updated \today}
 
 
 \begin{document}
 
-
 \maketitle
 
-\section{Brackets and bracket-like functions}
+\begin{abstract}
+The purpose of the ShorTeX (meta)package is to make the process of typesetting typical mathematical documents in LaTeX
+more efficient, and the resulting code easier to read. 
+It achieves this primarily by (1) providing an extensive, internally consistent, and easy to learn set of macro shorthands,
+and (2) incorporating a collection of packages that are dedicated to reducing manual coding effort while providing 
+the full suite of usual typesetting capabilities.
+\end{abstract}
+
+\section{Usage, options, and workflow}
+Include ShorTeX by adding \verb!\usepackage{shortex}! to the preamble of your document.
+The package has a few options:
+\bdesc
+\item[\texttt{manualnumbering}] Asdf
+\item[\texttt{subtlehypersetup}] Asdf
+\item[\texttt{blackhypersetup}] Asdf
+\edesc
+You must compile your document 4 times when using ShorTeX to ensure that equation
+numbers and references update properly.
+
+\section{Packages included in ShorTeX}
+\subsection{Internal packages}
+\bdesc
+\item[xifthen, xstring, xspace, xargs] asdf
+\edesc
+\subsection{Typical packages}
+It is worth noting that we did not include a standard bibliography package in ShorTeX (e.g., \verb!natbib.sty!).
+This is because...
+\bdesc
+\item[mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools] asdf
+\item[hyperref] asdf
+\item[color] asdf
+\item[algorithm, algpseudocode] asdf
+\item[graphicx] asdf
+\edesc
+\subsection{Improvement packages}
+\bdesc
+\item[cleveref] asdf
+\item[autonum] asdf
+\item[nicefrac] asdf
+\item[crossreftools] asdf
+\item[multirow] asdf
+\item[wrapfig] asdf
+\item[caption,subcaption] asdf
+\item[microtype] asdf
+\item[booktabs] asdf
+\item[import,subfiles] asdf
+\item[url] asdf
+\edesc
+
+\section{Features and Examples}
+
+\subsection{Automated references for equations, figures, tables}
+
+\subsection{Automatic equation numbering}
+
+\subsection{Brackets and bracket-like functions}
 
 You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
 
@@ -77,7 +131,7 @@ Inner product with subscript			& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $
 \end{center}
 
 
-\section{$\Lp{p}$ Spaces and Operators}
+\subsection{$\Lp{p}$ Spaces and Operators}
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -101,7 +155,7 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinn
 \end{tabular}
 \end{center}
 
-\section{annotation commands}
+\subsection{annotation commands}
 \begin{tabular}{ll}
     \verb!\barA! & $\barA$ \\
     \verb!\bara! & $\bara$ \\
@@ -140,7 +194,7 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinn
 \end{tabular}
 
 
-\section{new approach to annotation commands}
+\subsection{new approach to annotation commands}
 Out of the box we can get all sorts of cool fonts in math mode using \texttt{\textbackslash f[<fontcodestring>]{A}}.
 For the time being I only implemented 2 fonts and 1 accent. These can be expanded once everything else is set.
 We see the effect of single font codes:
