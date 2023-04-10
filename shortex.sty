@@ -12,21 +12,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
-\usepackage{xstring} % string manipulation (needed internally for StrLeft, StrGobbleLeft, IfStrEqCase, etc in font/style macro expansions)
+\usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
 \usepackage{xspace} % defines \xspace command that automatically determine whether spaces should be eaten (needed internally for many defns)
-\usepackage{xargs} % more flexible \newcommand etc for multiple optional arguments
-\usepackage[usenames]{color} % for using colored text
+\usepackage{xargs} % more flexible \newcommand etc for multiple optional arguments (TODO: is this needed?)
+\usepackage[usenames]{color} % for using colored text (needed internally for \definecolor)
 \usepackage{hyperref} % typical linking package
 \usepackage{mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
 \usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
 \usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
-% ensure that crefs appear correctly in bookmarks 
-\usepackage{crossreftools} % may not be available when uploading to arXiv 
-\pdfstringdefDisableCommands{%
-    \let\Cref\crtCref
-    \let\cref\crtcref
-}
-\usepackage{algpseudocode, algorithm} % typical alg typesetting packages
+\usepackage{crossreftools} % ensure that crefs appear correctly in bookmarks (needed internally for \crtCref, \crtcref)
+\usepackage{algpseudocode, algorithm} % typical algorithm typesetting packages
 \usepackage{graphicx} % typical graphics package for figures
 \usepackage{multirow} % multirow tables
 \usepackage{wrapfig} % figures wrapped into the text
@@ -61,6 +56,17 @@
 \ProcessOptions
 
 \ifuseautonum \usepackage{autonum} \fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bookmarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ensures that hyperref generates correct 
+% bookmarks when using cleveref
+\pdfstringdefDisableCommands{%
+    \let\Cref\crtCref
+    \let\cref\crtcref
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
