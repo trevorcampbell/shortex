@@ -75,6 +75,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcounter{margincounter}
 \newcommand{\displaycounter}{{\arabic{margincounter}}}
 \newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
@@ -121,6 +122,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Math Environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \AtBeginDocument{ %necessary to stop clash with autonum package
 \def\[#1\]{\begin{align}#1\end{align}}		% numbered
 \def \<#1\>{\begin{aligned}#1\end{aligned}}
@@ -130,6 +132,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Proof Environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\bprf}{\begin{proof}}
 \newcommand{\eprf}{\end{proof}}
 \newenvironment{proofof}[1]{\renewcommand{\proofname}{Proof of #1}\proof}{\endproof}
