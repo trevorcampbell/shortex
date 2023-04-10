@@ -1,25 +1,26 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  shortex.sty
 %%  Latex packages and macros for
 %%  more efficient, readable math
 %%
 %%  Copyright (c) 2023 Trevor Campbell
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Adapted from original style files
+%%  by Jonathan Huggins, Dan Roy, Ryan Adams
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Imports
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
 \usepackage{xspace} % defines \xspace command that automatically determine whether spaces should be eaten (needed internally for many defns)
 \usepackage{xargs} % more flexible \newcommand etc for multiple optional arguments (TODO: is this needed?)
-\usepackage[usenames]{color} % for using colored text (needed internally for \definecolor)
+\usepackage[usenames]{color} % for using colored text (needed internally for \definecolor to create WowColor and SubtleColor)
 \usepackage{hyperref} % typical linking package
 \usepackage{mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
-\usepackage[nice]{nicefrac} % nice fraction typesetting, compact symbols for 1/2, etc
-\usepackage[capitalize,sort,compress]{cleveref} % nice reference package for automatically choosing names for references
+\usepackage[nice]{nicefrac} % nice fraction typesetting
+\usepackage[capitalize,sort,compress]{cleveref} % automatic typesetting of references with typed names
 \usepackage{crossreftools} % ensure that crefs appear correctly in bookmarks (needed internally for \crtCref, \crtcref)
 \usepackage{algpseudocode, algorithm} % typical algorithm typesetting packages
 \usepackage{graphicx} % typical graphics package for figures
@@ -29,18 +30,18 @@
 \usepackage{microtype} % microtypesetting improvements for latex
 \usepackage{booktabs} % professional quality tables
 \usepackage{import, subfiles} % packages for using subfile/folder structure
-\usepackage{url} % nice URL typesetting
+\usepackage{url} % nice URL typesetting (used internally for \UrlFont command)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Color Definitions 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \definecolor{WowColor}{rgb}{.75,0,.75}
 \definecolor{SubtleColor}{rgb}{0,0,.50}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Option Declarations 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Option Declarations and Processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %hyperref format/color/etc
 \DeclareOption{colorhypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
@@ -52,9 +53,7 @@
 \newif\ifuseautonum
 \useautonumfalse
 \DeclareOption{autonum}{\useautonumtrue}
-
 \ProcessOptions
-
 \ifuseautonum \usepackage{autonum} \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,51 +70,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% NA: needs attention (rough writing whose correctness needs to be verified)
-%% TBD: instructions for how to fix a gap ("Describe the propagation by ...")
-%% PROBLEM: bug or missing crucial bit
-
-%% use \fXXX versions of these macros to put additional explanation into a footnote (in the margin).
-%% The idea is that we don't want to interrupt the flow of the paper or make it
-%% impossible to read because there are a bunch of comments.
-
-%% NA's (and TBDs, those less crucially) should be written so
-%% that they flow with the text.
-
-% inline
-\newcommand{\NA}[1]{\textcolor{SubtleColor}{ {\tiny \bf ($\star$)} #1}}
-\newcommand{\LATER}[1]{\textcolor{SubtleColor}{ {\tiny \bf ($\dagger$)} #1}}
-\newcommand{\TBD}[1]{\textcolor{SubtleColor}{ {\tiny \bf (!)} #1}}
-\newcommand{\PROBLEM}[1]{\textcolor{WowColor}{ {\bf (!!)} {\bf #1}}}
-
-% as margin notes
 \newcounter{margincounter}
 \newcommand{\displaycounter}{{\arabic{margincounter}}}
 \newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
 
-\newcommand{\fTBD}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
+% inline comments
+\newcommand{\REMARK}[1]{\textcolor{SubtleColor}{ {\tiny \bf (!)} #1}} % a general comment (subtle color)
+\newcommand{\PROBLEM}[1]{\textcolor{WowColor}{ {\bf (!!)} {\bf #1}}} % a problem (wow color)
+% margin comments
+\newcommand{\MREMARK}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
+\newcommand{\MPROB}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
 
-\newcommand{\fPROBLEM}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% URLs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\fLATER}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter\dagger)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter\dagger)$} #1}}}
-
-\DeclareRobustCommand{\suppresscomments}{
-% For submission, make all render blank.
-\renewcommand{\LATER}[1]{}
-\renewcommand{\fLATER}[1]{}
-\renewcommand{\TBD}[1]{}
-\renewcommand{\fTBD}[1]{}
-\renewcommand{\PROBLEM}[1]{}
-\renewcommand{\fPROBLEM}[1]{}
-\renewcommand{\NA}[1]{##1}  %% Note, NA's pass through!
-}
-
-%%%%%%%%%%%%%
-%%% Links %%%
-%%%%%%%%%%%%%
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
-
 
 % Stacked Relations
 %%%%%%%%%%%%%%%%%%%
