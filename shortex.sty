@@ -44,12 +44,6 @@
 \definecolor{SubtleColor}{rgb}{0,0,.50}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Math Alphabet Definitions 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Option Declarations 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -375,20 +369,19 @@
 \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
 
 % parametric distributions
-\newcommand{\distNamed}[1]{{\sf{#1}}}
+\newcommand{\distNamed}[1]{{\mathrm{#1}}}
 \newcommand{\distNorm}{\mathcal{N}}
 \newcommand{\distT}{\mathcal{T}}
-\newcommand{\distLaplace}{\distNamed{Lap}}
+\newcommand{\distWish}{\mathcal{W}}
+\newcommand{\distInvWish}{\mathcal{IW}}
+\newcommand{\distLap}{\distNamed{Lap}}
 \newcommand{\distChiSq}{\chi^2}
-%\newcommand{\distUnif}{\mathscr{U}}
 \newcommand{\distUnif}{\distNamed{Unif}}
-%\newcommand{\distGam}{\mathscr{G}{\scriptstyle\mathscr{A}}}
 \newcommand{\distGam}{\distNamed{Gam}}
 \newcommand{\distGumbel}{\distNamed{Gumbel}}
 \newcommand{\distGEV}{\distNamed{GEV}}
 \newcommand{\distCat}{\distNamed{Categorical}}
 \newcommand{\distInvGam}{\distNamed{InvGam}}
-%\newcommand{\distPoiss}{\mathscr{P}{\scriptstyle\mathscr{O}}}
 \newcommand{\distPoiss}{\distNamed{Poiss}}
 \newcommand{\distExp}{\distNamed{Exp}}
 \newcommand{\distBeta}{\distNamed{Beta}}
@@ -398,25 +391,23 @@
 \newcommand{\distMulti}{\distNamed{Multi}}
 \newcommand{\distBern}{\distNamed{Bern}}
 \newcommand{\distGeom}{\distNamed{Geom}}
-\newcommand{\distWish}{\mathpzc{W}}
-\newcommand{\distInvWish}{\mathpzc{IW}}
 \newcommand{\distCauchy}{\distNamed{Cauchy}}
-% non-parametric distributions
-\newcommand{\distBeP}{\mathrm{BeP}}
-\newcommand{\distDP}{\mathrm{DP}}
-\newcommand{\distCRP}{\mathrm{CRP}}
-\newcommand{\distPYP}{\mathrm{PY}}
-\newcommand{\distGP}{{\mathrm{GP}}} % Gaussian process
-\newcommand{\distPP}{\mathrm{PP}}
-\newcommand{\distBP}{\mathrm{BP}}
-\newcommand{\distBPP}{\mathrm{BPP}}
-\newcommand{\distGammaP}{\mathrm{\Gamma P}}
-\newcommand{\distNGammaP}{\mathrm{N\Gamma P}}
-\newcommand{\distLP}{\mathrm{LP}}
-\newcommand{\distObs}{\mathrm{Obs}}
-\newcommand{\distCRM}{\mathrm{CRM}}
-\newcommand{\distNCRM}{\mathrm{NCRM}}
-\newcommand{\distVMF}{\mathrm{vMF}}
+\newcommand{\distVMF}{\distNamed{vMF}}
+% nonparametric distributions
+\newcommand{\distBeP}{\distNamed{BeP}}
+\newcommand{\distDP}{\distNamed{DP}}
+\newcommand{\distCRP}{\distNamed{CRP}}
+\newcommand{\distPYP}{\distNamed{PY}}
+\newcommand{\distGP}{{\distNamed{GP}}} 
+\newcommand{\distPP}{\distNamed{PP}}
+\newcommand{\distBP}{\distNamed{BP}}
+\newcommand{\distBPP}{\distNamed{BPP}}
+\newcommand{\distGamP}{\distNamed{\Gamma P}}
+\newcommand{\distNGamP}{\distNamed{N\Gamma P}}
+\newcommand{\distLP}{\distNamed{LP}}
+\newcommand{\distObs}{\distNamed{Obs}}
+\newcommand{\distCRM}{\distNamed{CRM}}
+\newcommand{\distNCRM}{\distNamed{NCRM}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
