@@ -178,11 +178,31 @@ fact & \verb!\bfact...\efact!\\
 exercise & \verb!\bexer...\eexer!\\
 proof & \verb!\bprf...\eprf!\\
 proofof & \verb!\bprfof{\cref{proof_label}}...\eprfof!\\
+\bottomrule
+\etabr
+\ecent
+
+\subsection{Delimiters}
+
+Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
+A very common usage of these involves the \verb!\left...! and \verb!\right...! commands for automatic sizing. 
+ShorTeX defines the shortened \verb!\lt...! and \verb!\rt...! to replace these.
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description & Example & Text style & Display style \\ \midrule
+Parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
+Curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
+Square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
+Pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
+Double Pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
+Angles & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
+\bottomrule
 \etabr
 \ecent
 
 
-\subsection{Delimiters}
 
 You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
 
