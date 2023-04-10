@@ -95,9 +95,7 @@
 \algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1} 
 
 %properly indented comments
-%usage:
-%\LineComment{X}{Here is the comment},  where X = # additional indents. 
-%right after for / procedure / function calls, for whatever reason need to indent manually...
+%usage: \LineComment{X}{Here is the comment},  where X = # additional indents. 
 \newdimen{\algindent}
 \setlength\algindent{1.5em}
 \makeatletter
@@ -204,16 +202,12 @@
 \crefformat{footnote}{#1\footnotemark[#2]#3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Bracket Shorthands %%%
+%%%% Brackets 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Brackets and bracket-like functions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclarePairedDelimiter\rbra{(}{)}
 \DeclarePairedDelimiter\cbra{\{}{\}}
 \DeclarePairedDelimiter\sbra{[}{]}
-
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\card{\lvert}{\rvert}
 \DeclarePairedDelimiter\set{\{}{\}}
@@ -224,10 +218,10 @@
 \DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
 \DeclarePairedDelimiterXPP\innersub[3]{}{\langle}{\rangle}{_{#3}}{#1,#2}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Sets and Set Operations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%
-%%% Important Sets %%%
-%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
 \newcommand{\extReals}{\overline{\reals}}
 \newcommand{\posReals}{\reals_+}
@@ -249,9 +243,6 @@
 \newcommand{\measures}{\mathcal{M}}
 \newcommand{\probMeasures}{\mathcal{M}_1}
 
-
-% Set Operations
-%%%%%%%%%%%%%%%%
 \newcommand{\PowerSet}{\mathcal{P}}
 
 \newcommand{\union}{\cup}
@@ -273,6 +264,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Vectors & Matrices %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\bone}{\mathbf{1}}
 \newcommand{\bzero}{\mathbf{0}}
 \newcommand{\bell}{\mathbf{\ell}}
@@ -283,11 +275,10 @@
 \newcommand{\bmat}{\begin{matrix}}
 \newcommand{\emat}{\end{matrix}}
 
-
-
 %%%%%%%%%%%%%%%%%%
 %%% Lp spaces and operators %%%
 %%%%%%%%%%%%%%%%%%
+
 \newcommand{\Lp}[1]{L_{#1}}
 \DeclarePairedDelimiterXPP\Lpmeas[2]{\Lp{#1}}{(}{)}{}{#2}
 \DeclarePairedDelimiterXPP\Lpnorm[2]{}{\lVert}{\rVert}{_{\Lp{#2}}}{#1}
@@ -303,6 +294,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%% Linear Algebra %%%
 %%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\kron}{\operatorname{\otimes}}
 \newcommand{\adjsym}{\dag} % adjoint symbol
@@ -319,6 +311,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %%% General Purpose %%%
 %%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\tuple}[1][]{\left\langle #1 \right\rangle}
 \newcommand{\emptystr}{\text{\o}}
 \newcommand{\ind}{\mathds{1}} % indicator function
@@ -339,6 +332,7 @@
 
 % Words with special characters
 %%%%%%%%%%%%%%%%
+
 \def\cadlag{c\`adl\`ag\@\xspace}
 \def\Gronwall{Gr\"onwall\xspace}
 \def\Renyi{R\'enyi\xspace}
@@ -348,7 +342,7 @@
 \def\Schatten{Sch\"atten\xspace}
 \def\Matern{Mat\'ern\xspace}
 \def\Frechet{Fr\'echet\xspace}
-
+\def\Levy{L\'evy\xspace}
 
 % New definition of square root:
 % it renames \sqrt as \oldsqrt
@@ -379,12 +373,10 @@
 \newcommand{\sm}{\!-\!}
 \newcommand{\splus}{\!+\!}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Optimization               %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\rbra{#2}}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Convex Analysis %%%
@@ -523,12 +515,9 @@
 \newcommand{\angles}[1]{\langle #1 \rangle}
 \newcommand{\ip}[2]{\angles{#1, #2}}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%% Symbol shortcuts %%%
 %%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \newcommand{\charalphabetmacro}[3]{
 % #1: annotation prefix
