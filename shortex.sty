@@ -94,7 +94,7 @@
 \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Algorithms %%%
+%%% Algorithms
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fix the \Comment command
@@ -108,8 +108,38 @@
 \newcommand{\LineComment}[2][0]{\Statex \hspace{#1\algindent} \hskip\ALG@thistlm $\triangleright$ #2}
 \makeatother
 
+% environments
+\newcommand{\balg}{\begin{algorithm}}
+\newcommand{\ealg}{\end{algorithm}}
+\newcommand{\balgc}{\begin{algorithmic}}
+\newcommand{\ealgc}{\end{algorithmic}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% List Environments
+%%% Figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%environments
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\bsubfig}{\begin{subfigure}}
+\newcommand{\esubfig}{\end{subfigure}}
+\newcommand{\bfigs}{\begin{figure*}}
+\newcommand{\efigs}{\end{figure*}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%environments
+\newcommand{\btab}{\begin{table}}
+\newcommand{\etab}{\end{table}}
+\newcommand{\bsubtab}{\begin{subtable}}
+\newcommand{\esubtab}{\end{subtable}}
+\newcommand{\btabr}{\begin{tabular}}
+\newcommand{\etabr}{\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Lists
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\bitems}{\begin{itemize}}
@@ -120,7 +150,7 @@
 \newcommand{\edesc}{\end{description}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Math Environments
+%%% Math-Mode Environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \AtBeginDocument{ %necessary to stop clash with autonum package
