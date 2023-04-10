@@ -40,12 +40,15 @@
 \definecolor{SubtleColor}{rgb}{0,0,.50}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Option Declarations and Processing
+%%% Package Setup and Options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%hyperref format/color/etc
-\DeclareOption{subtlehypersetup}{\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}}
+% set the default hyperref style to dark blue
+\hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}
+% allow the user to switch to a black hypersetup if desired
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
+
+% define the 'b' prefix to mean bold or bar (bar default)
 \def\boldorbar{\bar}
 \DeclareOption{bbold}{\def\boldorbar{\bm}}
 \DeclareOption{bbar}{\def\boldorbar{\bar}}
@@ -91,7 +94,12 @@
 %%% URLs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
+% script size URL (useful when putting long URLs in footnotes)
+\newcommand{\scurl}[1]{%
+    \renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}%
+    \url{#1}%
+    \renewcommand*{\UrlFont}{\ttfamily\relax}%
+   }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Algorithms
@@ -356,7 +364,7 @@
 \newcommand{\pderi}[2]{\ensuremath{\frac{\partial^i #1}{\partial #2^i}}}
 \newcommand{\pderwrt}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
 \newcommand{\hes}[3]{\ensuremath{\frac{\partial^2 #1}{\partial #2 \partial #3}}}
-\newcommand{\heswrt}[2]{\ensuremath{\frac{\partial^2 }{\partial #2 \partial #3}}}
+\newcommand{\heswrt}[2]{\ensuremath{\frac{\partial^2 }{\partial #1 \partial #2}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% General Purpose Mathematics
