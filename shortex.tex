@@ -204,7 +204,7 @@ remark & \verb!\brmk...\ermk!\\
 fact & \verb!\bfact...\efact!\\
 exercise & \verb!\bexer...\eexer!\\
 proof & \verb!\bprf...\eprf!\\
-proofof & \verb!\bprfof{\cref{proof_label}}...\eprfof!\\
+proofof & \verb!\bprfof{\cref{theorem_label}}...\eprfof!\\
 \bottomrule
 \etabr
 \ecent
@@ -219,12 +219,12 @@ ShorTeX defines the shortened \verb!\lt...! and \verb!\rt...! to replace these.
 \btabr{@{}llll@{}}
 \toprule
 Description & Example & Text style & Display style \\ \midrule
-Parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
-Curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
-Square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
-Pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
-Double Pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
-Angles & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
+parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
+curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
+square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
+pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
+double pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
+angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
 \bottomrule
 \etabr
 \ecent
@@ -237,7 +237,7 @@ You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or o
 \begin{tabular}{@{}llll@{}}
 \toprule
 Description 				& Example					& Text style 				& Display style \\ \midrule
-Round brackets (i.e., parentheses)	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
 Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
 Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
 \bottomrule
@@ -288,6 +288,56 @@ Inner product with subscript			& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $
 \bottomrule
 \end{tabular}
 \end{center}
+
+\subsection{Font styles and accents}
+
+Out of the box we can get all sorts of cool fonts in math mode using \texttt{\textbackslash f[<fontcodestring>]{A}}.
+For the time being I only implemented 2 fonts and 1 accent. These can be expanded once everything else is set.
+We see the effect of single font codes:
+
+\begin{tabular}{ll}
+    \verb!\f[b]A! & $\f[b]A$ \\
+	\verb!\f[k]A! & $\f[k]A$ \\
+	% \verb!\f[c]A! & $\f[c]A$ \\
+	% \verb!\f[f]A! & $\f[f]A$ \\
+	% \verb!\f[y]A! & $\f[y]A$ \\
+	%
+	\verb!\f[h]A! & $\f[h]A$ \\
+	% \verb!\f[u]A! & $\f[u]A$ \\
+	% \verb!\f[o]A! & $\f[o]A$ \\
+	% \verb!\f[d]A! & $\f[d]A$ \\
+	% \verb!\f[t]A! & $\f[t]A$ \\
+\end{tabular}
+
+And multiple font codes:
+
+\begin{tabular}{ll}
+    \verb!\f[bh]A! & $\f[bh]A$ \\
+	\verb!\f[hb]A! & $\f[hb]A$ \\
+	\verb!\f[hk]A! & $\f[hk]A$ \\
+	\verb!\f[kh]A! & $\f[ka]A$ \\
+\end{tabular}
+
+Note that these are expanded in the reverse of the order they appear: the font code furthest to the right is applied first. This natches the order that the corresponding commands would appear in TeX code.
+
+We can also avoid typing \texttt{[]} for some combinations of font codes we sue frequently.
+To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,$\{$<fcstr2>$\}$,...$\}\{$<alphabet>$\}$} as demonstrated below. For ``ease of use'' we have implemented \texttt{\textbackslash upperCaseRomanLetters} and \texttt{\textbackslash lowerCaseRomanLetters}
+\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}. 
+\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}. 
+
+\begin{tabular}{ll}
+	\verb!\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}! & ...\\
+	\verb!\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}! & ...\\
+    \verb!\fhbA! & $\fhbA$ \\
+	\verb!\fhkB! & $\fhkB$ \\
+	\verb!\fhbx! & $\fhbx$ \\
+	\verb!\fhby! & $\fhby$ \\
+	\verb!\fhkz! & $\fhkz$ \\
+\end{tabular}
+
+Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
+
+
 
 
 \subsection{$\Lp{p}$ Spaces and Operators}
@@ -354,53 +404,6 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinn
 
 
 \subsection{new approach to annotation commands}
-Out of the box we can get all sorts of cool fonts in math mode using \texttt{\textbackslash f[<fontcodestring>]{A}}.
-For the time being I only implemented 2 fonts and 1 accent. These can be expanded once everything else is set.
-We see the effect of single font codes:
-
-\begin{tabular}{ll}
-    \verb!\f[b]A! & $\f[b]A$ \\
-	\verb!\f[k]A! & $\f[k]A$ \\
-	% \verb!\f[c]A! & $\f[c]A$ \\
-	% \verb!\f[f]A! & $\f[f]A$ \\
-	% \verb!\f[y]A! & $\f[y]A$ \\
-	%
-	\verb!\f[h]A! & $\f[h]A$ \\
-	% \verb!\f[u]A! & $\f[u]A$ \\
-	% \verb!\f[o]A! & $\f[o]A$ \\
-	% \verb!\f[d]A! & $\f[d]A$ \\
-	% \verb!\f[t]A! & $\f[t]A$ \\
-\end{tabular}
-
-And multiple font codes:
-
-\begin{tabular}{ll}
-    \verb!\f[bh]A! & $\f[bh]A$ \\
-	\verb!\f[hb]A! & $\f[hb]A$ \\
-	\verb!\f[hk]A! & $\f[hk]A$ \\
-	\verb!\f[kh]A! & $\f[ka]A$ \\
-\end{tabular}
-
-Note that these are expanded in the reverse of the order they appear: the font code furthest to the right is applied first. This natches the order that the corresponding commands would appear in TeX code.
-
-We can also avoid typing \texttt{[]} for some combinations of font codes we sue frequently.
-To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,$\{$<fcstr2>$\}$,...$\}\{$<alphabet>$\}$} as demonstrated below. For ``ease of use'' we have implemented \texttt{\textbackslash upperCaseRomanLetters} and \texttt{\textbackslash lowerCaseRomanLetters}
-\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}. 
-\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}. 
-
-\begin{tabular}{ll}
-	\verb!\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}! & ...\\
-	\verb!\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}! & ...\\
-    \verb!\fhbA! & $\fhbA$ \\
-	\verb!\fhkB! & $\fhkB$ \\
-	\verb!\fhbx! & $\fhbx$ \\
-	\verb!\fhby! & $\fhby$ \\
-	\verb!\fhkz! & $\fhkz$ \\
-\end{tabular}
-
-Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
-
-
 \section{Example Document}
 
 TODO: a full example in basic latex versus shortex
