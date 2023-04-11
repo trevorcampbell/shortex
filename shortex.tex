@@ -11,6 +11,7 @@
 
 \maketitle
 
+
 \babs
 The purpose of the ShorTeX (meta)package is to make the process of typesetting
 typical mathematical documents in \LaTeX~more efficient, and the resulting
@@ -22,6 +23,9 @@ shorthands,
 dedicated to reducing manual coding effort, and
 (3) incorporating a collection of very common / standard boilerplate packages.
 \eabs
+
+
+\tableofcontents
 
 \section{Usage and package options}\label{sec:usage}
 
@@ -135,7 +139,7 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 \item[url] asdf
 \edesc
 
-\section{Custom definitions}
+\section{Shorthands for existing commands}
 
 \subsection{Commenting}
 ShorTeX defines two types of comments that can be used 
@@ -300,6 +304,8 @@ To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,
 
 Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
 
+
+\section{Custom mathematics macros}
 
 \subsection{Sets and set operations}
 
