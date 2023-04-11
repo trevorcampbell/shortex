@@ -179,6 +179,9 @@ are numbered by default; unnumbered versions can be obtained by appending a \ver
 \toprule
 Environment & Syntax \\ \midrule
 abstract & \verb!\babs...\eabs!\\ \midrule
+itemize & \verb!\bitems...\eitems!\\
+enumerate & \verb!\benum...\eenum!\\
+description & \verb!\bdesc...\edesc!\\ \midrule
 algorithm & \verb!\balg...\ealg!\\
 algorithmic & \verb!\balgc...\ealgc!\\ \midrule
 table & \verb!\btab...\etab!\\
@@ -204,10 +207,10 @@ remark & \verb!\brmk...\ermk!\\
 fact & \verb!\bfact...\efact!\\
 exercise & \verb!\bexer...\eexer!\\
 proof & \verb!\bprf...\eprf!\\
-proofof & \verb!\bprfof{\cref{theorem_label}}...\eprfof!\\ \midrule
-itemize & \verb!\bitems...\eitems!\\
-enumerate & \verb!\benum...\eenum!\\
-description & \verb!\bdesc...\edesc!\\
+proofof & \verb!\bprfof{\cref{theorem_label}}...\eprfof!\\  \midrule
+matrix & \verb!\bmat...\emat!\\
+bmatrix & \verb!\bbmat...\ebmat!\\
+pmatrix & \verb!\pbmat...\epmat!\\
 \bottomrule
 \etabr
 \ecent
@@ -341,7 +344,76 @@ To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,
 Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
 
 
+\subsection{Sets and set operations}
 
+\[
+\reals \extReals \posReals \posExtReals \posPosReals \posPosExtReals
+\ints \posInts \rats \posRats \nats \natsO \comps \measures
+\probMeasures \PowerSet \union \Union \djunion \djUnion
+\intersect \Intersect \vol \diam \closure \spann \boundary \cone \conv
+\]
+
+\subsection{Linear algebra}
+
+\[
+\tr \kron A\adj \spec \diag \rank A\transpose A\invtranspose
+\]
+
+\subsection{Calculus}
+
+\[
+\dee \grad \der{x}{y} \dder{x}{y} \derwrt{y} \pder{x}{y} \pdder{x}{y} \pderi{x}{y} \pderwrt{y} \hes{a}{x}{y} \heswrt{x}{y}
+\]
+
+\subsection{General mathematics}
+
+\[
+\ind \sgn \scin{3}{5} \st \given
+\] 
+
+improved square root
+
+text in math?
+
+\[
+\defas \defines \half \third \quarter \argmax \esssup \argmin \essinf
+\]
+
+
+\subsection{Common words and names with accents}
+\cadlag
+\Gronwall
+\Renyi
+\Holder
+\Ito
+\Nystrom
+\Schatten
+\Matern
+\Frechet
+\Levy
+
+\subsection{Probability and statistics}
+\iid \as \aev 
+\[
+\convas \convp \convd \eqd \eqas \Pr \EE \law \var \cov \corr \supp \dist \distiid \distind
+\indep
+\]
+
+\[
+\distNorm \distT \distWish \distInvWish \distLap \distChiSq \distUnif \distGam \distGumbel \distGEV \distCat \distInvGam \distPoiss \\
+\distExp \distBeta \distBetaPrime \distDir \distBinom \distMulti \distBern \distGeom \distCauchy \distVMF \\
+\distBeP \distDP \distCRP \distPYP \distGP \distPP \distBP \distBPP \distGamP \distNGamP \distLP \distObs \distCRM
+\distNCRM
+\]
+
+\[
+\kl{q}{p} \hell{q}{p} \tvd{q}{p} \ent{q}\\
+\hell[a]{q}{p}
+\tvd[a]{q}{p}
+\kl[a]{q}{p}
+\]
+
+\subsection{}
 
 \subsection{$\Lp{p}$ Spaces and Operators}
 

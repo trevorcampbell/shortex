@@ -433,6 +433,13 @@
 \newcommand{\sm}{\!-\!}
 \newcommand{\splus}{\!+\!}
 
+% Fractions
+\newcommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
+\newcommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
+\newcommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Optimization              
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -472,6 +479,14 @@
 % independence
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
 \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
+
+% divergences
+\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3 || #4}}
+\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3, #4}}
+\newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
+\newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
+\newcommand{\ent}[1]{\mathcal{H}\rbra{#1}}
+\newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
 
 % parametric distributions
 \newcommand{\distNamed}[1]{{\mathrm{#1}}}
@@ -514,18 +529,6 @@
 \newcommand{\distCRM}{\distNamed{CRM}}
 \newcommand{\distNCRM}{\distNamed{NCRM}}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Information Theory 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3 || #4}}
-\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3, #4}}
-\newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
-\newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
-\newcommand{\ent}[1]{\mathcal{H}\rbra{#1}}
-\newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Special Funcs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -537,14 +540,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareMathOperator{\notimplies}{\centernot\implies}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Fractions 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
-\newcommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
-\newcommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Font/accent/symbol shortcuts 
@@ -659,8 +654,6 @@
 \newcommand{\boldhatitalic}[1]{\hat{\mathbbi{#1}}}
 \charalphabetmacro{bhi}{\boldhatitalic}{\upperCaseRomanLetters}
 \charalphabetmacro{bhi}{\boldhatitalic}{\lowerCaseRomanLetters}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% New approach to symbol shortcuts %%%
