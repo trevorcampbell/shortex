@@ -219,7 +219,24 @@ pmatrix & \verb!\pbmat...\epmat!\\
 
 Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
 A very common usage of these involves the \verb!\left...! and \verb!\right...! commands for automatic sizing. 
-ShorTeX defines the shortened \verb!\lt...! and \verb!\rt...! to replace these.
+One can also use \verb!\bigl...\bigr!, \verb!\Bigl...\Bigr!, \verb!\biggl...\biggr!, \verb!\Biggl...\Biggr! to control sizing manually.
+ShorTeX creates shorthands for these.
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description & Syntax  \\ \midrule
+automatic	& \verb!\lt...\rt!\\        
+big 	& \verb!\lb...\rb!\\
+Big & \verb!\lB...\rB! \\ 
+bigg & \verb!\lbg...\rbg!\\ 
+Bigg & \verb!\lBg...\rBg!\\
+\bottomrule
+\etabr
+\ecent
+
+These can be applied to all the usual delimiter characters.
+The following tables demonstrate usage for automatically sized delimiters. 
 
 \bcent
 \btabr{@{}llll@{}}
@@ -234,66 +251,6 @@ angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\
 \bottomrule
 \etabr
 \ecent
-
-
-
-You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description 				& Example					& Text style 				& Display style \\ \midrule
-Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
-Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
-Many other bracket-like, semantic commands are also available:
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description				& Example 					& Text style 				& Display style \\ \midrule
-%\verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-%\verb!\cbra{\frac{x}{y}}!        	& $\cbra{\frac{x}{y}}$ 		& $\displaystyle\cbra{\frac{x}{y}}$ \\[10pt]
-%\verb!\sbra{\frac{x}{y}}!        	& $\sbra{\frac{x}{y}}$ 		& $\displaystyle\sbra{\frac{x}{y}}$ \\[10pt]
-Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
-Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
-Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
-Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	& $\displaystyle\norm{\frac{x}{y}}$ \\[10pt]
-Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	& $\displaystyle\inner{\frac{x}{y}}{\frac{y}{z}}$ \\[10pt]
-Cardinality 				& \verb!\card{\whA}!       		& $\card{\whA}$ 			& $\displaystyle\card{\whA}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
-%Some examples of each size option:
-%\begin{center}
-%\begin{tabular}{@{}lllllll@{}}
-%\toprule
-%					& -1 					& 0					& 1					& 2					& 3					& 4 \\ \midrule
-%
-%\verb!\abs{\frac{x}{y}}!        	& $\abs[-1]{\frac{x}{y}}$ 	& $\abs[0]{\frac{x}{y}}$ 	& $\abs[1]{\frac{x}{y}}$ 	& $\abs[2]{\frac{x}{y}}$ 	& $\abs[3]{\frac{x}{y}}$ 	& $\abs[4]{\frac{x}{y}}$ \\[10pt]
-%\verb!\floor{\frac{x}{y}}!        	& $\floor[-1]{\frac{x}{y}}$	& $\floor[0]{\frac{x}{y}}$	& $\floor[1]{\frac{x}{y}}$	& $\floor[2]{\frac{x}{y}}$	& $\floor[3]{\frac{x}{y}}$	& $\floor[4]{\frac{x}{y}}$ \\[10pt]
-%\verb!\norm{\frac{x}{y}}!       	& $\norm[-1]{\frac{x}{y}}$	& $\norm[0]{\frac{x}{y}}$	& $\norm[1]{\frac{x}{y}}$	& $\norm[2]{\frac{x}{y}}$	& $\norm[3]{\frac{x}{y}}$	& $\norm[4]{\frac{x}{y}}$ \\[10pt]
-%\bottomrule
-%\end{tabular}
-%\end{center}
-
-The norm and inner product commands also have versions with a subscript argument:
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description				& Example 					& Text style 				& Display style \\ \midrule
-Norm	with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	& $\displaystyle\normsub*{\frac{x}{y}}{2}$ \\[10pt]
-Inner product with subscript			& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$ 	& $\displaystyle\innersub*{\frac{x}{y}}{z}{2}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
 
 \subsection{Font styles and accents}
 
@@ -482,6 +439,68 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinn
 \section{Example Document}
 
 TODO: a full example in basic latex versus shortex
+
+\subsection{Paired Delimiters}
+
+You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Description 				& Example					& Text style 				& Display style \\ \midrule
+Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
+Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+Many other bracket-like, semantic commands are also available:
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Description				& Example 					& Text style 				& Display style \\ \midrule
+%\verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+%\verb!\cbra{\frac{x}{y}}!        	& $\cbra{\frac{x}{y}}$ 		& $\displaystyle\cbra{\frac{x}{y}}$ \\[10pt]
+%\verb!\sbra{\frac{x}{y}}!        	& $\sbra{\frac{x}{y}}$ 		& $\displaystyle\sbra{\frac{x}{y}}$ \\[10pt]
+Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
+Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
+Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
+Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
+Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	& $\displaystyle\norm{\frac{x}{y}}$ \\[10pt]
+Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	& $\displaystyle\inner{\frac{x}{y}}{\frac{y}{z}}$ \\[10pt]
+Cardinality 				& \verb!\card{\whA}!       		& $\card{\whA}$ 			& $\displaystyle\card{\whA}$ \\[10pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+%Some examples of each size option:
+%\begin{center}
+%\begin{tabular}{@{}lllllll@{}}
+%\toprule
+%					& -1 					& 0					& 1					& 2					& 3					& 4 \\ \midrule
+%
+%\verb!\abs{\frac{x}{y}}!        	& $\abs[-1]{\frac{x}{y}}$ 	& $\abs[0]{\frac{x}{y}}$ 	& $\abs[1]{\frac{x}{y}}$ 	& $\abs[2]{\frac{x}{y}}$ 	& $\abs[3]{\frac{x}{y}}$ 	& $\abs[4]{\frac{x}{y}}$ \\[10pt]
+%\verb!\floor{\frac{x}{y}}!        	& $\floor[-1]{\frac{x}{y}}$	& $\floor[0]{\frac{x}{y}}$	& $\floor[1]{\frac{x}{y}}$	& $\floor[2]{\frac{x}{y}}$	& $\floor[3]{\frac{x}{y}}$	& $\floor[4]{\frac{x}{y}}$ \\[10pt]
+%\verb!\norm{\frac{x}{y}}!       	& $\norm[-1]{\frac{x}{y}}$	& $\norm[0]{\frac{x}{y}}$	& $\norm[1]{\frac{x}{y}}$	& $\norm[2]{\frac{x}{y}}$	& $\norm[3]{\frac{x}{y}}$	& $\norm[4]{\frac{x}{y}}$ \\[10pt]
+%\bottomrule
+%\end{tabular}
+%\end{center}
+
+The norm and inner product commands also have versions with a subscript argument:
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Description				& Example 					& Text style 				& Display style \\ \midrule
+Norm	with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	& $\displaystyle\normsub*{\frac{x}{y}}{2}$ \\[10pt]
+Inner product with subscript			& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$ 	& $\displaystyle\innersub*{\frac{x}{y}}{z}{2}$ \\[10pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+
 
 \end{document}
 
