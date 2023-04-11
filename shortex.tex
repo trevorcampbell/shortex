@@ -141,33 +141,6 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
 \section{Shorthands for existing commands}
 
-\subsection{Commenting}
-ShorTeX defines two types of comments that can be used 
-(\emph{remarks} and \emph{problems}), and provides an inline and margin
-style for each.
-
-\bcent
-\btabr{@{}ll@{}}
-\toprule
-Comment Type & Syntax \\ \midrule
-remark & \verb!\RMK{Example remark}!\\ 
-margin remark & \verb!\mRMK{Example margin remark}!\\ 
-problem & \verb!\PRB{Example problem}!\\ 
-margin problem & \verb!\mPRB{Example margin problem}!\\ 
-\bottomrule
-\etabr
-\ecent
-
-Here is an example of how these look in a typical paragraph:\\
-\\
-
-Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt...
-
-
 \subsection{Environments}
 
 \LaTeX~documents often includes a lot of verbose code
@@ -304,8 +277,56 @@ To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,
 
 Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
 
+\subsection{Greek characters and variants}
 
-\section{Custom mathematics macros}
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Letter & Syntax & Symbol  \\ \midrule
+epsilon	& \verb!\eps! & $\eps$ \\
+upsilon	& \verb!\ups! & $\ups$ \\
+variant epsilon	& \verb!\veps! & $\veps$ \\
+variant theta	& \verb!\vtheta! & $\vtheta$ \\
+variant pi	& \verb!\vpi! & $\vpi$ \\
+variant rho	& \verb!\vrho! & $\vrho$ \\
+variant sigma	& \verb!\vsigma! & $\vsigma$ \\
+variant phi	& \verb!\vphi! & $\vphi$ \\
+variant kappa	& \verb!\vkappa! & $\vkappa$ \\
+\bottomrule
+\etabr
+\ecent
+
+
+\section{Custom macros}
+
+\subsection{Commenting}
+ShorTeX defines two types of comments that can be used 
+(\emph{remarks} and \emph{problems}), and provides an inline and margin
+style for each.
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+Comment Type & Syntax \\ \midrule
+remark & \verb!\RMK{Example remark}!\\ 
+margin remark & \verb!\mRMK{Example margin remark}!\\ 
+problem & \verb!\PRB{Example problem}!\\ 
+margin problem & \verb!\mPRB{Example margin problem}!\\ 
+\bottomrule
+\etabr
+\ecent
+
+Here is an example of how these look in a typical paragraph:\\
+\\
+
+Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt...
+
+
+
 
 \subsection{Sets and set operations}
 
