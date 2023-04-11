@@ -231,51 +231,104 @@ angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\
 
 \subsection{Font styles and accents}
 
-Out of the box we can get all sorts of cool fonts in math mode using \texttt{\textbackslash f[<fontcodestring>]{A}}.
-For the time being I only implemented 2 fonts and 1 accent. These can be expanded once everything else is set.
-We see the effect of single font codes:
+Applying accents (e.g., hats $\f[h]a$, tildes $\f[t]a$, bars $\f[b]a$)
+and changing fonts (e.g., doublestroke $\f[d]A$, caligraphic $\f[c]A$, and bold $\f[k]A$)
+is quite cumbersome in standard \LaTeX. For example, the code to make a tilde caligraphic A,
+$\widetilde{\mathcal{A}}$
+is \verb!\widetilde{\mathcal{A}}!. By itself that code is not too bad, but many such characters 
+in a large mathematical expression results in unreadable code.
 
-\begin{tabular}{ll}
-    \verb!\f[b]A! & $\f[b]A$ \\
-	\verb!\f[k]A! & $\f[k]A$ \\
-	% \verb!\f[c]A! & $\f[c]A$ \\
-	% \verb!\f[f]A! & $\f[f]A$ \\
-	% \verb!\f[y]A! & $\f[y]A$ \\
-	%
-	\verb!\f[h]A! & $\f[h]A$ \\
-	% \verb!\f[u]A! & $\f[u]A$ \\
-	% \verb!\f[o]A! & $\f[o]A$ \\
-	% \verb!\f[d]A! & $\f[d]A$ \\
-	% \verb!\f[t]A! & $\f[t]A$ \\
-\end{tabular}
+ShorTeX defines an efficient syntax for changing fonts and applying accents to characters. 
+The syntax takes the form \verb!\f[modifiers]character!, where \verb!modifiers! is a set of single characters
+that represent font/accent modifications to \verb!character!. 
+For example, the code for tilde caligraphic A is \verb!\f[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
+``caligraphic,'' and \verb!A! is the character to typeset.
 
-And multiple font codes:
+\emph{Note: modifiers are applied in the reverse of the order in which they appear; 
+the modifier furthest to the right is applied first. This matches the order that 
+the corresponding commands would appear in TeX code.}
 
-\begin{tabular}{ll}
-    \verb!\f[bh]A! & $\f[bh]A$ \\
-	\verb!\f[hb]A! & $\f[hb]A$ \\
-	\verb!\f[hk]A! & $\f[hk]A$ \\
-	\verb!\f[kh]A! & $\f[ka]A$ \\
-\end{tabular}
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Style/Accent & Modifier & Example & Typeset Example \\ \midrule
+caligraphic (\verb!mathcal!) & \verb!c! & \verb!\f[c]A! & $\f[c]A$ \\
+bold (\verb!mathbf!) & \verb!k! & \verb!\f[k]A! & $\f[k]A$\\
+doublestroke (\verb!mathbb!) & \verb!d! & \verb!\f[d]A! & $\f[d]A$\\
+hat (\verb!widehat!) & \verb!h! & \verb!\f[h]A! & $\f[h]A$\\
+tilde (\verb!widetilde!) & \verb!t! & \verb!\f[t]A! & $\f[t]A$\\
+bar (\verb!overline!) & \verb!b! & \verb!\f[b]A! & $\f[b]A$\\
+\bottomrule
+\etabr
+\ecent
 
-Note that these are expanded in the reverse of the order they appear: the font code furthest to the right is applied first. This natches the order that the corresponding commands would appear in TeX code.
+These codes can be combined.
 
-We can also avoid typing \texttt{[]} for some combinations of font codes we sue frequently.
-To do this, use \texttt{\textbackslash parsefontstylesstrings$\{\{$<fcstr1>$\}$,$\{$<fcstr2>$\}$,...$\}\{$<alphabet>$\}$} as demonstrated below. For ``ease of use'' we have implemented \texttt{\textbackslash upperCaseRomanLetters} and \texttt{\textbackslash lowerCaseRomanLetters}
-\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}. 
-\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}. 
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Style/Accent & Modifier & Example & Typeset Example \\ \midrule
+caligraphic tilde & \verb!ct! & \verb!\f[ct]A! & $\f[ct]A$ \\
+bold hat & \verb!kh! & \verb!\f[kh]A! & $\f[kh]A$\\
+hat tilde  & \verb!ht! & \verb!\f[ht]A! & $\f[ht]A$\\
+tilde hat  & \verb!th! & \verb!\f[th]A! & $\f[th]A$\\
+\bottomrule
+\etabr
+\ecent
 
-\begin{tabular}{ll}
-	\verb!\parsefontstylesstrings{{hb},{hk}}{ABCDEFG}! & ...\\
-	\verb!\parsefontstylesstrings{{hb},{hk}}{\lowerCaseRomanLetters}! & ...\\
-    \verb!\fhbA! & $\fhbA$ \\
-	\verb!\fhkB! & $\fhkB$ \\
-	\verb!\fhbx! & $\fhbx$ \\
-	\verb!\fhby! & $\fhby$ \\
-	\verb!\fhkz! & $\fhkz$ \\
-\end{tabular}
+We can avoid typing \texttt{[]} for commonly used patterns
+by parsing the font style string in advance.
+For example, if we use ``bold hat'' symbols frequently,
+we might want to use commands like
+\verb!\fkh...!  instead of \verb!\f[kh]...!.
+We can accomplish this using the \verb!\parsefontstylestrings! command,
+with syntax
+\begin{verbatim}
+\parsefontstylestrings{{<fstr1>},{<fstr2},...}{<alphabet>}
+\end{verbatim}
+For example, to define ``bold hat'' and ``caligraphic hat'' styles
+for the characters A, B, C, and D, we would use the command 
+\begin{verbatim}
+\parsefontstylestrings{{kh},{ch}}{ABCD}
+\end{verbatim}
+\parsefontstylestrings{{kh}, {ch}}{ABCD}
+and then in the \LaTeX~document, use the commands
+\verb!\fkhA \fkhB \fkhC \fkhD! and
+\verb!\fchA \fchB \fchC \fchD! 
+to obtain the following symbols:
+\[
+\fkhA \fkhB \fkhC \fkhD 
+\fchA \fchB \fchC \fchD 
+\]
+As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
+\begin{verbatim}
+\parsefontstylestrings{{kh}}{{alpha}{beta}{gamma}}
+\end{verbatim}
+\parsefontstylestrings{{kh}}{{alpha}{beta}{gamma}}
+and then in the \LaTeX~document, use the commands
+\verb!\fkhalpha \fkhbeta \fkhgamma!
+to obtain the following symbols:
+\PRB{not working yet!}
 
-Since \texttt{\textbackslash mathbb{<lowercaseletter>}} is defined to give weird characters, our macros do the same.
+For convenience we also provide a few common alphabets of symbols 
+for use in the \verb!\parsefontstylestrings! command.
+Note that not every Greek character has an uppercase version (in cases where it is
+identical to its Roman counterpart).
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Syntax & Characters  \\ \midrule
+\verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
+\verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
+\verb!\lowercaseGreek! & alpha,beta,gamma,delta,epsilon,zeta,eta,theta\\
+& iota,kappa,lambda,mu,nu,xi,omicron,pi,rho\\
+& sigma,tau,upsilon,phi,chi,psi,omega\\
+\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma\\
+& Upsilon,Phi,Psi,Omega \\
+\bottomrule
+\etabr
+\ecent
 
 \subsection{Greek characters and variants}
 

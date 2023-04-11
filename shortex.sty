@@ -568,8 +568,67 @@
 \newcommand{\vkappa}{\varkappa}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Font styles and accents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
+\newcommand{\lowercaseGreek}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
+\newcommand{\uppercaseGreek}{{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Psi}{Omega}}
+
+
+
+\newcommand{\f}[2][]{
+    \StrLeft{#1}{1}[\fontstylehead]
+    \StrGobbleLeft{#1}{1}[\fontstyletail]
+    \IfStrEqCase{\fontstylehead}{%
+        {}{#2}
+        {b}{ \overline{\f[\fontstyletail]{#2}} }%
+        {k}{ \mathbf{\f[\fontstyletail]{#2}} }%
+        {d}{ \mathbb{\f[\fontstyletail]{#2}} }%
+        {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
+        {t}{ {\widetilde {\f[\fontstyletail]{#2}}} }%
+        {c}{ {\mathcal {\f[\fontstyletail]{#2}}} }%
+        }[{\f[\fontstyletail]{#2}}]
+}
+
+% commented out because it duplicates something above
+% \newcommand{\upperCaseRomanLetters}{ABCDEFGHIJKLMNOPQRSTUVWXYZ} 
+
+% essentially the same functionality as charalphabetmacro, 
+% % except the macro name and the command are passed as one argument 
+% % since \f is used in the definition
+\newcommand{\charfontstylemacro}[2]{
+% #1: annotation codes
+% #2: characters to define annotations for
+% Create a macros of the form
+%   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
+    \def\mydeffoo##1{\expandafter\def\csname f#1##1\endcsname{\f[#1]{##1}}}
+    \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
+    \expandafter \mydefallfoo #2\mydefallfoo
+}
+
+% I got this to work by basing it off of \texalphabetmacro above
+% % the order of expansion in LaTeX is very opaque to me, so im not 100% 
+% % sure why it works, but it does, and I wrote it thinking it would work 
+% % for whatever voodoo reason \texalphabetmacro also worked.
+ 
+\newcommand{\parsefontstylestrings}[2]{
+% #1: annotation codes
+% #2: characters to define annotations for
+% Create a macros of the form
+%	\newcommand{\f##1##2}{\f{##1}{##2}} for each ##1 in #1 and each ##2 in #2
+    \def\mydeftex##1{\expandafter\charfontstylemacro{##1}{#2}}
+    \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
+       \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
+    \expandafter \mydefalltex #1\mydefalltex
+}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Font/accent/symbol shortcuts 
+%%% OLD FONT SYMBOLS/ACCENTS (TODO: REMOVE THESE FROM DOCS)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\charalphabetmacro}[3]{
@@ -679,49 +738,4 @@
 \charalphabetmacro{bhi}{\boldhatitalic}{\upperCaseRomanLetters}
 \charalphabetmacro{bhi}{\boldhatitalic}{\lowerCaseRomanLetters}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% New approach to symbol shortcuts %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\f}[2][]{
-    \StrLeft{#1}{1}[\fontstylehead]
-    \StrGobbleLeft{#1}{1}[\fontstyletail]
-    \IfStrEqCase{\fontstylehead}{%
-        {}{#2}
-        {b}{ \mathbf{\f[\fontstyletail]{#2}} }%
-        {k}{ \mathbb{\f[\fontstyletail]{#2}} }%
-        {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
-        }[{\f[\fontstyletail]{#2}}]
-}
-
-% commented out because it duplicates something above
-% \newcommand{\upperCaseRomanLetters}{ABCDEFGHIJKLMNOPQRSTUVWXYZ} 
-
-% essentially the same functionality as charalphabetmacro, 
-% % except the macro name and the command are passed as one argument 
-% % since \f is used in the definition
-\newcommand{\charfontstylemacro}[2]{
-% #1: annotation codes
-% #2: characters to define annotations for
-% Create a macros of the form
-%   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
-    \def\mydeffoo##1{\expandafter\def\csname f#1##1\endcsname{\f[#1]{##1}}}
-    \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
-    \expandafter \mydefallfoo #2\mydefallfoo
-}
-
-% I got this to work by basing it off of \texalphabetmacro above
-% % the order of expansion in LaTeX is very opaque to me, so im not 100% 
-% % sure why it works, but it does, and I wrote it thinking it would work 
-% % for whatever voodoo reason \texalphabetmacro also worked.
- 
-\newcommand{\parsefontstylesstrings}[2]{
-% #1: annotation codes
-% #2: characters to define annotations for
-% Create a macros of the form
-%	\newcommand{\f##1##2}{\f{##1}{##2}} for each ##1 in #1 and each ##2 in #2
-    \def\mydeftex##1{\expandafter\charfontstylemacro{##1}{#2}}
-    \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
-       \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
-    \expandafter \mydefalltex #1\mydefalltex
-}
