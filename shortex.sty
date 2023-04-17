@@ -476,7 +476,7 @@
 % unary/functions
 \renewcommand{\Pr}{\mathbb{P}}  % probability
 \newcommand{\EE}{\mathbb{E}}	% expectation
-\newcommand{\law}{\mcL} 
+\newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}	% variance
 \newcommand{\cov}{\operatorname{Cov}}	% covariance
 \newcommand{\corr}{\operatorname{Corr}}	% correlation
@@ -577,15 +577,13 @@
 \newcommand{\lowercaseGreek}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
 \newcommand{\uppercaseGreek}{{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Psi}{Omega}}
 
-
-
 \newcommand{\f}[2][]{
     \StrLeft{#1}{1}[\fontstylehead]
     \StrGobbleLeft{#1}{1}[\fontstyletail]
     \IfStrEqCase{\fontstylehead}{%
         {}{#2}
         {b}{ \overline{\f[\fontstyletail]{#2}} }%
-        {k}{ \mathbf{\f[\fontstyletail]{#2}} }%
+        {k}{ \bm{{\f[\fontstyletail]{#2}}} }%
         {d}{ \mathbb{\f[\fontstyletail]{#2}} }%
         {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
         {t}{ {\widetilde {\f[\fontstyletail]{#2}}} }%
@@ -596,6 +594,15 @@
 % commented out because it duplicates something above
 % \newcommand{\upperCaseRomanLetters}{ABCDEFGHIJKLMNOPQRSTUVWXYZ} 
 
+
+% defines the macroname command:
+% \macroname{\alpha} -> alpha
+% \macroname{alpha} -> alpha
+% used for defining greek alphabets
+\begingroup\lccode`\|=`\\
+\lowercase{\endgroup\def\removebs#1{\if#1|\else#1\fi}}
+\newcommand{\macroname}[1]{\expandafter\removebs\string#1}
+
 % essentially the same functionality as charalphabetmacro, 
 % % except the macro name and the command are passed as one argument 
 % % since \f is used in the definition
@@ -604,7 +611,7 @@
 % #2: characters to define annotations for
 % Create a macros of the form
 %   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
-    \def\mydeffoo##1{\expandafter\def\csname f#1##1\endcsname{\f[#1]{##1}}}
+    \def\mydeffoo##1{\expandafter\def\csname f#1\macroname{##1}\endcsname{\f[#1]{##1}}}
     \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
     \expandafter \mydefallfoo #2\mydefallfoo
 }
@@ -625,117 +632,5 @@
     \expandafter \mydefalltex #1\mydefalltex
 }
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% OLD FONT SYMBOLS/ACCENTS (TODO: REMOVE THESE FROM DOCS)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\charalphabetmacro}[3]{
-% #1: annotation prefix
-% #2: annotation command (must be a single command!)
-% #3: characters to define annotations for
-% Create a macros of the form
-%   \newcommand{\#1##1}{#2{##1}} for each ##1 in #3
-    \def\mydeffoo##1{\expandafter\def\csname #1##1\endcsname{#2{##1}}}
-    \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
-    \expandafter \mydefallfoo #3\mydefallfoo
-}
-
-\newcommand{\texalphabetmacro}[3]{
-% #1: annotation prefix
-% #2: annotation command (must be a single command!)
-% #3: latex symbol command text to define annotations for
-% Create a macros of the form
-%   \newcommand{\#1##1}{#2{\##1}} for each ##1 in #3
-    \def\mydeftex##1{\expandafter\def\csname #1##1\endcsname{#2{\csname ##1\endcsname}}}
-    \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
-       \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
-    \expandafter \mydefalltex #3\mydefalltex
-}
-
-\newcommand{\upperCaseRomanLetters}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
-\newcommand{\lowerCaseRomanLetters}{abcdefghijklmnopqrstuvwxyz}
-\newcommand{\lowerCaseRomanLettersNoMHT}{abcdefgijklnopqrsuvwxyz}
-\newcommand{\lowerCaseRomanLettersNoG}{abcdefhijklmnopqrstuvwxyz}
-\newcommand{\lowerCaseRomanLettersNoMF}{abcdeghijklnopqrstuvwxyz}
-
-
-\newcommand{\lowerCaseGreekLetters}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
-\newcommand{\lowerCaseGreekLettersNoEta}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}}
-\newcommand{\upperCaseGreekLettersInLaTeX}{{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Psi}{Omega}}
-
-% Bar everything shortcuts
-\charalphabetmacro{bar}{\bar}{\upperCaseRomanLetters}
-\charalphabetmacro{bar}{\bar}{\lowerCaseRomanLetters}
-
-\charalphabetmacro{b}{\boldorbar}{\upperCaseRomanLetters}
-\charalphabetmacro{b}{\boldorbar}{\lowerCaseRomanLettersNoMF} % avoid clash with \bm and \bf
-\newcommand{\boldf}{\bm{f}} % only need \boldf, since \barf already defined above
-
-\texalphabetmacro{b}{\boldorbar}{\lowerCaseGreekLettersNoEta} % avoid \beta <-> \bar{\eta} clash
-\newcommand{\bareta}{\bar{\eta}}
-\newcommand{\boldeta}{\bm{\eta}}
-\texalphabetmacro{b}{\boldorbar}{\upperCaseGreekLettersInLaTeX}
-
-% Mathcal shortcuts
-\charalphabetmacro{mc}{\mathcal}{\upperCaseRomanLetters}
-
-\newcommand{\hatmathcal}[1]{\hat{\mathcal{#1}}}
-\charalphabetmacro{hmc}{\hatmathcal}{\upperCaseRomanLetters}
-
-% Mathfrak shortcuts
-\charalphabetmacro{mf}{\mathfrak}{\upperCaseRomanLetters}
-\charalphabetmacro{mf}{\mathfrak}{\lowerCaseRomanLetters}
-
-
-% Bold Mathfrak shortcuts
-\newcommand{\boldmathfrak}[1]{\mathbf{\mathfrak{#1}}}
-\charalphabetmacro{bmf}{\boldmathfrak}{\upperCaseRomanLetters}
-\charalphabetmacro{bmf}{\boldmathfrak}{\lowerCaseRomanLetters}
-
-% Hatted shortcuts
-\charalphabetmacro{h}{\hat}{\upperCaseRomanLetters}
-\charalphabetmacro{h}{\hat}{\lowerCaseRomanLettersNoMHT}
-\texalphabetmacro{h}{\hat}{\lowerCaseGreekLetters}
-\texalphabetmacro{h}{\hat}{\upperCaseGreekLettersInLaTeX}
-
-% Bold hatted shortcuts
-\newcommand{\boldhat}[1]{\mathbf{\hat{#1}}}
-\charalphabetmacro{bh}{\boldhat}{\upperCaseRomanLetters}
-\charalphabetmacro{bh}{\boldhat}{\lowerCaseRomanLetters}
-\texalphabetmacro{bh}{\boldhat}{\lowerCaseGreekLetters}
-\texalphabetmacro{bh}{\boldhat}{\upperCaseGreekLettersInLaTeX}
-
-
-%Wide hatted shortcuts
-\charalphabetmacro{wh}{\widehat}{\upperCaseRomanLetters}
-\charalphabetmacro{wh}{\widehat}{\lowerCaseRomanLettersNoMHT}
-
-% Tilde shortcuts 
-\charalphabetmacro{td}{\tilde}{\upperCaseRomanLetters}
-\charalphabetmacro{td}{\tilde}{\lowerCaseRomanLetters}
-\texalphabetmacro{td}{\tilde}{\lowerCaseGreekLetters}
-\texalphabetmacro{td}{\tilde}{\upperCaseGreekLettersInLaTeX}
-
-% this had too many exceptions so i went with td instead of t :S
-
-% Bold tilde shortcuts
-\newcommand{\boldtilde}[1]{\mathbf{\tilde{#1}}}
-
-\charalphabetmacro{btd}{\boldtilde}{\upperCaseRomanLetters}
-\charalphabetmacro{btd}{\boldtilde}{\lowerCaseRomanLetters}
-\texalphabetmacro{btd}{\boldtilde}{\lowerCaseGreekLetters}
-\texalphabetmacro{btd}{\boldtilde}{\upperCaseGreekLettersInLaTeX}
-
-% bold italics
-\def\mathbbi#1{\textbf{\em #1}}
-\charalphabetmacro{bi}{\mathbbi}{\upperCaseRomanLetters}
-\charalphabetmacro{bi}{\mathbbi}{\lowerCaseRomanLettersNoG}
-
-% bold hatted italics
-\newcommand{\boldhatitalic}[1]{\hat{\mathbbi{#1}}}
-\charalphabetmacro{bhi}{\boldhatitalic}{\upperCaseRomanLetters}
-\charalphabetmacro{bhi}{\boldhatitalic}{\lowerCaseRomanLetters}
 
 

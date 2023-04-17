@@ -284,14 +284,14 @@ we might want to use commands like
 We can accomplish this using the \verb!\parsefontstylestrings! command,
 with syntax
 \begin{verbatim}
-\parsefontstylestrings{{<fstr1>},{<fstr2},...}{<alphabet>}
+\parsefontstylestrings{{<fstr1>}{<fstr2}...}{<alphabet>}
 \end{verbatim}
 For example, to define ``bold hat'' and ``caligraphic hat'' styles
 for the characters A, B, C, and D, we would use the command 
 \begin{verbatim}
-\parsefontstylestrings{{kh},{ch}}{ABCD}
+\parsefontstylestrings{{kh}{ch}}{ABCD}
 \end{verbatim}
-\parsefontstylestrings{{kh}, {ch}}{ABCD}
+\parsefontstylestrings{{kh}{ch}}{ABCD}
 and then in the \LaTeX~document, use the commands
 \verb!\fkhA \fkhB \fkhC \fkhD! and
 \verb!\fchA \fchB \fchC \fchD! 
@@ -302,13 +302,15 @@ to obtain the following symbols:
 \]
 As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
 \begin{verbatim}
-\parsefontstylestrings{{kh}}{{alpha}{beta}{gamma}}
+\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
 \end{verbatim}
-\parsefontstylestrings{{kh}}{{alpha}{beta}{gamma}}
+\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
 and then in the \LaTeX~document, use the commands
 \verb!\fkhalpha \fkhbeta \fkhgamma!
 to obtain the following symbols:
-\PRB{not working yet!}
+\[
+	\fkhalpha \fkhbeta \fkhgamma
+\]
 
 For convenience we also provide a few common alphabets of symbols 
 for use in the \verb!\parsefontstylestrings! command.
@@ -459,63 +461,62 @@ text in math?
 \toprule
 Description						& Example 				& Text style 				& Display style \\ \midrule
 $\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 				& $\displaystyle\Lp{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpmeas{2}{\hmu}!	& $\Lpmeas{2}{\hmu}$ 		& $\displaystyle\Lpmeas{2}{\hmu}$ \\[10pt]
-							& \verb!\Lpmeas[\Big]{2}{\hmu}!	& $\Lpmeas[\Big]{2}{\hmu}$ 	& $\displaystyle\Lpmeas[\Big]{2}{\hmu}$ \\[10pt]
-$\Lp{p}$ norm					& \verb!\Lpnorm{\hGamma}{2}!        & $\Lpnorm{\hGamma}{2}$ 		& $\displaystyle\Lpnorm{\hGamma}{2}$ \\[10pt]
-							& \verb!\Lpnorm*{\hGamma}{2}!        & $\Lpnorm*{\hGamma}{2}$ 		& $\displaystyle\Lpnorm*{\hGamma}{2}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpmeas{2}{\f[h]\mu}!	& $\Lpmeas{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeas{2}{\f[h]\mu}$ \\[10pt]
+							& \verb!\Lpmeas[\Big]{2}{\f[h]\mu}!	& $\Lpmeas[\Big]{2}{\f[h]\mu}$ 	& $\displaystyle\Lpmeas[\Big]{2}{\f[h]\mu}$ \\[10pt]
+$\Lp{p}$ norm					& \verb!\Lpnorm{\f[h]\Gamma}{2}!        & $\Lpnorm{\f[h]\Gamma}{2}$ 		& $\displaystyle\Lpnorm{\f[h]\Gamma}{2}$ \\[10pt]
+							& \verb!\Lpnorm*{\f[h]\Gamma}{2}!        & $\Lpnorm*{\f[h]\Gamma}{2}$ 		& $\displaystyle\Lpnorm*{\f[h]\Gamma}{2}$ \\[10pt]
 				& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ 		& $\displaystyle\Lpnorm*{\Gamma}{2}$ \\[10pt]
-							& \verb!\left\Vert{\hGamma}\right\Vert_{2}!        & $\left\Vert{\hGamma}\right\Vert_{2}$ 		& $\displaystyle\left\Vert{\hGamma}\right\Vert_{2}$ \\[10pt]
+							& \verb!\left\Vert{\f[h]\Gamma}\right\Vert_{2}!        & $\left\Vert{\f[h]\Gamma}\right\Vert_{2}$ 		& $\displaystyle\left\Vert{\f[h]\Gamma}\right\Vert_{2}$ \\[10pt]
 							& \verb!\left\Vert{\Gamma}\right\Vert_{2}!        & $\left\Vert{\Gamma}\right\Vert_{2}$ 		& $\displaystyle\left\Vert{\Gamma}\right\Vert_{2}$ \\[10pt]														
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmeasnorm{\hGamma}{2}{\hmu}!        & $\Lpmeasnorm{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasnorm{\hGamma}{2}{\hmu}$ \\[10pt]
-							& \verb!\Lpmeasnorm[\Big]{\hGamma}{2}{\hmu}!        & $\Lpmeasnorm[\Big]{\hGamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasnorm[\Big]{\hGamma}{2}{\hmu}$ \\[10pt]
-$\Lp{p}$ inner product				& \verb!\Lpinner{\hGamma}{\Gamma}{2}!        & $\Lpinner{\hGamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner{\hGamma}{\Gamma}{2}$ \\[10pt]
-							& \verb!\Lpinner*{\hGamma}{\Gamma}{2}!        & $\Lpinner*{\hGamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner*{\hGamma}{\Gamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasinner{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
-							& \verb!\Lpmeasinner[\big]{\hGamma}{\Gamma}{2}{\hmu}!        & $\Lpmeasinner[\big]{\hGamma}{\Gamma}{2}{\hmu}$ 		& $\displaystyle\Lpmeasinner[\big]{\hGamma}{\Gamma}{2}{\hmu}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}$ \\[10pt]
+							& \verb!\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}$ \\[10pt]
+$\Lp{p}$ inner product				& \verb!\Lpinner{\f[h]\Gamma}{\Gamma}{2}!        & $\Lpinner{\f[h]\Gamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner{\f[h]\Gamma}{\Gamma}{2}$ \\[10pt]
+							& \verb!\Lpinner*{\f[h]\Gamma}{\Gamma}{2}!        & $\Lpinner*{\f[h]\Gamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner*{\f[h]\Gamma}{\Gamma}{2}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ \\[10pt]
+							& \verb!\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
 
-\subsection{annotation commands}
-\begin{tabular}{ll}
-    \verb!\barA! & $\barA$ \\
-    \verb!\bara! & $\bara$ \\
-    \verb!\bA! & $\bA$ \\
-    \verb!\bB! & $\bB$ \\
-    \verb!\balpha! & $\balpha$ \\
-    \verb!\bGamma! & $\bGamma$ \\
-    \verb!\mcA! & $\mcA$ \\
-    \verb!\hmcA! & $\hmcA$ \\
-    \verb!\mfA! & $\mfA$ \\
-    \verb!\mfa! & $\mfa$ \\
-    \verb!\bmfA! & $\bmfA$ \\
-    \verb!\bmfa! & $\bmfa$ \\
-    \verb!\hA! & $\hA$ \\
-    \verb!\ha! & $\ha$ \\
-    \verb!\halpha! & $\halpha$ \\
-    \verb!\hGamma! & $\hGamma$ \\
-    \verb!\bhA! & $\bhA$ \\
-    \verb!\bha! & $\bha$ \\
-    \verb!\bhalpha! & $\bhalpha$ \\
-    \verb!\bhGamma! & $\bhGamma$ \\
-    \verb!\whA! & $\whA$ \\
-    \verb!\wha! & $\wha$ \\
-    \verb!\tdA! & $\tdA$ \\
-    \verb!\tda! & $\tda$ \\
-    \verb!\tdalpha! & $\tdalpha$ \\
-    \verb!\tdGamma! & $\tdGamma$ \\
-    \verb!\btdA! & $\btdA$ \\
-    \verb!\btda! & $\btda$ \\
-    \verb!\btdalpha! & $\btdalpha$ \\
-    \verb!\btdGamma! & $\btdGamma$ \\
-    \verb!\biA! & $\biA$ \\
-    \verb!\bia! & $\bia$ \\
-    \verb!\bhiA! & $\bhiA$ \\
-    \verb!\bhia! & $\bhia$ \\
-\end{tabular}
+%\subsection{annotation commands}
+%\begin{tabular}{ll}
+%    \verb!\barA! & $\barA$ \\
+%    \verb!\bara! & $\bara$ \\
+%    \verb!\bA! & $\bA$ \\
+%    \verb!\bB! & $\bB$ \\
+%    \verb!\balpha! & $\balpha$ \\
+%    \verb!\bGamma! & $\bGamma$ \\
+%    \verb!\mcA! & $\mcA$ \\
+%    \verb!\hmcA! & $\hmcA$ \\
+%    \verb!\mfA! & $\mfA$ \\
+%    \verb!\mfa! & $\mfa$ \\
+%    \verb!\bmfA! & $\bmfA$ \\
+%    \verb!\bmfa! & $\bmfa$ \\
+%    \verb!\hA! & $\hA$ \\
+%    \verb!\ha! & $\ha$ \\
+%    \verb!\halpha! & $\halpha$ \\
+%    \verb!\f[h]\Gamma! & $\f[h]\Gamma$ \\
+%    \verb!\bhA! & $\bhA$ \\
+%    \verb!\bha! & $\bha$ \\
+%    \verb!\bhalpha! & $\bhalpha$ \\
+%    \verb!\bhGamma! & $\bhGamma$ \\
+%    \verb!\f[h]A! & $\f[h]A$ \\
+%    \verb!\wha! & $\wha$ \\
+%    \verb!\tdA! & $\tdA$ \\
+%    \verb!\tda! & $\tda$ \\
+%    \verb!\tdalpha! & $\tdalpha$ \\
+%    \verb!\tdGamma! & $\tdGamma$ \\
+%    \verb!\btdA! & $\btdA$ \\
+%    \verb!\btda! & $\btda$ \\
+%    \verb!\btdalpha! & $\btdalpha$ \\
+%    \verb!\btdGamma! & $\btdGamma$ \\
+%    \verb!\biA! & $\biA$ \\
+%    \verb!\bia! & $\bia$ \\
+%    \verb!\bhiA! & $\bhiA$ \\
+%    \verb!\bhia! & $\bhia$ \\
+%\end{tabular}
 
-
-\subsection{new approach to annotation commands}
+%\subsection{new approach to annotation commands}
 \section{Example Document}
 
 TODO: a full example in basic latex versus shortex
@@ -550,7 +551,7 @@ Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\dis
 Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
 Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	& $\displaystyle\norm{\frac{x}{y}}$ \\[10pt]
 Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	& $\displaystyle\inner{\frac{x}{y}}{\frac{y}{z}}$ \\[10pt]
-Cardinality 				& \verb!\card{\whA}!       		& $\card{\whA}$ 			& $\displaystyle\card{\whA}$ \\[10pt]
+Cardinality 				& \verb!\card{\f[h]A}!       		& $\card{\f[h]A}$ 			& $\displaystyle\card{\f[h]A}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
