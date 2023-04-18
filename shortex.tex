@@ -228,6 +228,16 @@ angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\
 \etabr
 \ecent
 
+\subsection{Wide bar}
+
+ShorTeX provides the \verb!\widebar! command to typeset a wide bar accent on top of a character (similar to the 
+usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \verb!\bar! and 
+\verb!\overline! commands:
+\[
+	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
+\]
+The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
+
 \subsection{Font styles and accents}
 
 Applying accents (e.g., hats $\f[h]a$, tildes $\f[t]a$, bars $\f[b]a$)
@@ -354,15 +364,17 @@ variant kappa	& \verb!\vkappa! & $\vkappa$ \\
 
 \section{Custom macros}
 
-\subsection{Squeezing math}
-The command \verb!\squeeze{<frac>}! in math mode enables you to shrink whitespace in mathematics,
+\subsection{Shrinking whitespace in math}
+The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
 where \verb!<frac>! represents the fraction of whitespace reduction.
-Below, the first line is regularly spaced, the second line has \verb!\squeeze{0.5}!, and the third has \verb!\squeeze{0.0}!.
+Below, the first line is regularly spaced, the second line has \verb!\squish{0.5}!, and the third has \verb!\squish{0.0}!.
 \[
 	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squeeze{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squeeze{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
 \]
+
+The code for \verb!\squish! was taken from \url{https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation}.
 
 
 \subsection{Commenting}
