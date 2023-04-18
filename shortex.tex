@@ -18,10 +18,9 @@ typical mathematical documents in \LaTeX~more efficient, and the resulting
 code easier to read.  It achieves this by 
 (1) providing an
 extensive, internally consistent, and easy to learn set of macro
-shorthands, 
+shorthands and custom commands, and 
 (2) incorporating a set of packages that are
-dedicated to reducing manual coding effort, and
-(3) incorporating a collection of very common / standard boilerplate packages.
+dedicated to reducing manual coding effort.
 \eabs
 
 
@@ -262,7 +261,8 @@ bar (\verb!widebar!) & \verb!b! & \verb!\f[b]A! & $\f[b]A$\\
 \etabr
 \ecent
 
-These codes can be combined.
+These style modifiers can be combined; the underlying code is flexible enough that
+it will happily produce a wide variety of combinations, including those that aren't very sensible.
 
 \bcent
 \btabr{@{}llll@{}}
@@ -452,8 +452,6 @@ text in math?
 \kl[a]{q}{p}
 \]
 
-\subsection{}
-
 \subsection{$\Lp{p}$ Spaces and Operators}
 
 \begin{center}
@@ -478,45 +476,7 @@ $\Lp{p}$ inner product				& \verb!\Lpinner{\f[h]\Gamma}{\Gamma}{2}!        & $\L
 \end{tabular}
 \end{center}
 
-%\subsection{annotation commands}
-%\begin{tabular}{ll}
-%    \verb!\barA! & $\barA$ \\
-%    \verb!\bara! & $\bara$ \\
-%    \verb!\bA! & $\bA$ \\
-%    \verb!\bB! & $\bB$ \\
-%    \verb!\balpha! & $\balpha$ \\
-%    \verb!\bGamma! & $\bGamma$ \\
-%    \verb!\mcA! & $\mcA$ \\
-%    \verb!\hmcA! & $\hmcA$ \\
-%    \verb!\mfA! & $\mfA$ \\
-%    \verb!\mfa! & $\mfa$ \\
-%    \verb!\bmfA! & $\bmfA$ \\
-%    \verb!\bmfa! & $\bmfa$ \\
-%    \verb!\hA! & $\hA$ \\
-%    \verb!\ha! & $\ha$ \\
-%    \verb!\halpha! & $\halpha$ \\
-%    \verb!\f[h]\Gamma! & $\f[h]\Gamma$ \\
-%    \verb!\bhA! & $\bhA$ \\
-%    \verb!\bha! & $\bha$ \\
-%    \verb!\bhalpha! & $\bhalpha$ \\
-%    \verb!\bhGamma! & $\bhGamma$ \\
-%    \verb!\f[h]A! & $\f[h]A$ \\
-%    \verb!\wha! & $\wha$ \\
-%    \verb!\tdA! & $\tdA$ \\
-%    \verb!\tda! & $\tda$ \\
-%    \verb!\tdalpha! & $\tdalpha$ \\
-%    \verb!\tdGamma! & $\tdGamma$ \\
-%    \verb!\btdA! & $\btdA$ \\
-%    \verb!\btda! & $\btda$ \\
-%    \verb!\btdalpha! & $\btdalpha$ \\
-%    \verb!\btdGamma! & $\btdGamma$ \\
-%    \verb!\biA! & $\biA$ \\
-%    \verb!\bia! & $\bia$ \\
-%    \verb!\bhiA! & $\bhiA$ \\
-%    \verb!\bhia! & $\bhia$ \\
-%\end{tabular}
 
-%\subsection{new approach to annotation commands}
 \section{Example Document}
 
 TODO: a full example in basic latex versus shortex
