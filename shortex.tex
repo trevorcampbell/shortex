@@ -258,7 +258,7 @@ variant kappa	& \verb!\vkappa! & $\vkappa$ \\
 \etabr
 \ecent
 
-\subsection{Referencing Figures, Equations, Tables, etc.}
+\subsection{Referencing figures, equations, tables, etc.}
 
 ShorTeX includes the \texttt{cleveref} package, which simplifies the process
 of typesetting references. Use the \verb!\cref! command to automatically
@@ -372,19 +372,53 @@ fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} c
 
 
 \subsection{Sets and set operations}
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+reals	& \verb!\reals! & $\reals$ \\
+rationals & \verb!\rats! & $\rats$\\
+integers	& \verb!\ints! & $\ints$ \\
+natural numbers	& \verb!\nats! & $\nats$ \\
+complex numbers	& \verb!\comps! & $\comps$ \\
+(big) intersection & \verb!\intersect!, \verb!\Intersect! & $\intersect$, $\Intersect$\\
+(big) union & \verb!\union!, \verb!\Union! & $\union$, $\Union$\\
+(big) disjoint union & \verb!\djunion!, \verb!\djUnion! & $\djunion$, $\djUnion$\\
+volume	& \verb!\vol! & $\vol$ \\
+diameter	& \verb!\diam! & $\diam$ \\
+boundary	& \verb!\boundary! & $\boundary$ \\
+closure	& \verb!\closure! & $\closure$ \\
+span	& \verb!\spann! & $\spann$ \\
+cone	& \verb!\cone! & $\cone$ \\
+convex hull	& \verb!\conv! & $\conv$ \\
+\bottomrule
+\etabr
+\ecent
 
+To discuss:
 \[
-\reals \extReals \posReals \posExtReals \posPosReals \posPosExtReals
-\ints \posInts \rats \posRats \nats \natsO \comps \measures
-\probMeasures \PowerSet \union \Union \djunion \djUnion
-\intersect \Intersect \vol \diam \closure \spann \boundary \cone \conv
+\extReals \posReals \posExtReals \posPosReals \posPosExtReals
+\posInts \posRats \natsO \measures
+\probMeasures \PowerSet 
 \]
 
 \subsection{Linear algebra}
 
-\[
-\tr \kron A\adj \spec \diag \rank A\transpose A\invtranspose
-\]
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+trace	& \verb!\tr A! & $\tr A$ \\
+rank	& \verb!\rank A! & $\rank A$ \\
+transpose	& \verb!A\T! & $A\T$ \\
+inverse transpose	& \verb!A\nT! & $A\nT$ \\
+diagonal	& \verb!\diag A! & $\diag A$ \\
+adjoint	& \verb!A\adj! & $A\adj$ \\
+spectrum	& \verb!\spec A! & $\spec A$ \\
+kronecker product & \verb!A\kron B! & $A\kron B$\\
+\bottomrule
+\etabr
+\ecent
 
 \subsection{Calculus}
 
