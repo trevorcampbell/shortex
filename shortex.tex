@@ -43,101 +43,6 @@ The ShorTeX package has a few options:
 \textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
 numbers and references update properly.
 
-\section{Packages included in ShorTeX}
-\subsection{Internal packages}
-The following packages provide features that are used internally in ShorTeX for 
-macro definitions etc.
-\bdesc
-\item[xifthen, xstring, xspace, xargs] asdf
-\edesc
-\subsection{Typical packages}
-We include a set of typical packages to avoid the problem of having to remember precisely
-what order to import each one, which options, compatibility, etc
-
-It is worth noting that we did not include a standard bibliography package in ShorTeX (e.g., \verb!natbib.sty!).
-This is because...
-
-\bdesc
-\item[mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools] asdf
-\item[hyperref] asdf
-\item[color] asdf
-\item[algorithm, algpseudocode] asdf
-\item[graphicx] asdf
-\edesc
-\subsection{Improvement packages}
-\bdesc
-\item[cleveref] Typically to use a reference in \LaTeX, you have to write the name of the type of reference
-yourself. For example, if you want to reference a figure, you would have to write something like:
-\begin{verbatim}
-In Figure \ref{fig:first}, you can see...
-\end{verbatim}
-Or for multiple figures, you might use:
-\begin{verbatim}
-Figures \ref{fig:first}, \ref{fig:second}, 
-and \ref{fig:third} show that...
-\end{verbatim}
-
-The \texttt{cleveref} package simplifies this process significantly. Use the \verb!\cref! command to automatically
-typeset the names of the objects you're referencing (including properly handling multiple references). The 
-above two examples become
-\begin{verbatim}
-In \cref{fig:first}, you can see...
-\end{verbatim}
-and
-\begin{verbatim}
-\cref{fig:first,fig:second,fig:third} show that...
-\end{verbatim}
-
-This works for many different reference types (Figure, Algorithm, Equation, Table, etc),
-and can be extended if needed. See the \texttt{cleveref} documentation 
-at \url{https://ctan.org/pkg/cleveref?lang=en} and the homepage at \url{https://www.dr-qubit.org/cleveref.html} 
-for more information.
-
-\item[autonum] 
-Typically when you typeset equations, you have to choose between 
-\verb!$...$!, \verb!$$...$$!, 
-\verb!\begin{align}...\end{align}!, 
-\verb!\begin{aligned}...\end{aligned}!, 
-\verb!\begin{equation}...\end{equation}!, 
-not to mention starred versions of those environments 
-and \verb!\nonumber!/\verb!\notag! commands, depending 
-on whether/where you want equation numbers,
-display or in-text math, etc. This leads to verbose, inconsistent code.
-
-The \texttt{autonum} package automatically decides which equations to provide
-numbers based on \textit{which equations you reference}. So when using ShorTeX,
-you only need two commands for math mode: single dollar signs \verb!$...$! for
-inline math, and \texttt{align} environments (redefined in ShorTeX to be
-\verb!\[...\]!) for display math.\footnote{Note that there are minor
-differences between how \texttt{align} and 
-\texttt{equation} display equations. But after 10+ years of using \LaTeX, I have not ever
-encountered a case where it mattered much. That being said, ShorTeX does not
-\emph{disable} any functionality, so you can use the usual environments anywhere
-you feel it is necessary.}
-
-For example, if you create 
-the following display math,
-\begin{verbatim}
-\[
-   a+b = c \label{eq:the_equation}
-\]
-\end{verbatim}
-then if you use the command \verb!\cref{eq:the_equation}! somewhere
-in the document, that equation will automatically be assigned a number. If not, it
-won't get a number. See the \texttt{autonum} package 
-documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
-
-\item[nicefrac] asdf
-\item[crossreftools] asdf
-\item[multirow] asdf
-\item[wrapfig] asdf
-\item[caption,subcaption] asdf
-\item[microtype] asdf
-\item[booktabs] asdf
-\item[import,subfiles] asdf
-\item[url] asdf
-\edesc
-
 \section{Shorthands for existing commands}
 
 \subsection{Environments}
@@ -352,6 +257,63 @@ variant kappa	& \verb!\vkappa! & $\vkappa$ \\
 \bottomrule
 \etabr
 \ecent
+
+\subsection{Referencing Figures, Equations, Tables, etc.}
+
+ShorTeX includes the \texttt{cleveref} package, which simplifies the process
+of typesetting references. Use the \verb!\cref! command to automatically
+typeset the names of the objects you reference (including properly handling multiple references). 
+For example, if \verb!\label{fig:first}! is applied to the first figure in the document,
+\begin{verbatim}
+In \cref{fig:first}, you can see...
+\end{verbatim}
+would typeset as ``In Figure 1, you can see...''
+Similarly, if \verb!\label{thm:first}! references a theorem and \verb!\label{second_result}! references
+a lemma, 
+\begin{verbatim}
+\cref{thm:first,lem:second} show that...
+\end{verbatim}
+will typeset as ``Theorem 1 and Lemma 2 show that...''
+This works for many different reference types (Figure, Algorithm, Equation, Table, etc),
+and can be extended if needed. See the \texttt{cleveref} documentation 
+at \url{https://ctan.org/pkg/cleveref?lang=en} and the homepage at \url{https://www.dr-qubit.org/cleveref.html} 
+for more information.
+
+\subsection{Automatic equation numbers}
+
+ShorTeX includes the \texttt{autonum} package, which simplifies the process of 
+equation numbering. Typically when you typeset equations, you have to choose between 
+\verb!$...$!, \verb!$$...$$!, 
+\verb!\begin{align}...\end{align}!, 
+\verb!\begin{aligned}...\end{aligned}!, 
+\verb!\begin{equation}...\end{equation}!, 
+not to mention starred versions of those environments 
+and \verb!\nonumber!/\verb!\notag! commands, depending 
+on whether/where you want equation numbers,
+
+The \texttt{autonum} package automatically decides which equations to provide
+numbers based on \textit{which equations you reference}. So when using ShorTeX,
+you only need two commands for math mode: single dollar signs \verb!$...$! for
+inline math, and \texttt{align} environments (redefined in ShorTeX to be
+\verb!\[...\]!) for display math.\footnote{There are
+differences between how \texttt{align} and 
+other math display environments typeset equations. I have not ever
+encountered a case where it mattered much. If you are very picky about typesetting,
+note that ShorTeX does not \emph{disable} any functionality, so you 
+can use other environments anywhere you feel it is necessary.}
+
+For example, if you create 
+the following display math,
+\begin{verbatim}
+\[
+   a+b = c \label{eq:the_equation}
+\]
+\end{verbatim}
+then if you use the command \verb!\cref{eq:the_equation}! somewhere
+in the document, that equation will automatically be assigned a number. If not, it
+won't get a number. See the \texttt{autonum} package 
+documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
+
 
 
 \section{Custom macros}
