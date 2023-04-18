@@ -568,6 +568,25 @@
 \newcommand{\vkappa}{\varkappa}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Squeezed math
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% taken from https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation
+
+\newcommand*\scalemuskip[2]{%
+  \muexpr #1*\numexpr\dimexpr#2pt\relax\relax/65536\relax
+} %% <- based on  https://tex.stackexchange.com/a/198966/156366
+
+%% <- #1 is a number between 0 and 1
+\newcommand*\squeeze[1]{% 
+  \thickmuskip=\scalemuskip{\thickmuskip}{#1}%
+  \medmuskip=\scalemuskip{\medmuskip}{#1}%
+  \thinmuskip=\scalemuskip{\thinmuskip}{#1}%
+  \nulldelimiterspace=#1\nulldelimiterspace
+  \scriptspace=#1\scriptspace
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Font styles and accents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

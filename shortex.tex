@@ -354,6 +354,17 @@ variant kappa	& \verb!\vkappa! & $\vkappa$ \\
 
 \section{Custom macros}
 
+\subsection{Squeezing math}
+The command \verb!\squeeze{<frac>}! in math mode enables you to shrink whitespace in mathematics,
+where \verb!<frac>! represents the fraction of whitespace reduction.
+Below, the first line is regularly spaced, the second line has \verb!\squeeze{0.5}!, and the third has \verb!\squeeze{0.0}!.
+\[
+	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squeeze{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squeeze{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+\]
+
+
 \subsection{Commenting}
 ShorTeX defines two types of comments that can be used 
 (\emph{remarks} and \emph{problems}), and provides an inline and margin
