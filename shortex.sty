@@ -383,7 +383,7 @@
 \newcommand{\derwrt}[1]{\ensuremath{\frac{\dee}{\dee #1}}}
 \newcommand{\pder}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
 \newcommand{\pdder}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
-\newcommand{\pderi}[2]{\ensuremath{\frac{\partial^i #1}{\partial #2^i}}}
+\newcommand{\pderi}[3]{\ensuremath{\frac{\partial^{#3} #1}{\partial #2^{#3}}}}
 \newcommand{\pderwrt}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
 \newcommand{\hes}[3]{\ensuremath{\frac{\partial^2 #1}{\partial #2 \partial #3}}}
 \newcommand{\heswrt}[2]{\ensuremath{\frac{\partial^2 }{\partial #1 \partial #2}}}
@@ -474,12 +474,12 @@
 \newcommand{\eqas}{\overset{a.s.}{=}}
 
 % unary/functions
-\renewcommand{\Pr}{\mathbb{P}}  % probability
-\newcommand{\EE}{\mathbb{E}}	% expectation
+\newcommand{\pr}{\mathbb{P}}  % probability
+\newcommand{\ex}{\mathbb{E}}	% expectation
 \newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}	% variance
 \newcommand{\cov}{\operatorname{Cov}}	% covariance
-\newcommand{\corr}{\operatorname{Corr}}	% correlation
+\newcommand{\cor}{\operatorname{Corr}}	% correlation
 \newcommand{\supp}{\operatorname{supp}} %support
 
 % binary operators
@@ -509,7 +509,7 @@
 \newcommand{\distChiSq}{\chi^2}
 \newcommand{\distUnif}{\distNamed{Unif}}
 \newcommand{\distGam}{\distNamed{Gam}}
-\newcommand{\distGumbel}{\distNamed{Gumbel}}
+\newcommand{\distGum}{\distNamed{Gumbel}}
 \newcommand{\distGEV}{\distNamed{GEV}}
 \newcommand{\distCat}{\distNamed{Categorical}}
 \newcommand{\distInvGam}{\distNamed{InvGam}}

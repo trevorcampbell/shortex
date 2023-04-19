@@ -422,57 +422,153 @@ kronecker product & \verb!A\kron B! & $A\kron B$\\
 
 \subsection{Calculus}
 
-\[
-\dee \grad \der{x}{y} \dder{x}{y} \derwrt{y} \pder{x}{y} \pdder{x}{y} \pderi{x}{y} \pderwrt{y} \hes{a}{x}{y} \heswrt{x}{y}
-\]
+\bcent
+\renewcommand{\arraystretch}{1.5}
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+differential symbol	& \verb!\dee x! & $\dee x$ \\
+gradient symbol	& \verb!\grad f! & $\grad f$ \\
+derivative	& \verb!\der{x}{y}! & $\der{x}{y}$ \\
+double derivative	& \verb!\dder{x}{y}! & $\dder{x}{y}$ \\
+derivative w.r.t.	& \verb!\derwrt{y}! & $\derwrt{y}$ \\
+partial derivative	& \verb!\pder{x}{y}! & $\pder{x}{y}$ \\
+partial double derivative	& \verb!\pdder{x}{y}! & $\pdder{x}{y}$ \\
+partial derivative coordinate & \verb!\pderi{x}{y}{i}! & $\pderi{x}{y}{i}$ \\
+partial derivative w.r.t. & \verb!\pderwrt{y}! & $\pderwrt{y}$ \\
+Hessian & \verb!\hess{a}{x}{y}! & $\hes{a}{x}{y}$ \\
+\bottomrule
+\etabr
+\ecent
 
 \subsection{General mathematics}
 
-\[
-\ind \sgn \scin{3}{5} \st \given
-\] 
+TODO: ShorTeX also provides an improved square root symbol.
 
-improved square root
-
-text in math?
-
-\[
-\defas \defines \half \third \quarter \argmax \esssup \argmin \essinf
-\]
-
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+argmax	& \verb!\argmax_{x\in \reals}! & $\argmax_{x\in\reals}$ \\
+argmin	& \verb!\argmin_{x\in \reals}! & $\argmin_{x\in\reals}$ \\
+esssup	& \verb!\esssup_{x\in \reals}! & $\esssup_{x\in\reals}$ \\
+essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
+indicator	& \verb!\ind[x=3]! & $\ind[x=3]$ \\
+sign	& \verb!\sgn x! & $\sgn x$ \\
+scientific notation	& \verb!\scin{3}{5}! & $\scin{3}{5}$ \\
+such that	& \verb!\st! & $\st$ \\
+given	& \verb!\given! & $\given$ \\
+defined as	& \verb!\defas! & $\defas$ \\
+defines	& \verb!\defines! & $\defines$ \\
+half	& \verb!\half! & $\half$ \\
+third	& \verb!\third! & $\third$ \\
+quarter	& \verb!\quarter! & $\quarter$ \\
+\bottomrule
+\etabr
+\ecent
 
 \subsection{Common words and names with accents}
-\cadlag
-\Gronwall
-\Renyi
-\Holder
-\Ito
-\Nystrom
-\Schatten
-\Matern
-\Frechet
-\Levy
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+ Syntax & Symbol  \\ \midrule
+\verb!\cadlag! & \cadlag \\
+\verb!\Frechet! & \Frechet \\
+\verb!\Gronwall! & \Gronwall \\
+\verb!\Holder! & \Holder \\
+\verb!\Ito! & \Ito \\
+\verb!\Levy! & \Levy \\
+\verb!\Matern! & \Matern \\
+\verb!\Nystrom! & \Nystrom \\
+\verb!\Renyi! & \Renyi \\
+\verb!\Schatten! & \Schatten \\
+\bottomrule
+\etabr
+\ecent
+
 
 \subsection{Probability and statistics}
-\iid \as \aev 
-\[
-\convas \convp \convd \eqd \eqas \Pr \EE \law \var \cov \corr \supp \dist \distiid \distind
-\indep
-\]
 
-\[
-\distNorm \distT \distWish \distInvWish \distLap \distChiSq \distUnif \distGam \distGumbel \distGEV \distCat \distInvGam \distPoiss \\
-\distExp \distBeta \distBetaPrime \distDir \distBinom \distMulti \distBern \distGeom \distCauchy \distVMF \\
-\distBeP \distDP \distCRP \distPYP \distGP \distPP \distBP \distBPP \distGamP \distNGamP \distLP \distObs \distCRM
-\distNCRM
-\]
 
-\[
-\kl{q}{p} \hell{q}{p} \tvd{q}{p} \ent{q}\\
-\hell[a]{q}{p}
-\tvd[a]{q}{p}
-\kl[a]{q}{p}
-\]
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+i.i.d.	& \verb!\iid! & \iid \\
+almost sure	& \verb!\as! & \as \\
+almost everywhere	& \verb!\aev! & \aev \\
+convergence almost surely	& \verb!\convas! & $\convas$ \\
+convergence in probability	& \verb!\convp! & $\convp$ \\
+convergence in distribution	& \verb!\convd! & $\convd$ \\
+equality in distribution	& \verb!\eqd! & $\eqd$ \\
+equality almost surely	& \verb!\eqas! & $\eqas$ \\
+probability	& \verb!\pr! & $\pr$ \\
+expectation	& \verb!\ex! & $\ex$ \\
+variance	& \verb!\var! & $\var$ \\
+covariance	& \verb!\cov! & $\cov$ \\
+correlation	& \verb!\cor! & $\cor$ \\
+support	& \verb!\supp! & $\supp$ \\
+distributed as	& \verb!\dist! & $\dist$ \\
+distributed \iid	& \verb!\distiid! & $\distiid$ \\
+distributed independently	& \verb!\distind! & $\distind$ \\
+independent &  \verb!\indep! & $\indep$ \\
+Entropy & \verb!\ent{q}! & $\ent{q}$\\
+KL divergence & \verb!\kl{q}{p}!, \verb!\kl[a]{q}{p}! & $\kl{q}{p}$, $\kl[a]{q}{p}$\\
+Hellinger distance & \verb!\hell{q}{p}!, \verb!\hell[a]{q}{p}! & $\hell{q}{p}$, $\hell[a]{q}{p}$\\
+Total variation distance & \verb!\tvd{q}{p}!, \verb!\tvd[a]{q}{p}! & $\tvd{q}{p}$, $\tvd[a]{q}{p}$\\
+\bottomrule
+\etabr
+\ecent
+
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+Bernoulli	& \verb!\distBern! & $\distBern$ \\
+beta	& \verb!\distBeta! & $\distBeta$ \\
+beta prime	& \verb!\distBetaPrime! & $\distBetaPrime$ \\
+binomial	& \verb!\distBinom! & $\distBinom$ \\
+categorical	& \verb!\distCat! & $\distCat$ \\
+Cauchy	& \verb!\distCauchy! & $\distCauchy$ \\
+chi-squared	& \verb!\distChiSq! & $\distChiSq$ \\
+Dirichlet	& \verb!\distDir! & $\distDir$ \\
+exponential	& \verb!\distExp! & $\distExp$ \\
+gamma	& \verb!\distGam! & $\distGam$ \\
+inverse gamma	& \verb!\distInvGam! & $\distInvGam$ \\
+geometric	& \verb!\distGeom! & $\distGeom$ \\
+Gumbel	& \verb!\distGum! & $\distGum$ \\
+generalized extreme value	& \verb!\distGEV! & $\distGEV$ \\
+Laplace	& \verb!\distLap! & $\distLap$ \\
+multinomial	& \verb!\distMulti! & $\distMulti$ \\
+normal	& \verb!\distNorm! & $\distNorm$ \\
+Poisson	& \verb!\distPoiss! & $\distPoiss$ \\
+student-t	& \verb!\distT! & $\distT$ \\
+uniform	& \verb!\distUnif! & $\distUnif$ \\
+von Mises-Fisher	& \verb!\distVMF! & $\distVMF$ \\
+Wishart	& \verb!\distWish! & $\distWish$ \\
+inverse Wishart	& \verb!\distInvWish! & $\distInvWish$ \\
+\midrule
+Bernoulli process	& \verb!\distBeP! & $\distBeP$ \\
+beta process	& \verb!\distBP! & $\distBP$ \\
+beta prime process	& \verb!\distBPP! & $\distBPP$ \\
+Dirichlet process	& \verb!\distDP! & $\distDP$ \\
+Chinese restauarant process	& \verb!\distCRP! & $\distCRP$ \\
+completely random measure	& \verb!\distCRM! & $\distCRM$ \\
+normalized completely random measure & \verb!\distNCRM! & $\distNCRM$ \\
+gamma process	& \verb!\distGamP! & $\distGamP$ \\
+normalized gamma process	& \verb!\distNGamP! & $\distNGamP$ \\
+Gaussian process	& \verb!\distGP! & $\distGP$ \\
+Pitman-Yor process	& \verb!\distPYP! & $\distPYP$ \\
+Poisson process	& \verb!\distPP! & $\distPP$ \\
+\bottomrule
+\etabr
+\ecent
+
+
+
 
 \subsection{$\Lp{p}$ Spaces and Operators}
 
