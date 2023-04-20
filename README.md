@@ -9,7 +9,7 @@ X_n &\in \mathcal{X} \notag\\
 X_n &\overset{\text{p}}{\to} X \label{eq:foo}\\
 \mathbb{E}\left[X\right] &= \int_0^1 6\frac{\mathrm{d} 4y^2}{\mathrm{d} y}\mathrm{d}y \notag\\
 \mathbb{P}\left(X_n \in \mathcal{A}\right) &= \hat{\mathbb{C}} \notag\\
-X_n &\sim \mathcal{N}(\hat{\mu}, \hat{\sigma}). \notag
+X_n &\sim \mathcal{N}(\hat{\mu}, \hat{\Sigma}). \notag
 \end{align}
 ```
 
