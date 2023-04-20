@@ -22,7 +22,7 @@ See \cref{eq:foo}.
 X_n &\in \fcX\\
 X_n &\convp X \label{eq:foo}\\
 \ex\lt[X\rt] &= \int_0^1 6\der{4y^2}{y}\dee y\\
-\pr\lt(X_n \in \fcA\right) &= \fbhC\\
+\pr\lt(X_n \in \fcA\rt) &= \fbhC\\
 X_n &\dist \distNorm(\fhmu, \fhSigma)
 \]
 ```
