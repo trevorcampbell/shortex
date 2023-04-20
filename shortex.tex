@@ -377,10 +377,13 @@ fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} c
 \toprule
 Name & Syntax & Symbol  \\ \midrule
 reals	& \verb!\reals! & $\reals$ \\
+extended reals	& \verb!\extreals! & $\extreals$ \\
 rationals & \verb!\rats! & $\rats$\\
 integers	& \verb!\ints! & $\ints$ \\
 natural numbers	& \verb!\nats! & $\nats$ \\
 complex numbers	& \verb!\comps! & $\comps$ \\
+measures & \verb!\measures! & $\measures$\\
+probability measures & \verb!\pmeasures! & $\pmeasures$\\
 (big) intersection & \verb!\intersect!, \verb!\Intersect! & $\intersect$, $\Intersect$\\
 (big) union & \verb!\union!, \verb!\Union! & $\union$, $\Union$\\
 (big) disjoint union & \verb!\djunion!, \verb!\djUnion! & $\djunion$, $\djUnion$\\
@@ -394,13 +397,6 @@ convex hull	& \verb!\conv! & $\conv$ \\
 \bottomrule
 \etabr
 \ecent
-
-To discuss:
-\[
-\extReals \posReals \posExtReals \posPosReals \posPosExtReals
-\posInts \posRats \natsO \measures
-\probMeasures \PowerSet 
-\]
 
 \subsection{Linear algebra}
 
@@ -442,8 +438,6 @@ Hessian & \verb!\hess{a}{x}{y}! & $\hes{a}{x}{y}$ \\
 \ecent
 
 \subsection{General mathematics}
-
-TODO: ShorTeX also provides an improved square root symbol.
 
 \bcent
 \btabr{@{}lll@{}}
@@ -570,91 +564,54 @@ Poisson process	& \verb!\distPP! & $\distPP$ \\
 
 
 
-\subsection{$\Lp{p}$ Spaces and Operators}
+\subsection{Vector spaces and operators}
 
 \begin{center}
-\begin{tabular}{@{}llll@{}}
+\begin{tabular}{@{}lll@{}}
 \toprule
-Description						& Example 				& Text style 				& Display style \\ \midrule
-$\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 				& $\displaystyle\Lp{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpmeas{2}{\f[h]\mu}!	& $\Lpmeas{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeas{2}{\f[h]\mu}$ \\[10pt]
-							& \verb!\Lpmeas[\Big]{2}{\f[h]\mu}!	& $\Lpmeas[\Big]{2}{\f[h]\mu}$ 	& $\displaystyle\Lpmeas[\Big]{2}{\f[h]\mu}$ \\[10pt]
-$\Lp{p}$ norm					& \verb!\Lpnorm{\f[h]\Gamma}{2}!        & $\Lpnorm{\f[h]\Gamma}{2}$ 		& $\displaystyle\Lpnorm{\f[h]\Gamma}{2}$ \\[10pt]
-							& \verb!\Lpnorm*{\f[h]\Gamma}{2}!        & $\Lpnorm*{\f[h]\Gamma}{2}$ 		& $\displaystyle\Lpnorm*{\f[h]\Gamma}{2}$ \\[10pt]
-				& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ 		& $\displaystyle\Lpnorm*{\Gamma}{2}$ \\[10pt]
-							& \verb!\left\Vert{\f[h]\Gamma}\right\Vert_{2}!        & $\left\Vert{\f[h]\Gamma}\right\Vert_{2}$ 		& $\displaystyle\left\Vert{\f[h]\Gamma}\right\Vert_{2}$ \\[10pt]
-							& \verb!\left\Vert{\Gamma}\right\Vert_{2}!        & $\left\Vert{\Gamma}\right\Vert_{2}$ 		& $\displaystyle\left\Vert{\Gamma}\right\Vert_{2}$ \\[10pt]														
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasnorm{\f[h]\Gamma}{2}{\f[h]\mu}$ \\[10pt]
-							& \verb!\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasnorm[\Big]{\f[h]\Gamma}{2}{\f[h]\mu}$ \\[10pt]
-$\Lp{p}$ inner product				& \verb!\Lpinner{\f[h]\Gamma}{\Gamma}{2}!        & $\Lpinner{\f[h]\Gamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner{\f[h]\Gamma}{\Gamma}{2}$ \\[10pt]
-							& \verb!\Lpinner*{\f[h]\Gamma}{\Gamma}{2}!        & $\Lpinner*{\f[h]\Gamma}{\Gamma}{2}$ 		& $\displaystyle\Lpinner*{\f[h]\Gamma}{\Gamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasinner{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ \\[10pt]
-							& \verb!\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}!        & $\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ 		& $\displaystyle\Lpmeasinner[\big]{\f[h]\Gamma}{\Gamma}{2}{\f[h]\mu}$ \\[10pt]
+Description						& Syntax 				& Symbol \\ \midrule
+Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	\\[10pt]
+Norm  with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	\\[10pt]
+Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	\\[10pt]
+Inner prod with subscript 		& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$  \\[10pt]
+$\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 			\\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpm{2}{\mu}!	& $\Lpm{2}{\mu}$ 		\\[10pt]
+							& \verb!\Lpm*{2}{\mu}!	& $\Lpm*{2}{\mu}$ 	\\[10pt]
+							& \verb!\Lpm[\Big]{2}{\mu}!	& $\Lpm[\Big]{2}{\mu}$ 	\\[10pt]
+$\Lp{p}$ norm					& \verb!\Lpnorm{\Gamma}{2}!        & $\Lpnorm{\Gamma}{2}$ 		 \\[10pt]
+						& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ \\[10pt]
+						& \verb!\Lpnorm[\Big]{\Gamma}{2}!        & $\Lpnorm[\Big]{\Gamma}{2}$ \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmnorm{\Gamma}{2}{\mu}!        & $\Lpmnorm{\Gamma}{2}{\mu}$  \\[10pt]
+							& \verb!\Lpmnorm*{\Gamma}{2}{\mu}!        & $\Lpmnorm*{\Gamma}{2}{\mu}$ \\[10pt]
+							& \verb!\Lpmnorm[\Big]{\Gamma}{2}{\mu}!        & $\Lpmnorm[\Big]{\Gamma}{2}{\mu}$ \\[10pt]
+$\Lp{p}$ inner product				& \verb!\Lpinner{\Gamma}{\Gamma}{2}!        & $\Lpinner{\Gamma}{\Gamma}{2}$ 	\\[10pt]
+							& \verb!\Lpinner*{\Gamma}{\Gamma}{2}!        & $\Lpinner*{\Gamma}{\Gamma}{2}$  \\[10pt]
+							& \verb!\Lpinner[\Big]{\Gamma}{\Gamma}{2}!        & $\Lpinner[\Big]{\Gamma}{\Gamma}{2}$  \\[10pt]
+\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpminner{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner{\Gamma}{\Gamma}{2}{\mu}$ 	 \\[10pt]
+							& \verb!\Lpminner*{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner*{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
+							& \verb!\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
 
 
-\subsection{Paired Delimiters}
-
-You can specify a bracket size using $*$ for \verb!\left! and \verb!\right! or one of the standard size choices (\verb!\big!, \verb!\Big!, \verb!\bigg!, \verb!\Bigg!).
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description 				& Example					& Text style 				& Display style \\ \midrule
-Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
-Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
-Many other bracket-like, semantic commands are also available:
+\subsection{Paired delimiters}
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
 Description				& Example 					& Text style 				& Display style \\ \midrule
-%\verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-%\verb!\cbra{\frac{x}{y}}!        	& $\cbra{\frac{x}{y}}$ 		& $\displaystyle\cbra{\frac{x}{y}}$ \\[10pt]
-%\verb!\sbra{\frac{x}{y}}!        	& $\sbra{\frac{x}{y}}$ 		& $\displaystyle\sbra{\frac{x}{y}}$ \\[10pt]
+Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
+Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
 Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
 Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
 Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
 Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	& $\displaystyle\norm{\frac{x}{y}}$ \\[10pt]
-Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	& $\displaystyle\inner{\frac{x}{y}}{\frac{y}{z}}$ \\[10pt]
 Cardinality 				& \verb!\card{\f[h]A}!       		& $\card{\f[h]A}$ 			& $\displaystyle\card{\f[h]A}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
-
-%Some examples of each size option:
-%\begin{center}
-%\begin{tabular}{@{}lllllll@{}}
-%\toprule
-%					& -1 					& 0					& 1					& 2					& 3					& 4 \\ \midrule
-%
-%\verb!\abs{\frac{x}{y}}!        	& $\abs[-1]{\frac{x}{y}}$ 	& $\abs[0]{\frac{x}{y}}$ 	& $\abs[1]{\frac{x}{y}}$ 	& $\abs[2]{\frac{x}{y}}$ 	& $\abs[3]{\frac{x}{y}}$ 	& $\abs[4]{\frac{x}{y}}$ \\[10pt]
-%\verb!\floor{\frac{x}{y}}!        	& $\floor[-1]{\frac{x}{y}}$	& $\floor[0]{\frac{x}{y}}$	& $\floor[1]{\frac{x}{y}}$	& $\floor[2]{\frac{x}{y}}$	& $\floor[3]{\frac{x}{y}}$	& $\floor[4]{\frac{x}{y}}$ \\[10pt]
-%\verb!\norm{\frac{x}{y}}!       	& $\norm[-1]{\frac{x}{y}}$	& $\norm[0]{\frac{x}{y}}$	& $\norm[1]{\frac{x}{y}}$	& $\norm[2]{\frac{x}{y}}$	& $\norm[3]{\frac{x}{y}}$	& $\norm[4]{\frac{x}{y}}$ \\[10pt]
-%\bottomrule
-%\end{tabular}
-%\end{center}
-
-The norm and inner product commands also have versions with a subscript argument:
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description				& Example 					& Text style 				& Display style \\ \midrule
-Norm	with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	& $\displaystyle\normsub*{\frac{x}{y}}{2}$ \\[10pt]
-Inner product with subscript			& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$ 	& $\displaystyle\innersub*{\frac{x}{y}}{z}{2}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
 
 
 \section{Example Document}

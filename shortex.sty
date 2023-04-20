@@ -293,27 +293,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
-\newcommand{\extReals}{\overline{\reals}}
-\newcommand{\posReals}{\reals_+}
-\newcommand{\posExtReals}{{\overline\reals}_+}
-\newcommand{\posPosReals}{\reals_{++}}
-\newcommand{\posPosExtReals}{{\overline\reals}_{++}}
-
+\newcommand{\extreals}{\overline{\reals}}
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
-\newcommand{\posInts}{\ints_+}
-
 \newcommand{\rats}{\ensuremath{\mathbb{Q}}}
-\newcommand{\posRats}{\rats_+}
-
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
-\newcommand{\natsO}{\nats_{0}}
-
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
-
 \newcommand{\measures}{\mathcal{M}}
-\newcommand{\probMeasures}{\mathcal{M}_1}
-
-\newcommand{\PowerSet}{\mathcal{P}}
+\newcommand{\pmeasures}{\mathcal{M}_1}
 
 \newcommand{\union}{\cup}
 \newcommand{\Union}{\bigcup}
@@ -335,17 +321,12 @@
 %%% Lp Spaces and Operators
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\Lp}[1]{L_{#1}}
-\DeclarePairedDelimiterXPP\Lpmeas[2]{\Lp{#1}}{(}{)}{}{#2}
+\newcommand{\Lp}[1]{L^{#1}}
+\DeclarePairedDelimiterXPP\Lpm[2]{\Lp{#1}}{(}{)}{}{#2}
 \DeclarePairedDelimiterXPP\Lpnorm[2]{}{\lVert}{\rVert}{_{\Lp{#2}}}{#1}
-\DeclarePairedDelimiterXPP\Lpmeasnorm[3]{}{\lVert}{\rVert}{_{\Lpmeas{#2}{#3}}}{#1}
-%\newcommand{\Lpnorm}[3][*]{\normsub#1{#2}{\Lp{#3}}}
-%\newcommand{\Lpmeasnorm}[4][{-2}]{\normsub[#1]{#2}{\Lpmeas{#3}{#4}}}
+\DeclarePairedDelimiterXPP\Lpmnorm[3]{}{\lVert}{\rVert}{_{\Lpm{#2}{#3}}}{#1}
 \DeclarePairedDelimiterXPP\Lpinner[3]{}{\langle}{\rangle}{_{\Lp{#3}}}{#1,#2}
-\DeclarePairedDelimiterXPP\Lpmeasinner[4]{}{\langle}{\rangle}{_{\Lpmeas{#3}{#4}}}{#1,#2}
-%\newcommand{\Lpinner}[4][{-2}]{\innersub[#1]{#2}{#3}{\Lp{#4}}}
-%\newcommand{\Lpmeasinner}[5][{-2}]{\innersub[#1]{#2}{#3}{\Lpmeas{#4}{#5}}}
-
+\DeclarePairedDelimiterXPP\Lpminner[4]{}{\langle}{\rangle}{_{\Lpm{#3}{#4}}}{#1,#2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Linear Algebra, Vectors, and Matrices
