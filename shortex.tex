@@ -261,13 +261,13 @@ variant kappa	& \verb!\vkappa! & $\vkappa$ \\
 \subsection{Referencing figures, equations, tables, etc.}
 
 ShorTeX includes the \texttt{cleveref} package, which simplifies the process
-of typesetting references. Use the \verb!\cref! command to automatically
-typeset the names of the objects you reference (including properly handling multiple references). 
+of typesetting references. Use the \verb!\cref! command (or \verb!\Cref! at the beginning of a sentence) 
+to automatically typeset the names of the objects you reference (including properly handling multiple references). 
 For example, if \verb!\label{fig:first}! is applied to the first figure in the document,
 \begin{verbatim}
 In \cref{fig:first}, you can see...
 \end{verbatim}
-would typeset as ``In Figure 1, you can see...''
+would typeset as ``In Fig.~1, you can see...''
 Similarly, if \verb!\label{thm:first}! references a theorem and \verb!\label{second_result}! references
 a lemma, 
 \begin{verbatim}
