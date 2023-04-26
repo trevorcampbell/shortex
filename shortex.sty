@@ -90,6 +90,14 @@
 \newcommand{\mRMK}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
 \newcommand{\mPRB}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
 
+\DeclareRobustCommand{\suppresscomments}{
+% For submission, make all render blank.
+\renewcommand{\RMK}[1]{}
+\renewcommand{\PRB}[1]{}
+\renewcommand{\mRMK}[1]{}
+\renewcommand{\mPRB}[1]{}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% URLs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
