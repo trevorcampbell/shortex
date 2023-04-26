@@ -37,7 +37,7 @@ in your document's root folder. Then in your document's preamble, type:
 **Note: ShorTeX requires you to compile your document 4 times.**
 
 Do not install ShorTeX system-wide. This repository has not reached
-a stable v1.0, and we updating things regularly without any guarantee of 
+a stable v1.0, and we are updating things regularly without any guarantee of 
 backwards compatibility. So to avoid accidentally breaking old documents, just
 include a self-contained copy of `shortex.sty` with each document.
 
