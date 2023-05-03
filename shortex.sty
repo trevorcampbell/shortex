@@ -84,16 +84,19 @@
 \newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
 
 % inline comments
-\newcommand{\RMK}[1]{\textcolor{SubtleColor}{ {\bf (!)} #1}} % a general comment (subtle color)
+\newcommand{\HLT}[1]{\textcolor{SubtleColor}{ {\bf ($\star$)} #1}} % highlight (subtle color)
+\newcommand{\RMK}[1]{\textcolor{SubtleColor}{ {\bf (!)} #1}} % a general remark (subtle color)
 \newcommand{\PRB}[1]{\textcolor{WowColor}{ {\bf (!!)} {\bf #1}}} % a problem (wow color)
 % margin comments
 \newcommand{\mRMK}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
 \newcommand{\mPRB}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
 
 \DeclareRobustCommand{\suppresscomments}{
-% For submission, make all render blank.
+% For submission, make RMK/PRB render blank, 
+% and make HLTs just render normally
 \renewcommand{\RMK}[1]{}
 \renewcommand{\PRB}[1]{}
+\renewcommand{\HLT}[1]{##1} 
 \renewcommand{\mRMK}[1]{}
 \renewcommand{\mPRB}[1]{}
 }

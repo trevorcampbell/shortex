@@ -356,6 +356,7 @@ remark & \verb!\RMK{Example remark}!\\
 margin remark & \verb!\mRMK{Example margin remark}!\\ 
 problem & \verb!\PRB{Example problem}!\\ 
 margin problem & \verb!\mPRB{Example margin problem}!\\ 
+highlight & \verb!\HLT{Some rough text}!\\ 
 \bottomrule
 \etabr
 \ecent
@@ -367,9 +368,13 @@ Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscin
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt...
+fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
+\HLT{Lorem ipsum dolor sit amet, consectetur adipiscing elit,} sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 
-You can also disable all comments to see the clean version of the current document using the \verb!\suppresscomments! command.
+You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
+This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
+all \verb!\HLT! text normally.
 
 
 \subsection{Sets and set operations}
