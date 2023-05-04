@@ -343,9 +343,9 @@ The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/q
 
 
 \subsection{Commenting}
-ShorTeX defines two types of comments that can be used 
-(\emph{remarks} and \emph{problems}), and provides an inline and margin
-style for each. This is a lightweight alternative to some more common
+ShorTeX defines three types of comments that can be used 
+(\emph{remarks}, \emph{problems}, and \emph{highlights}), and provides an inline and margin
+style for the former two. This is a lightweight alternative to some more common
 todo packages (e.g., \texttt{todonotes}).
 
 \bcent
@@ -361,16 +361,17 @@ highlight & \verb!\HLT{Some rough text}!\\
 \etabr
 \ecent
 
-Here is an example of how these look in a typical paragraph:\\
-\\
+Here is an example of how these look in a typical paragraph:
 
+\begin{quote}
 Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
-\HLT{Lorem ipsum dolor sit amet, consectetur adipiscing elit,} sed do eiusmod tempor
+\HLT{Here is a highlighted part of the text.} sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+\end{quote}
 
 You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
 This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
