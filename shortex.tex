@@ -39,9 +39,18 @@ dedicated to reducing manual coding effort.
 
 \section{Usage and package options}\label{sec:usage}
 
+Put a copy of \texttt{shortex.sty} in the folder
+alongside your other document files, and
+include ShorTeX in the document by adding \verb!\usepackage{shortex}! to the preamble.
+\textbf{Do not install ShorTeX system-wide;} this package has not yet reached a stable version 1.0,
+and we are updating things regularly without any guarantee of backwards
+compatibility. 
+\textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
+numbers and references update properly.
 
-Include ShorTeX by adding \verb!\usepackage{shortex}! to the preamble of your document.
-ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx, subcaption, hyperref, algorithm, algpseudocode, amsmath}, among others),
+
+ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx}, \texttt{subcaption}, \texttt{hyperref},
+\texttt{algorithm}, \texttt{algpseudocode}, \texttt{amsmath}, among others),
 so you do not need to explicitly include and set these up yourself.
 If you are writing a document that must use a specific style file (e.g., for a conference or journal) that itself
 includes some of these packages, we recommend editing those style files to remove the package imports.
@@ -50,10 +59,8 @@ The ShorTeX package has a few options:
 \bdesc
 \item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
-\item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures to speed up compilation).
+\item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
 \edesc
-\textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
-numbers and references update properly.
 
 \section{Shorthands for existing commands}
 
@@ -72,7 +79,7 @@ are numbered by default; unnumbered versions can be obtained by appending a \ver
 \toprule
 Environment & Syntax \\ \midrule
 abstract & \verb!\babs...\eabs!\\ \midrule
-itemize & \verb!\bitems...\eitems!\\
+itemize & \verb!\bitem...\eitem!\\
 enumerate & \verb!\benum...\eenum!\\
 description & \verb!\bdesc...\edesc!\\ \midrule
 algorithm & \verb!\balg...\ealg!\\
