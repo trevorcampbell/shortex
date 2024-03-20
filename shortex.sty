@@ -8,9 +8,9 @@
 %%  by Jonathan Huggins, Dan Roy, Ryan Adams
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Imports
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Imports (packages without options)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
@@ -23,7 +23,6 @@
 \usepackage[capitalize,sort,compress]{cleveref} % automatic typesetting of references with typed names
 \usepackage{crossreftools} % ensure that crefs appear correctly in bookmarks (needed internally for \crtCref, \crtcref)
 \usepackage{algpseudocode, algorithm} % typical algorithm typesetting packages
-\usepackage{graphicx} % typical graphics package for figures
 \usepackage{multirow} % multirow tables
 \usepackage{wrapfig} % figures wrapped into the text
 \usepackage{caption,subcaption} % package for sub-environments (figs, tables, etc)
@@ -58,10 +57,20 @@
 \usemanualnumfalse
 \DeclareOption{manualnumbering}{\usemanualnumtrue}
 
+% pass draft mode on to graphicx
+\DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
+
 % process the package options
 \ProcessOptions
 
-% act on the selected options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Imports (packages with options)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% load graphicx using draft mode (or not) per above
+\usepackage{graphicx} 
+
+% load autonum by default; avoid loading it is manualnumbering set
 \ifusemanualnum \else \usepackage{autonum} \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
