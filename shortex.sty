@@ -46,11 +46,6 @@
 % allow the user to switch to a black hypersetup if desired
 \DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 
-% define the 'b' prefix to mean bold or bar (bar default)
-\def\boldorbar{\bar}
-\DeclareOption{bbold}{\def\boldorbar{\bm}}
-\DeclareOption{bbar}{\def\boldorbar{\bar}}
-
 % use autonum by default 
 \newif\ifusemanualnum
 \usemanualnumfalse
