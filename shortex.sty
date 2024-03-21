@@ -59,6 +59,11 @@
 % pass draft mode on to graphicx
 \DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
 
+% whether to parse common font/accent combinations
+\newif\iffontcombos
+\fontcombostrue
+\DeclareOption{minimal}{\fontcombosfalse}
+
 % process the package options
 \ProcessOptions
 
@@ -71,7 +76,6 @@
 
 % load autonum by default; avoid loading it is manualnumbering set
 \ifusemanualnum \else \usepackage{autonum} \fi
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Environments
@@ -307,18 +311,18 @@
 \newcommand{\lowercaseGreek}{{apa}{bta}{gma}{dta}{eps}{zta}{eta}{tta}{ita}{kpa}{lda}{mu}{nu}{xi}{pi}{rho}{sga}{tau}{ups}{phi}{chi}{psi}{oga}{veps}{vtta}{vkpa}{vpi}{vrho}{vsga}{vphi}}
 \newcommand{\uppercaseGreek}{{Gma}{Dta}{Tta}{Lda}{Xi}{Pi}{Sga}{Ups}{Phi}{Psi}{Oga}}
 
-\newcommand{\f}[2][]{
+\newcommand{\s}[2][]{
     \StrLeft{#1}{1}[\fontstylehead]
     \StrGobbleLeft{#1}{1}[\fontstyletail]
     \IfStrEqCase{\fontstylehead}{%
         {}{#2}
-        {b}{ \widebar{\f[\fontstyletail]{#2}} }%
-        {k}{ \bm{{\f[\fontstyletail]{#2}}} }%
-        {d}{ \mathbb{\f[\fontstyletail]{#2}} }%
-        {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
-        {t}{ {\widetilde {\f[\fontstyletail]{#2}}} }%
-        {c}{ {\mathcal {\f[\fontstyletail]{#2}}} }%
-        }[{\f[\fontstyletail]{#2}}]
+        {b}{ \widebar{\s[\fontstyletail]{#2}} }%
+        {k}{ \bm{{\s[\fontstyletail]{#2}}} }%
+        {d}{ \mathbb{\s[\fontstyletail]{#2}} }%
+        {h}{ {\widehat {\s[\fontstyletail]{#2}}} }%
+        {t}{ {\widetilde {\s[\fontstyletail]{#2}}} }%
+        {c}{ {\mathcal {\s[\fontstyletail]{#2}}} }%
+        }[{\s[\fontstyletail]{#2}}]
 }
 
 % defines the macroname command:
@@ -331,13 +335,13 @@
 
 % essentially the same functionality as charalphabetmacro, 
 % % except the macro name and the command are passed as one argument 
-% % since \f is used in the definition
+% % since \s is used in the definition
 \newcommand{\charfontstylemacro}[2]{
 % #1: annotation codes
 % #2: characters to define annotations for
 % Create a macros of the form
-%   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
-    \def\mydeffoo##1{\expandafter\def\csname f#1\macroname{##1}\endcsname{\f[#1]{##1}}}
+%   \newcommand{\s#1##1}{\s[#1]{##1}} for each ##1 in #2
+    \def\mydeffoo##1{\expandafter\def\csname s#1\macroname{##1}\endcsname{\s[#1]{##1}}}
     \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
     \expandafter \mydefallfoo #2\mydefallfoo
 }
@@ -351,14 +355,16 @@
 % #1: annotation codes
 % #2: characters to define annotations for
 % Create a macros of the form
-%	\newcommand{\f##1##2}{\f{##1}{##2}} for each ##1 in #1 and each ##2 in #2
+%	\newcommand{\s##1##2}{\s{##1}{##2}} for each ##1 in #1 and each ##2 in #2
     \def\mydeftex##1{\expandafter\charfontstylemacro{##1}{#2}}
     \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
        \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
     \expandafter \mydefalltex #1\mydefalltex
 }
 
-
+% default is to parse common font style/accent combinations
+% but can be disabled with the minimal package option
+\iffontcombos \parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseRoman\uppercaseRoman\lowercaseGreek\uppercaseGreek} \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 

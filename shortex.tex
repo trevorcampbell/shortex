@@ -60,6 +60,7 @@ The ShorTeX package has a few options:
 \item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
+\item[\texttt{minimal}] Disable common font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
 \edesc
 
 \newpage
@@ -196,19 +197,19 @@ omega & \verb!\oga,\Oga! & $\oga,\Oga$ &  &  \\
 \ecent
 
 \newpage
-\section{Font styles and accents}
+\section{Font styles and accents}\label{sec:fontstylesaccents}
 
-Applying accents (e.g., hats $\f[h]a$, tildes $\f[t]a$, bars $\f[b]a$)
-and changing fonts (e.g., doublestroke $\f[d]A$, caligraphic $\f[c]A$, and bold $\f[k]A$)
+Applying accents (e.g., hats $\s[h]a$, tildes $\s[t]a$, bars $\s[b]a$)
+and changing fonts (e.g., doublestroke $\s[d]A$, caligraphic $\s[c]A$, and bold $\s[k]A$)
 is quite cumbersome in standard \LaTeX. For example, the code to make a tilde caligraphic A,
 $\widetilde{\mathcal{A}}$
 is \verb!\widetilde{\mathcal{A}}!. By itself that code is not too bad, but many such characters 
 in a large mathematical expression results in unreadable code.
 
 ShorTeX defines an efficient syntax for changing fonts and applying accents to characters. 
-The syntax takes the form \verb!\f[modifiers]character!, where \verb!modifiers! is a set of single characters
+The syntax takes the form \verb!\s[modifiers]character!, where \verb!modifiers! is a set of single characters
 that represent font/accent modifications to \verb!character!. 
-For example, the code for tilde caligraphic A is \verb!\f[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
+For example, the code for tilde caligraphic A is \verb!\s[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
 ``caligraphic,'' and \verb!A! is the character to typeset.
 
 \emph{Note: modifiers are applied in the reverse of the order in which they appear; 
@@ -219,12 +220,12 @@ the corresponding commands would appear in TeX code.}
 \btabr{@{}llll@{}}
 \toprule
 Style/Accent & Modifier & Example & Typeset Example \\ \midrule
-caligraphic (\verb!mathcal!) & \verb!c! & \verb!\f[c]A! & $\f[c]A$ \\
-bold (\verb!mathbf!) & \verb!k! & \verb!\f[k]A! & $\f[k]A$\\
-doublestroke (\verb!mathbb!) & \verb!d! & \verb!\f[d]A! & $\f[d]A$\\
-hat (\verb!widehat!) & \verb!h! & \verb!\f[h]A! & $\f[h]A$\\
-tilde (\verb!widetilde!) & \verb!t! & \verb!\f[t]A! & $\f[t]A$\\
-bar (\verb!widebar!) & \verb!b! & \verb!\f[b]A! & $\f[b]A$\\
+caligraphic (\verb!mathcal!) & \verb!c! & \verb!\s[c]A! & $\s[c]A$ \\
+bold (\verb!mathbf!) & \verb!k! & \verb!\s[k]A! & $\s[k]A$\\
+doublestroke (\verb!mathbb!) & \verb!d! & \verb!\s[d]A! & $\s[d]A$\\
+hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
+tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
+bar (\verb!widebar!) & \verb!b! & \verb!\s[b]A! & $\s[b]A$\\
 \bottomrule
 \etabr
 \ecent
@@ -236,10 +237,10 @@ it will happily produce a wide variety of combinations, including those that are
 \btabr{@{}llll@{}}
 \toprule
 Style/Accent & Modifier & Example & Typeset Example \\ \midrule
-caligraphic tilde & \verb!ct! & \verb!\f[ct]A! & $\f[ct]A$ \\
-bold hat & \verb!kh! & \verb!\f[kh]A! & $\f[kh]A$\\
-hat tilde  & \verb!ht! & \verb!\f[ht]A! & $\f[ht]A$\\
-tilde hat  & \verb!th! & \verb!\f[th]A! & $\f[th]A$\\
+caligraphic tilde & \verb!ct! & \verb!\s[ct]A! & $\s[ct]A$ \\
+bold hat & \verb!kh! & \verb!\s[kh]A! & $\s[kh]A$\\
+hat tilde  & \verb!ht! & \verb!\s[ht]A! & $\s[ht]A$\\
+tilde hat  & \verb!th! & \verb!\s[th]A! & $\s[th]A$\\
 \bottomrule
 \etabr
 \ecent
@@ -248,7 +249,7 @@ We can avoid typing \texttt{[]} for commonly used patterns
 by parsing the font style string in advance.
 For example, if we use ``bold hat'' symbols frequently,
 we might want to use commands like
-\verb!\fkh...!  instead of \verb!\f[kh]...!.
+\verb!\skh...!  instead of \verb!\s[kh]...!.
 We can accomplish this using the \verb!\parsefontstylestrings! command,
 with syntax
 \begin{verbatim}
@@ -261,23 +262,23 @@ for the characters A, B, C, and D, we would use the command
 \end{verbatim}
 \parsefontstylestrings{{kh}{ch}}{ABCD}
 and then in the \LaTeX~document, use the commands
-\verb!\fkhA \fkhB \fkhC \fkhD! and
-\verb!\fchA \fchB \fchC \fchD! 
+\verb!\skhA \skhB \skhC \skhD! and
+\verb!\schA \schB \schC \schD! 
 to obtain the following symbols:
 \[
-\fkhA \fkhB \fkhC \fkhD 
-\fchA \fchB \fchC \fchD 
+\skhA \skhB \skhC \skhD 
+\schA \schB \schC \schD 
 \]
 As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
 \begin{verbatim}
-\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
+\parsefontstylestrings{{kh}}{{\apa}{\bta}{\gma}}
 \end{verbatim}
-\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
+\parsefontstylestrings{{kh}}{{\apa}{\bta}{\gma}}
 and then in the \LaTeX~document, use the commands
-\verb!\fkhalpha \fkhbeta \fkhgamma!
+\verb!\skhapa \skhbta \skhgma!
 to obtain the following symbols:
 \[
-	\fkhalpha \fkhbeta \fkhgamma
+	\skhapa \skhbta \skhgma
 \]
 
 For convenience we also provide a few common alphabets of symbols 
@@ -302,7 +303,61 @@ Syntax & Characters  \\ \midrule
 \etabr
 \ecent
 
-\subsection{Referencing figures, equations, tables, etc.}
+Finally, by default, ShorTeX comes by default with all upper/lowercase Greek and Roman
+characters with bold, caligraphic, doublestroke, hat, tilde, bar, and pairwise combinations 
+of (bold, caligraphic, doublestroke) with (hat, tilde, bar).  To disable this behaviour,
+pass the \texttt{minimal} option to ShorTeX. For example,
+\verb!\skA!
+\verb!\scA!
+\verb!\sdA!
+\verb!\shA!
+\verb!\stA!
+\verb!\sbA!
+
+\[
+	\skA \scA \sdA \shA \stA \sbA
+\]
+
+\newpage
+\section{Commenting}
+ShorTeX defines three types of comments that can be used 
+(\emph{remarks}, \emph{problems}, and \emph{highlights}), and provides an inline and margin
+style for the former two. This is a lightweight alternative to some more common
+todo packages (e.g., \texttt{todonotes}).
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+Comment Type & Syntax \\ \midrule
+remark & \verb!\RMK{Example remark}!\\ 
+margin remark & \verb!\mRMK{Example margin remark}!\\ 
+problem & \verb!\PRB{Example problem}!\\ 
+margin problem & \verb!\mPRB{Example margin problem}!\\ 
+highlight & \verb!\HLT{Some rough text}!\\ 
+\bottomrule
+\etabr
+\ecent
+
+Here is an example of how these look in a typical paragraph:
+
+\begin{quote}
+Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
+\HLT{Here is a highlighted part of the text.} sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+\end{quote}
+
+You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
+This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
+all \verb!\HLT! text normally.
+
+
+
+\newpage
+\section{Referencing figures, equations, tables, etc.}
 
 ShorTeX includes the \texttt{cleveref} package, which simplifies the process
 of typesetting references. Use the \verb!\cref! command (or \verb!\Cref! at the beginning of a sentence) 
@@ -323,9 +378,7 @@ and can be extended if needed. See the \texttt{cleveref} documentation
 at \url{https://ctan.org/pkg/cleveref?lang=en} and the homepage at \url{https://www.dr-qubit.org/cleveref.html} 
 for more information.
 
-\subsection{Automatic equation numbers}
-
-ShorTeX includes the \texttt{autonum} package, which simplifies the process of 
+ShorTeX also includes the \texttt{autonum} package, which simplifies the process of 
 equation numbering. Typically when you typeset equations, you have to choose between 
 \verb!$...$!, \verb!$$...$$!, 
 \verb!\begin{align}...\end{align}!, 
@@ -385,41 +438,6 @@ usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \ver
 The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
 
 
-
-\subsection{Commenting}
-ShorTeX defines three types of comments that can be used 
-(\emph{remarks}, \emph{problems}, and \emph{highlights}), and provides an inline and margin
-style for the former two. This is a lightweight alternative to some more common
-todo packages (e.g., \texttt{todonotes}).
-
-\bcent
-\btabr{@{}ll@{}}
-\toprule
-Comment Type & Syntax \\ \midrule
-remark & \verb!\RMK{Example remark}!\\ 
-margin remark & \verb!\mRMK{Example margin remark}!\\ 
-problem & \verb!\PRB{Example problem}!\\ 
-margin problem & \verb!\mPRB{Example margin problem}!\\ 
-highlight & \verb!\HLT{Some rough text}!\\ 
-\bottomrule
-\etabr
-\ecent
-
-Here is an example of how these look in a typical paragraph:
-
-\begin{quote}
-Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
-\HLT{Here is a highlighted part of the text.} sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-\end{quote}
-
-You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
-This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
-all \verb!\HLT! text normally.
 
 
 \subsection{Sets and set operations}
@@ -659,7 +677,7 @@ Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $
 Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
 Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
 Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-Cardinality 				& \verb!\card{\f[h]A}!       		& $\card{\f[h]A}$ 			& $\displaystyle\card{\f[h]A}$ \\[10pt]
+Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displaystyle\card{\s[h]A}$ \\[10pt]
 \bottomrule
 \end{tabular}
 \end{center}
