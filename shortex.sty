@@ -40,6 +40,12 @@
 %%% Package Setup and Options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% ensures that hyperref generates correct bookmarks when using cleveref
+\pdfstringdefDisableCommands{%
+    \let\Cref\crtCref
+    \let\cref\crtcref
+}
+
 % set the default hyperref style to dark blue
 \hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}
 % allow the user to switch to a black hypersetup if desired
@@ -66,16 +72,293 @@
 % load autonum by default; avoid loading it is manualnumbering set
 \ifusemanualnum \else \usepackage{autonum} \fi
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Bookmarks
+%%% Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% algorithms
+\newcommand{\balg}{\begin{algorithm}}
+\newcommand{\ealg}{\end{algorithm}}
+\newcommand{\balgc}{\begin{algorithmic}}
+\newcommand{\ealgc}{\end{algorithmic}}
+% abstract
+\newcommand{\babs}{\begin{abstract}}
+\newcommand{\eabs}{\end{abstract}}
+% centering
+\newcommand{\bcent}{\begin{center}}
+\newcommand{\ecent}{\end{center}}
+% figures
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\bsubfig}{\begin{subfigure}}
+\newcommand{\esubfig}{\end{subfigure}}
+\newcommand{\bfigs}{\begin{figure*}}
+\newcommand{\efigs}{\end{figure*}}
+% tables
+\newcommand{\btab}{\begin{table}}
+\newcommand{\etab}{\end{table}}
+\newcommand{\bsubtab}{\begin{subtable}}
+\newcommand{\esubtab}{\end{subtable}}
+\newcommand{\btabr}{\begin{tabular}}
+\newcommand{\etabr}{\end{tabular}}
+% lists
+\newcommand{\bitem}{\begin{itemize}}
+\newcommand{\eitem}{\end{itemize}}
+\newcommand{\benum}{\begin{enumerate}}
+\newcommand{\eenum}{\end{enumerate}}
+\newcommand{\bdesc}{\begin{description}}
+\newcommand{\edesc}{\end{description}}
+% general math
+\AtBeginDocument{ %necessary to stop clash with autonum package
+\def\[#1\]{\begin{align}#1\end{align}}
+}
+\newcommand{\bprf}{\begin{proof}}
+\newcommand{\eprf}{\end{proof}}
+\newenvironment{proofof}[1]{\renewcommand{\proofname}{Proof of #1}\proof}{\endproof}
+\newcommand{\bprfof}{\begin{proofof}}
+\newcommand{\eprfof}{\end{proofof}}
+\newcommand{\bpmat}{\begin{pmatrix}}
+\newcommand{\epmat}{\end{pmatrix}}
+\newcommand{\bbmat}{\begin{bmatrix}}
+\newcommand{\ebmat}{\end{bmatrix}}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+% numbered theorem-like envs
+\declaretheorem[name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[name=Lemma,numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition,numberlike=theorem]{proposition}
+\declaretheorem[name=Corollary,numberlike=theorem]{corollary}
+\declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
+\declaretheorem[name=Definition,numberlike=theorem]{definition}
+\declaretheorem[name=Assumption,numberlike=theorem]{assumption}
+\declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
+\declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
+\long\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
+\long\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
+\long\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
+\long\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
+\long\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
+\long\def\bdef#1\edef{\begin{definition}#1\end{definition}}
+\long\def\bassump#1\eassump{\begin{assumption}#1\end{assumption}}
+\long\def\bexa#1\eexa{\begin{example}#1\end{example}}
+\long\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
+\long\def\bfact#1\efact{\begin{fact}#1\end{fact}}
+\long\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
+% unnumbered theorem-like envs
+\declaretheorem[name=Theorem,numbered=no]{theorem*}
+\declaretheorem[name=Lemma,numbered=no]{lemma*}
+\declaretheorem[name=Proposition,numbered=no]{proposition*}
+\declaretheorem[name=Corollary,numbered=no]{corollary*}
+\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
+\declaretheorem[name=Definition,numbered=no]{definition*}
+\declaretheorem[name=Assumption,numbered=no]{assumption*}
+\declaretheorem[qed=$\triangleleft$,name=Example,numbered=no]{example*}
+\declaretheorem[qed=$\triangleleft$,name=Remark,numbered=no]{remark*}
+\declaretheorem[qed=$\triangleleft$,name=Fact,numbered=no]{fact*}
+\declaretheorem[qed=$\square$,name=Exercise,numbered=no]{exercise*}
+\def\bthmu#1\ethmu{\begin{theorem*}#1\end{theorem*}}
+\def\blemu#1\elemu{\begin{lemma*}#1\end{lemma*}}
+\def\bpropu#1\epropu{\begin{proposition*}#1\end{proposition*}}
+\def\bcoru#1\ecoru{\begin{corollary*}#1\end{corollary*}}
+\def\bconju#1\econju{\begin{conjecture*}#1\end{conjecture*}}
+\def\bdefu#1\edefu{\begin{definition*}#1\end{definition*}}
+\def\bassumpu#1\eassumpu{\begin{assumption*}#1\end{assumption*}}
+\def\bexau#1\eexau{\begin{example*}#1\end{example*}}
+\def\brmku#1\ermku{\begin{remark*}#1\end{remark*}}
+\def\bfactu#1\efactu{\begin{fact*}#1\end{fact*}}
+\def\bexeru#1\eexeru{\begin{exercise*}#1\end{exercise*}}
+% cleveref names
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{Assumption}{Assumptions}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+\crefname{fact}{Fact}{Facts}
+\crefname{exercise}{Exercise}{Exercises}
+\crefformat{footnote}{#1\footnotemark[#2]#3}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Delimiters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% ensures that hyperref generates correct 
-% bookmarks when using cleveref
-\pdfstringdefDisableCommands{%
-    \let\Cref\crtCref
-    \let\cref\crtcref
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\lb}{\bigl}
+\newcommand{\lB}{\Bigl}
+\newcommand{\lbg}{\biggl}
+\newcommand{\lBg}{\Biggl}
+\newcommand{\rb}{\bigr}
+\newcommand{\rB}{\Bigr}
+\newcommand{\rbg}{\biggr}
+\newcommand{\rBg}{\Biggr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Greek characters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% original
+\newcommand{\apa}{\alpha}
+\newcommand{\bta}{\beta}
+\newcommand{\gma}{\gamma}\newcommand{\Gma}{\Gamma}
+\newcommand{\dta}{\delta}\newcommand{\Dta}{\Delta}
+\newcommand{\eps}{\epsilon}
+\newcommand{\zta}{\zeta}
+\newcommand{\tta}{\theta}\newcommand{\Tta}{\Theta}
+\newcommand{\ita}{\iota}
+\newcommand{\kpa}{\kappa}
+\newcommand{\lda}{\lambda}\newcommand{\Lda}{\Lambda}
+\newcommand{\sga}{\sigma}\newcommand{\Sga}{\Sigma}
+\newcommand{\ups}{\upsilon}\newcommand{\Ups}{\Upsilon}
+\newcommand{\oga}{\omega}\newcommand{\Oga}{\Omega}
+% variants
+\newcommand{\veps}{\varepsilon}
+\newcommand{\vtta}{\vartheta}
+\newcommand{\vpi}{\varpi}
+\newcommand{\vrho}{\varrho}
+\newcommand{\vsga}{\varsigma}
+\newcommand{\vphi}{\varphi}
+\newcommand{\vkpa}{\varkappa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Font styles/accents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% widebar code 
+% obtained from https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package
+\makeatletter
+\let\save@mathaccent\mathaccent
+\newcommand*\if@single[3]{%
+  \setbox0\hbox{${\mathaccent"0362{#1}}^H$}%
+  \setbox2\hbox{${\mathaccent"0362{\kern0pt#1}}^H$}%
+  \ifdim\ht0=\ht2 #3\else #2\fi
+  }
+%The bar will be moved to the right by a half of \macc@kerna, which is computed by amsmath:
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+%If there's a superscript following the bar, then no negative kern may follow the bar;
+%an additional {} makes sure that the superscript is high enough in this case:
+\newcommand*\widebar[1]{\@ifnextchar^{{\wide@bar{#1}{0}}}{\wide@bar{#1}{1}}}
+%Use a separate algorithm for single symbols:
+\newcommand*\wide@bar[2]{\if@single{#1}{\wide@bar@{#1}{#2}{1}}{\wide@bar@{#1}{#2}{2}}}
+\newcommand*\wide@bar@[3]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+%Enable nesting of accents:
+    \let\mathaccent\save@mathaccent
+%If there's more than a single symbol, use the first character instead (see below):
+    \if#32 \let\macc@nucleus\first@char \fi
+%Determine the italic correction:
+    \setbox\z@\hbox{$\macc@style{\macc@nucleus}_{}$}%
+    \setbox\tw@\hbox{$\macc@style{\macc@nucleus}{}_{}$}%
+    \dimen@\wd\tw@
+    \advance\dimen@-\wd\z@
+%Now \dimen@ is the italic correction of the symbol.
+    \divide\dimen@ 3
+    \@tempdima\wd\tw@
+    \advance\@tempdima-\scriptspace
+%Now \@tempdima is the width of the symbol.
+    \divide\@tempdima 10
+    \advance\dimen@-\@tempdima
+%Now \dimen@ = (italic correction / 3) - (Breite / 10)
+    \ifdim\dimen@>\z@ \dimen@0pt\fi
+%The bar will be shortened in the case \dimen@<0 !
+    \rel@kern{0.6}\kern-\dimen@
+    \if#31
+      \overline{\rel@kern{-0.6}\kern\dimen@\macc@nucleus\rel@kern{0.4}\kern\dimen@}%
+      \advance\dimen@0.4\dimexpr\macc@kerna
+%Place the combined final kern (-\dimen@) if it is >0 or if a superscript follows:
+      \let\final@kern#2%
+      \ifdim\dimen@<\z@ \let\final@kern1\fi
+      \if\final@kern1 \kern-\dimen@\fi
+    \else
+      \overline{\rel@kern{-0.6}\kern\dimen@#1}%
+    \fi
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+%The following initialises \macc@kerna and calls \mathaccent:
+  \if#31
+    \macc@nested@a\relax111{#1}%
+  \else
+%If the argument consists of more than one symbol, and if the first token is
+%a letter, use that letter for the computations:
+    \def\gobble@till@marker##1\endmarker{}%
+    \futurelet\first@char\gobble@till@marker#1\endmarker
+    \ifcat\noexpand\first@char A\else
+      \def\first@char{}%
+    \fi
+    \macc@nested@a\relax111{\first@char}%
+  \fi
+  \endgroup
 }
+\makeatother
+
+\newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
+\newcommand{\lowercaseGreek}{{apa}{bta}{gma}{dta}{eps}{zta}{eta}{tta}{ita}{kpa}{lda}{mu}{nu}{xi}{pi}{rho}{sga}{tau}{ups}{phi}{chi}{psi}{oga}{veps}{vtta}{vkpa}{vpi}{vrho}{vsga}{vphi}}
+\newcommand{\uppercaseGreek}{{Gma}{Dta}{Tta}{Lda}{Xi}{Pi}{Sga}{Ups}{Phi}{Psi}{Oga}}
+
+\newcommand{\f}[2][]{
+    \StrLeft{#1}{1}[\fontstylehead]
+    \StrGobbleLeft{#1}{1}[\fontstyletail]
+    \IfStrEqCase{\fontstylehead}{%
+        {}{#2}
+        {b}{ \widebar{\f[\fontstyletail]{#2}} }%
+        {k}{ \bm{{\f[\fontstyletail]{#2}}} }%
+        {d}{ \mathbb{\f[\fontstyletail]{#2}} }%
+        {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
+        {t}{ {\widetilde {\f[\fontstyletail]{#2}}} }%
+        {c}{ {\mathcal {\f[\fontstyletail]{#2}}} }%
+        }[{\f[\fontstyletail]{#2}}]
+}
+
+% defines the macroname command:
+% \macroname{\alpha} -> alpha
+% \macroname{alpha} -> alpha
+% used for defining greek alphabets
+\begingroup\lccode`\|=`\\
+\lowercase{\endgroup\def\removebs#1{\if#1|\else#1\fi}}
+\newcommand{\macroname}[1]{\expandafter\removebs\string#1}
+
+% essentially the same functionality as charalphabetmacro, 
+% % except the macro name and the command are passed as one argument 
+% % since \f is used in the definition
+\newcommand{\charfontstylemacro}[2]{
+% #1: annotation codes
+% #2: characters to define annotations for
+% Create a macros of the form
+%   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
+    \def\mydeffoo##1{\expandafter\def\csname f#1\macroname{##1}\endcsname{\f[#1]{##1}}}
+    \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
+    \expandafter \mydefallfoo #2\mydefallfoo
+}
+
+% I got this to work by basing it off of \texalphabetmacro above
+% % the order of expansion in LaTeX is very opaque to me, so im not 100% 
+% % sure why it works, but it does, and I wrote it thinking it would work 
+% % for whatever voodoo reason \texalphabetmacro also worked.
+ 
+\newcommand{\parsefontstylestrings}[2]{
+% #1: annotation codes
+% #2: characters to define annotations for
+% Create a macros of the form
+%	\newcommand{\f##1##2}{\f{##1}{##2}} for each ##1 in #1 and each ##2 in #2
+    \def\mydeftex##1{\expandafter\charfontstylemacro{##1}{#2}}
+    \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
+       \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
+    \expandafter \mydefalltex #1\mydefalltex
+}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
@@ -129,178 +412,6 @@
 \newcommand{\LineComment}[2][0]{\Statex \hspace{#1\algindent} \hskip\ALG@thistlm $\triangleright$ #2}
 \makeatother
 
-% environments
-\newcommand{\balg}{\begin{algorithm}}
-\newcommand{\ealg}{\end{algorithm}}
-\newcommand{\balgc}{\begin{algorithmic}}
-\newcommand{\ealgc}{\end{algorithmic}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Abstract
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\babs}{\begin{abstract}}
-\newcommand{\eabs}{\end{abstract}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Positioning
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\bcent}{\begin{center}}
-\newcommand{\ecent}{\end{center}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Figures
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%environments
-\newcommand{\bfig}{\begin{figure}}
-\newcommand{\efig}{\end{figure}}
-\newcommand{\bsubfig}{\begin{subfigure}}
-\newcommand{\esubfig}{\end{subfigure}}
-\newcommand{\bfigs}{\begin{figure*}}
-\newcommand{\efigs}{\end{figure*}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Tables
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%environments
-\newcommand{\btab}{\begin{table}}
-\newcommand{\etab}{\end{table}}
-\newcommand{\bsubtab}{\begin{subtable}}
-\newcommand{\esubtab}{\end{subtable}}
-\newcommand{\btabr}{\begin{tabular}}
-\newcommand{\etabr}{\end{tabular}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Lists
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\bitem}{\begin{itemize}}
-\newcommand{\eitem}{\end{itemize}}
-\newcommand{\benum}{\begin{enumerate}}
-\newcommand{\eenum}{\end{enumerate}}
-\newcommand{\bdesc}{\begin{description}}
-\newcommand{\edesc}{\end{description}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Math-Mode Environments
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\AtBeginDocument{ %necessary to stop clash with autonum package
-\def\[#1\]{\begin{align}#1\end{align}}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Proof Environments
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\bprf}{\begin{proof}}
-\newcommand{\eprf}{\end{proof}}
-\newenvironment{proofof}[1]{\renewcommand{\proofname}{Proof of #1}\proof}{\endproof}
-\newcommand{\bprfof}{\begin{proofof}}
-\newcommand{\eprfof}{\end{proofof}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Theorem-like environments
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% numbered
-\declaretheorem[name=Theorem,numberwithin=section]{theorem}
-\declaretheorem[name=Lemma,numberlike=theorem]{lemma}
-\declaretheorem[name=Proposition,numberlike=theorem]{proposition}
-\declaretheorem[name=Corollary,numberlike=theorem]{corollary}
-\declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
-\declaretheorem[name=Definition,numberlike=theorem]{definition}
-\declaretheorem[name=Assumption,numberlike=theorem]{assumption}
-\declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
-\declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
-\declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
-\declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
-
-% unnumbered
-\declaretheorem[name=Theorem,numbered=no]{theorem*}
-\declaretheorem[name=Lemma,numbered=no]{lemma*}
-\declaretheorem[name=Proposition,numbered=no]{proposition*}
-\declaretheorem[name=Corollary,numbered=no]{corollary*}
-\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
-\declaretheorem[name=Definition,numbered=no]{definition*}
-\declaretheorem[name=Assumption,numbered=no]{assumption*}
-\declaretheorem[qed=$\triangleleft$,name=Example,numbered=no]{example*}
-\declaretheorem[qed=$\triangleleft$,name=Remark,numbered=no]{remark*}
-\declaretheorem[qed=$\triangleleft$,name=Fact,numbered=no]{fact*}
-\declaretheorem[qed=$\square$,name=Exercise,numbered=no]{exercise*}
-
-% numbered shorthands
-\long\def\bthm#1\ethm{\begin{theorem}#1\end{theorem}}
-\long\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
-\long\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
-\long\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
-\long\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
-\long\def\bdef#1\edef{\begin{definition}#1\end{definition}}
-\long\def\bassump#1\eassump{\begin{assumption}#1\end{assumption}}
-\long\def\bexa#1\eexa{\begin{example}#1\end{example}}
-\long\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
-\long\def\bfact#1\efact{\begin{fact}#1\end{fact}}
-\long\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
-
-% unnumbered shorthands
-\def\bthmu#1\ethmu{\begin{theorem*}#1\end{theorem*}}
-\def\blemu#1\elemu{\begin{lemma*}#1\end{lemma*}}
-\def\bpropu#1\epropu{\begin{proposition*}#1\end{proposition*}}
-\def\bcoru#1\ecoru{\begin{corollary*}#1\end{corollary*}}
-\def\bconju#1\econju{\begin{conjecture*}#1\end{conjecture*}}
-\def\bdefu#1\edefu{\begin{definition*}#1\end{definition*}}
-\def\bassumpu#1\eassumpu{\begin{assumption*}#1\end{assumption*}}
-\def\bexau#1\eexau{\begin{example*}#1\end{example*}}
-\def\brmku#1\ermku{\begin{remark*}#1\end{remark*}}
-\def\bfactu#1\efactu{\begin{fact*}#1\end{fact*}}
-\def\bexeru#1\eexeru{\begin{exercise*}#1\end{exercise*}}
-
-% cleveref names
-\crefname{theorem}{Theorem}{Theorems}
-\crefname{lemma}{Lemma}{Lemmas}
-\crefname{proposition}{Proposition}{Propositions}
-\crefname{corollary}{Corollary}{Corollaries}
-\crefname{conjecture}{Conjecture}{Conjectures}
-\crefname{definition}{Definition}{Definitions}
-\crefname{assumption}{Assumption}{Assumptions}
-\crefname{example}{Example}{Examples}
-\crefname{remark}{Remark}{Remarks}
-\crefname{fact}{Fact}{Facts}
-\crefname{exercise}{Exercise}{Exercises}
-\crefformat{footnote}{#1\footnotemark[#2]#3}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Brackets 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\lt}{\left}
-\newcommand{\rt}{\right}
-
-\newcommand{\lb}{\bigl}
-\newcommand{\lB}{\Bigl}
-\newcommand{\lbg}{\biggl}
-\newcommand{\lBg}{\Biggl}
-
-\newcommand{\rb}{\bigr}
-\newcommand{\rB}{\Bigr}
-\newcommand{\rbg}{\biggr}
-\newcommand{\rBg}{\Biggr}
-
-\DeclarePairedDelimiter\rbra{(}{)}
-\DeclarePairedDelimiter\cbra{\{}{\}}
-\DeclarePairedDelimiter\sbra{[}{]}
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\DeclarePairedDelimiter\card{\lvert}{\rvert}
-\DeclarePairedDelimiter\set{\{}{\}}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\DeclarePairedDelimiterXPP\normsub[2]{}{\lVert}{\rVert}{_{#2}}{#1}
-\DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
-\DeclarePairedDelimiterXPP\innersub[3]{}{\langle}{\rangle}{_{#3}}{#1,#2}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Common Sets and Set Operations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -341,6 +452,20 @@
 \DeclarePairedDelimiterXPP\Lpinner[3]{}{\langle}{\rangle}{_{\Lp{#3}}}{#1,#2}
 \DeclarePairedDelimiterXPP\Lpminner[4]{}{\langle}{\rangle}{_{\Lpm{#3}{#4}}}{#1,#2}
 
+
+\DeclarePairedDelimiter\rbra{(}{)}
+\DeclarePairedDelimiter\cbra{\{}{\}}
+\DeclarePairedDelimiter\sbra{[}{]}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiterXPP\normsub[2]{}{\lVert}{\rVert}{_{#2}}{#1}
+\DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiterXPP\innersub[3]{}{\langle}{\rangle}{_{#3}}{#1,#2}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Linear Algebra, Vectors, and Matrices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -359,12 +484,6 @@
 
 \newcommand{\bone}{\mathbf{1}}
 \newcommand{\bzero}{\mathbf{0}}
-\newcommand{\bpmat}{\begin{pmatrix}}
-\newcommand{\epmat}{\end{pmatrix}}
-\newcommand{\bbmat}{\begin{bmatrix}}
-\newcommand{\ebmat}{\end{bmatrix}}
-\newcommand{\bmat}{\begin{matrix}}
-\newcommand{\emat}{\end{matrix}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calculus 
@@ -541,21 +660,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Greek letters and variants
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\eps}{\epsilon}
-\newcommand{\ups}{\upsilon}
-\newcommand{\veps}{\varepsilon}
-\newcommand{\vtheta}{\vartheta}
-\newcommand{\vpi}{\varpi}
-\newcommand{\vrho}{\varrho}
-\newcommand{\vsigma}{\varsigma}
-\newcommand{\vphi}{\varphi}
-\newcommand{\vkappa}{\varkappa}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Squeezed math
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -574,142 +678,7 @@
   \scriptspace=#1\scriptspace
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Font styles and accents
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-% widebar code 
-% obtained from https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package
-\makeatletter
-\let\save@mathaccent\mathaccent
-\newcommand*\if@single[3]{%
-  \setbox0\hbox{${\mathaccent"0362{#1}}^H$}%
-  \setbox2\hbox{${\mathaccent"0362{\kern0pt#1}}^H$}%
-  \ifdim\ht0=\ht2 #3\else #2\fi
-  }
-%The bar will be moved to the right by a half of \macc@kerna, which is computed by amsmath:
-\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
-%If there's a superscript following the bar, then no negative kern may follow the bar;
-%an additional {} makes sure that the superscript is high enough in this case:
-\newcommand*\widebar[1]{\@ifnextchar^{{\wide@bar{#1}{0}}}{\wide@bar{#1}{1}}}
-%Use a separate algorithm for single symbols:
-\newcommand*\wide@bar[2]{\if@single{#1}{\wide@bar@{#1}{#2}{1}}{\wide@bar@{#1}{#2}{2}}}
-\newcommand*\wide@bar@[3]{%
-  \begingroup
-  \def\mathaccent##1##2{%
-%Enable nesting of accents:
-    \let\mathaccent\save@mathaccent
-%If there's more than a single symbol, use the first character instead (see below):
-    \if#32 \let\macc@nucleus\first@char \fi
-%Determine the italic correction:
-    \setbox\z@\hbox{$\macc@style{\macc@nucleus}_{}$}%
-    \setbox\tw@\hbox{$\macc@style{\macc@nucleus}{}_{}$}%
-    \dimen@\wd\tw@
-    \advance\dimen@-\wd\z@
-%Now \dimen@ is the italic correction of the symbol.
-    \divide\dimen@ 3
-    \@tempdima\wd\tw@
-    \advance\@tempdima-\scriptspace
-%Now \@tempdima is the width of the symbol.
-    \divide\@tempdima 10
-    \advance\dimen@-\@tempdima
-%Now \dimen@ = (italic correction / 3) - (Breite / 10)
-    \ifdim\dimen@>\z@ \dimen@0pt\fi
-%The bar will be shortened in the case \dimen@<0 !
-    \rel@kern{0.6}\kern-\dimen@
-    \if#31
-      \overline{\rel@kern{-0.6}\kern\dimen@\macc@nucleus\rel@kern{0.4}\kern\dimen@}%
-      \advance\dimen@0.4\dimexpr\macc@kerna
-%Place the combined final kern (-\dimen@) if it is >0 or if a superscript follows:
-      \let\final@kern#2%
-      \ifdim\dimen@<\z@ \let\final@kern1\fi
-      \if\final@kern1 \kern-\dimen@\fi
-    \else
-      \overline{\rel@kern{-0.6}\kern\dimen@#1}%
-    \fi
-  }%
-  \macc@depth\@ne
-  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
-  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
-  \macc@set@skewchar\relax
-  \let\mathaccentV\macc@nested@a
-%The following initialises \macc@kerna and calls \mathaccent:
-  \if#31
-    \macc@nested@a\relax111{#1}%
-  \else
-%If the argument consists of more than one symbol, and if the first token is
-%a letter, use that letter for the computations:
-    \def\gobble@till@marker##1\endmarker{}%
-    \futurelet\first@char\gobble@till@marker#1\endmarker
-    \ifcat\noexpand\first@char A\else
-      \def\first@char{}%
-    \fi
-    \macc@nested@a\relax111{\first@char}%
-  \fi
-  \endgroup
-}
-\makeatother
-
-\newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
-\newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
-\newcommand{\lowercaseGreek}{{alpha}{beta}{gamma}{delta}{epsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{chi}{psi}{omega}{varepsilon}{vartheta}{varkappa}{varpi}{varrho}{varsigma}{varphi}}
-\newcommand{\uppercaseGreek}{{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Psi}{Omega}}
-
-\newcommand{\f}[2][]{
-    \StrLeft{#1}{1}[\fontstylehead]
-    \StrGobbleLeft{#1}{1}[\fontstyletail]
-    \IfStrEqCase{\fontstylehead}{%
-        {}{#2}
-        {b}{ \widebar{\f[\fontstyletail]{#2}} }%
-        {k}{ \bm{{\f[\fontstyletail]{#2}}} }%
-        {d}{ \mathbb{\f[\fontstyletail]{#2}} }%
-        {h}{ {\widehat {\f[\fontstyletail]{#2}}} }%
-        {t}{ {\widetilde {\f[\fontstyletail]{#2}}} }%
-        {c}{ {\mathcal {\f[\fontstyletail]{#2}}} }%
-        }[{\f[\fontstyletail]{#2}}]
-}
-
-% commented out because it duplicates something above
-% \newcommand{\upperCaseRomanLetters}{ABCDEFGHIJKLMNOPQRSTUVWXYZ} 
-
-
-% defines the macroname command:
-% \macroname{\alpha} -> alpha
-% \macroname{alpha} -> alpha
-% used for defining greek alphabets
-\begingroup\lccode`\|=`\\
-\lowercase{\endgroup\def\removebs#1{\if#1|\else#1\fi}}
-\newcommand{\macroname}[1]{\expandafter\removebs\string#1}
-
-% essentially the same functionality as charalphabetmacro, 
-% % except the macro name and the command are passed as one argument 
-% % since \f is used in the definition
-\newcommand{\charfontstylemacro}[2]{
-% #1: annotation codes
-% #2: characters to define annotations for
-% Create a macros of the form
-%   \newcommand{\f#1##1}{\f[#1]{##1}} for each ##1 in #2
-    \def\mydeffoo##1{\expandafter\def\csname f#1\macroname{##1}\endcsname{\f[#1]{##1}}}
-    \def\mydefallfoo##1{\ifx##1\mydefallfoo\else\mydeffoo##1\expandafter\mydefallfoo\fi}
-    \expandafter \mydefallfoo #2\mydefallfoo
-}
-
-% I got this to work by basing it off of \texalphabetmacro above
-% % the order of expansion in LaTeX is very opaque to me, so im not 100% 
-% % sure why it works, but it does, and I wrote it thinking it would work 
-% % for whatever voodoo reason \texalphabetmacro also worked.
- 
-\newcommand{\parsefontstylestrings}[2]{
-% #1: annotation codes
-% #2: characters to define annotations for
-% Create a macros of the form
-%	\newcommand{\f##1##2}{\f{##1}{##2}} for each ##1 in #1 and each ##2 in #2
-    \def\mydeftex##1{\expandafter\charfontstylemacro{##1}{#2}}
-    \def\mydefalltex##1{\ifx\mydefalltex##1\else\mydeftex{##1}%
-       \lowercase{\mydeftex{##1}}\expandafter\mydefalltex\fi}
-    \expandafter \mydefalltex #1\mydefalltex
-}
 
 
 

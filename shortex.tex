@@ -62,18 +62,19 @@ The ShorTeX package has a few options:
 \item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
 \edesc
 
-\section{Shorthands for existing commands}
+\newpage
+\section{Environments}
 
-\subsection{Environments}
-
-\LaTeX~documents often includes a lot of verbose code
+\LaTeX~documents often include a lot of verbose code
 related to creating environments (\verb!\begin{blah}...\end{blah}!). ShorTeX provides a set of 
 shortened macros for common environments.
+Each shortened begin and end command starts with \verb!\b...! and \verb!\e...!, respectively.
 Note that all theorem-like environments (theorem, lemma, proposition, etc.) 
 are numbered by default; unnumbered versions can be obtained by appending a \verb!u!. For example,
 \verb!\bthmu...\ethmu! creates an unnumbered theorem environment, while
 \verb!\blemu...\elemu! creates an unnumbered lemma environment.
 
+{\small
 \bcent
 \btabr{@{}ll@{}}
 \toprule
@@ -114,8 +115,10 @@ pmatrix & \verb!\pbmat...\epmat!\\
 \bottomrule
 \etabr
 \ecent
+}
 
-\subsection{Delimiters}
+\newpage
+\section{Delimiters}
 
 Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
 A very common usage of these involves the \verb!\left...\right! commands for automatic sizing. 
@@ -152,7 +155,48 @@ angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\
 \etabr
 \ecent
 
-\subsection{Font styles and accents}
+\newpage
+\section{Greek characters and variants}\label{sec:greeks}
+
+ShorTeX defines shorthands for Greek characters and variants.
+The syntax is identical to standard \LaTeX~for letters with three or fewer characters,
+and is reduced to three characters for those with more than three. 
+Variants are obtained by preceding the usual command with \verb!\v...!.
+
+\bcent
+\btabr{@{}lllll@{}}
+\toprule
+Letter & Syntax & Symbol & Variant Syntax & Variant Symbol  \\ \midrule
+alpha & \verb!\apa,A! & $\apa,A$ &  &  \\
+beta & \verb!\bta,B! & $\bta,B$ &  &  \\
+gamma & \verb!\gma,\Gma! & $\gma,\Gma$ &  &  \\
+delta & \verb!\dta,\Dta! & $\dta,\Dta$ &  &  \\
+epsilon & \verb!\eps,E! & $\eps,E$ & \verb!\veps,E! & $\veps$ \\
+zeta & \verb!\zta,Z! & $\zta,Z$ &  &  \\
+eta & \verb!\eta,H! & $\eta,H$ &  &  \\
+theta & \verb!\tta,\Tta! & $\tta,\Tta$ & \verb!\vtta! & $\vtta$ \\
+iota & \verb!\ita,I! & $\ita,I$ &  &  \\
+kappa & \verb!\kpa,K! & $\kpa,K$ & \verb!\vkpa! & $\vkpa$ \\
+lambda & \verb!\lda,\Lda! & $\lda,\Lda$ &  &  \\
+mu & \verb!\mu,M! & $\mu,M$ &  &  \\
+nu & \verb!\nu,N! & $\nu,N$ &  &  \\
+xi & \verb!\xi,\Xi! & $\xi,\Xi$ &  &  \\
+omicron & \verb!o,O! & $o,O$ &  &  \\
+pi & \verb!\pi,\Pi! & $\pi,\Pi$ & \verb!\vpi! & $\vpi$ \\
+rho & \verb!\rho,P! & $\rho,P$ & \verb!\vrho! & $\vrho$ \\
+sigma & \verb!\sga,\Sga! & $\sga,\Sga$ & \verb!\vsga! & $\vsga$ \\
+tau & \verb!\tau,T! & $\tau,T$ &  &  \\
+upsilon & \verb!\ups,\Ups! & $\ups,\Ups$ &  &  \\
+phi & \verb!\phi,\Phi! & $\phi,\Phi$ & \verb!\vphi! & $\vphi$ \\
+chi & \verb!\chi,X! & $\chi,X$ &  &  \\
+psi & \verb!\psi,\Psi! & $\psi,\Psi$ &  &  \\
+omega & \verb!\oga,\Oga! & $\oga,\Oga$ &  &  \\
+\bottomrule
+\etabr
+\ecent
+
+\newpage
+\section{Font styles and accents}
 
 Applying accents (e.g., hats $\f[h]a$, tildes $\f[t]a$, bars $\f[b]a$)
 and changing fonts (e.g., doublestroke $\f[d]A$, caligraphic $\f[c]A$, and bold $\f[k]A$)
@@ -238,8 +282,9 @@ to obtain the following symbols:
 
 For convenience we also provide a few common alphabets of symbols 
 for use in the \verb!\parsefontstylestrings! command.
-Note that not every Greek character has an uppercase version (in cases where it is
-identical to its Roman counterpart).
+Note that not every Greek character has a lowercase or uppercase version (in cases where it is
+identical to its Roman counterpart). Also note that we use ShorTeX Greek letter syntax;
+see \cref{sec:greeks}.
 
 \bcent
 \btabr{@{}lll@{}}
@@ -247,33 +292,12 @@ identical to its Roman counterpart).
 Syntax & Characters  \\ \midrule
 \verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
 \verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\verb!\lowercaseGreek! & alpha,beta,gamma,delta,epsilon,zeta,eta,theta\\
-& iota,kappa,lambda,mu,nu,xi,omicron,pi,rho\\
-& sigma,tau,upsilon,phi,chi,psi,omega\\
-& varepsilon,vartheta,varkappa,varpi,varrho,varsigma,varphi\\
-\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma\\
-& Upsilon,Phi,Psi,Omega \\
-\bottomrule
-\etabr
-\ecent
-
-\subsection{Greek characters and variants}
-
-ShorTeX defines a number of shorthands for Greek characters and variants.
-
-\bcent
-\btabr{@{}lll@{}}
-\toprule
-Letter & Syntax & Symbol  \\ \midrule
-epsilon	& \verb!\eps! & $\eps$ \\
-upsilon	& \verb!\ups! & $\ups$ \\
-variant epsilon	& \verb!\veps! & $\veps$ \\
-variant theta	& \verb!\vtheta! & $\vtheta$ \\
-variant pi	& \verb!\vpi! & $\vpi$ \\
-variant rho	& \verb!\vrho! & $\vrho$ \\
-variant sigma	& \verb!\vsigma! & $\vsigma$ \\
-variant phi	& \verb!\vphi! & $\vphi$ \\
-variant kappa	& \verb!\vkappa! & $\vkappa$ \\
+\verb!\lowercaseGreek! & apa,bta,gma,dta,eps,zta,eta,tta\\
+& ita,kpa,lda,mu,nu,xi,pi,rho\\
+& sga,tau,ups,phi,chi,psi,oga\\
+& veps,vtta,vkpa,vpi,vrho,vsga,vphi\\
+\verb!\uppercaseGreek! & Gma,Dta,Tta,Lda,Xi,Pi,Sga\\
+& Ups,Phi,Psi,Oga \\
 \bottomrule
 \etabr
 \ecent
