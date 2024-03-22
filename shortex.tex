@@ -60,7 +60,7 @@ The ShorTeX package has a few options:
 \item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
-\item[\texttt{minimal}] Disable common font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
+\item[\texttt{minimal}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
 \edesc
 
 \newpage
@@ -223,6 +223,7 @@ Style/Accent & Modifier & Example & Typeset Example \\ \midrule
 caligraphic (\verb!mathcal!) & \verb!c! & \verb!\s[c]A! & $\s[c]A$ \\
 bold (\verb!mathbf!) & \verb!k! & \verb!\s[k]A! & $\s[k]A$\\
 doublestroke (\verb!mathbb!) & \verb!d! & \verb!\s[d]A! & $\s[d]A$\\
+fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\
 hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
 tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
 bar (\verb!widebar!) & \verb!b! & \verb!\s[b]A! & $\s[b]A$\\
@@ -239,8 +240,8 @@ it will happily produce a wide variety of combinations, including those that are
 Style/Accent & Modifier & Example & Typeset Example \\ \midrule
 caligraphic tilde & \verb!ct! & \verb!\s[ct]A! & $\s[ct]A$ \\
 bold hat & \verb!kh! & \verb!\s[kh]A! & $\s[kh]A$\\
-hat tilde  & \verb!ht! & \verb!\s[ht]A! & $\s[ht]A$\\
-tilde hat  & \verb!th! & \verb!\s[th]A! & $\s[th]A$\\
+tilde hat  & \verb!ht! & \verb!\s[ht]A! & $\s[ht]A$\\
+hat tilde   & \verb!th! & \verb!\s[th]A! & $\s[th]A$\\
 \bottomrule
 \etabr
 \ecent
@@ -305,18 +306,17 @@ Syntax & Characters  \\ \midrule
 
 Finally, by default, ShorTeX comes by default with all upper/lowercase Greek and Roman
 characters with bold, caligraphic, doublestroke, hat, tilde, bar, and pairwise combinations 
-of (bold, caligraphic, doublestroke) with (hat, tilde, bar).  To disable this behaviour,
-pass the \texttt{minimal} option to ShorTeX. For example,
+of (bold, caligraphic, doublestroke) with (hat, tilde, bar).   For example,
 \verb!\skA!
 \verb!\scA!
 \verb!\sdA!
 \verb!\shA!
 \verb!\stA!
 \verb!\sbA!
-
 \[
 	\skA \scA \sdA \shA \stA \sbA
 \]
+To disable these default shortcuts, pass the \texttt{minimal} option to ShorTeX.
 
 \newpage
 \section{Commenting}
@@ -519,7 +519,7 @@ essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
 indicator	& \verb!\ind[x=3]! & $\ind[x=3]$ \\
 sign	& \verb!\sgn x! & $\sgn x$ \\
 scientific notation	& \verb!\scin{3}{5}! & $\scin{3}{5}$ \\
-such that	& \verb!\st! & $\st$ \\
+%such that	& \verb!\st! & $\st$ \\
 given	& \verb!\given! & $\given$ \\
 defined as	& \verb!\defas! & $\defas$ \\
 defines	& \verb!\defines! & $\defines$ \\

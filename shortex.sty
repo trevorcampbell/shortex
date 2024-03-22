@@ -308,8 +308,8 @@
 
 \newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
-\newcommand{\lowercaseGreek}{{apa}{bta}{gma}{dta}{eps}{zta}{eta}{tta}{ita}{kpa}{lda}{mu}{nu}{xi}{pi}{rho}{sga}{tau}{ups}{phi}{chi}{psi}{oga}{veps}{vtta}{vkpa}{vpi}{vrho}{vsga}{vphi}}
-\newcommand{\uppercaseGreek}{{Gma}{Dta}{Tta}{Lda}{Xi}{Pi}{Sga}{Ups}{Phi}{Psi}{Oga}}
+\newcommand{\lowercaseGreek}{\apa\bta\gma\dta\eps\zta\eta\tta\ita\kpa\lda\mu\nu\xi\pi\rho\sga\tau\ups\phi\chi\psi\oga\veps\vtta\vkpa\vpi\vrho\vsga\vphi}
+\newcommand{\uppercaseGreek}{\Gma\Dta\Tta\Lda\Xi\Pi\Sga\Ups\Phi\Psi\Oga}
 
 \newcommand{\s}[2][]{
     \StrLeft{#1}{1}[\fontstylehead]
@@ -322,6 +322,7 @@
         {h}{ {\widehat {\s[\fontstyletail]{#2}}} }%
         {t}{ {\widetilde {\s[\fontstyletail]{#2}}} }%
         {c}{ {\mathcal {\s[\fontstyletail]{#2}}} }%
+        {f}{ {\mathfrak {\s[\fontstyletail]{#2}}} }%
         }[{\s[\fontstyletail]{#2}}]
 }
 
@@ -364,7 +365,12 @@
 
 % default is to parse common font style/accent combinations
 % but can be disabled with the minimal package option
-\iffontcombos \parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseRoman\uppercaseRoman\lowercaseGreek\uppercaseGreek} \fi
+\iffontcombos
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseRoman}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\uppercaseRoman}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseGreek}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\uppercaseGreek}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commenting 
@@ -514,11 +520,11 @@
 \newcommand{\ind}{\mathds{1}} % indicator function
 \newcommand{\sgn}{\operatorname{sgn}} % sign function
 \newcommand{\scin}[2]{\ensuremath{#1\!\times\!10^{#2}}}	% #1 x 10^{#2}
-\newcommand{\st}{\,:\,}
+%\newcommand{\st}{\,:\,}
 \newcommand{\given}{\mid}
 
 % Words in math
-\newcommand{\stT}{\ \text{s.t.}\ }
+%\newcommand{\stT}{\ \text{s.t.}\ }
 \newcommand{\andT}{\ \text{and}\ }
 \newcommand{\orT}{\ \text{or}\ }
 \newcommand{\whereT}{\ \text{where}\ }
