@@ -586,8 +586,9 @@
 \newcommand{\eqas}{\overset{a.s.}{=}}
 
 % unary/functions
-\newcommand{\pr}{\mathbb{P}}  % probability
-\newcommand{\ex}{\mathbb{E}}	% expectation
+\let\oldP\P
+\renewcommand\P{\ifmmode\mathbb{P}\else\oldP\fi} %make \P be mathbbP in math mode, usual defn as pilcrow in text mode
+\newcommand{\E}{\mathbb{E}}	% expectation
 \newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}	% variance
 \newcommand{\cov}{\operatorname{Cov}}	% covariance
