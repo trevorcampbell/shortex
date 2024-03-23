@@ -30,13 +30,21 @@
 \usepackage{import, subfiles} % packages for using subfile/folder structure
 \usepackage{url} % nice URL typesetting (used internally for \UrlFont command)
 \usepackage{kvoptions} % for defining key-value options for this package
+\usepackage{marginnote} % for margin comments within floats
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Color Definitions 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\colorlet{WowColor}{Blue!100}
-\colorlet{SubtleColor}{Blue!60}
-
+\definecolor{SubtleColor}{rgb}{0,0,.50}
+\definecolor{CommentColor0}{rgb}{0,0,.8}
+\definecolor{CommentColor1}{rgb}{.8,0,.8}
+\definecolor{CommentColor2}{rgb}{.8,0,0}
+\definecolor{CommentColor3}{rgb}{0,.4,0}
+\definecolor{CommentColor4}{rgb}{.8,.3,0}
+\definecolor{CommentColor5}{rgb}{.5,0,.5}
+\definecolor{CommentColor6}{rgb}{.3,.7,.7}
+\definecolor{CommentColor7}{rgb}{0,.4,.8}
+\definecolor{CommentColor8}{rgb}{.6,.5,.3}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -392,9 +400,7 @@
 \ifdefined\shortex@commenters
 % and only if the list of commenters isnt empty
 \IfEq{\shortex@commenters}{}{}{
-\newcounter{commentcounter}
-\newcommand{\displaycounter}{{\arabic{commentcounter}}}
-\newcommand{\incdisplaycounter}{{\stepcounter{commentcounter}\arabic{commentcounter}}}
+\newcounter{commentcolorcounter}
 \newcommand{\definecommenters}[1]{
 % extract the name of the next commenter in the list
 \IfSubStr{#1}{,}{
@@ -406,6 +412,10 @@
 \StrDel{#1}{}[\thiscommenter]
 \StrBehind{#1}{,}[\remainingcommenters]
 }
+% define a counter for this commenter, as well as functions to just display or increment
+\expandarg\newcounter{commentcounter\thiscommenter}
+\edef\displaycounter{\noexpand\noexpand\noexpand\arabic{commentcounter\thiscommenter}}
+\edef\incdisplaycounter{\noexpand\noexpand\noexpand\stepcounter{commentcounter\thiscommenter}\noexpand\noexpand\noexpand\arabic{commentcounter\thiscommenter}}
 \ifsuppresscomments
 % if comments are suppressed, just set the commenting commands to be no-ops
 \expandafter\def\csname c\thiscommenter\endcsname##1{}
@@ -414,13 +424,14 @@
 \expandafter\def\csname m\thiscommenter\endcsname##1{}
 \else
 %otherwise, set commenting commands to add comments
-\expandafter\edef\csname c\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{ {(\thiscommenter\noexpand\incdisplaycounter)} ##1}}
-\expandafter\edef\csname e\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{{\noexpand\bf (\thiscommenter\noexpand\bm\noexpand\incdisplaycounter) ##1}}}
-\expandafter\edef\csname h\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{##1}}
+\expandafter\edef\csname c\thiscommenter\endcsname##1{\noexpand\textcolor{CommentColor\thecommentcolorcounter}{ {(\thiscommenter\incdisplaycounter)} ##1}}
+\expandafter\edef\csname e\thiscommenter\endcsname##1{\noexpand\textcolor{CommentColor\thecommentcolorcounter}{{\noexpand\bf (\thiscommenter\incdisplaycounter) ##1}}}
+\expandafter\edef\csname h\thiscommenter\endcsname##1{\noexpand\textcolor{CommentColor\thecommentcolorcounter}{##1}}
 \expandafter\edef\csname m\thiscommenter\endcsname##1{%
-\noexpand\textcolor{WowColor}{$\,^{(\noexpand\text{\thiscommenter}\noexpand\incdisplaycounter)}$\noexpand\marginpar{\noexpand\tiny\noexpand\textcolor{WowColor}{(\thiscommenter\noexpand\displaycounter) ##1}}}}
+\noexpand\textcolor{CommentColor\thecommentcolorcounter}{$\,^{(\noexpand\text{\thiscommenter}\incdisplaycounter)}$\noexpand\marginnote{\noexpand\tiny\noexpand\textcolor{CommentColor\thecommentcolorcounter}{(\thiscommenter\displaycounter) ##1}}}}
 \fi
-% call this command on the remaining names in the list if there are any left
+%% call this command on the remaining names in the list if there are any left
+\stepcounter{commentcolorcounter}
 \IfEq{\remainingcommenters}{}{}{\definecommenters{\remainingcommenters}}
 }
 \definecommenters{\shortex@commenters}

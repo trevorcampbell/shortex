@@ -11,7 +11,7 @@
 
 
 
-\usepackage[commenters={AB,CD}]{shortex}
+\usepackage[commenters={A,B,C,D,E,F,G,H,I}]{shortex}
 
 \title{The \texttt{ShorTeX} package}
 \author{Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
@@ -321,38 +321,46 @@ To disable these default shortcuts, pass the \texttt{minimal} option to ShorTeX.
 
 \newpage
 \section{Commenting}
-ShorTeX defines three types of comments that can be used 
-(\emph{remarks}, \emph{problems}, and \emph{highlights}), and provides an inline and margin
-style for the former two. This is a lightweight alternative to some more common
-todo packages (e.g., \texttt{todonotes}).
+ShorTeX defines four types of document markup that can be used: 
+\emph{comment}, \emph{emphasized comment}, \emph{margin comment}, and \emph{highlight}.
+This is a lightweight alternative to some more common todo packages (e.g., \texttt{todonotes}).
+In order to create comments, you must pass the \verb!commenters! option to the package, and specify
+an identifier for each commenter. For example, one could specify three commenters 
+(named A, B, C) using the command\\
+\\
+\verb!\usepackage[commenters={A,B,C}]{shortex}!
+\\\\
+For each commenter, there are four commands (one for each markup type). The table
+below contains examples for commenter ``A''. Notice that each comment is tagged with a number
+(specific to each commenter) for easy referencing.
 
 \bcent
-\btabr{@{}ll@{}}
+\btabr{@{}llll@{}}
 \toprule
-Comment Type & Syntax \\ \midrule
-remark & \verb!\RMK{Example remark}!\\ 
-margin remark & \verb!\mRMK{Example margin remark}!\\ 
-problem & \verb!\PRB{Example problem}!\\ 
-margin problem & \verb!\mPRB{Example margin problem}!\\ 
-highlight & \verb!\HLT{Some rough text}!\\ 
+Comment Type & Syntax & Example & Typeset Example\\ \midrule
+comment & \verb!\c...{comment}! & \verb~\cA{hello!}~ & \cA{hello!} \\ 
+emphasized comment & \verb!\e...{comment}! & \verb~\eA{hello!}~ & \eA{hello!} \\ 
+margin comment & \verb!\m...{comment}! & text\verb~\mA{hello!}~ & text\mA{hello!} \\ 
+highlight & \verb!\h...{text}! & \verb~\hA{hello!}~ & \hA{hello!} \\ 
 \bottomrule
 \etabr
 \ecent
 
-Here is an example of how these look in a typical paragraph with two commenters
-AB and CD with shortex package options \verb!\usepackage[commenters={AB,CD}]{shortex}!:
-
-\begin{quote}
-Lorem ipsum dolor sit amet\cAB{Here is an inline comment}, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation\eCD{Here is an inline emphasized comment} ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint\mAB{Here is a margin comment} occaecat cupidatat non proident, sunt.
-\hCD{Here is a highlighted part of the text.} sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-\end{quote}
-
-You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! package option.
+Note that each commenter gets their own color. Currently ShorTeX supports nine different commenter colors:
+\bitem
+\setlength{\itemsep}{0pt}
+\item \cA{example}\eA{emphasized example}more text\mA{margin example}
+\item \cB{example}\eB{emphasized example}more text\mB{margin example}
+\item \cC{example}\eC{emphasized example}more text\mC{margin example}
+\item \cD{example}\eD{emphasized example}more text\mD{margin example}
+\item \cE{example}\eE{emphasized example}more text\mE{margin example}
+\item \cF{example}\eF{emphasized example}more text\mF{margin example}
+\item \cG{example}\eG{emphasized example}more text\mG{margin example}
+\item \cH{example}\eH{emphasized example}more text\mH{margin example}
+\item \cI{example}\eI{emphasized example}more text\mI{margin example}
+\eitem
+You can also disable all comments to see a clean version of the current 
+document using the \verb!suppresscomments! package option.
 This option will blank out all comments and render highlighted text normally.
 
 \newpage
