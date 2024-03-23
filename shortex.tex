@@ -11,7 +11,7 @@
 
 
 
-\usepackage{shortex}
+\usepackage[commenters={AB,CD}]{shortex}
 
 \title{The \texttt{ShorTeX} package}
 \author{Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
@@ -22,8 +22,8 @@
 
 \maketitle
 
-
 \babs
+
 The purpose of the ShorTeX (meta)package is to make the process of typesetting
 typical mathematical documents in \LaTeX~more efficient, and the resulting
 code easier to read.  It achieves this by 
@@ -61,6 +61,7 @@ The ShorTeX package has a few options:
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
 \item[\texttt{minimal}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
+\item[\texttt{suppresscomments}] Suppress comments.
 \edesc
 
 \newpage
@@ -338,23 +339,21 @@ highlight & \verb!\HLT{Some rough text}!\\
 \etabr
 \ecent
 
-Here is an example of how these look in a typical paragraph:
+Here is an example of how these look in a typical paragraph with two commenters
+AB and CD with shortex package options \verb!\usepackage[commenters={AB,CD}]{shortex}!:
 
 \begin{quote}
-Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
+Lorem ipsum dolor sit amet\cAB{Here is an inline comment}, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
-\HLT{Here is a highlighted part of the text.} sed do eiusmod tempor
+nostrud exercitation\eCD{Here is an inline emphasized comment} ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint\mAB{Here is a margin comment} occaecat cupidatat non proident, sunt.
+\hCD{Here is a highlighted part of the text.} sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 \end{quote}
 
-You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
-This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
-all \verb!\HLT! text normally.
-
-
+You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! package option.
+This option will blank out all comments and render highlighted text normally.
 
 \newpage
 \section{Referencing figures, equations, tables, etc.}
@@ -685,7 +684,7 @@ Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displays
 
 \section{Example Document}
 
-\PRB{TODO: a full example in basic latex versus shortex}
+TODO: full shortex example
 
 \end{document}
 

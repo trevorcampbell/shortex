@@ -7,14 +7,15 @@
 %%  Jonathan Huggins, Jeffrey Negrea
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\ProvidesPackage{shortex}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Imports (packages without options)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
 \usepackage{xspace} % defines \xspace command that automatically determine whether spaces should be eaten (needed internally for many defns)
-\usepackage[usenames]{color} % for using colored text (needed internally for \definecolor to create WowColor and SubtleColor)
+\usepackage[usenames,dvipsnames]{xcolor} % for using colored text (needed internally for \definecolor to create WowColor and SubtleColor)
 \usepackage{hyperref} % typical linking package
 \usepackage{mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
 \usepackage[nice]{nicefrac} % nice fraction typesetting
@@ -28,13 +29,15 @@
 \usepackage{booktabs} % professional quality tables
 \usepackage{import, subfiles} % packages for using subfile/folder structure
 \usepackage{url} % nice URL typesetting (used internally for \UrlFont command)
+\usepackage{kvoptions} % for defining key-value options for this package
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Color Definitions 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\colorlet{WowColor}{Blue!100}
+\colorlet{SubtleColor}{Blue!60}
 
-\definecolor{WowColor}{rgb}{.75,0,.75}
-\definecolor{SubtleColor}{rgb}{0,0,.50}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Setup and Options
@@ -49,23 +52,31 @@
 % set the default hyperref style to dark blue
 \hypersetup{colorlinks=true, allcolors=SubtleColor, pdfborder={0 0 0}}
 % allow the user to switch to a black hypersetup if desired
-\DeclareOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
+\DeclareVoidOption{blackhypersetup}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 
 % use autonum by default 
 \newif\ifusemanualnum
 \usemanualnumfalse
-\DeclareOption{manualnumbering}{\usemanualnumtrue}
+\DeclareVoidOption{manualnumbering}{\usemanualnumtrue}
 
 % pass draft mode on to graphicx
-\DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
+\DeclareVoidOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
 
 % whether to parse common font/accent combinations
 \newif\iffontcombos
 \fontcombostrue
-\DeclareOption{minimal}{\fontcombosfalse}
+\DeclareVoidOption{minimal}{\fontcombosfalse}
+
+% an option to specify commenter names
+\DeclareStringOption{commenters}
+
+% an option to suppress comments
+\newif\ifsuppresscomments
+\suppresscommentsfalse
+\DeclareVoidOption{suppresscomments}{\suppresscommentstrue}
 
 % process the package options
-\ProcessOptions
+\ProcessKeyvalOptions*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Imports (packages with options)
@@ -376,27 +387,47 @@
 %%% Commenting 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcounter{margincounter}
-\newcommand{\displaycounter}{{\arabic{margincounter}}}
-\newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
-
-% inline comments
-\newcommand{\HLT}[1]{\textcolor{SubtleColor}{ {\bf ($\star$)} #1}} % highlight (subtle color)
-\newcommand{\RMK}[1]{\textcolor{SubtleColor}{ {\bf (!)} #1}} % a general remark (subtle color)
-\newcommand{\PRB}[1]{\textcolor{WowColor}{ {\bf (!!)} {\bf #1}}} % a problem (wow color)
-% margin comments
-\newcommand{\mRMK}[1]{\textcolor{SubtleColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\tiny\textcolor{SubtleColor}{ {\tiny $(\displaycounter)$} #1}}}
-\newcommand{\mPRB}[1]{\textcolor{WowColor}{$\,^{((\incdisplaycounter))}$}\marginpar{\tiny\textcolor{WowColor}{ {\bf $\mathbf{((\displaycounter))}$} {\bf #1}}}}
-
-\DeclareRobustCommand{\suppresscomments}{
-% For submission, make RMK/PRB render blank, 
-% and make HLTs just render normally
-\renewcommand{\RMK}[1]{}
-\renewcommand{\PRB}[1]{}
-\renewcommand{\HLT}[1]{##1} 
-\renewcommand{\mRMK}[1]{}
-\renewcommand{\mPRB}[1]{}
+\makeatletter
+% define comment commands only if commenters were specified
+\ifdefined\shortex@commenters
+% and only if the list of commenters isnt empty
+\IfEq{\shortex@commenters}{}{}{
+\newcounter{commentcounter}
+\newcommand{\displaycounter}{{\arabic{commentcounter}}}
+\newcommand{\incdisplaycounter}{{\stepcounter{commentcounter}\arabic{commentcounter}}}
+\newcommand{\definecommenters}[1]{
+% extract the name of the next commenter in the list
+\IfSubStr{#1}{,}{
+% if there is a comma in the list string, split and take the first
+\StrBefore{#1}{,}[\thiscommenter]
+\StrBehind{#1}{,}[\remainingcommenters]
+}{
+% if there is no comma in the string, just keep the whole string
+\StrDel{#1}{}[\thiscommenter]
+\StrBehind{#1}{,}[\remainingcommenters]
 }
+\ifsuppresscomments
+% if comments are suppressed, just set the commenting commands to be no-ops
+\expandafter\def\csname c\thiscommenter\endcsname##1{}
+\expandafter\def\csname e\thiscommenter\endcsname##1{}
+\expandafter\def\csname h\thiscommenter\endcsname##1{##1}
+\expandafter\def\csname m\thiscommenter\endcsname##1{}
+\else
+%otherwise, set commenting commands to add comments
+\expandafter\edef\csname c\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{ {(\thiscommenter\noexpand\incdisplaycounter)} ##1}}
+\expandafter\edef\csname e\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{{\noexpand\bf (\thiscommenter\noexpand\bm\noexpand\incdisplaycounter) ##1}}}
+\expandafter\edef\csname h\thiscommenter\endcsname##1{\noexpand\textcolor{WowColor}{##1}}
+\expandafter\edef\csname m\thiscommenter\endcsname##1{%
+\noexpand\textcolor{WowColor}{$\,^{(\noexpand\text{\thiscommenter}\noexpand\incdisplaycounter)}$\noexpand\marginpar{\noexpand\tiny\noexpand\textcolor{WowColor}{(\thiscommenter\noexpand\displaycounter) ##1}}}}
+\fi
+% call this command on the remaining names in the list if there are any left
+\IfEq{\remainingcommenters}{}{}{\definecommenters{\remainingcommenters}}
+}
+\definecommenters{\shortex@commenters}
+}
+\fi
+\makeatother
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% URLs
