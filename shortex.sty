@@ -229,27 +229,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % original
-\newcommand{\apa}{\alpha}
-\newcommand{\bta}{\beta}
-\newcommand{\gma}{\gamma}\newcommand{\Gma}{\Gamma}
-\newcommand{\dta}{\delta}\newcommand{\Dta}{\Delta}
-\newcommand{\eps}{\epsilon}
-\newcommand{\zta}{\zeta}
-\newcommand{\tta}{\theta}\newcommand{\Tta}{\Theta}
-\newcommand{\ita}{\iota}
-\newcommand{\kpa}{\kappa}
-\newcommand{\lda}{\lambda}\newcommand{\Lda}{\Lambda}
-\newcommand{\sga}{\sigma}\newcommand{\Sga}{\Sigma}
-\newcommand{\ups}{\upsilon}\newcommand{\Ups}{\Upsilon}
-\newcommand{\oga}{\omega}\newcommand{\Oga}{\Omega}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}\newcommand{\Ga}{\Gamma}
+\newcommand{\de}{\delta}\newcommand{\De}{\Delta}
+\newcommand{\ep}{\epsilon}
+\newcommand{\ze}{\zeta}
+\newcommand{\et}{\eta}
+\let\oldth\th
+\renewcommand\th{\ifmmode\theta\else\oldth\fi}\newcommand{\Th}{\Theta} %make \th be theta in math mode, usual defn in main text
+\newcommand{\io}{\iota}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}\newcommand{\La}{\Lambda}
+% mu, nu xi, omicron, pi fine
+\newcommand{\rh}{\rho}
+\newcommand{\si}{\sigma}\newcommand{\Si}{\Sigma}
+\newcommand{\ta}{\tau}
+\newcommand{\up}{\upsilon}\newcommand{\Up}{\Upsilon}
+\newcommand{\ph}{\phi}\newcommand{\Ph}{\Phi}
+\newcommand{\ch}{\chi}
+\newcommand{\ps}{\psi}\newcommand{\Ps}{\Psi}
+\newcommand{\om}{\omega}\newcommand{\Om}{\Omega}
 % variants
-\newcommand{\veps}{\varepsilon}
-\newcommand{\vtta}{\vartheta}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\vth}{\vartheta}
 \newcommand{\vpi}{\varpi}
-\newcommand{\vrho}{\varrho}
-\newcommand{\vsga}{\varsigma}
-\newcommand{\vphi}{\varphi}
-\newcommand{\vkpa}{\varkappa}
+\newcommand{\vrh}{\varrho}
+\newcommand{\vsi}{\varsigma}
+\newcommand{\vph}{\varphi}
+\newcommand{\vka}{\varkappa}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Font styles/accents
@@ -329,8 +337,8 @@
 
 \newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
-\newcommand{\lowercaseGreek}{\apa\bta\gma\dta\eps\zta\eta\tta\ita\kpa\lda\mu\nu\xi\pi\rho\sga\tau\ups\phi\chi\psi\oga\veps\vtta\vkpa\vpi\vrho\vsga\vphi}
-\newcommand{\uppercaseGreek}{\Gma\Dta\Tta\Lda\Xi\Pi\Sga\Ups\Phi\Psi\Oga}
+\newcommand{\lowercaseGreek}{\al\be\ga\de\ep\ze\et\th\io\ka\la\mu\nu\xi\pi\rh\si\ta\up\ph\ch\ps\om\vep\vth\vka\vpi\vrh\vsi\vph}
+\newcommand{\uppercaseGreek}{\Ga\De\Th\La\Xi\Pi\Si\Up\Ph\Ps\Om}
 
 \newcommand{\s}[2][]{
     \StrLeft{#1}{1}[\fontstylehead]

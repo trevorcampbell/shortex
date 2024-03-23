@@ -161,38 +161,39 @@ angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\
 \section{Greek characters and variants}\label{sec:greeks}
 
 ShorTeX defines shorthands for Greek characters and variants.
-The syntax is identical to standard \LaTeX~for letters with three or fewer characters,
-and is reduced to three characters for those with more than three. 
+The syntax is just the first two characters of the greek name
+(except for omicron, which is identical to the Roman o and O
+and so no special characters are required).
 Variants are obtained by preceding the usual command with \verb!\v...!.
 
 \bcent
 \btabr{@{}lllll@{}}
 \toprule
 Letter & Syntax & Symbol & Variant Syntax & Variant Symbol  \\ \midrule
-alpha & \verb!\apa,A! & $\apa,A$ &  &  \\
-beta & \verb!\bta,B! & $\bta,B$ &  &  \\
-gamma & \verb!\gma,\Gma! & $\gma,\Gma$ &  &  \\
-delta & \verb!\dta,\Dta! & $\dta,\Dta$ &  &  \\
-epsilon & \verb!\eps,E! & $\eps,E$ & \verb!\veps,E! & $\veps$ \\
-zeta & \verb!\zta,Z! & $\zta,Z$ &  &  \\
-eta & \verb!\eta,H! & $\eta,H$ &  &  \\
-theta & \verb!\tta,\Tta! & $\tta,\Tta$ & \verb!\vtta! & $\vtta$ \\
-iota & \verb!\ita,I! & $\ita,I$ &  &  \\
-kappa & \verb!\kpa,K! & $\kpa,K$ & \verb!\vkpa! & $\vkpa$ \\
-lambda & \verb!\lda,\Lda! & $\lda,\Lda$ &  &  \\
+alpha & \verb!\al,A! & $\al,A$ &  &  \\
+beta & \verb!\be,B! & $\be,B$ &  &  \\
+gamma & \verb!\ga,\Ga! & $\ga,\Ga$ &  &  \\
+delta & \verb!\de,\De! & $\de,\De$ &  &  \\
+epsilon & \verb!\ep,E! & $\ep,E$ & \verb!\vep,E! & $\vep$ \\
+zeta & \verb!\ze,Z! & $\ze,Z$ &  &  \\
+eta & \verb!\et,H! & $\et,H$ &  &  \\
+theta & \verb!\th,\Th! & $\th,\Th$ & \verb!\vth! & $\vth$ \\
+iota & \verb!\io,I! & $\io,I$ &  &  \\
+kappa & \verb!\ka,K! & $\ka,K$ & \verb!\vka! & $\vka$ \\
+lambda & \verb!\la,\La! & $\la,\La$ &  &  \\
 mu & \verb!\mu,M! & $\mu,M$ &  &  \\
 nu & \verb!\nu,N! & $\nu,N$ &  &  \\
 xi & \verb!\xi,\Xi! & $\xi,\Xi$ &  &  \\
 omicron & \verb!o,O! & $o,O$ &  &  \\
 pi & \verb!\pi,\Pi! & $\pi,\Pi$ & \verb!\vpi! & $\vpi$ \\
-rho & \verb!\rho,P! & $\rho,P$ & \verb!\vrho! & $\vrho$ \\
-sigma & \verb!\sga,\Sga! & $\sga,\Sga$ & \verb!\vsga! & $\vsga$ \\
-tau & \verb!\tau,T! & $\tau,T$ &  &  \\
-upsilon & \verb!\ups,\Ups! & $\ups,\Ups$ &  &  \\
-phi & \verb!\phi,\Phi! & $\phi,\Phi$ & \verb!\vphi! & $\vphi$ \\
-chi & \verb!\chi,X! & $\chi,X$ &  &  \\
-psi & \verb!\psi,\Psi! & $\psi,\Psi$ &  &  \\
-omega & \verb!\oga,\Oga! & $\oga,\Oga$ &  &  \\
+rho & \verb!\rh,P! & $\rh,P$ & \verb!\vrh! & $\vrh$ \\
+sigma & \verb!\si,\Si! & $\si,\Si$ & \verb!\vsi! & $\vsi$ \\
+tau & \verb!\ta,T! & $\ta,T$ &  &  \\
+upsilon & \verb!\up,\Up! & $\up,\Up$ &  &  \\
+phi & \verb!\ph,\Ph! & $\ph,\Ph$ & \verb!\vph! & $\vph$ \\
+chi & \verb!\ch,X! & $\ch,X$ &  &  \\
+psi & \verb!\ps,\Psi! & $\ps,\Ps$ &  &  \\
+omega & \verb!\om,\Om! & $\om,\Om$ &  &  \\
 \bottomrule
 \etabr
 \ecent
@@ -273,14 +274,14 @@ to obtain the following symbols:
 \]
 As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
 \begin{verbatim}
-\parsefontstylestrings{{kh}}{{\apa}{\bta}{\gma}}
+\parsefontstylestrings{{kh}}{{\al}{\be}{\ga}}
 \end{verbatim}
-\parsefontstylestrings{{kh}}{{\apa}{\bta}{\gma}}
+\parsefontstylestrings{{kh}}{{\al}{\be}{\ga}}
 and then in the \LaTeX~document, use the commands
-\verb!\skhapa \skhbta \skhgma!
+\verb!\skhal \skhbe \skhga!
 to obtain the following symbols:
 \[
-	\skhapa \skhbta \skhgma
+	\skhal \skhbe \skhga
 \]
 
 For convenience we also provide a few common alphabets of symbols 
@@ -295,12 +296,9 @@ see \cref{sec:greeks}.
 Syntax & Characters  \\ \midrule
 \verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
 \verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\verb!\lowercaseGreek! & apa,bta,gma,dta,eps,zta,eta,tta\\
-& ita,kpa,lda,mu,nu,xi,pi,rho\\
-& sga,tau,ups,phi,chi,psi,oga\\
-& veps,vtta,vkpa,vpi,vrho,vsga,vphi\\
-\verb!\uppercaseGreek! & Gma,Dta,Tta,Lda,Xi,Pi,Sga\\
-& Ups,Phi,Psi,Oga \\
+\verb!\lowercaseGreek! & al,be,ga,de,ep,ze,et,th,io,ka,la,mu,nu,xi,pi,rh\\
+& si,ta,up,ph,ch,ps,om,vep,vth,vka,vpi,vrh,vsi,vph\\
+\verb!\uppercaseGreek! & Ga,De,Th,La,Xi,Pi,Si,Up,Ph,Ps,Om\\
 \bottomrule
 \etabr
 \ecent
