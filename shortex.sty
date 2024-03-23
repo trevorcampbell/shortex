@@ -45,6 +45,8 @@
 \definecolor{CommentColor6}{rgb}{.3,.7,.7}
 \definecolor{CommentColor7}{rgb}{0,.4,.8}
 \definecolor{CommentColor8}{rgb}{.6,.5,.3}
+\newcounter{MaxCommentColor}
+\setcounter{MaxCommentColor}{8}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -430,8 +432,12 @@
 \expandafter\edef\csname m\thiscommenter\endcsname##1{%
 \noexpand\textcolor{CommentColor\thecommentcolorcounter}{$\,^{(\noexpand\text{\thiscommenter}\incdisplaycounter)}$\noexpand\marginnote{\noexpand\tiny\noexpand\textcolor{CommentColor\thecommentcolorcounter}{(\thiscommenter\displaycounter) ##1}}}}
 \fi
-%% call this command on the remaining names in the list if there are any left
+% if the color counter exceeded
 \stepcounter{commentcolorcounter}
+\ifnum\c@commentcolorcounter>\c@MaxCommentColor
+\setcounter{commentcolorcounter}{0}
+\fi
+%% call this command on the remaining names in the list if there are any left
 \IfEq{\remainingcommenters}{}{}{\definecommenters{\remainingcommenters}}
 }
 \definecommenters{\shortex@commenters}

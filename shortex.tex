@@ -11,7 +11,7 @@
 
 
 
-\usepackage[commenters={A,B,C,D,E,F,G,H,I}]{shortex}
+\usepackage[commenters={A,B,C,D,E,F,G,H,I,J}]{shortex}
 
 \title{The \texttt{ShorTeX} package}
 \author{Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
@@ -346,7 +346,8 @@ highlight & \verb!\h...{text}! & \verb~\hA{hello!}~ & \hA{hello!} \\
 \etabr
 \ecent
 
-Note that each commenter gets their own color. Currently ShorTeX supports nine different commenter colors:
+Note that each commenter gets their own color. Currently ShorTeX supports nine different commenter colors,
+and will wrap around back to the first color if the number of commenters exceeds nine:
 \bitem
 \setlength{\itemsep}{0pt}
 \item \cA{example}\eA{emphasized example}more text\mA{margin example}
@@ -358,6 +359,7 @@ Note that each commenter gets their own color. Currently ShorTeX supports nine d
 \item \cG{example}\eG{emphasized example}more text\mG{margin example}
 \item \cH{example}\eH{emphasized example}more text\mH{margin example}
 \item \cI{example}\eI{emphasized example}more text\mI{margin example}
+\item Back to first color: \cJ{example}\eJ{emphasized example}more text\mJ{margin example}
 \eitem
 You can also disable all comments to see a clean version of the current 
 document using the \verb!suppresscomments! package option.
