@@ -61,7 +61,8 @@ The ShorTeX package has a few options:
 \item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
 \item[\texttt{minimal}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
-\item[\texttt{suppresscomments}] Suppress comments.
+\item[\texttt{commenters}] Specify names of commenters for comment commands (see \cref{sec:commenting} for details).
+\item[\texttt{suppresscomments}] Suppress comments (see \cref{sec:commenting} for details).
 \edesc
 
 \newpage
@@ -113,7 +114,7 @@ proof & \verb!\bprf...\eprf!\\
 proofof & \verb!\bprfof{\cref{theorem_label}}...\eprfof!\\  \midrule
 matrix & \verb!\bmat...\emat!\\
 bmatrix & \verb!\bbmat...\ebmat!\\
-pmatrix & \verb!\pbmat...\epmat!\\
+pmatrix & \verb!\bpmat...\epmat!\\
 \bottomrule
 \etabr
 \ecent
@@ -318,7 +319,7 @@ of (bold, caligraphic, doublestroke) with (hat, tilde, bar).   For example,
 To disable these default shortcuts, pass the \texttt{minimal} option to ShorTeX.
 
 \newpage
-\section{Commenting}
+\section{Commenting}\label{sec:commenting}
 ShorTeX defines four types of document markup that can be used: 
 \emph{comment}, \emph{emphasized comment}, \emph{margin comment}, and \emph{highlight}.
 This is a lightweight alternative to some more common todo packages (e.g., \texttt{todonotes}).
@@ -443,8 +444,7 @@ usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \ver
 	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
 \]
 The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
-
-
+Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
 
 
 \subsection{Sets and set operations}
