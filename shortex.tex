@@ -59,8 +59,8 @@ The ShorTeX package has a few options:
 \bdesc
 \item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blacklinks}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
-\item[\texttt{draft}] Enable \texttt{graphicx} draft mode (with placeholder figures).
-\item[\texttt{minimal}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
+\item[\texttt{draft}] Turn on draft mode for \texttt{graphicx}, \texttt{hyperref} (with placeholder figures etc).
+\item[\texttt{nomathfontdefaults}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
 \item[\texttt{commenters}] Specify names of commenters for comment commands (see \cref{sec:commenting} for details).
 \item[\texttt{suppresscomments}] Suppress comments (see \cref{sec:commenting} for details).
 \edesc
@@ -230,6 +230,7 @@ fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\
 hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
 tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
 bar (\verb!widebar!) & \verb!b! & \verb!\s[b]A! & $\s[b]A$\\
+dot (\verb!dot!) & \verb!o! & \verb!\s[o]A! & $\s[o]A$\\
 \bottomrule
 \etabr
 \ecent
@@ -245,6 +246,7 @@ caligraphic tilde & \verb!ct! & \verb!\s[ct]A! & $\s[ct]A$ \\
 bold hat & \verb!kh! & \verb!\s[kh]A! & $\s[kh]A$\\
 tilde hat  & \verb!ht! & \verb!\s[ht]A! & $\s[ht]A$\\
 hat tilde   & \verb!th! & \verb!\s[th]A! & $\s[th]A$\\
+fraktur dot   & \verb!of! & \verb!\s[of]A! & $\s[of]A$\\
 \bottomrule
 \etabr
 \ecent
@@ -305,18 +307,19 @@ Syntax & Characters  \\ \midrule
 \ecent
 
 Finally, by default, ShorTeX comes by default with all upper/lowercase Greek and Roman
-characters with bold, caligraphic, doublestroke, hat, tilde, bar, and pairwise combinations 
-of (bold, caligraphic, doublestroke) with (hat, tilde, bar).   For example,
+characters with bold, caligraphic, doublestroke, hat, tilde, bar, dot, and pairwise combinations 
+of (bold, caligraphic, doublestroke) with (hat, tilde, bar, dot).   For example,
 \verb!\skA!
 \verb!\scA!
 \verb!\sdA!
 \verb!\shA!
 \verb!\stA!
 \verb!\sbA!
+\verb!\soA!
 \[
-	\skA \scA \sdA \shA \stA \sbA
+	\skA \scA \sdA \shA \stA \sbA \soA
 \]
-To disable these default shortcuts, pass the \texttt{minimal} option to ShorTeX.
+To disable these default shortcuts, pass the \texttt{nomathfontdefaults} option to ShorTeX.
 
 \newpage
 \section{Commenting}\label{sec:commenting}

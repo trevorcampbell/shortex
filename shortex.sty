@@ -10,7 +10,7 @@
 \ProvidesPackage{shortex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Imports (packages without dynamic options)
+%%% Package Imports (packages without dynamic options/inclusion)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
@@ -77,7 +77,7 @@
 % whether to parse common font/accent combinations
 \newif\iffontcombos
 \fontcombostrue
-\DeclareVoidOption{minimal}{\fontcombosfalse}
+\DeclareVoidOption{nomathfontdefaults}{\fontcombosfalse}
 
 % an option to specify commenter names
 \DeclareStringOption{commenters}
@@ -91,7 +91,7 @@
 \ProcessKeyvalOptions*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Imports (packages with dynamic options)
+%%% Package Imports (packages with dynamic options/inclusion)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % load graphicx using draft mode (or not) per above
@@ -300,6 +300,7 @@
         {t}{ {\widetilde {\s[\fontstyletail]{#2}}} }%
         {c}{ {\mathcal {\s[\fontstyletail]{#2}}} }%
         {f}{ {\mathfrak {\s[\fontstyletail]{#2}}} }%
+        {o}{ {\dot {\s[\fontstyletail]{#2}}} }%
         }[{\s[\fontstyletail]{#2}}]
 }
 
@@ -343,10 +344,10 @@
 % default is to parse common font style/accent combinations
 % but can be disabled with the minimal package option
 \iffontcombos
-\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseRoman}
-\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\uppercaseRoman}
-\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\lowercaseGreek}
-\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}}{\uppercaseGreek}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{o}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}{ko}{do}{co}}{\lowercaseRoman}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{o}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}{ko}{do}{co}}{\uppercaseRoman}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{o}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}{ko}{do}{co}}{\lowercaseGreek}
+\parsefontstylestrings{{b}{k}{d}{h}{t}{c}{o}{kb}{db}{cb}{kh}{dh}{ch}{kt}{dt}{ct}{ko}{do}{co}}{\uppercaseGreek}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
