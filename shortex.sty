@@ -16,6 +16,7 @@
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
 \usepackage{xspace} % defines \xspace command that automatically determine whether spaces should be eaten (needed internally for many defns)
 \usepackage[usenames,dvipsnames]{xcolor} % for using colored text (needed internally for \definecolor to create WowColor and SubtleColor)
+\usepackage{xr-hyper} % cross referencing across docs
 \usepackage{hyperref} % typical linking package
 \usepackage{mathrsfs,dsfont,amsmath,amssymb,amsthm,bm,bbm,amsfonts,mathtools,thmtools} % math
 \usepackage[nice]{nicefrac} % nice fraction typesetting
@@ -69,8 +70,8 @@
 \usemanualnumfalse
 \DeclareVoidOption{manualnumbering}{\usemanualnumtrue}
 
-% pass draft mode on to graphicx
-\DeclareVoidOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
+% pass draft mode on to graphicx and hyperref
+\DeclareVoidOption{draft}{\PassOptionsToPackage{draft}{graphicx}\PassOptionsToPackage{draft}{hyperref}}
 
 % whether to parse common font/accent combinations
 \newif\iffontcombos
