@@ -9,8 +9,6 @@
 %%  Jonathan Huggins, Jeffrey Negrea
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
 \usepackage[commenters={A,B,C,D,E,F,G,H,I,J}]{shortex}
 
 \title{The \texttt{ShorTeX} package}
@@ -209,24 +207,57 @@ $\widetilde{\mathcal{A}}$
 is \verb!\widetilde{\mathcal{A}}!. By itself that code is not too bad, but many such characters 
 in a large mathematical expression results in unreadable code.
 
-ShorTeX defines an efficient syntax for changing fonts and applying accents to characters. 
-The syntax takes the form \verb!\s[modifiers]character!, where \verb!modifiers! is a set of single characters
-that represent font/accent modifications to \verb!character!. 
-For example, the code for tilde caligraphic A is \verb!\s[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
-``caligraphic,'' and \verb!A! is the character to typeset.
+\subsection{Default font, accent combinations}
 
-\emph{Note: modifiers are applied in the reverse of the order in which they appear; 
-the modifier furthest to the right is applied first. This matches the order that 
-the corresponding commands would appear in TeX code.}
+ShorTeX defines an efficient syntax for changing math fonts and applying accents to characters.
+The syntax takes the form \verb!\s<modifiers>character!, where \verb!<modifiers>! is a set of single characters
+that represent font/accent modifications to \verb!character!. 
+For example, the code for tilde caligraphic A is \verb!\stcA! where \verb!t! represents ``tilde,'' \verb!c! represents
+``caligraphic,'' and \verb!A! is the character to typeset. The table below shows the modifier characters that
+are implemented by default with all upper/lowercase Greek and Roman characters.
 
 \bcent
 \btabr{@{}llll@{}}
 \toprule
-Style/Accent & Modifier & Example & Typeset Example \\ \midrule
+Style & Modifier & Example & Typeset Example \\ \midrule
+caligraphic (\verb!mathcal!) & \verb!c! & \verb!\scA! & $\scA$ \\
+bold (\verb!mathbf!) & \verb!k! & \verb!\skA! & $\skA$\\
+doublestroke (\verb!mathbb!) & \verb!d! & \verb!\sdA! & $\sdA$\\ \midrule
+Accent & Modifier & Example & Typeset Example \\ \midrule
+hat (\verb!widehat!) & \verb!h! & \verb!\shA! & $\shA$\\
+tilde (\verb!widetilde!) & \verb!t! & \verb!\stA! & $\stA$\\
+bar (\verb!widebar!) & \verb!b! & \verb!\sbA! & $\sbA$\\
+dot (\verb!dot!) & \verb!o! & \verb!\soA! & $\soA$\\
+\bottomrule
+\etabr
+\ecent
+
+In addition, ShorTeX allows the use of combinations of any one of the above fonts with any one of the above accents.
+For example, we can combine the caligraphic style \verb!c! with all the accents
+via \verb!\stcA!, \verb!\socA!, \verb!\sbcA!, \verb!\shcA!:
+\[
+\stcA \quad \socA \quad \sbcA \quad \shcA.
+\]
+To disable these default shortcuts, pass the \texttt{nomathfontdefaults} option to ShorTeX.
+
+\subsection{Advanced usage: flexible font, accent combinations}
+
+For most users, the default font style/accent combinations that come with ShorTeX will suffice.
+However, the \verb!\s...! commands are actually implemented under the hood using
+a more flexible \verb!\s[modifiers]character! command that can take a wide variety of
+combinations of font/accent modifiers. For example, the code for tilde 
+caligraphic A is \verb!\s[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
+``caligraphic,'' and \verb!A! is the character to typeset.
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Style & Modifier & Example & Typeset Example \\ \midrule
 caligraphic (\verb!mathcal!) & \verb!c! & \verb!\s[c]A! & $\s[c]A$ \\
 bold (\verb!mathbf!) & \verb!k! & \verb!\s[k]A! & $\s[k]A$\\
 doublestroke (\verb!mathbb!) & \verb!d! & \verb!\s[d]A! & $\s[d]A$\\
 fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\
+Accent & Modifier & Example & Typeset Example \\ \midrule
 hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
 tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
 bar (\verb!widebar!) & \verb!b! & \verb!\s[b]A! & $\s[b]A$\\
@@ -237,6 +268,10 @@ dot (\verb!dot!) & \verb!o! & \verb!\s[o]A! & $\s[o]A$\\
 
 These style modifiers can be combined; the underlying code is flexible enough that
 it will happily produce a wide variety of combinations, including those that aren't very sensible.
+
+\emph{Note: modifiers are applied in the reverse of the order in which they appear; 
+the modifier furthest to the right is applied first. This matches the order that 
+the corresponding commands would appear in TeX code.}
 
 \bcent
 \btabr{@{}llll@{}}
@@ -251,8 +286,10 @@ fraktur dot   & \verb!of! & \verb!\s[of]A! & $\s[of]A$\\
 \etabr
 \ecent
 
-We can avoid typing \texttt{[]} for commonly used patterns
-by parsing the font style string in advance.
+The default \verb!\s...! commands included in ShorTeX are compiled
+in advance from the more general \verb!\s[...]...!
+via the \verb!\parsefontstylestrings! command; this lets us avoid having
+to type \texttt{[]} for common style/accent combinations.
 For example, if we use ``bold hat'' symbols frequently,
 we might want to use commands like
 \verb!\skh...!  instead of \verb!\s[kh]...!.
@@ -305,21 +342,6 @@ Syntax & Characters  \\ \midrule
 \bottomrule
 \etabr
 \ecent
-
-Finally, by default, ShorTeX comes by default with all upper/lowercase Greek and Roman
-characters with bold, caligraphic, doublestroke, hat, tilde, bar, dot, and pairwise combinations 
-of (bold, caligraphic, doublestroke) with (hat, tilde, bar, dot).   For example,
-\verb!\skA!
-\verb!\scA!
-\verb!\sdA!
-\verb!\shA!
-\verb!\stA!
-\verb!\sbA!
-\verb!\soA!
-\[
-	\skA \scA \sdA \shA \stA \sbA \soA
-\]
-To disable these default shortcuts, pass the \texttt{nomathfontdefaults} option to ShorTeX.
 
 \newpage
 \section{Commenting}\label{sec:commenting}
