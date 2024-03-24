@@ -59,6 +59,7 @@
     \let\Cref\crtCref
     \let\cref\crtcref
 }
+\crefformat{footnote}{#1\footnotemark[#2]#3}
 
 % set the default hyperref style to dark blue
 \hypersetup{colorlinks=true, allcolors=SubtleColor, linkbordercolor={1 1 1}, pdfborder={0 0 0}, pdfborderstyle={/S/U/W 0}}
@@ -102,156 +103,59 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% algorithms
-\newcommand{\balg}{\begin{algorithm}}
-\newcommand{\ealg}{\end{algorithm}}
-\newcommand{\balgc}{\begin{algorithmic}}
-\newcommand{\ealgc}{\end{algorithmic}}
-% abstract
-\newcommand{\babs}{\begin{abstract}}
-\newcommand{\eabs}{\end{abstract}}
-% centering
-\newcommand{\bcent}{\begin{center}}
-\newcommand{\ecent}{\end{center}}
-% figures
-\newcommand{\bfig}{\begin{figure}}
-\newcommand{\efig}{\end{figure}}
-\newcommand{\bsubfig}{\begin{subfigure}}
-\newcommand{\esubfig}{\end{subfigure}}
-\newcommand{\bfigs}{\begin{figure*}}
-\newcommand{\efigs}{\end{figure*}}
-% tables
-\newcommand{\btab}{\begin{table}}
-\newcommand{\etab}{\end{table}}
-\newcommand{\bsubtab}{\begin{subtable}}
-\newcommand{\esubtab}{\end{subtable}}
-\newcommand{\btabr}{\begin{tabular}}
-\newcommand{\etabr}{\end{tabular}}
-% lists
-\newcommand{\bitem}{\begin{itemize}}
-\newcommand{\eitem}{\end{itemize}}
-\newcommand{\benum}{\begin{enumerate}}
-\newcommand{\eenum}{\end{enumerate}}
-\newcommand{\bdesc}{\begin{description}}
-\newcommand{\edesc}{\end{description}}
-% general math
+\newcommand{\defineshortenedenvironment}[2]{
+\expandafter\def\csname b#1\endcsname{\begin{#2}}
+\expandafter\def\csname e#1\endcsname{\end{#2}}
+}
+\newcommand{\defineshortenedenvironmentwithstar}[2]{
+\expandafter\def\csname b#1\endcsname{\begin{#2}}
+\expandafter\def\csname e#1\endcsname{\end{#2}}
+\expandafter\def\csname b#1s\endcsname{\begin{#2*}}
+\expandafter\def\csname e#1s\endcsname{\end{#2*}}
+}
+\newcommand{\defineshortenedtheoremlike}[5]{
+\declaretheorem[name=#3,#5]{#2}
+\declaretheorem[name=#3,numbered=no]{#2*}
+\expandafter\def\csname b#1\endcsname{\begin{#2}}
+\expandafter\def\csname e#1\endcsname{\end{#2}}
+\expandafter\def\csname b#1u\endcsname{\begin{#2*}}
+\expandafter\def\csname e#1u\endcsname{\end{#2*}}
+\crefname{#2}{#3}{#4}
+}
+% align redef
 \AtBeginDocument{ %necessary to stop clash with autonum package
 \def\[#1\]{\begin{align}#1\end{align}}
 }
-\newcommand{\bprf}{\begin{proof}}
-\newcommand{\eprf}{\end{proof}}
+% common environments
+\defineshortenedenvironment{alg}{algorithm}
+\defineshortenedenvironment{algc}{algorithmic}
+\defineshortenedenvironment{abs}{abstract}
+\defineshortenedenvironment{cent}{center}
+\defineshortenedenvironmentwithstar{fig}{figure}
+\defineshortenedenvironment{subfig}{subfigure}
+\defineshortenedenvironment{tab}{table}
+\defineshortenedenvironment{tabr}{tabular}
+\defineshortenedenvironment{item}{itemize}
+\defineshortenedenvironment{enum}{enumerate}
+\defineshortenedenvironment{desc}{description}
+\defineshortenedenvironment{prf}{proof}
 \newenvironment{proofof}[1]{\renewcommand{\proofname}{Proof of #1}\proof}{\endproof}
-\newcommand{\bprfof}{\begin{proofof}}
-\newcommand{\eprfof}{\end{proofof}}
-\newcommand{\bpmat}{\begin{pmatrix}}
-\newcommand{\epmat}{\end{pmatrix}}
-\newcommand{\bbmat}{\begin{bmatrix}}
-\newcommand{\ebmat}{\end{bmatrix}}
-\newcommand{\bmat}{\begin{matrix}}
-\newcommand{\emat}{\end{matrix}}
-% numbered theorem-like envs
-\declaretheorem[name=Theorem,numberwithin=section]{theorem}
-\declaretheorem[name=Lemma,numberlike=theorem]{lemma}
-\declaretheorem[name=Proposition,numberlike=theorem]{proposition}
-\declaretheorem[name=Corollary,numberlike=theorem]{corollary}
-\declaretheorem[name=Conjecture,numberlike=theorem]{conjecture}
-\declaretheorem[name=Definition,numberlike=theorem]{definition}
-\declaretheorem[name=Assumption,numberlike=theorem]{assumption}
-\declaretheorem[qed=$\triangleleft$,name=Example,numberlike=theorem]{example}
-\declaretheorem[qed=$\triangleleft$,name=Remark,numberlike=theorem]{remark}
-\declaretheorem[qed=$\triangleleft$,name=Fact,numberlike=theorem]{fact}
-\declaretheorem[qed=$\square$,name=Exercise,numberwithin=section]{exercise}
-\newcommand{\bthm}{\begin{theorem}}
-\newcommand{\ethm}{\end{theorem}}
-\newcommand{\blem}{\begin{lemma}}
-\newcommand{\elem}{\end{lemma}}
-\newcommand{\bprop}{\begin{proposition}}
-\newcommand{\eprop}{\end{proposition}}
-\newcommand{\bcor}{\begin{corollary}}
-\newcommand{\ecor}{\end{corollary}}
-\newcommand{\bconj}{\begin{conjecture}}
-\newcommand{\econj}{\end{conjecture}}
-\newcommand{\bdefn}{\begin{definition}}
-\newcommand{\edefn}{\end{definition}}
-\newcommand{\bassump}{\begin{assumption}}
-\newcommand{\eassump}{\end{assumption}}
-\newcommand{\bexa}{\begin{example}}
-\newcommand{\eexa}{\end{example}}
-\newcommand{\brmk}{\begin{remark}}
-\newcommand{\ermk}{\end{remark}}
-\newcommand{\bfact}{\begin{fact}}
-\newcommand{\efact}{\end{fact}}
-\newcommand{\bexer}{\begin{exercise}}
-\newcommand{\eexer}{\end{exercise}}
-%\long\def\blem#1\elem{\begin{lemma}#1\end{lemma}}
-%\long\def\bprop#1\eprop{\begin{proposition}#1\end{proposition}}
-%\long\def\bcor#1\ecor{\begin{corollary}#1\end{corollary}}
-%\long\def\bconj#1\econj{\begin{conjecture}#1\end{conjecture}}
-%\long\def\bdef#1\edef{\begin{definition}#1\end{definition}}
-%\long\def\bassump#1\eassump{\begin{assumption}#1\end{assumption}}
-%\long\def\bexa#1\eexa{\begin{example}#1\end{example}}
-%\long\def\brmk#1\ermk{\begin{remark}#1\end{remark}}
-%\long\def\bfact#1\efact{\begin{fact}#1\end{fact}}
-%\long\def\bexer#1\eexer{\begin{exercise}#1\end{exercise}}
-% unnumbered theorem-like envs
-\declaretheorem[name=Theorem,numbered=no]{theorem*}
-\declaretheorem[name=Lemma,numbered=no]{lemma*}
-\declaretheorem[name=Proposition,numbered=no]{proposition*}
-\declaretheorem[name=Corollary,numbered=no]{corollary*}
-\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
-\declaretheorem[name=Definition,numbered=no]{definition*}
-\declaretheorem[name=Assumption,numbered=no]{assumption*}
-\declaretheorem[qed=$\triangleleft$,name=Example,numbered=no]{example*}
-\declaretheorem[qed=$\triangleleft$,name=Remark,numbered=no]{remark*}
-\declaretheorem[qed=$\triangleleft$,name=Fact,numbered=no]{fact*}
-\declaretheorem[qed=$\square$,name=Exercise,numbered=no]{exercise*}
-\newcommand{\bthmu}{\begin{theorem*}}
-\newcommand{\ethmu}{\end{theorem*}}
-\newcommand{\blemu}{\begin{lemma*}}
-\newcommand{\elemu}{\end{lemma*}}
-\newcommand{\bpropu}{\begin{proposition*}}
-\newcommand{\epropu}{\end{proposition*}}
-\newcommand{\bcoru}{\begin{corollary*}}
-\newcommand{\ecoru}{\end{corollary*}}
-\newcommand{\bconju}{\begin{conjecture*}}
-\newcommand{\econju}{\end{conjecture*}}
-\newcommand{\bdefnu}{\begin{definition*}}
-\newcommand{\edefnu}{\end{definition*}}
-\newcommand{\bassumpu}{\begin{assumption*}}
-\newcommand{\eassumpu}{\end{assumption*}}
-\newcommand{\bexau}{\begin{example*}}
-\newcommand{\eexau}{\end{example*}}
-\newcommand{\brmku}{\begin{remark*}}
-\newcommand{\ermku}{\end{remark*}}
-\newcommand{\bfactu}{\begin{fact*}}
-\newcommand{\efactu}{\end{fact*}}
-\newcommand{\bexeru}{\begin{exercise*}}
-\newcommand{\eexeru}{\end{exercise*}}
-%\def\bthmu#1\ethmu{\begin{theorem*}#1\end{theorem*}}
-%\def\blemu#1\elemu{\begin{lemma*}#1\end{lemma*}}
-%\def\bpropu#1\epropu{\begin{proposition*}#1\end{proposition*}}
-%\def\bcoru#1\ecoru{\begin{corollary*}#1\end{corollary*}}
-%\def\bconju#1\econju{\begin{conjecture*}#1\end{conjecture*}}
-%\def\bdefu#1\edefu{\begin{definition*}#1\end{definition*}}
-%\def\bassumpu#1\eassumpu{\begin{assumption*}#1\end{assumption*}}
-%\def\bexau#1\eexau{\begin{example*}#1\end{example*}}
-%\def\brmku#1\ermku{\begin{remark*}#1\end{remark*}}
-%\def\bfactu#1\efactu{\begin{fact*}#1\end{fact*}}
-%\def\bexeru#1\eexeru{\begin{exercise*}#1\end{exercise*}}
-% cleveref names
-\crefname{theorem}{Theorem}{Theorems}
-\crefname{lemma}{Lemma}{Lemmas}
-\crefname{proposition}{Proposition}{Propositions}
-\crefname{corollary}{Corollary}{Corollaries}
-\crefname{conjecture}{Conjecture}{Conjectures}
-\crefname{definition}{Definition}{Definitions}
-\crefname{assumption}{Assumption}{Assumptions}
-\crefname{example}{Example}{Examples}
-\crefname{remark}{Remark}{Remarks}
-\crefname{fact}{Fact}{Facts}
-\crefname{exercise}{Exercise}{Exercises}
-\crefformat{footnote}{#1\footnotemark[#2]#3}
-
+\defineshortenedenvironment{prfof}{proofof}
+\defineshortenedenvironment{pmat}{pmatrix}
+\defineshortenedenvironment{bmat}{bmatrix}
+\defineshortenedenvironment{mat}{matrix}
+% theorem-like envs
+\defineshortenedtheoremlike{thm}{theorem}{Theorem}{Theorems}{numberwithin=section}
+\defineshortenedtheoremlike{lem}{lemma}{Lemma}{Lemmas}{numberlike=theorem}
+\defineshortenedtheoremlike{prop}{proposition}{Proposition}{Propositions}{numberlike=theorem}
+\defineshortenedtheoremlike{cor}{corollary}{Corollary}{Corollaries}{numberlike=theorem}
+\defineshortenedtheoremlike{conj}{conjecture}{Conjecture}{Conjectures}{numberlike=theorem}
+\defineshortenedtheoremlike{defn}{definition}{Definition}{Definitions}{numberlike=theorem}
+\defineshortenedtheoremlike{assump}{assumption}{Assumption}{Assumptions}{numberlike=theorem}
+\defineshortenedtheoremlike{exa}{example}{Example}{Examples}{numberlike=theorem}
+\defineshortenedtheoremlike{rmk}{remark}{Remark}{Remarks}{numberlike=theorem}
+\defineshortenedtheoremlike{fact}{fact}{Fact}{Facts}{numberlike=theorem}
+\defineshortenedtheoremlike{exer}{exercise}{Exercise}{Exercises}{numberwithin=section}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Delimiters
