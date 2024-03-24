@@ -10,7 +10,7 @@
 \ProvidesPackage{shortex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Imports (packages without options)
+%%% Package Imports (packages without dynamic options)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{xifthen} % extended if/then commands (needed internally for \isempty)
 \usepackage{xstring} % string manipulation (needed internally for \StrLeft, \StrGobbleLeft, \IfStrEqCase, etc in font/style macro expansions)
@@ -91,7 +91,7 @@
 \ProcessKeyvalOptions*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Imports (packages with options)
+%%% Package Imports (packages with dynamic options)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % load graphicx using draft mode (or not) per above
