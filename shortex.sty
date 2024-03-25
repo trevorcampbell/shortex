@@ -497,15 +497,9 @@
 \renewcommand\d{\ifmmode\mathrm{d}\else\oldd\fi} %make \d be mathrm{d} in math mode, usual defn as underdot(?) in text mode
 \newcommand{\pd}{\partial}
 \newcommand{\grad}{\nabla}
-\newcommand{\der}[2]{\ensuremath{\frac{\d #1}{\d #2}}}
-\newcommand{\dder}[2]{\ensuremath{\frac{\d^2 #1}{\d #2^2}}}
-\newcommand{\derwrt}[1]{\ensuremath{\frac{\d}{\d #1}}}
-\newcommand{\pder}[2]{\ensuremath{\frac{\pd #1}{\pd #2}}}
-\newcommand{\pdder}[2]{\ensuremath{\frac{\pd^2 #1}{\pd #2^2}}}
-\newcommand{\pderi}[3]{\ensuremath{\frac{\pd^{#3} #1}{\pd #2^{#3}}}}
-\newcommand{\pderwrt}[1]{\ensuremath{\frac{\pd}{\pd #1}}}
+\newcommand{\der}[3][]{\ensuremath{\frac{{\d}^{#1} #2}{\d {#3}^{#1}}}}
+\newcommand{\pder}[3][]{\ensuremath{\frac{{\pd}^{#1} #2}{\pd {#3}^{#1}}}}
 \newcommand{\hes}[3]{\ensuremath{\frac{\pd^2 #1}{\pd #2 \pd #3}}}
-\newcommand{\heswrt}[2]{\ensuremath{\frac{\pd^2 }{\pd #1 \pd #2}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% General Purpose Mathematics
@@ -629,7 +623,6 @@
 \newcommand{\distPoiss}{\distNamed{Poiss}}
 \newcommand{\distExp}{\distNamed{Exp}}
 \newcommand{\distBeta}{\distNamed{Beta}}
-\newcommand{\distBetaPrime}{\distNamed{Beta}'}
 \newcommand{\distDir}{\distNamed{Dir}}
 \newcommand{\distBinom}{\distNamed{Binom}}
 \newcommand{\distMulti}{\distNamed{Multi}}
