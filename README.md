@@ -48,28 +48,46 @@ Package features are detailed in `shortex.pdf` in this repository.
 ## Contributing Guide
 
 The goals of ShorTeX code patterns are:
-- readability
-- brevity
-- ease of typing
-- consistency
+- readability: make LaTeX math code look like its typeset version, where
+  reasonable
+- brevity: avoid the verbose commands and boilerplate common in LaTeX
+- ease of typing: avoid multi-key presses (curly braces, capital letters, etc),
+  where reasonable 
+- consistency and memorability: make commands easy to remember and follow
+  consistent patterns
+- robustness: make editing LaTeX documents without accidentally breaking things
+  (e.g. references, equation numbers, etc) easier 
 
 ### Packages
 
 A package may be included in ShorTeX if it satisfies one of a few criteria:
-- It makes basic LaTeX functionality significantly easier to use (e.g., `autonum`, `cleveref`)
-- It is commonly included in mathematical/computational documents anyway, but results in a lot of boilerplate each time (e.g., `hyperref`, `graphicx`, `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc)
-- It makes improvements to LaTeX typesetting or internal functionality without code changes (e.g., `booktabs`, `microtype`, `marginnote`)
-- It is necessary for other functionality in ShorTeX (e.g., `xifthen`, `xstring`, `xcolor`)
+- It makes basic LaTeX functionality significantly easier to use (e.g.,
+  `autonum`, `cleveref`)
+- It is commonly included in mathematical/computational documents anyway, but
+  results in a lot of boilerplate each time (e.g., `hyperref`, `graphicx`,
+  `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc)
+- It makes improvements to LaTeX typesetting or internal functionality without
+  code changes (e.g., `booktabs`, `microtype`, `marginnote`)
+- It is necessary for other functionality in ShorTeX (e.g., `xifthen`,
+  `xstring`, `xcolor`)
 
-Opinionated default arguments for packages included in ShorTeX are preferred. If a package usually needs to be configured carefully on a case-by-case basis, that's a signal
-that it may not be a good idea to include in ShorTeX. But if there are a small number of common configurations, ShorTeX should expose those in a compact way.
+Opinionated default arguments for packages included in ShorTeX are preferred.
+If a package usually needs to be configured carefully on a case-by-case basis,
+that's a signal that it may not be a good idea to include in ShorTeX. But if
+there are a small number of common configurations, ShorTeX should expose those
+in a compact way.
 
 ### Environments
 
-Environments should be specified with a pair of commands `\b...` and `\e...` where `...` is a readable/memorable shorthand. For example, `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`,
-and `\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
-- Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes `\bthmu...\ethmu`.
-- Starred versions of other environments append an `s` (because there is no consistent behaviour of a star); so `\bfig...\efig` becomes `\bfigs...\efigs`.
+Environments should be specified with a pair of commands `\b...` and `\e...`
+where `...` is a readable/memorable shorthand. For example,
+`\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`, and
+`\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
+- Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes
+  `\bthmu...\ethmu`.
+- Starred versions of other environments append an `s` (because there is no
+  consistent behaviour of a star); so `\bfig...\efig` becomes
+  `\bfigs...\efigs`.
 
 ### Macros
 
