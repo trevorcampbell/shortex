@@ -47,20 +47,31 @@ Package features are detailed in `shortex.pdf` in this repository.
 
 ## Contributing Guide
 
-ShorTeX follows a few rules for including shortcuts and packages.
+The goals of ShorTeX code patterns are:
+- readability
+- brevity
+- ease of typing
+- consistency
 
 ### Packages
 
-A package should be included in ShorTeX if it satisfies one of a few criteria:
+A package may be included in ShorTeX if it satisfies one of a few criteria:
 - It makes basic LaTeX functionality significantly easier to use (e.g., `autonum`, `cleveref`)
 - It is commonly included in mathematical/computational documents anyway, but results in a lot of boilerplate each time (e.g., `hyperref`, `graphicx`, `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc)
 - It makes improvements to LaTeX typesetting or internal functionality without code changes (e.g., `booktabs`, `microtype`, `marginnote`)
 - It is necessary for other functionality in ShorTeX (e.g., `xifthen`, `xstring`, `xcolor`)
 
+Opinionated default arguments for packages included in ShorTeX are preferred. If a package usually needs to be configured carefully on a case-by-case basis, that's a signal
+that it may not be a good idea to include in ShorTeX. But if there are a small number of common configurations, ShorTeX should expose those in a compact way.
+
+### Environments
+
+Environments should be specified with a pair of commands `\b...` and `\e...` where `...` is a readable/memorable shorthand. For example, `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`,
+and `\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
+- Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes `\bthmu...\ethmu`.
+- Starred versions of other environments append an `s` (because there is no consistent behaviour of a star); so `\bfig...\efig` becomes `\bfigs...\efigs`.
+
 ### Macros
 
-- Environments should be specified with a pair of commands `\b...` and `\e...` where `...` is a readable shorthand. For example, `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`.
-    - Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes `\bthmu...\ethmu`.
-    - Starred versions of other environments append an `s` (because there is no consistent behaviour of a star); so `\bfig...\efig` becomes `\bfigs...\efigs`.
 - todo
 
