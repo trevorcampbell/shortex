@@ -54,7 +54,7 @@ The high-level goal of ShorTeX is to make LaTeX...
   and avoid multi-key presses (curly braces, capital letters, etc) where reasonable 
 - **consistent & memorable:** make commands easy to remember and follow
   consistent patterns
-- **clear and opinionated:** there should be one ShorTex way of doing things
+- **clear & opinionated:** there should be one ShorTex way of doing things
 - **robust:** make editing LaTeX documents without accidentally breaking things
   (e.g. references, equation numbers, etc) easier 
 
