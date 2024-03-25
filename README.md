@@ -45,3 +45,19 @@ include a self-contained copy of `shortex.sty` with each document.
 
 Package features are detailed in `shortex.pdf` in this repository. 
 
+## Contributing Guide
+
+ShorTeX follows a few rules for including shortcuts and packages.
+
+### Packages
+
+A package should be included in ShorTeX if it satisfies one of a few criteria:
+- It makes basic LaTeX functionality significantly easier to use (`autonum`, `cleveref`)
+- It is commonly included in mathematical/computational documents anyway, but may be annoying to configure each time (`hyperref`, `graphicx`, `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc)
+- It makes improvements to LaTeX typesetting or internal functionality without code changes (`booktabs`, `microtype`, `marginnote`)
+- It is necessary for other functionality in ShorTeX (e.g. `xifthen`, `xstring`, `xcolor`)
+
+### Macros
+
+Todo
+
