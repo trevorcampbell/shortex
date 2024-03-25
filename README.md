@@ -58,7 +58,7 @@ The high-level goal of ShorTeX is to make LaTeX...
 - **robust:** make editing LaTeX documents without accidentally breaking things
   (e.g. references, equation numbers, etc) easier 
 
-...without breaking original LaTeX commands so that users can employ as much or as little ShorTex as they want.
+...without breaking original LaTeX commands so that users can employ as much or as little ShorTeX as they want.
 
 ### Packages
 
@@ -79,10 +79,10 @@ that's a signal that it may not be a good idea to include in ShorTeX. But if
 there are a small number of common configurations, ShorTeX should expose those
 in a compact way.
 
-### Environments
+### Environments (and other "non-printing" commands)
 
 Environments should be specified with a pair of commands `\b...` and `\e...`
-where `...` is a readable/memorable shorthand. For example,
+where `...` is a readable/memorable lowercase shorthand. For example,
 `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`, and
 `\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
 - Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes
@@ -90,6 +90,9 @@ where `...` is a readable/memorable shorthand. For example,
 - Starred versions of other environments append an `s` (because there is no
   consistent behaviour of a star outside of theorem-like environments); so
   `\bfig...\efig` becomes `\bfigs...\efigs`.
+
+Other non-printing commands (things that do not appear in the typeset document)
+should generally be replaced with lowercase, short, and memorable macros.
 
 ### Macros
 
