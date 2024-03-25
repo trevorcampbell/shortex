@@ -59,5 +59,8 @@ A package should be included in ShorTeX if it satisfies one of a few criteria:
 
 ### Macros
 
-Todo
+- Environments should be specified with a pair of commands `\b...` and `\e...` where `...` is a readable shorthand. For example, `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`.
+    - Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes `\bthmu...\ethmu`.
+    - Starred versions of other environments append an `s` (because there is no consistent behaviour of a star); so `\bfig...\efig` becomes `\bfigs...\efigs`.
+- todo
 
