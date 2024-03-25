@@ -92,9 +92,11 @@ where `...` is a readable/memorable lowercase shorthand. For example,
   `\bfig...\efig` becomes `\bfigs...\efigs`.
 
 Other non-printing commands (things that do not appear in the typeset document)
-should generally be replaced with lowercase, short, and memorable macros.
+should generally be replaced with lowercase, short, and memorable macros. Commands
+with arguments in curly braces can often be simplified by specifying common argument
+values.
 
-### Macros
+### Mathematics
 
-- todo
+TODO
 
