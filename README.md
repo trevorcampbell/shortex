@@ -47,16 +47,18 @@ Package features are detailed in `shortex.pdf` in this repository.
 
 ## Contributing Guide
 
-The goals of ShorTeX code patterns are:
-- readability: make LaTeX math code look like its typeset version, where
+The high-level goal of ShorTeX is to make LaTeX...
+- **readable:** make LaTeX math code look like its typeset version, where
   reasonable
-- brevity: avoid the verbose commands and boilerplate common in LaTeX
-- ease of typing: avoid multi-key presses (curly braces, capital letters, etc),
-  where reasonable 
-- consistency and memorability: make commands easy to remember and follow
+- **brief & easy to type:** avoid the verbose commands and boilerplate common in LaTeX,
+  and avoid multi-key presses (curly braces, capital letters, etc) where reasonable 
+- **consistent & memorable:** make commands easy to remember and follow
   consistent patterns
-- robustness: make editing LaTeX documents without accidentally breaking things
+- **clear and opinionated:** there should be one ShorTex way of doing things
+- **robust:** make editing LaTeX documents without accidentally breaking things
   (e.g. references, equation numbers, etc) easier 
+
+...without breaking original LaTeX commands so that users can employ as much or as little ShorTex as they want.
 
 ### Packages
 
@@ -86,8 +88,8 @@ where `...` is a readable/memorable shorthand. For example,
 - Unnumbered theorem-like environments append a `u`; so `\bthm...\ethm` becomes
   `\bthmu...\ethmu`.
 - Starred versions of other environments append an `s` (because there is no
-  consistent behaviour of a star); so `\bfig...\efig` becomes
-  `\bfigs...\efigs`.
+  consistent behaviour of a star outside of theorem-like environments); so
+  `\bfig...\efig` becomes `\bfigs...\efigs`.
 
 ### Macros
 
