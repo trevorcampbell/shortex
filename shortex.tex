@@ -368,7 +368,7 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
 
 
-\section{Math macros}
+\section{Math mode macros}
 
 \subsection{Delimiters}
 
@@ -519,9 +519,6 @@ esssup	& \verb!\esssup_{x\in \reals}! & $\esssup_{x\in\reals}$ \\
 essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
 indicator	& \verb!\1[x=3]! & $\1[x=3]$ \\
 sign	& \verb!\sgn x! & $\sgn x$ \\
-scientific notation	& \verb!\scin{3}{5}! & $\scin{3}{5}$ \\
-%such that	& \verb!\st! & $\st$ \\
-given	& \verb!\given! & $\given$ \\
 defined as	& \verb!\defas! & $\defas$ \\
 defines	& \verb!\defines! & $\defines$ \\
 half	& \verb!\half! & $\half$ \\
@@ -531,30 +528,8 @@ quarter	& \verb!\quarter! & $\quarter$ \\
 \etabr
 \ecent
 
-\subsection{Common words and names with accents}
-
-\bcent
-\btabr{@{}ll@{}}
-\toprule
- Syntax & Symbol  \\ \midrule
-\verb!\cadlag! & \cadlag \\
-\verb!\Frechet! & \Frechet \\
-\verb!\Gronwall! & \Gronwall \\
-\verb!\Holder! & \Holder \\
-\verb!\Ito! & \Ito \\
-\verb!\Levy! & \Levy \\
-\verb!\Matern! & \Matern \\
-\verb!\Nystrom! & \Nystrom \\
-\verb!\Renyi! & \Renyi \\
-\verb!\Schatten! & \Schatten \\
-\bottomrule
-\etabr
-\ecent
-
 
 \subsection{Probability and statistics}
-
-
 
 \bcent
 \btabr{@{}lll@{}}
@@ -654,13 +629,10 @@ usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \ver
 The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
 Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
 
-
-
-
 \subsection{Vector spaces and operators}
 
-\begin{center}
-\begin{tabular}{@{}lll@{}}
+\bcent
+\btabr{@{}lll@{}}
 \toprule
 Description						& Syntax 				& Symbol \\ \midrule
 Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	\\[10pt]
@@ -668,30 +640,30 @@ Norm  with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\
 Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	\\[10pt]
 Inner prod with subscript 		& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$  \\[10pt]
 $\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 			\\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpm{2}{\mu}!	& $\Lpm{2}{\mu}$ 		\\[10pt]
+\btabr[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpm{2}{\mu}!	& $\Lpm{2}{\mu}$ 		\\[10pt]
 							& \verb!\Lpm*{2}{\mu}!	& $\Lpm*{2}{\mu}$ 	\\[10pt]
 							& \verb!\Lpm[\Big]{2}{\mu}!	& $\Lpm[\Big]{2}{\mu}$ 	\\[10pt]
 $\Lp{p}$ norm					& \verb!\Lpnorm{\Gamma}{2}!        & $\Lpnorm{\Gamma}{2}$ 		 \\[10pt]
 						& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ \\[10pt]
 						& \verb!\Lpnorm[\Big]{\Gamma}{2}!        & $\Lpnorm[\Big]{\Gamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmnorm{\Gamma}{2}{\mu}!        & $\Lpmnorm{\Gamma}{2}{\mu}$  \\[10pt]
+\btabr[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmnorm{\Gamma}{2}{\mu}!        & $\Lpmnorm{\Gamma}{2}{\mu}$  \\[10pt]
 							& \verb!\Lpmnorm*{\Gamma}{2}{\mu}!        & $\Lpmnorm*{\Gamma}{2}{\mu}$ \\[10pt]
 							& \verb!\Lpmnorm[\Big]{\Gamma}{2}{\mu}!        & $\Lpmnorm[\Big]{\Gamma}{2}{\mu}$ \\[10pt]
 $\Lp{p}$ inner product				& \verb!\Lpinner{\Gamma}{\Gamma}{2}!        & $\Lpinner{\Gamma}{\Gamma}{2}$ 	\\[10pt]
 							& \verb!\Lpinner*{\Gamma}{\Gamma}{2}!        & $\Lpinner*{\Gamma}{\Gamma}{2}$  \\[10pt]
 							& \verb!\Lpinner[\Big]{\Gamma}{\Gamma}{2}!        & $\Lpinner[\Big]{\Gamma}{\Gamma}{2}$  \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpminner{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner{\Gamma}{\Gamma}{2}{\mu}$ 	 \\[10pt]
+\btabr[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpminner{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner{\Gamma}{\Gamma}{2}{\mu}$ 	 \\[10pt]
 							& \verb!\Lpminner*{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner*{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
 							& \verb!\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
 \bottomrule
-\end{tabular}
-\end{center}
+\etabr
+\ecent
 
 
 \subsection{Paired delimiters}
 
-\begin{center}
-\begin{tabular}{@{}llll@{}}
+\bcent
+\btabr{@{}llll@{}}
 \toprule
 Description				& Example 					& Text style 				& Display style \\ \midrule
 Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
@@ -703,8 +675,47 @@ Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\dis
 Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
 Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displaystyle\card{\s[h]A}$ \\[10pt]
 \bottomrule
-\end{tabular}
-\end{center}
+\etabr
+\ecent
+
+\section{Text mode macros}
+
+\subsection{Common words and names with accents}
+
+\bcent
+\btabr{@{}ll@{}}
+\toprule
+ Syntax & Symbol  \\ \midrule
+\verb!\cadlag! & \cadlag \\
+\verb!\Frechet! & \Frechet \\
+\verb!\Gronwall! & \Gronwall \\
+\verb!\Holder! & \Holder \\
+\verb!\Ito! & \Ito \\
+\verb!\Levy! & \Levy \\
+\verb!\Matern! & \Matern \\
+\verb!\Nystrom! & \Nystrom \\
+\verb!\Renyi! & \Renyi \\
+\verb!\Schatten! & \Schatten \\
+\bottomrule
+\etabr
+\ecent
+
+
+
+\subsection{Abbreviations with punctuation}
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+e.g.,	& \verb!\eg! & \eg \\
+et al.	& \verb!\etal! & \etal \\
+i.e.,	& \verb!\ie! & \ie \\
+a.k.a.	& \verb!\aka! & \aka \\
+\bottomrule
+\etabr
+\ecent
+
 
 
 \section{Example Document}

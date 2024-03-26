@@ -51,7 +51,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Package Setup and Options
+%%% Package Setup, Options, and Fixes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ensures that hyperref generates correct bookmarks when using cleveref
@@ -61,8 +61,20 @@
 }
 \crefformat{footnote}{#1\footnotemark[#2]#3}
 
+% Fix the algorithm \Comment command
+\algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1} 
+
+%properly indented algorithm comments
+%usage: \LineComment{X}{Here is the comment},  where X = # additional indents. 
+\newdimen{\algindent}
+\setlength\algindent{1.5em}
+\makeatletter
+\newcommand{\LineComment}[2][0]{\Statex \hspace{#1\algindent} \hskip\ALG@thistlm $\triangleright$ #2}
+\makeatother
+
 % set the default hyperref style to dark blue
 \hypersetup{colorlinks=true, allcolors=SubtleColor, linkbordercolor={1 1 1}, pdfborder={0 0 0}, pdfborderstyle={/S/U/W 0}}
+
 % allow the user to switch to a black hypersetup if desired
 \DeclareVoidOption{blacklinks}{\hypersetup{colorlinks=false, allcolors=black, pdfborder={0 0 0}}}
 
@@ -157,44 +169,11 @@
 \defineshortenedtheoremlike{fact}{fact}{Fact}{Facts}{numberlike=theorem}
 \defineshortenedtheoremlike{exer}{exercise}{Exercise}{Exercises}{numberwithin=section}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Delimiters
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\lt}{\left}
-\newcommand{\rt}{\right}
-\newcommand{\m}{\middle}
-\newcommand{\lb}{\bigl}
-\newcommand{\lB}{\Bigl}
-\newcommand{\lbg}{\biggl}
-\newcommand{\lBg}{\Biggl}
-\newcommand{\rb}{\bigr}
-\newcommand{\rB}{\Bigr}
-\newcommand{\rbg}{\biggr}
-\newcommand{\rBg}{\Biggr}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Greek characters
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% original
-\newcommand{\eps}{\epsilon}
-\newcommand{\ups}{\upsilon}
-\newcommand{\Ups}{\Upsilon}
-% variants
-\newcommand{\veps}{\varepsilon}
-\newcommand{\vtheta}{\vartheta}
-\newcommand{\vpi}{\varpi}
-\newcommand{\vrho}{\varrho}
-\newcommand{\vsigma}{\varsigma}
-\newcommand{\vphi}{\varphi}
-\newcommand{\vkappa}{\varkappa}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Font styles/accents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% widebar code 
+% Widebar (need to define here for font style usage)
 % obtained from https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package
 \makeatletter
 \let\save@mathaccent\mathaccent
@@ -386,24 +365,47 @@
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Algorithms
+%%%% Delimiters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\m}{\middle}
+\newcommand{\lb}{\bigl}
+\newcommand{\lB}{\Bigl}
+\newcommand{\lbg}{\biggl}
+\newcommand{\lBg}{\Biggl}
+\newcommand{\rb}{\bigr}
+\newcommand{\rB}{\Bigr}
+\newcommand{\rbg}{\biggr}
+\newcommand{\rBg}{\Biggr}
 
-% Fix the \Comment command
-\algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Greek characters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% original
+\newcommand{\eps}{\epsilon}
+\newcommand{\ups}{\upsilon}
+\newcommand{\Ups}{\Upsilon}
+% variants
+\newcommand{\veps}{\varepsilon}
+\newcommand{\vtheta}{\vartheta}
+\newcommand{\vpi}{\varpi}
+\newcommand{\vrho}{\varrho}
+\newcommand{\vsigma}{\varsigma}
+\newcommand{\vphi}{\varphi}
+\newcommand{\vkappa}{\varkappa}
 
-%properly indented comments
-%usage: \LineComment{X}{Here is the comment},  where X = # additional indents. 
-\newdimen{\algindent}
-\setlength\algindent{1.5em}
-\makeatletter
-\newcommand{\LineComment}[2][0]{\Statex \hspace{#1\algindent} \hskip\ALG@thistlm $\triangleright$ #2}
-\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abbreviations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\eg}{e.g.,\ }
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\ie}{i.e.,\ }
+\newcommand{\aka}{a.k.a.\ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Common Sets and Set Operations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
 \newcommand{\xreals}{\overline{\reals}}
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
@@ -412,18 +414,15 @@
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
 \newcommand{\msrs}{\mathcal{M}}
 \newcommand{\pmsrs}{\mathcal{M}_1}
-
 \newcommand{\union}{\bigcup}
-
 \newcommand{\inter}{\bigcap}
-
 \newcommand{\vol}{\operatorname{vol}}
 \newcommand{\diam}{\operatorname{diam}}
 \newcommand{\cl}{\operatorname{cl}}
 \newcommand{\spann}{\operatorname{span}}
 \newcommand{\bdry}{\partial}
-\DeclareMathOperator{\cone}{cone}
-\DeclareMathOperator{\conv}{conv}
+\newcommand{\cone}{\operatorname{cone}}
+\newcommand{\conv}{\operatorname{conv}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Lp Spaces and Operators
@@ -435,8 +434,6 @@
 \DeclarePairedDelimiterXPP\Lpmnorm[3]{}{\lVert}{\rVert}{_{\Lpm{#2}{#3}}}{#1}
 \DeclarePairedDelimiterXPP\Lpinner[3]{}{\langle}{\rangle}{_{\Lp{#3}}}{#1,#2}
 \DeclarePairedDelimiterXPP\Lpminner[4]{}{\langle}{\rangle}{_{\Lpm{#3}{#4}}}{#1,#2}
-
-
 \DeclarePairedDelimiter\rbra{(}{)}
 \DeclarePairedDelimiter\cbra{\{}{\}}
 \DeclarePairedDelimiter\sbra{[}{]}
@@ -458,16 +455,12 @@
 \newcommand{\kron}{\operatorname{\otimes}}
 \newcommand{\adjsym}{\dag} % adjoint symbol
 \newcommand{\adj}{^{\adjsym}} % adjoint
-\DeclareMathOperator{\spec}{\sigma} % spectrum
-\DeclareMathOperator{\diag}{diag} % diagonal
-\DeclareMathOperator{\rank}{rank} % rank
-
+\newcommand{\spec}{\operatorname{\sigma}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\rank}{\operatorname{rank}}
 \newcommand{\transposesym}{\top}
 \newcommand{\T}{^{\transposesym}}
 \newcommand{\nT}{^{-\transposesym}}
-
-\newcommand{\bone}{\mathbf{1}}
-\newcommand{\bzero}{\mathbf{0}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calculus 
@@ -486,37 +479,12 @@
 
 \newcommand{\1}{\mathds{1}} % indicator function
 \newcommand{\sgn}{\operatorname{sgn}} % sign function
-\newcommand{\scin}[2]{\ensuremath{#1\!\times\!10^{#2}}}	% #1 x 10^{#2}
-%\newcommand{\st}{\,:\,}
-\newcommand{\given}{\mid}
-
 % Words in math
 %\newcommand{\stT}{\ \text{s.t.}\ }
 \newcommand{\andT}{\ \text{and}\ }
 \newcommand{\orT}{\ \text{or}\ }
 \newcommand{\whereT}{\ \text{where}\ }
 \newcommand{\withT}{\ \text{with}\ }
-
-% Words with special characters
-\def\cadlag{c\`adl\`ag\xspace}
-\def\Gronwall{Gr\"onwall\xspace}
-\def\Renyi{R\'enyi\xspace}
-\def\Holder{H\"older\xspace}
-\def\Ito{It\^o\xspace}
-\def\Nystrom{Nystr\"om\xspace}
-\def\Schatten{Sch\"atten\xspace}
-\def\Matern{Mat\'ern\xspace}
-\def\Frechet{Fr\'echet\xspace}
-\def\Levy{L\'evy\xspace}
-
-% Improved square root
-\let\oldsqrt\sqrt % rename \sqrt as \oldsqrt
-\def\sqrt{\mathpalette\DHLhksqrt} % define the new \sqrt in terms of the old one
-\def\DHLhksqrt#1#2{%
-\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
-\advance\dimen0-0.2\ht0
-\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
-{\box0\lower0.4pt\box2}}
 
 % Min and max
 \def\argmax{\operatornamewithlimits{arg\,max}}
@@ -637,6 +605,8 @@
 \DeclareMathOperator{\notimplies}{\centernot\implies}
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Squeezed math
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -655,6 +625,35 @@
   \nulldelimiterspace=#1\nulldelimiterspace
   \scriptspace=#1\scriptspace
 }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Improved square root
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let\oldsqrt\sqrt % rename \sqrt as \oldsqrt
+\def\sqrt{\mathpalette\DHLhksqrt} % define the new \sqrt in terms of the old one
+\def\DHLhksqrt#1#2{%
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Words/names with accents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\cadlag{c\`adl\`ag\xspace}
+\def\Gronwall{Gr\"onwall\xspace}
+\def\Renyi{R\'enyi\xspace}
+\def\Holder{H\"older\xspace}
+\def\Ito{It\^o\xspace}
+\def\Nystrom{Nystr\"om\xspace}
+\def\Schatten{Sch\"atten\xspace}
+\def\Matern{Mat\'ern\xspace}
+\def\Frechet{Fr\'echet\xspace}
+\def\Levy{L\'evy\xspace}
+
+
 
 
 
