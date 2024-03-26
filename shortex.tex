@@ -258,9 +258,12 @@ see \cref{sec:greeks}.
 Syntax & Characters  \\ \midrule
 \verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
 \verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\verb!\lowercaseGreek! & alpha,beta,gamma,delta,eps,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho\\
-& sigma,tau,ups,phi,chi,psi,omega,veps,vtheta,vkappa,vpi,vrho,vsigma,vphi\\
-\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma,Ups,Phi,Psi,Omega\\
+\verb!\lowercaseGreek! & alpha,beta,gamma,delta,eps,zeta,\\
+& eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho,\\
+& sigma,tau,ups,phi,chi,psi,omega,veps,vtheta,\\
+& vkappa,vpi,vrho,vsigma,vphi\\
+\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,\\
+&Pi,Sigma,Ups,Phi,Psi,Omega\\
 \bottomrule
 \etabr
 \ecent
@@ -507,27 +510,6 @@ Hessian w.r.t. & \verb!\hes{}{y}{z}! & $\hes{}{y}{z}$ \\
 \etabr
 \ecent
 
-\subsection{General mathematics}
-
-\bcent
-\btabr{@{}lll@{}}
-\toprule
-Name & Syntax & Symbol  \\ \midrule
-argmax	& \verb!\argmax_{x\in \reals}! & $\argmax_{x\in\reals}$ \\
-argmin	& \verb!\argmin_{x\in \reals}! & $\argmin_{x\in\reals}$ \\
-esssup	& \verb!\esssup_{x\in \reals}! & $\esssup_{x\in\reals}$ \\
-essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
-indicator	& \verb!\1[x=3]! & $\1[x=3]$ \\
-sign	& \verb!\sgn x! & $\sgn x$ \\
-defined as	& \verb!\defas! & $\defas$ \\
-defines	& \verb!\defines! & $\defines$ \\
-half	& \verb!\half! & $\half$ \\
-third	& \verb!\third! & $\third$ \\
-quarter	& \verb!\quarter! & $\quarter$ \\
-\bottomrule
-\etabr
-\ecent
-
 
 \subsection{Probability and statistics}
 
@@ -606,6 +588,29 @@ Poisson process	& \verb!\PP! & $\PP$ \\
 \etabr
 \ecent
 
+\subsection{Other}
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+argmax	& \verb!\argmax_{x\in \reals}! & $\argmax_{x\in\reals}$ \\
+argmin	& \verb!\argmin_{x\in \reals}! & $\argmin_{x\in\reals}$ \\
+esssup	& \verb!\esssup_{x\in \reals}! & $\esssup_{x\in\reals}$ \\
+essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
+indicator	& \verb!\1[x=3]! & $\1[x=3]$ \\
+sign	& \verb!\sgn x! & $\sgn x$ \\
+defined as	& \verb!\defas! & $\defas$ \\
+defines	& \verb!\defines! & $\defines$ \\
+half	& \verb!\half! & $\half$ \\
+third	& \verb!\third! & $\third$ \\
+quarter	& \verb!\quarter! & $\quarter$ \\
+\bottomrule
+\etabr
+\ecent
+
+
+
 \subsection{Shrinking whitespace in math}
 The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
 where \verb!<frac>! represents the fraction of whitespace reduction.
@@ -628,6 +633,10 @@ usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \ver
 \]
 The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
 Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
+
+\subsection{Improved square root}
+
+todo
 
 \subsection{Vector spaces and operators}
 
