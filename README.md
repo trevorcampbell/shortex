@@ -131,6 +131,6 @@ generally include macros that mimic the typeset appearance of the function/opera
 ShorTeX should include macros to make very common, but otherwise bulky/difficult-to-read 
 mathematical syntax clearer. Common examples of this are long style/accent combinations, like 
 `\bar{\mathbb{A}}`, over/underset expressions like `\overset{\text{p}}{\to}`, 
-delimiters like `\left\{ ... \right\}`, and accented names and words like ``\c\`{a}dl\`{a}g``.
+delimiters like `\left\{ ... \right\}`, and accented names and words like ``c\`{a}dl\`{a}g``.
 The macro names should be short, memorable, and avoid curly braces and multikey presses.
 
