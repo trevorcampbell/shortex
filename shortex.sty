@@ -151,7 +151,7 @@
 \defineshortenedtheoremlike{cor}{corollary}{Corollary}{Corollaries}{numberlike=theorem}
 \defineshortenedtheoremlike{conj}{conjecture}{Conjecture}{Conjectures}{numberlike=theorem}
 \defineshortenedtheoremlike{defn}{definition}{Definition}{Definitions}{numberlike=theorem}
-\defineshortenedtheoremlike{assump}{assumption}{Assumption}{Assumptions}{numberlike=theorem}
+\defineshortenedtheoremlike{assum}{assumption}{Assumption}{Assumptions}{numberlike=theorem}
 \defineshortenedtheoremlike{exa}{example}{Example}{Examples}{numberlike=theorem}
 \defineshortenedtheoremlike{rmk}{remark}{Remark}{Remarks}{numberlike=theorem}
 \defineshortenedtheoremlike{fact}{fact}{Fact}{Facts}{numberlike=theorem}
@@ -422,27 +422,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
-\newcommand{\extreals}{\overline{\reals}}
+\newcommand{\xreals}{\overline{\reals}}
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
 \newcommand{\rats}{\ensuremath{\mathbb{Q}}}
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
-\newcommand{\measures}{\mathcal{M}}
-\newcommand{\pmeasures}{\mathcal{M}_1}
+\newcommand{\msrs}{\mathcal{M}}
+\newcommand{\pmsrs}{\mathcal{M}_1}
 
-\newcommand{\union}{\cup}
-\newcommand{\Union}{\bigcup}
-\newcommand{\djunion}{\sqcup}
-\newcommand{\djUnion}{\bigsqcup}
+\newcommand{\union}{\bigcup}
 
-\newcommand{\intersect}{\cap}
-\newcommand{\Intersect}{\bigcap}
+\newcommand{\inter}{\bigcap}
 
 \newcommand{\vol}{\operatorname{vol}}
 \newcommand{\diam}{\operatorname{diam}}
-\newcommand{\closure}{\operatorname{cl}}
+\newcommand{\cl}{\operatorname{cl}}
 \newcommand{\spann}{\operatorname{span}}
-\newcommand{\boundary}{\partial}
+\newcommand{\bdry}{\partial}
 \DeclareMathOperator{\cone}{cone}
 \DeclareMathOperator{\conv}{conv}
 
@@ -608,43 +604,43 @@
 
 % parametric distributions
 \newcommand{\distNamed}[1]{{\mathrm{#1}}}
-\newcommand{\distNorm}{\mathcal{N}}
-\newcommand{\distT}{\mathcal{T}}
-\newcommand{\distWish}{\mathcal{W}}
-\newcommand{\distInvWish}{\mathcal{IW}}
-\newcommand{\distLap}{\distNamed{Lap}}
-\newcommand{\distChiSq}{\chi^2}
-\newcommand{\distUnif}{\distNamed{Unif}}
-\newcommand{\distGam}{\distNamed{Gam}}
-\newcommand{\distGum}{\distNamed{Gumbel}}
-\newcommand{\distGEV}{\distNamed{GEV}}
-\newcommand{\distCat}{\distNamed{Categorical}}
-\newcommand{\distInvGam}{\distNamed{InvGam}}
-\newcommand{\distPoiss}{\distNamed{Poiss}}
-\newcommand{\distExp}{\distNamed{Exp}}
-\newcommand{\distBeta}{\distNamed{Beta}}
-\newcommand{\distDir}{\distNamed{Dir}}
-\newcommand{\distBinom}{\distNamed{Binom}}
-\newcommand{\distMulti}{\distNamed{Multi}}
-\newcommand{\distBern}{\distNamed{Bern}}
-\newcommand{\distGeom}{\distNamed{Geom}}
-\newcommand{\distCauchy}{\distNamed{Cauchy}}
-\newcommand{\distVMF}{\distNamed{vMF}}
+\newcommand{\Norm}{\mathcal{N}}
+\newcommand{\StudentT}{\mathcal{T}}
+\newcommand{\Wish}{\mathcal{W}}
+\newcommand{\InvWish}{\mathcal{IW}}
+\newcommand{\Lap}{\distNamed{Lap}}
+\newcommand{\ChiSq}{\chi^2}
+\newcommand{\Unif}{\distNamed{Unif}}
+\newcommand{\Gam}{\distNamed{Gam}}
+\newcommand{\Gum}{\distNamed{Gumbel}}
+\newcommand{\GEV}{\distNamed{GEV}}
+\newcommand{\Cat}{\distNamed{Categorical}}
+\newcommand{\InvGam}{\distNamed{InvGam}}
+\newcommand{\Poiss}{\distNamed{Poiss}}
+\newcommand{\Exp}{\distNamed{Exp}}
+\newcommand{\Beta}{\distNamed{Beta}}
+\newcommand{\Dir}{\distNamed{Dir}}
+\newcommand{\Binom}{\distNamed{Binom}}
+\newcommand{\Multi}{\distNamed{Multi}}
+\newcommand{\Bern}{\distNamed{Bern}}
+\newcommand{\Geom}{\distNamed{Geom}}
+\newcommand{\Cauchy}{\distNamed{Cauchy}}
+\newcommand{\VMF}{\distNamed{vMF}}
 % nonparametric distributions
-\newcommand{\distBeP}{\distNamed{BeP}}
-\newcommand{\distDP}{\distNamed{DP}}
-\newcommand{\distCRP}{\distNamed{CRP}}
-\newcommand{\distPYP}{\distNamed{PY}}
-\newcommand{\distGP}{{\distNamed{GP}}} 
-\newcommand{\distPP}{\distNamed{PP}}
-\newcommand{\distBP}{\distNamed{BP}}
-\newcommand{\distBPP}{\distNamed{BPP}}
-\newcommand{\distGamP}{\distNamed{\Gamma P}}
-\newcommand{\distNGamP}{\distNamed{N\Gamma P}}
-\newcommand{\distLP}{\distNamed{LP}}
-\newcommand{\distObs}{\distNamed{Obs}}
-\newcommand{\distCRM}{\distNamed{CRM}}
-\newcommand{\distNCRM}{\distNamed{NCRM}}
+\newcommand{\BeP}{\distNamed{BeP}}
+\newcommand{\DP}{\distNamed{DP}}
+\newcommand{\CRP}{\distNamed{CRP}}
+\newcommand{\PYP}{\distNamed{PY}}
+\newcommand{\GP}{{\distNamed{GP}}} 
+\newcommand{\PP}{\distNamed{PP}}
+\newcommand{\BP}{\distNamed{BP}}
+\newcommand{\BPP}{\distNamed{BPP}}
+\newcommand{\GamP}{\distNamed{\Gamma P}}
+\newcommand{\NGamP}{\distNamed{N\Gamma P}}
+\newcommand{\LP}{\distNamed{LP}}
+\newcommand{\Obs}{\distNamed{Obs}}
+\newcommand{\CRM}{\distNamed{CRM}}
+\newcommand{\NCRM}{\distNamed{NCRM}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Special Funcs

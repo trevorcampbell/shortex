@@ -79,9 +79,15 @@ that's a signal that it may not be a good idea to include in ShorTeX. But if
 there are a small number of common configurations, ShorTeX should expose those
 in a compact way.
 
-### Environments (and other "non-printing" commands)
+### Non-printing commands (e.g., environments)
 
-Environments should be specified with a pair of commands `\b...` and `\e...`
+Non-printing commands are those that do not directly appear in the typeset document,
+such as environments, commands that change alignment and spacing, etc.
+These should generally be replaced with lowercase, short, and memorable macros. Commands
+with arguments in curly braces can often be simplified by specifying common argument
+values.
+
+Environments in particular should be specified with a pair of commands `\b...` and `\e...`
 where `...` is a readable/memorable lowercase shorthand. For example,
 `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`, and
 `\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
@@ -91,12 +97,19 @@ where `...` is a readable/memorable lowercase shorthand. For example,
   consistent behaviour of a star outside of theorem-like environments); so
   `\bfig...\efig` becomes `\bfigs...\efigs`.
 
-Other non-printing commands (things that do not appear in the typeset document)
-should generally be replaced with lowercase, short, and memorable macros. Commands
-with arguments in curly braces can often be simplified by specifying common argument
-values.
+### Extensions
 
-### Mathematics
+Extensions are additional commands that follow a similar pattern to those existing in 
+basic LaTeX and common math packages. For example, there are `\max` and `\min`
+commands in LaTeX for maximization and minimization, but no commands for
+argmax, argmin, essential supremum, etc. As another
+example, there is `\sum` and `\prod` command for sums and products, but no commands for
+unions, intersections, etc. There are `\widehat` and `\widetilde` commands, but no `\widebar`.
+ShorTeX defines a range of such extension macros that a typical
+LaTeX user might expect to exist anyway and should be able to "guess" without much effort.
+
+### Printing commands (e.g., math symbols, operators)
 
 TODO
+
 

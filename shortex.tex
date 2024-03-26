@@ -103,7 +103,7 @@ proposition & \verb!\bprop...\eprop!\\
 corollary & \verb!\bcor...\ecor!\\
 conjecture & \verb!\bconj...\econj!\\
 definition & \verb!\bdefn...\edefn!\\
-assumption & \verb!\bassump...\eassump!\\
+assumption & \verb!\bassum...\eassum!\\
 example & \verb!\bexa...\eexa!\\
 remark & \verb!\brmk...\ermk!\\
 fact & \verb!\bfact...\efact!\\
@@ -478,20 +478,19 @@ Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesacce
 \toprule
 Name & Syntax & Symbol  \\ \midrule
 reals	& \verb!\reals! & $\reals$ \\
-extended reals	& \verb!\extreals! & $\extreals$ \\
+extended reals	& \verb!\xreals! & $\xreals$ \\
 rationals & \verb!\rats! & $\rats$\\
 integers	& \verb!\ints! & $\ints$ \\
 natural numbers	& \verb!\nats! & $\nats$ \\
 complex numbers	& \verb!\comps! & $\comps$ \\
-measures & \verb!\measures! & $\measures$\\
-probability measures & \verb!\pmeasures! & $\pmeasures$\\
-(big) intersection & \verb!\intersect!, \verb!\Intersect! & $\intersect$, $\Intersect$\\
-(big) union & \verb!\union!, \verb!\Union! & $\union$, $\Union$\\
-(big) disjoint union & \verb!\djunion!, \verb!\djUnion! & $\djunion$, $\djUnion$\\
+measures & \verb!\msrs! & $\msrs$\\
+probability measures & \verb!\pmsrs! & $\pmsrs$\\
+intersection & \verb!\inter! & $\inter$\\
+union & \verb!\union! & $\union$\\
 volume	& \verb!\vol! & $\vol$ \\
 diameter	& \verb!\diam! & $\diam$ \\
-boundary	& \verb!\boundary! & $\boundary$ \\
-closure	& \verb!\closure! & $\closure$ \\
+boundary	& \verb!\bdry! & $\bdry$ \\
+closure	& \verb!\cl! & $\cl$ \\
 span	& \verb!\spann! & $\spann$ \\
 cone	& \verb!\cone! & $\cone$ \\
 convex hull	& \verb!\conv! & $\conv$ \\
@@ -623,42 +622,42 @@ Total variation distance & \verb!\tvd{q}{p}!, \verb!\tvd[a]{q}{p}! & $\tvd{q}{p}
 \btabr{@{}lll@{}}
 \toprule
 Name & Syntax & Symbol  \\ \midrule
-Bernoulli	& \verb!\distBern! & $\distBern$ \\
-beta	& \verb!\distBeta! & $\distBeta$ \\
-beta prime	& \verb!\distBeta'! & $\distBeta'$ \\
-binomial	& \verb!\distBinom! & $\distBinom$ \\
-categorical	& \verb!\distCat! & $\distCat$ \\
-Cauchy	& \verb!\distCauchy! & $\distCauchy$ \\
-chi-squared	& \verb!\distChiSq! & $\distChiSq$ \\
-Dirichlet	& \verb!\distDir! & $\distDir$ \\
-exponential	& \verb!\distExp! & $\distExp$ \\
-gamma	& \verb!\distGam! & $\distGam$ \\
-inverse gamma	& \verb!\distInvGam! & $\distInvGam$ \\
-geometric	& \verb!\distGeom! & $\distGeom$ \\
-Gumbel	& \verb!\distGum! & $\distGum$ \\
-generalized extreme value	& \verb!\distGEV! & $\distGEV$ \\
-Laplace	& \verb!\distLap! & $\distLap$ \\
-multinomial	& \verb!\distMulti! & $\distMulti$ \\
-normal	& \verb!\distNorm! & $\distNorm$ \\
-Poisson	& \verb!\distPoiss! & $\distPoiss$ \\
-student-t	& \verb!\distT! & $\distT$ \\
-uniform	& \verb!\distUnif! & $\distUnif$ \\
-von Mises-Fisher	& \verb!\distVMF! & $\distVMF$ \\
-Wishart	& \verb!\distWish! & $\distWish$ \\
-inverse Wishart	& \verb!\distInvWish! & $\distInvWish$ \\
+Bernoulli	& \verb!\Bern! & $\Bern$ \\
+beta	& \verb!\Beta! & $\Beta$ \\
+beta prime	& \verb!\Beta'! & $\Beta'$ \\
+binomial	& \verb!\Binom! & $\Binom$ \\
+categorical	& \verb!\Cat! & $\Cat$ \\
+Cauchy	& \verb!\Cauchy! & $\Cauchy$ \\
+chi-squared	& \verb!\ChiSq! & $\ChiSq$ \\
+Dirichlet	& \verb!\Dir! & $\Dir$ \\
+exponential	& \verb!\Exp! & $\Exp$ \\
+gamma	& \verb!\Gam! & $\Gam$ \\
+inverse gamma	& \verb!\InvGam! & $\InvGam$ \\
+geometric	& \verb!\Geom! & $\Geom$ \\
+Gumbel	& \verb!\Gum! & $\Gum$ \\
+generalized extreme value	& \verb!\GEV! & $\GEV$ \\
+Laplace	& \verb!\Lap! & $\Lap$ \\
+multinomial	& \verb!\Multi! & $\Multi$ \\
+normal	& \verb!\Norm! & $\Norm$ \\
+Poisson	& \verb!\Poiss! & $\Poiss$ \\
+student-t	& \verb!\StudentT! & $\StudentT$ \\
+uniform	& \verb!\Unif! & $\Unif$ \\
+von Mises-Fisher	& \verb!\VMF! & $\VMF$ \\
+Wishart	& \verb!\Wish! & $\Wish$ \\
+inverse Wishart	& \verb!\InvWish! & $\InvWish$ \\
 \midrule
-Bernoulli process	& \verb!\distBeP! & $\distBeP$ \\
-beta process	& \verb!\distBP! & $\distBP$ \\
-beta prime process	& \verb!\distBPP! & $\distBPP$ \\
-Dirichlet process	& \verb!\distDP! & $\distDP$ \\
-Chinese restauarant process	& \verb!\distCRP! & $\distCRP$ \\
-completely random measure	& \verb!\distCRM! & $\distCRM$ \\
-normalized completely random measure & \verb!\distNCRM! & $\distNCRM$ \\
-gamma process	& \verb!\distGamP! & $\distGamP$ \\
-normalized gamma process	& \verb!\distNGamP! & $\distNGamP$ \\
-Gaussian process	& \verb!\distGP! & $\distGP$ \\
-Pitman-Yor process	& \verb!\distPYP! & $\distPYP$ \\
-Poisson process	& \verb!\distPP! & $\distPP$ \\
+Bernoulli process	& \verb!\BeP! & $\BeP$ \\
+beta process	& \verb!\BP! & $\BP$ \\
+beta prime process	& \verb!\BPP! & $\BPP$ \\
+Dirichlet process	& \verb!\DP! & $\DP$ \\
+Chinese restauarant process	& \verb!\CRP! & $\CRP$ \\
+completely random measure	& \verb!\CRM! & $\CRM$ \\
+normalized completely random measure & \verb!\NCRM! & $\NCRM$ \\
+gamma process	& \verb!\GamP! & $\GamP$ \\
+normalized gamma process	& \verb!\NGamP! & $\NGamP$ \\
+Gaussian process	& \verb!\GP! & $\GP$ \\
+Pitman-Yor process	& \verb!\PYP! & $\PYP$ \\
+Poisson process	& \verb!\PP! & $\PP$ \\
 \bottomrule
 \etabr
 \ecent
@@ -718,7 +717,13 @@ Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displays
 
 \section{Example Document}
 
-TODO: full shortex example
+TODO: full shortex example and unit testing of all commands at the end
+
+Note: \verb!\bdR! doesn't work
+
+\[
+	asdf
+\]
 
 \end{document}
 
