@@ -48,30 +48,32 @@ Package features are detailed in `shortex.pdf` in this repository.
 ## Contributing Guide
 
 The high-level goal of ShorTeX is to make LaTeX...
-- **readable:** make LaTeX math code look like its typeset version, where
-  reasonable
+- **readable:** make LaTeX math code shorter and more readable.
 - **brief & easy to type:** avoid the verbose commands and boilerplate common in LaTeX,
-  and avoid multi-key presses (curly braces, capital letters, etc) where reasonable 
+  and avoid multi-key presses (curly braces, capital letters, etc) where reasonable.
 - **consistent & memorable:** make commands easy to remember and follow
-  consistent patterns
-- **clear & opinionated:** there should be one ShorTex way of doing things
+  consistent patterns.
+- **clear & opinionated:** there should be one ShorTex way of doing things.
 - **robust:** make editing LaTeX documents without accidentally breaking things
-  (e.g. references, equation numbers, etc) easier 
+  (e.g. references, equation numbers, etc) easier.
 
 ...without breaking original LaTeX commands so that users can employ as much or as little ShorTeX as they want.
+ShorTeX includes a few different categories of functionality towards this goal.
+Contributors to this package should be able to justify proposed inclusions based on the below
+guidelines.
 
 ### Packages
 
 A package may be included in ShorTeX if it satisfies one of a few criteria:
 - It makes basic LaTeX functionality significantly easier to use (e.g.,
-  `autonum`, `cleveref`)
+  `autonum`, `cleveref`).
 - It is commonly included in mathematical/computational documents anyway, but
   results in a lot of boilerplate each time (e.g., `hyperref`, `graphicx`,
-  `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc)
+  `algorithm`, `algpseudocode`, `amsmath`, `amsthm`, `mathtools`, etc).
 - It makes improvements to LaTeX typesetting or internal functionality without
-  code changes (e.g., `booktabs`, `microtype`, `marginnote`)
+  code changes (e.g., `booktabs`, `microtype`, `marginnote`).
 - It is necessary for other functionality in ShorTeX (e.g., `xifthen`,
-  `xstring`, `xcolor`)
+  `xstring`, `xcolor`).
 
 Opinionated default arguments for packages included in ShorTeX are preferred.
 If a package usually needs to be configured carefully on a case-by-case basis,
@@ -79,15 +81,16 @@ that's a signal that it may not be a good idea to include in ShorTeX. But if
 there are a small number of common configurations, ShorTeX should expose those
 in a compact way.
 
-### Non-printing commands (e.g., environments)
+### Shorthands for environments, other non-printing macros
 
-Non-printing commands are those that do not directly appear in the typeset document,
+Non-printing macros are those that do not directly appear in the typeset document,
 such as environments, commands that change alignment and spacing, etc.
-These should generally be replaced with lowercase, short, and memorable macros. Commands
-with arguments in curly braces can often be simplified by specifying common argument
-values.
+Commonly used, bulky non-printing macros should be replaced in ShorTeX
+with lowercase, short, and memorable macros without curly braces.
+Occasionally curly braces are necessary for arguments, but
+arguments in curly braces can often be simplified by specifying common argument values.
 
-Environments in particular should be specified with a pair of commands `\b...` and `\e...`
+Environments in particular should be specified with a pair of macros `\b...` and `\e...`
 where `...` is a readable/memorable lowercase shorthand. For example,
 `\begin{theorem}...\end{theorem}` becomes `\bthm...\ethm`, and
 `\begin{figure}...\end{figure}` becomes `\bfig...\efig`.
@@ -97,19 +100,39 @@ where `...` is a readable/memorable lowercase shorthand. For example,
   consistent behaviour of a star outside of theorem-like environments); so
   `\bfig...\efig` becomes `\bfigs...\efigs`.
 
-### Extensions
+### Shorthands for common tasks
 
-Extensions are additional commands that follow a similar pattern to those existing in 
-basic LaTeX and common math packages. For example, there are `\max` and `\min`
-commands in LaTeX for maximization and minimization, but no commands for
-argmax, argmin, essential supremum, etc. As another
-example, there is `\sum` and `\prod` command for sums and products, but no commands for
-unions, intersections, etc. There are `\widehat` and `\widetilde` commands, but no `\widebar`.
-ShorTeX defines a range of such extension macros that a typical
-LaTeX user might expect to exist anyway and should be able to "guess" without much effort.
+There are certain tasks that are commonly performed across a wide range of
+documents for which users tend to define their own special one-off commands. A
+perfect example of this is a set of commands to add comments/highlights/margin
+notes to documents. ShorTeX should include shorthand macros to automate these
+common tasks with a simple syntax.
 
-### Printing commands (e.g., math symbols, operators)
+### Math macros that "fill in the gaps"
 
-TODO
+ShorTeX should include macros to implement commonly used math
+symbols/operations that are missing from LaTeX with usual math packages. The
+syntax should be as unsurprising as possible and follow the patterns existing
+in LaTeX with usual math packages. For example, there are `\max` and `\min`
+macros in LaTeX for maximization and minimization, but no macros for argmax,
+argmin, essential supremum, etc. As another example, there is `\sum` and
+`\prod` command for sums and products, but no macros for other common operations "over a range of
+items" like unions, intersections, etc. There are `\widehat` and
+`\widetilde` macros, but no `\widebar`. 
 
+### Math macros for functions and operators
+
+For functions and operators (e.g., trace, rank, variance, support), ShorTeX should
+include macros that mimic the typeset appearance of the name 
+
+ShorTeX defines a range of such
+extension macros that a typical LaTeX user might expect to exist anyway and
+should be able to "guess" without much effort.
+
+### Shorthands for unwieldy/unreadable math expressions
+
+ShorTeX should include macros to make very common, but otherwise bulky/difficult-to-read 
+mathematical syntax clearer. Common examples of this are long style/accent combinations, like 
+`\bar{\mathbb{A}}`, over/underset expressions like `\overset{\text{p}}{\to}`, 
+delimiters like `\left\{ ... \right\}`, and accented names and words like `\c\\\`{a}dl\\\`{a}g`
 
