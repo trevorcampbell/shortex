@@ -163,6 +163,7 @@
 
 \newcommand{\lt}{\left}
 \newcommand{\rt}{\right}
+\newcommand{\m}{\middle}
 \newcommand{\lb}{\bigl}
 \newcommand{\lB}{\Bigl}
 \newcommand{\lbg}{\biggl}
@@ -177,35 +178,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % original
-\newcommand{\al}{\alpha}
-\newcommand{\be}{\beta}
-\newcommand{\ga}{\gamma}\newcommand{\Ga}{\Gamma}
-\newcommand{\de}{\delta}\newcommand{\De}{\Delta}
-\newcommand{\ep}{\epsilon}
-\newcommand{\ze}{\zeta}
-\newcommand{\et}{\eta}
-\let\oldth\th
-\renewcommand\th{\ifmmode\theta\else\oldth\fi}\newcommand{\Th}{\Theta} %make \th be theta in math mode, usual defn in main text
-\newcommand{\io}{\iota}
-\newcommand{\ka}{\kappa}
-\newcommand{\la}{\lambda}\newcommand{\La}{\Lambda}
-% mu, nu xi, omicron, pi fine
-\newcommand{\rh}{\rho}
-\newcommand{\si}{\sigma}\newcommand{\Si}{\Sigma}
-\newcommand{\ta}{\tau}
-\newcommand{\up}{\upsilon}\newcommand{\Up}{\Upsilon}
-\newcommand{\ph}{\phi}\newcommand{\Ph}{\Phi}
-\newcommand{\ch}{\chi}
-\newcommand{\ps}{\psi}\newcommand{\Ps}{\Psi}
-\newcommand{\om}{\omega}\newcommand{\Om}{\Omega}
+\newcommand{\eps}{\epsilon}
+\newcommand{\ups}{\upsilon}
+\newcommand{\Ups}{\Upsilon}
 % variants
-\newcommand{\vep}{\varepsilon}
-\newcommand{\vth}{\vartheta}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\vtheta}{\vartheta}
 \newcommand{\vpi}{\varpi}
-\newcommand{\vrh}{\varrho}
-\newcommand{\vsi}{\varsigma}
-\newcommand{\vph}{\varphi}
-\newcommand{\vka}{\varkappa}
+\newcommand{\vrho}{\varrho}
+\newcommand{\vsigma}{\varsigma}
+\newcommand{\vphi}{\varphi}
+\newcommand{\vkappa}{\varkappa}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Font styles/accents
@@ -285,8 +268,8 @@
 
 \newcommand{\uppercaseRoman}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \newcommand{\lowercaseRoman}{abcdefghijklmnopqrstuvwxyz}
-\newcommand{\lowercaseGreek}{\al\be\ga\de\ep\ze\et\th\io\ka\la\mu\nu\xi\pi\rh\si\ta\up\ph\ch\ps\om\vep\vth\vka\vpi\vrh\vsi\vph}
-\newcommand{\uppercaseGreek}{\Ga\De\Th\La\Xi\Pi\Si\Up\Ph\Ps\Om}
+\newcommand{\lowercaseGreek}{\alpha\beta\gamma\delta\eps\zeta\eta\theta\iota\kappa\lambda\mu\nu\xi\pi\rho\sigma\tau\ups\phi\chi\psi\omega\veps\vtheta\vkappa\vpi\vrho\vsigma\vphi}
+\newcommand{\uppercaseGreek}{\Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Ups\Phi\Psi\Omega}
 
 \newcommand{\s}[2][]{
     \StrLeft{#1}{1}[\fontstylehead]
@@ -579,10 +562,9 @@
 \let\oldP\P
 \renewcommand\P{\ifmmode\mathbb{P}\else\oldP\fi} %make \P be mathbbP in math mode, usual defn as pilcrow in text mode
 \newcommand{\E}{\mathbb{E}}	% expectation
-\newcommand{\law}{\mathcal{L}} 
-\newcommand{\var}{\operatorname{Var}}	% variance
-\newcommand{\cov}{\operatorname{Cov}}	% covariance
-\newcommand{\cor}{\operatorname{Corr}}	% correlation
+\newcommand{\Var}{\operatorname{Var}}	% variance
+\newcommand{\Cov}{\operatorname{Cov}}	% covariance
+\newcommand{\Cor}{\operatorname{Cor}}	% correlation
 \newcommand{\supp}{\operatorname{supp}} %support
 
 % binary operators

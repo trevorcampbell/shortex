@@ -59,8 +59,8 @@ The high-level goal of ShorTeX is to make LaTeX...
 
 ...without breaking original LaTeX commands so that users can employ as much or as little ShorTeX as they want.
 ShorTeX includes a few different categories of functionality towards this goal.
-Contributors to this package should be able to justify proposed inclusions based on the below
-guidelines.
+Contributors to this package should try to justify proposed inclusions
+based on the below guidelines (or propose different guidelines, of course!).
 
 ### Packages
 
@@ -100,18 +100,19 @@ where `...` is a readable/memorable lowercase shorthand. For example,
   consistent behaviour of a star outside of theorem-like environments); so
   `\bfig...\efig` becomes `\bfigs...\efigs`.
 
-### Shorthands for common tasks
+### Shorthands for common editing tasks
 
 There are certain tasks that are commonly performed across a wide range of
-documents for which users tend to define their own special one-off commands. A
-perfect example of this is a set of commands to add comments/highlights/margin
+documents for which users tend to define their own special one-off commands.
+Examples of this are a command to shrink whitespace in math mode, 
+as well as a set of commands to add comments/highlights/margin
 notes to documents. ShorTeX should include shorthand macros to automate these
 common tasks with a simple syntax.
 
 ### Math macros that "fill in the gaps"
 
 ShorTeX should include macros to implement commonly used math
-symbols/operations that are missing from LaTeX with usual math packages. The
+symbols/operations that are clearly missing from LaTeX with usual math packages. The
 syntax should be as unsurprising as possible and follow the patterns existing
 in LaTeX with usual math packages. For example, there are `\max` and `\min`
 macros in LaTeX for maximization and minimization, but no macros for argmax,
@@ -120,19 +121,16 @@ argmin, essential supremum, etc. As another example, there is `\sum` and
 items" like unions, intersections, etc. There are `\widehat` and
 `\widetilde` macros, but no `\widebar`. 
 
-### Math macros for functions and operators
+### Math macros for common functions and operations
 
-For functions and operators (e.g., trace, rank, variance, support), ShorTeX should
-include macros that mimic the typeset appearance of the name 
+For functions and operators (e.g., trace, rank, variance, support, probability), ShorTeX should
+generally include macros that mimic the typeset appearance of the function/operator name.
 
-ShorTeX defines a range of such
-extension macros that a typical LaTeX user might expect to exist anyway and
-should be able to "guess" without much effort.
-
-### Shorthands for unwieldy/unreadable math expressions
+### Math macros for unwieldy/unreadable expressions
 
 ShorTeX should include macros to make very common, but otherwise bulky/difficult-to-read 
 mathematical syntax clearer. Common examples of this are long style/accent combinations, like 
 `\bar{\mathbb{A}}`, over/underset expressions like `\overset{\text{p}}{\to}`, 
-delimiters like `\left\{ ... \right\}`, and accented names and words like ``\c\`{a}dl\`{a}g``
+delimiters like `\left\{ ... \right\}`, and accented names and words like ``\c\`{a}dl\`{a}g``.
+The macro names should be short, memorable, and avoid curly braces and multikey presses.
 

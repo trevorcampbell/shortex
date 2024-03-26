@@ -118,87 +118,9 @@ pmatrix & \verb!\bpmat...\epmat!\\
 \ecent
 }
 
-\newpage
-\section{Delimiters}
-
-Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
-A very common usage of these involves the \verb!\left...\right! commands for automatic sizing. 
-One can also use \verb!\bigl...\bigr!, \verb!\Bigl...\Bigr!, \verb!\biggl...\biggr!, \verb!\Biggl...\Biggr! to control sizing manually.
-ShorTeX creates shorthands for these.
-
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Description & Syntax  \\ \midrule
-automatic	& \verb!\lt...\rt!\\        
-big 	& \verb!\lb...\rb!\\
-Big & \verb!\lB...\rB! \\ 
-bigg & \verb!\lbg...\rbg!\\ 
-Bigg & \verb!\lBg...\rBg!\\
-\bottomrule
-\etabr
-\ecent
-
-These can be applied to all the usual delimiter characters.
-The following tables demonstrate usage for automatically sized delimiters. 
-
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Description & Example & Text style & Display style \\ \midrule
-parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
-curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
-square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
-pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
-double pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
-angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
-\bottomrule
-\etabr
-\ecent
 
 \newpage
-\section{Greek characters and variants}\label{sec:greeks}
-
-ShorTeX defines shorthands for Greek characters and variants.
-The syntax is just the first two characters of the greek name
-(except for omicron, which is identical to the Roman o and O
-and so no special characters are required).
-Variants are obtained by preceding the usual command with \verb!\v...!.
-
-\bcent
-\btabr{@{}lllll@{}}
-\toprule
-Letter & Syntax & Symbol & Variant Syntax & Variant Symbol  \\ \midrule
-alpha & \verb!\al,A! & $\al,A$ &  &  \\
-beta & \verb!\be,B! & $\be,B$ &  &  \\
-gamma & \verb!\ga,\Ga! & $\ga,\Ga$ &  &  \\
-delta & \verb!\de,\De! & $\de,\De$ &  &  \\
-epsilon & \verb!\ep,E! & $\ep,E$ & \verb!\vep! & $\vep$ \\
-zeta & \verb!\ze,Z! & $\ze,Z$ &  &  \\
-eta & \verb!\et,H! & $\et,H$ &  &  \\
-theta & \verb!\th,\Th! & $\th,\Th$ & \verb!\vth! & $\vth$ \\
-iota & \verb!\io,I! & $\io,I$ &  &  \\
-kappa & \verb!\ka,K! & $\ka,K$ & \verb!\vka! & $\vka$ \\
-lambda & \verb!\la,\La! & $\la,\La$ &  &  \\
-mu & \verb!\mu,M! & $\mu,M$ &  &  \\
-nu & \verb!\nu,N! & $\nu,N$ &  &  \\
-xi & \verb!\xi,\Xi! & $\xi,\Xi$ &  &  \\
-omicron & \verb!o,O! & $o,O$ &  &  \\
-pi & \verb!\pi,\Pi! & $\pi,\Pi$ & \verb!\vpi! & $\vpi$ \\
-rho & \verb!\rh,P! & $\rh,P$ & \verb!\vrh! & $\vrh$ \\
-sigma & \verb!\si,\Si! & $\si,\Si$ & \verb!\vsi! & $\vsi$ \\
-tau & \verb!\ta,T! & $\ta,T$ &  &  \\
-upsilon & \verb!\up,\Up! & $\up,\Up$ &  &  \\
-phi & \verb!\ph,\Ph! & $\ph,\Ph$ & \verb!\vph! & $\vph$ \\
-chi & \verb!\ch,X! & $\ch,X$ &  &  \\
-psi & \verb!\ps,\Ps! & $\ps,\Ps$ &  &  \\
-omega & \verb!\om,\Om! & $\om,\Om$ &  &  \\
-\bottomrule
-\etabr
-\ecent
-
-\newpage
-\section{Font styles and accents}\label{sec:fontstylesaccents}
+\section{Math font styles and accents}\label{sec:fontstylesaccents}
 
 Applying accents (e.g., hats $\s[h]a$, tildes $\s[t]a$, bars $\s[b]a$)
 and changing fonts (e.g., doublestroke $\s[d]A$, caligraphic $\s[c]A$, and bold $\s[k]A$)
@@ -314,14 +236,14 @@ to obtain the following symbols:
 \]
 As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
 \begin{verbatim}
-\parsefontstylestrings{{kh}}{{\al}{\be}{\ga}}
+\parsefontstylestrings{{kh}}{{\alpha}{\beta}{\gamma}}
 \end{verbatim}
-\parsefontstylestrings{{kh}}{{\al}{\be}{\ga}}
+\parsefontstylestrings{{kh}}{{\alpha}{\beta}{\gamma}}
 and then in the \LaTeX~document, use the commands
-\verb!\skhal \skhbe \skhga!
+\verb!\skhalpha \skhbeta \skhgamma!
 to obtain the following symbols:
 \[
-	\skhal \skhbe \skhga
+	\skhalpha \skhbeta \skhgamma
 \]
 
 For convenience we also provide a few common alphabets of symbols 
@@ -336,9 +258,9 @@ see \cref{sec:greeks}.
 Syntax & Characters  \\ \midrule
 \verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
 \verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\verb!\lowercaseGreek! & al,be,ga,de,ep,ze,et,th,io,ka,la,mu,nu,xi,pi,rh\\
-& si,ta,up,ph,ch,ps,om,vep,vth,vka,vpi,vrh,vsi,vph\\
-\verb!\uppercaseGreek! & Ga,De,Th,La,Xi,Pi,Si,Up,Ph,Ps,Om\\
+\verb!\lowercaseGreek! & alpha,beta,gamma,delta,eps,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho\\
+& sigma,tau,ups,phi,chi,psi,omega,veps,vtheta,vkappa,vpi,vrho,vsigma,vphi\\
+\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma,Ups,Phi,Psi,Omega\\
 \bottomrule
 \etabr
 \ecent
@@ -446,30 +368,77 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
 
 
-\section{Custom macros}
+\section{Math macros}
 
-\subsection{Shrinking whitespace in math}
-The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
-where \verb!<frac>! represents the fraction of whitespace reduction.
-Below, the first line is regularly spaced, the second line has \verb!\squish{0.5}!, and the third has \verb!\squish{0.0}!.
-\[
-	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squish{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squish{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-\]
+\subsection{Delimiters}
 
-The code for \verb!\squish! was taken from \url{https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation}.
+Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
+A very common usage of these involves the \verb!\left...\right! commands for automatic sizing, as well as \verb!\middle! 
+for sizing characters in between delimiters.
+One can also use \verb!\bigl...\bigr!, \verb!\Bigl...\Bigr!, \verb!\biggl...\biggr!, \verb!\Biggl...\Biggr! to control sizing manually.
+ShorTeX creates shorthands for these.
 
-\subsection{Wide bar}
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description & Syntax  \\ \midrule
+automatic left, right	& \verb!\lt...\rt!\\        
+automatic middle	& \verb!\m...!\\        
+big 	& \verb!\lb...\rb!\\
+Big & \verb!\lB...\rB! \\ 
+bigg & \verb!\lbg...\rbg!\\ 
+Bigg & \verb!\lBg...\rBg!\\
+\bottomrule
+\etabr
+\ecent
 
-ShorTeX provides the \verb!\widebar! command to typeset a wide bar accent on top of a character (similar to the 
-usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \verb!\bar! and 
-\verb!\overline! commands:
-\[
-	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
-\]
-The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
-Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
+These can be applied to all the usual delimiter characters.
+The following tables demonstrate usage for automatically sized delimiters. 
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description & Example & Text style & Display style \\ \midrule
+parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
+curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
+square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
+pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
+double pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
+angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
+middle bar 	& \verb!\E\lt[X \m| Y\rt]!    	& $\E\lt[X \m| Y\rt]$ 	& $\displaystyle\E\lt[X \m| Y\rt]$ \\[10pt]
+\bottomrule
+\etabr
+\ecent
+
+\subsection{Greek characters and variants}\label{sec:greeks}
+
+ShorTeX defines shorthands for \verb!\epsilon! and \verb!\upsilon!
+as well as variant characters. Variants are obtained by preceding the usual command with \verb!\v...!.
+
+\bcent
+\btabr{@{}lllll@{}}
+\toprule
+Letter & Syntax & Symbol  \\ \midrule
+epsilon & \verb!\eps! & $\eps$ \\
+upsilon & \verb!\ups,\Ups! & $\ups,\Ups$\\
+\bottomrule
+\etabr
+\ecent
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Letter & Variant Syntax & Variant Symbol  \\ \midrule
+epsilon & \verb!\veps! & $\veps$ \\
+theta & \verb!\vtheta! & $\vtheta$ \\
+kappa & \verb!\vkappa! & $\vkappa$ \\
+pi & \verb!\vpi! & $\vpi$ \\
+rho & \verb!\vrho! & $\vrho$ \\
+sigma & \verb!\vsigma! & $\vsigma$ \\
+phi & \verb!\vphi! & $\vphi$ \\
+\bottomrule
+\etabr
+\ecent
 
 
 \subsection{Sets and set operations}
@@ -601,9 +570,9 @@ equality in distribution	& \verb!\eqd! & $\eqd$ \\
 equality almost surely	& \verb!\eqas! & $\eqas$ \\
 probability	& \verb!\P! & $\P$ \\
 expectation	& \verb!\E! & $\E$ \\
-variance	& \verb!\var! & $\var$ \\
-covariance	& \verb!\cov! & $\cov$ \\
-correlation	& \verb!\cor! & $\cor$ \\
+variance	& \verb!\Car! & $\Var$ \\
+covariance	& \verb!\Cov! & $\Cov$ \\
+correlation	& \verb!\Cor! & $\Cor$ \\
 support	& \verb!\supp! & $\supp$ \\
 distributed as	& \verb!\dist! & $\dist$ \\
 distributed \iid	& \verb!\distiid! & $\distiid$ \\
@@ -661,6 +630,29 @@ Poisson process	& \verb!\PP! & $\PP$ \\
 \bottomrule
 \etabr
 \ecent
+
+\subsection{Shrinking whitespace in math}
+The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
+where \verb!<frac>! represents the fraction of whitespace reduction.
+Below, the first line is regularly spaced, the second line has \verb!\squish{0.5}!, and the third has \verb!\squish{0.0}!.
+\[
+	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+\]
+
+The code for \verb!\squish! was taken from \url{https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation}.
+
+\subsection{Wide bar}
+
+ShorTeX provides the \verb!\widebar! command to typeset a wide bar accent on top of a character (similar to the 
+usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \verb!\bar! and 
+\verb!\overline! commands:
+\[
+	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
+\]
+The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
+Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
 
 
 
@@ -720,10 +712,6 @@ Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displays
 TODO: full shortex example and unit testing of all commands at the end
 
 Note: \verb!\bdR! doesn't work
-
-\[
-	asdf
-\]
 
 \end{document}
 
