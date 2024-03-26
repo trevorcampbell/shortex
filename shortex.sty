@@ -508,11 +508,11 @@
 \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
 
 % divergences
-\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3 || #4}}
-\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\rbra{#3, #4}}
+\newcommand{\divergence}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\!\lt( #3 \m|\m| #4 \rt)}
+\newcommand{\distance}[4][]{\mathrm{D^{\ifthenelse{\isempty{#1}}{}{#1}}_{#2}}\!\lt( #3, #4\rt)}
 \newcommand{\kl}[3][]{\divergence[#1]{KL}{#2}{#3}}
 \newcommand{\tvd}[3][]{\distance[#1]{TV}{#2}{#3}}
-\newcommand{\ent}[1]{\mathcal{H}\rbra{#1}}
+\newcommand{\ent}[1]{\mathcal{H}\!\lt(#1\rt)}
 \newcommand{\hell}[3][]{\distance[#1]{H}{#2}{#3}}
 
 % parametric distributions
