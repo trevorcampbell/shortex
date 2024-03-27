@@ -19,11 +19,11 @@ For example, here is the same expression as above in `shortex.sty` syntax:
 ```latex
 See \cref{eq:foo}.
 \[
-X_n &\in \fcX\\
+X_n &\in \scX\\
 X_n &\convp X \label{eq:foo}\\
-\ex\lt[X\rt] &= \int_0^1 6\der{4y^2}{y}\dee y\\
-\pr\lt(X_n \in \fcA\rt) &= \fbhC\\
-X_n &\dist \distNorm(\fhmu, \fhSigma)
+\E\lt[X\rt] &= \int_0^1 6\der{4y^2}{y}\d y\\
+\P\lt(X_n \in \scA\rt) &= \fbhC\\
+X_n &\dist \Norm(\shmu, \shSigma)
 \]
 ```
 
