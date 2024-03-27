@@ -1,6 +1,15 @@
 \documentclass{article}
 
-\usepackage{shortex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  shortex.tex
+%%  Latex packages and macros for
+%%  more efficient, readable math
+%%
+%%  Copyright (c) 2023 Trevor Campbell, 
+%%  Jonathan Huggins, Jeffrey Negrea
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[commenters={A,B,C,D,E,F,G,H,I,J}]{shortex}
 
 \title{The \texttt{ShorTeX} package}
 \author{Trevor Campbell, Jonathan Huggins, and Jeff Negrea}
@@ -11,8 +20,8 @@
 
 \maketitle
 
-
 \babs
+
 The purpose of the ShorTeX (meta)package is to make the process of typesetting
 typical mathematical documents in \LaTeX~more efficient, and the resulting
 code easier to read.  It achieves this by 
@@ -28,39 +37,51 @@ dedicated to reducing manual coding effort.
 
 \section{Usage and package options}\label{sec:usage}
 
+Put a copy of \texttt{shortex.sty} in the folder
+alongside your other document files, and
+include ShorTeX in the document by adding \verb!\usepackage{shortex}! to the preamble.
+\textbf{Do not install ShorTeX system-wide;} this package has not yet reached a stable version 1.0,
+and we are updating things regularly without any guarantee of backwards
+compatibility. 
+\textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
+numbers and references update properly.
 
-Include ShorTeX by adding \verb!\usepackage{shortex}! to the preamble of your document.
-ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx, subcaption, hyperref, algorithm, algpseudocode, amsmath}, among others),
+
+ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx}, \texttt{subcaption}, \texttt{hyperref},
+\texttt{algorithm}, \texttt{algpseudocode}, \texttt{amsmath}, among others),
 so you do not need to explicitly include and set these up yourself.
 If you are writing a document that must use a specific style file (e.g., for a conference or journal) that itself
 includes some of these packages, we recommend editing those style files to remove the package imports.
 
 The ShorTeX package has a few options:
 \bdesc
-\item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
-\item[\texttt{blackhypersetup}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
+\item[\texttt{noautonum}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
+\item[\texttt{blacklinks}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
+\item[\texttt{draft}] Turn on draft mode for \texttt{graphicx}, \texttt{hyperref} (with placeholder figures etc).
+\item[\texttt{nomathfontdefaults}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
+\item[\texttt{commenters}] Specify names of commenters for comment commands (see \cref{sec:commenting} for details).
+\item[\texttt{hidecomments}] Suppress comments (see \cref{sec:commenting} for details).
 \edesc
-\textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
-numbers and references update properly.
 
-\section{Shorthands for existing commands}
+\newpage
+\section{Environments}
 
-\subsection{Environments}
-
-\LaTeX~documents often includes a lot of verbose code
+\LaTeX~documents often include a lot of verbose code
 related to creating environments (\verb!\begin{blah}...\end{blah}!). ShorTeX provides a set of 
 shortened macros for common environments.
+Each shortened begin and end command starts with \verb!\b...! and \verb!\e...!, respectively.
 Note that all theorem-like environments (theorem, lemma, proposition, etc.) 
 are numbered by default; unnumbered versions can be obtained by appending a \verb!u!. For example,
 \verb!\bthmu...\ethmu! creates an unnumbered theorem environment, while
 \verb!\blemu...\elemu! creates an unnumbered lemma environment.
 
+{\small
 \bcent
 \btabr{@{}ll@{}}
 \toprule
 Environment & Syntax \\ \midrule
 abstract & \verb!\babs...\eabs!\\ \midrule
-itemize & \verb!\bitems...\eitems!\\
+itemize & \verb!\bitem...\eitem!\\
 enumerate & \verb!\benum...\eenum!\\
 description & \verb!\bdesc...\edesc!\\ \midrule
 algorithm & \verb!\balg...\ealg!\\
@@ -81,8 +102,8 @@ lemma & \verb!\blem...\elem!\\
 proposition & \verb!\bprop...\eprop!\\
 corollary & \verb!\bcor...\ecor!\\
 conjecture & \verb!\bconj...\econj!\\
-definition & \verb!\bdef...\edef!\\
-assumption & \verb!\bassump...\eassump!\\
+definition & \verb!\bdefn...\edefn!\\
+assumption & \verb!\bassum...\eassum!\\
 example & \verb!\bexa...\eexa!\\
 remark & \verb!\brmk...\ermk!\\
 fact & \verb!\bfact...\efact!\\
@@ -91,62 +112,86 @@ proof & \verb!\bprf...\eprf!\\
 proofof & \verb!\bprfof{\cref{theorem_label}}...\eprfof!\\  \midrule
 matrix & \verb!\bmat...\emat!\\
 bmatrix & \verb!\bbmat...\ebmat!\\
-pmatrix & \verb!\pbmat...\epmat!\\
+pmatrix & \verb!\bpmat...\epmat!\\
 \bottomrule
 \etabr
 \ecent
+}
 
-\subsection{Delimiters}
 
-Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
-A very common usage of these involves the \verb!\left...\right! commands for automatic sizing. 
-One can also use \verb!\bigl...\bigr!, \verb!\Bigl...\Bigr!, \verb!\biggl...\biggr!, \verb!\Biggl...\Biggr! to control sizing manually.
-ShorTeX creates shorthands for these.
+\newpage
+\section{Math font styles and accents}\label{sec:fontstylesaccents}
 
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Description & Syntax  \\ \midrule
-automatic	& \verb!\lt...\rt!\\        
-big 	& \verb!\lb...\rb!\\
-Big & \verb!\lB...\rB! \\ 
-bigg & \verb!\lbg...\rbg!\\ 
-Bigg & \verb!\lBg...\rBg!\\
-\bottomrule
-\etabr
-\ecent
-
-These can be applied to all the usual delimiter characters.
-The following tables demonstrate usage for automatically sized delimiters. 
-
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Description & Example & Text style & Display style \\ \midrule
-parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
-curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
-square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
-pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
-double pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
-angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
-\bottomrule
-\etabr
-\ecent
-
-\subsection{Font styles and accents}
-
-Applying accents (e.g., hats $\f[h]a$, tildes $\f[t]a$, bars $\f[b]a$)
-and changing fonts (e.g., doublestroke $\f[d]A$, caligraphic $\f[c]A$, and bold $\f[k]A$)
+Applying accents (e.g., hats $\s[h]a$, tildes $\s[t]a$, bars $\s[b]a$)
+and changing fonts (e.g., doublestroke $\s[d]A$, caligraphic $\s[c]A$, and bold $\s[k]A$)
 is quite cumbersome in standard \LaTeX. For example, the code to make a tilde caligraphic A,
 $\widetilde{\mathcal{A}}$
 is \verb!\widetilde{\mathcal{A}}!. By itself that code is not too bad, but many such characters 
 in a large mathematical expression results in unreadable code.
 
-ShorTeX defines an efficient syntax for changing fonts and applying accents to characters. 
-The syntax takes the form \verb!\f[modifiers]character!, where \verb!modifiers! is a set of single characters
+\subsection{Default font, accent combinations}
+
+ShorTeX defines an efficient syntax for changing math fonts and applying accents to characters.
+The syntax takes the form \verb!\s<modifiers>character!, where \verb!<modifiers>! is a set of single characters
 that represent font/accent modifications to \verb!character!. 
-For example, the code for tilde caligraphic A is \verb!\f[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
+For example, the code for tilde caligraphic A is \verb!\stcA! where \verb!t! represents ``tilde,'' \verb!c! represents
+``caligraphic,'' and \verb!A! is the character to typeset. The table below shows the modifier characters that
+are implemented by default with all upper/lowercase Greek and Roman characters.
+Because \verb!b! is already used for ``bar,'' ShorTeX uses \verb!k! for ``bold'' (arising from the use of \verb!k! to represent
+``black'' in plotting packages across many languages, which itself arises from the ``K'' in CMYK).
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Style & Modifier & Example & Typeset Example \\ \midrule
+caligraphic (\verb!mathcal!) & \verb!c! & \verb!\scA! & $\scA$ \\
+bold (\verb!mathbf!) & \verb!k! & \verb!\skA! & $\skA$\\
+doublestroke (\verb!mathbb!) & \verb!d! & \verb!\sdA! & $\sdA$\\ \midrule
+Accent & Modifier & Example & Typeset Example \\ \midrule
+hat (\verb!widehat!) & \verb!h! & \verb!\shA! & $\shA$\\
+tilde (\verb!widetilde!) & \verb!t! & \verb!\stA! & $\stA$\\
+bar (\verb!widebar!) & \verb!b! & \verb!\sbA! & $\sbA$\\
+dot (\verb!dot!) & \verb!o! & \verb!\soA! & $\soA$\\
+\bottomrule
+\etabr
+\ecent
+
+In addition, ShorTeX allows the use of combinations of any one of the above fonts with any one of the above accents.
+For example, we can combine the caligraphic style \verb!c! with all the accents
+via \verb!\stcA!, \verb!\socA!, \verb!\sbcA!, \verb!\shcA!:
+\[
+\stcA \quad \socA \quad \sbcA \quad \shcA.
+\]
+To disable these default shortcuts, pass the \texttt{nomathfontdefaults} option to ShorTeX.
+
+\subsection{Advanced usage: flexible font, accent combinations}
+
+For most users, the default font style/accent combinations that come with ShorTeX will suffice.
+However, the \verb!\s...! commands are actually implemented under the hood using
+a more flexible \verb!\s[modifiers]character! command that can take a wide variety of
+combinations of font/accent modifiers. For example, the code for tilde 
+caligraphic A is \verb!\s[tc]A! where \verb!t! represents ``tilde,'' \verb!c! represents
 ``caligraphic,'' and \verb!A! is the character to typeset.
+
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Style & Modifier & Example & Typeset Example \\ \midrule
+caligraphic (\verb!mathcal!) & \verb!c! & \verb!\s[c]A! & $\s[c]A$ \\
+bold (\verb!mathbf!) & \verb!k! & \verb!\s[k]A! & $\s[k]A$\\
+doublestroke (\verb!mathbb!) & \verb!d! & \verb!\s[d]A! & $\s[d]A$\\
+fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\ \midrule
+Accent & Modifier & Example & Typeset Example \\ \midrule
+hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
+tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
+bar (\verb!widebar!) & \verb!b! & \verb!\s[b]A! & $\s[b]A$\\
+dot (\verb!dot!) & \verb!o! & \verb!\s[o]A! & $\s[o]A$\\
+\bottomrule
+\etabr
+\ecent
+
+These style modifiers can be combined; the underlying code is flexible enough that
+it will happily produce a wide variety of combinations, including those that aren't very sensible.
 
 \emph{Note: modifiers are applied in the reverse of the order in which they appear; 
 the modifier furthest to the right is applied first. This matches the order that 
@@ -156,36 +201,22 @@ the corresponding commands would appear in TeX code.}
 \btabr{@{}llll@{}}
 \toprule
 Style/Accent & Modifier & Example & Typeset Example \\ \midrule
-caligraphic (\verb!mathcal!) & \verb!c! & \verb!\f[c]A! & $\f[c]A$ \\
-bold (\verb!mathbf!) & \verb!k! & \verb!\f[k]A! & $\f[k]A$\\
-doublestroke (\verb!mathbb!) & \verb!d! & \verb!\f[d]A! & $\f[d]A$\\
-hat (\verb!widehat!) & \verb!h! & \verb!\f[h]A! & $\f[h]A$\\
-tilde (\verb!widetilde!) & \verb!t! & \verb!\f[t]A! & $\f[t]A$\\
-bar (\verb!widebar!) & \verb!b! & \verb!\f[b]A! & $\f[b]A$\\
+caligraphic tilde & \verb!ct! & \verb!\s[ct]A! & $\s[ct]A$ \\
+bold hat & \verb!kh! & \verb!\s[kh]A! & $\s[kh]A$\\
+tilde hat  & \verb!ht! & \verb!\s[ht]A! & $\s[ht]A$\\
+hat tilde   & \verb!th! & \verb!\s[th]A! & $\s[th]A$\\
+fraktur dot   & \verb!of! & \verb!\s[of]A! & $\s[of]A$\\
 \bottomrule
 \etabr
 \ecent
 
-These style modifiers can be combined; the underlying code is flexible enough that
-it will happily produce a wide variety of combinations, including those that aren't very sensible.
-
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Style/Accent & Modifier & Example & Typeset Example \\ \midrule
-caligraphic tilde & \verb!ct! & \verb!\f[ct]A! & $\f[ct]A$ \\
-bold hat & \verb!kh! & \verb!\f[kh]A! & $\f[kh]A$\\
-hat tilde  & \verb!ht! & \verb!\f[ht]A! & $\f[ht]A$\\
-tilde hat  & \verb!th! & \verb!\f[th]A! & $\f[th]A$\\
-\bottomrule
-\etabr
-\ecent
-
-We can avoid typing \texttt{[]} for commonly used patterns
-by parsing the font style string in advance.
+The default \verb!\s...! commands included in ShorTeX are compiled
+in advance from the more general \verb!\s[...]...!
+via the \verb!\parsefontstylestrings! command; this lets us avoid having
+to type \texttt{[]} for common style/accent combinations.
 For example, if we use ``bold hat'' symbols frequently,
 we might want to use commands like
-\verb!\fkh...!  instead of \verb!\f[kh]...!.
+\verb!\skh...!  instead of \verb!\s[kh]...!.
 We can accomplish this using the \verb!\parsefontstylestrings! command,
 with syntax
 \begin{verbatim}
@@ -198,29 +229,30 @@ for the characters A, B, C, and D, we would use the command
 \end{verbatim}
 \parsefontstylestrings{{kh}{ch}}{ABCD}
 and then in the \LaTeX~document, use the commands
-\verb!\fkhA \fkhB \fkhC \fkhD! and
-\verb!\fchA \fchB \fchC \fchD! 
+\verb!\skhA \skhB \skhC \skhD! and
+\verb!\schA \schB \schC \schD! 
 to obtain the following symbols:
 \[
-\fkhA \fkhB \fkhC \fkhD 
-\fchA \fchB \fchC \fchD 
+\skhA \skhB \skhC \skhD 
+\schA \schB \schC \schD 
 \]
 As another example, for ``bold hat'' applied to $\alpha$, $\beta$, and $\gamma$, we would use the syntax
 \begin{verbatim}
-\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
+\parsefontstylestrings{{kh}}{{\alpha}{\beta}{\gamma}}
 \end{verbatim}
-\parsefontstylestrings{{kh}}{\alpha\beta\gamma}
+\parsefontstylestrings{{kh}}{{\alpha}{\beta}{\gamma}}
 and then in the \LaTeX~document, use the commands
-\verb!\fkhalpha \fkhbeta \fkhgamma!
+\verb!\skhalpha \skhbeta \skhgamma!
 to obtain the following symbols:
 \[
-	\fkhalpha \fkhbeta \fkhgamma
+	\skhalpha \skhbeta \skhgamma
 \]
 
 For convenience we also provide a few common alphabets of symbols 
 for use in the \verb!\parsefontstylestrings! command.
-Note that not every Greek character has an uppercase version (in cases where it is
-identical to its Roman counterpart).
+Note that not every Greek character has a lowercase or uppercase version (in cases where it is
+identical to its Roman counterpart). Also note that we use ShorTeX Greek letter syntax;
+see \cref{sec:greeks}.
 
 \bcent
 \btabr{@{}lll@{}}
@@ -228,37 +260,64 @@ identical to its Roman counterpart).
 Syntax & Characters  \\ \midrule
 \verb!\lowercaseRoman! & abcdefghijklmnopqrstuvwxyz \\
 \verb!\uppercaseRoman! & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\verb!\lowercaseGreek! & alpha,beta,gamma,delta,epsilon,zeta,eta,theta\\
-& iota,kappa,lambda,mu,nu,xi,omicron,pi,rho\\
-& sigma,tau,upsilon,phi,chi,psi,omega\\
-\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma\\
-& Upsilon,Phi,Psi,Omega \\
+\verb!\lowercaseGreek! & alpha,beta,gamma,delta,eps,zeta,\\
+& eta,theta,iota,kappa,lam,mu,nu,xi,pi,rho,\\
+& sigma,tau,ups,phi,chi,psi,omega,veps,vtheta,\\
+& vkappa,vpi,vrho,vsigma,vphi\\
+\verb!\uppercaseGreek! & Gamma,Delta,Theta,Lam,Xi,\\
+&Pi,Sigma,Ups,Phi,Psi,Omega\\
 \bottomrule
 \etabr
 \ecent
 
-\subsection{Greek characters and variants}
-
-ShorTeX defines a number of shorthands for Greek characters and variants.
+\newpage
+\section{Commenting}\label{sec:commenting}
+ShorTeX defines four types of document markup that can be used: 
+\emph{comment}, \emph{emphasized comment}, \emph{margin comment}, and \emph{highlight}.
+This is a lightweight alternative to some more common todo packages (e.g., \texttt{todonotes}).
+In order to create comments, you must pass the \verb!commenters! option to the package, and specify
+an identifier for each commenter. For example, one could specify three commenters 
+(named A, B, C) using the command\\
+\\
+\verb!\usepackage[commenters={A,B,C}]{shortex}!
+\\\\
+For each commenter, there are four commands (one for each markup type). The table
+below contains examples for commenter ``A''. Notice that each comment is tagged with a number
+(specific to each commenter) for easy referencing.
 
 \bcent
-\btabr{@{}lll@{}}
+\btabr{@{}llll@{}}
 \toprule
-Letter & Syntax & Symbol  \\ \midrule
-epsilon	& \verb!\eps! & $\eps$ \\
-upsilon	& \verb!\ups! & $\ups$ \\
-variant epsilon	& \verb!\veps! & $\veps$ \\
-variant theta	& \verb!\vtheta! & $\vtheta$ \\
-variant pi	& \verb!\vpi! & $\vpi$ \\
-variant rho	& \verb!\vrho! & $\vrho$ \\
-variant sigma	& \verb!\vsigma! & $\vsigma$ \\
-variant phi	& \verb!\vphi! & $\vphi$ \\
-variant kappa	& \verb!\vkappa! & $\vkappa$ \\
+Comment Type & Syntax & Example & Typeset Example\\ \midrule
+comment & \verb!\c...{comment}! & \verb~\cA{hello!}~ & \cA{hello!} \\ 
+emphasized comment & \verb!\e...{comment}! & \verb~\eA{hello!}~ & \eA{hello!} \\ 
+margin comment & \verb!\m...{comment}! & text\verb~\mA{hello!}~ & text\mA{hello!} \\ 
+highlight & \verb!\h...{text}! & \verb~\hA{hello!}~ & \hA{hello!} \\ 
 \bottomrule
 \etabr
 \ecent
 
-\subsection{Referencing figures, equations, tables, etc.}
+Note that each commenter gets their own color. Currently ShorTeX supports nine different commenter colors,
+and will wrap around back to the first color if the number of commenters exceeds nine:
+\bitem
+\setlength{\itemsep}{0pt}
+\item \cA{example}\eA{emphasized example}more text\mA{margin example}
+\item \cB{example}\eB{emphasized example}more text\mB{margin example}
+\item \cC{example}\eC{emphasized example}more text\mC{margin example}
+\item \cD{example}\eD{emphasized example}more text\mD{margin example}
+\item \cE{example}\eE{emphasized example}more text\mE{margin example}
+\item \cF{example}\eF{emphasized example}more text\mF{margin example}
+\item \cG{example}\eG{emphasized example}more text\mG{margin example}
+\item \cH{example}\eH{emphasized example}more text\mH{margin example}
+\item \cI{example}\eI{emphasized example}more text\mI{margin example}
+\item Back to first color: \cJ{example}\eJ{emphasized example}more text\mJ{margin example}
+\eitem
+You can also disable all comments to see a clean version of the current 
+document using the \verb!hidecomments! package option.
+This option will blank out all comments and render highlighted text normally.
+
+\newpage
+\section{Referencing figures, equations, tables, etc.}
 
 ShorTeX includes the \texttt{cleveref} package, which simplifies the process
 of typesetting references. Use the \verb!\cref! command (or \verb!\Cref! at the beginning of a sentence) 
@@ -279,9 +338,7 @@ and can be extended if needed. See the \texttt{cleveref} documentation
 at \url{https://ctan.org/pkg/cleveref?lang=en} and the homepage at \url{https://www.dr-qubit.org/cleveref.html} 
 for more information.
 
-\subsection{Automatic equation numbers}
-
-ShorTeX includes the \texttt{autonum} package, which simplifies the process of 
+ShorTeX also includes the \texttt{autonum} package, which simplifies the process of 
 equation numbering. Typically when you typeset equations, you have to choose between 
 \verb!$...$!, \verb!$$...$$!, 
 \verb!\begin{align}...\end{align}!, 
@@ -316,88 +373,140 @@ documentation \url{https://ctan.org/pkg/autonum?lang=en} for more information.
 
 
 
-\section{Custom macros}
+\section{Math mode macros}
 
-\subsection{Shrinking whitespace in math}
-The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
-where \verb!<frac>! represents the fraction of whitespace reduction.
-Below, the first line is regularly spaced, the second line has \verb!\squish{0.5}!, and the third has \verb!\squish{0.0}!.
-\[
-	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squish{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-	\squish{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
-\]
+\subsection{Delimiters}
 
-The code for \verb!\squish! was taken from \url{https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation}.
-
-\subsection{Wide bar}
-
-ShorTeX provides the \verb!\widebar! command to typeset a wide bar accent on top of a character (similar to the 
-usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \verb!\bar! and 
-\verb!\overline! commands:
-\[
-	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
-\]
-The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
-
-
-
-\subsection{Commenting}
-ShorTeX defines three types of comments that can be used 
-(\emph{remarks}, \emph{problems}, and \emph{highlights}), and provides an inline and margin
-style for the former two. This is a lightweight alternative to some more common
-todo packages (e.g., \texttt{todonotes}).
+Mathematics in \LaTeX~often includes quite a few delimiters (parentheses, brackets, curly brackets, etc.).
+A very common usage of these involves the \verb!\left...\right! commands for automatic sizing, as well as \verb!\middle! 
+for sizing characters in between delimiters.
+One can also use \verb!\bigl...\bigr!, \verb!\Bigl...\Bigr!, \verb!\biggl...\biggr!, \verb!\Biggl...\Biggr! to control sizing manually.
+ShorTeX creates shorthands for these.
 
 \bcent
-\btabr{@{}ll@{}}
+\btabr{@{}llll@{}}
 \toprule
-Comment Type & Syntax \\ \midrule
-remark & \verb!\RMK{Example remark}!\\ 
-margin remark & \verb!\mRMK{Example margin remark}!\\ 
-problem & \verb!\PRB{Example problem}!\\ 
-margin problem & \verb!\mPRB{Example margin problem}!\\ 
-highlight & \verb!\HLT{Some rough text}!\\ 
+Description & Syntax  \\ \midrule
+automatic left, right	& \verb!\lt...\rt!\\        
+automatic middle	& \verb!\m...!\\        
+big 	& \verb!\lb...\rb!\\
+Big & \verb!\lB...\rB! \\ 
+bigg & \verb!\lbg...\rbg!\\ 
+Bigg & \verb!\lBg...\rBg!\\
 \bottomrule
 \etabr
 \ecent
 
-Here is an example of how these look in a typical paragraph:
+These can be applied to all the usual delimiter characters.
+The following tables demonstrate usage for automatically sized delimiters. 
 
-\begin{quote}
-Lorem ipsum dolor sit amet \RMK{Here is an inline remark}, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation \PRB{Here is an inline problem} ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in \mRMK{Here is a margin remark} voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat \mPRB{Here is a margin problem} cupidatat non proident, sunt.
-\HLT{Here is a highlighted part of the text.} sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-\end{quote}
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description & Example & Text style & Display style \\ \midrule
+parentheses	& \verb!\lt(\frac{x}{y}\rt)!        	& $\lt(\frac{x}{y}\rt)$ 		& $\displaystyle\lt(\frac{x}{y}\rt)$ \\[10pt]
+curly brackets 	& \verb!\lt\{\frac{x}{y}\rt\}!    	& $\lt\{\frac{x}{y}\rt\}$ 	& $\displaystyle\lt\{\frac{x}{y}\rt\}$ \\[10pt]
+square brackets & \verb!\lt[frac{x}{y}\rt]!        	& $\lt[\frac{x}{y}\rt]$ 	& $\displaystyle\lt[\frac{x}{y}\rt]$ \\[10pt]
+pipes & \verb!\lt|frac{x}{y}\rt|!        	& $\lt|\frac{x}{y}\rt|$ 	& $\displaystyle\lt|\frac{x}{y}\rt|$ \\[10pt]
+double pipes & \verb!\lt\|frac{x}{y}\rt\|!        	& $\lt\|\frac{x}{y}\rt\|$ 	& $\displaystyle\lt\|\frac{x}{y}\rt\|$ \\[10pt]
+angle brackets & \verb!\lt<frac{x}{y}\rt>!        	& $\lt<\frac{x}{y}\rt>$ 	& $\displaystyle\lt<\frac{x}{y}\rt>$ \\[10pt]
+middle bar 	& \verb!\E\lt[X \m| Y\rt]!    	& $\E\lt[X \m| Y\rt]$ 	& $\displaystyle\E\lt[X \m| Y\rt]$ \\[10pt]
+\bottomrule
+\etabr
+\ecent
 
-You can also disable all comments to see a clean version of the current document using the \verb!\suppresscomments! command.
-This command will blank out all \verb!\(m)RMK! and \verb!\(m)PRB! text, and render 
-all \verb!\HLT! text normally.
+Also note that the spacing around the standard \verb!\left...! and \verb!\right...! delimiters is sometimes a bit odd. For example,
+the code \verb!\operatorname{A}\left(x\right)! adds too much space between $\operatorname{A}$ and the parentheses:
+\[
+	\operatorname{A}\left(x\right)
+\]
+ShorTeX's shorthands \verb!\lt...! and \verb!\rt...! fix this. The code \verb!\operatorname{A}\lt(x\rt)! typesets as
+\[
+	\operatorname{A}\lt(x\rt)
+\]
+The code for the spacing fixes was taken from
+\url{https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right}, which itself originally
+arose from Heiko Oberdiek on the \textsc{comp.text.tex} newsgroup (\url{https://groups.google.com/group/comp.text.tex/msg/257aa6119bef878b})
+and is now in the \verb!mleftright! package.
+
+ShorTeX also provides a set of common paired delimiters:
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description				& Syntax 					& Text style 				& Display style \\ \midrule
+Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+Curly brackets 			& \verb!\cbra{\frac{x}{y}}!    	& $\cbra{\frac{x}{y}}$ 	& $\displaystyle\cbra{\frac{x}{y}}$ \\[10pt]
+Square brackets 		& \verb!\sbra{\frac{x}{y}}!        	& $\sbra{\frac{x}{y}}$ 	& $\displaystyle\sbra{\frac{x}{y}}$ \\[10pt]
+Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ & $\displaystyle\norm{\frac{x}{y}}$	\\[10pt]
+Inner product			& \verb!\inner{\frac{x}{y},\frac{y}{z}}!       	& $\inner{\frac{x}{y},\frac{y}{z}}$ & $\displaystyle\inner{\frac{x}{y},\frac{y}{z}}$	\\[10pt]
+Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
+Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
+Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
+\bottomrule
+\etabr
+\ecent
+These paired delimiters are defined using the \verb!\DeclarePairedDelimiter! command, so 
+one can use an asterisk for automatic sizing, or place a size specification in square brackets.
+For example, \verb!\rbra{\frac{x}{y}}!, \verb!\rbra*{\frac{x}{y}}!, and \verb!\rbra[\Bigg]{\frac{x}{y}}! typeset, 
+respectively, as
+\[
+	\rbra{\frac{x}{y}}, \quad \rbra*{\frac{x}{y}}, \quad \rbra[\Bigg]{\frac{x}{y}}.
+\]
 
 
+\newpage
+\subsection{Greek characters and variants}\label{sec:greeks}
+
+ShorTeX defines shorthands for Greek letters with more than 5 characters in their name (\verb!\epsilon!, \verb!\lambda!, \verb!\upsilon!)
+as well as variant characters. Variants are obtained by preceding the usual command with \verb!\v...!.
+
+\bcent
+\btabr{@{}lllll@{}}
+\toprule
+Letter & Syntax & Symbol  \\ \midrule
+epsilon & \verb!\eps! & $\eps$ \\
+lambda & \verb!\lam,\Lam! & $\lam,\Lam$ \\
+upsilon & \verb!\ups,\Ups! & $\ups,\Ups$\\
+\bottomrule
+\etabr
+\ecent
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Letter & Variant Syntax & Variant Symbol  \\ \midrule
+epsilon & \verb!\veps! & $\veps$ \\
+theta & \verb!\vtheta! & $\vtheta$ \\
+kappa & \verb!\vkappa! & $\vkappa$ \\
+pi & \verb!\vpi! & $\vpi$ \\
+rho & \verb!\vrho! & $\vrho$ \\
+sigma & \verb!\vsigma! & $\vsigma$ \\
+phi & \verb!\vphi! & $\vphi$ \\
+\bottomrule
+\etabr
+\ecent
+
+
+\newpage
 \subsection{Sets and set operations}
 \bcent
 \btabr{@{}lll@{}}
 \toprule
 Name & Syntax & Symbol  \\ \midrule
 reals	& \verb!\reals! & $\reals$ \\
-extended reals	& \verb!\extreals! & $\extreals$ \\
+extended reals	& \verb!\xreals! & $\xreals$ \\
 rationals & \verb!\rats! & $\rats$\\
 integers	& \verb!\ints! & $\ints$ \\
 natural numbers	& \verb!\nats! & $\nats$ \\
 complex numbers	& \verb!\comps! & $\comps$ \\
-measures & \verb!\measures! & $\measures$\\
-probability measures & \verb!\pmeasures! & $\pmeasures$\\
-(big) intersection & \verb!\intersect!, \verb!\Intersect! & $\intersect$, $\Intersect$\\
-(big) union & \verb!\union!, \verb!\Union! & $\union$, $\Union$\\
-(big) disjoint union & \verb!\djunion!, \verb!\djUnion! & $\djunion$, $\djUnion$\\
+measures & \verb!\msrs! & $\msrs$\\
+probability measures & \verb!\pmsrs! & $\pmsrs$\\
+intersection & \verb!\inter! & $\inter$\\
+union & \verb!\union! & $\union$\\
 volume	& \verb!\vol! & $\vol$ \\
 diameter	& \verb!\diam! & $\diam$ \\
-boundary	& \verb!\boundary! & $\boundary$ \\
-closure	& \verb!\closure! & $\closure$ \\
+boundary	& \verb!\bdry! & $\bdry$ \\
+closure	& \verb!\cl! & $\cl$ \\
 span	& \verb!\spann! & $\spann$ \\
 cone	& \verb!\cone! & $\cone$ \\
 convex hull	& \verb!\conv! & $\conv$ \\
@@ -405,6 +514,7 @@ convex hull	& \verb!\conv! & $\conv$ \\
 \etabr
 \ecent
 
+\newpage
 \subsection{Linear algebra}
 
 \bcent
@@ -430,21 +540,120 @@ kronecker product & \verb!A\kron B! & $A\kron B$\\
 \btabr{@{}lll@{}}
 \toprule
 Name & Syntax & Symbol  \\ \midrule
-differential symbol	& \verb!\dee x! & $\dee x$ \\
+differential symbol	& \verb!\d x! & $\d x$ \\
+partial differential symbol	& \verb!\pd x! & $\pd x$ \\
 gradient symbol	& \verb!\grad f! & $\grad f$ \\
 derivative	& \verb!\der{x}{y}! & $\der{x}{y}$ \\
-double derivative	& \verb!\dder{x}{y}! & $\dder{x}{y}$ \\
-derivative w.r.t.	& \verb!\derwrt{y}! & $\derwrt{y}$ \\
+$n^\text{th}$ derivative	& \verb!\der[n]{x}{y}! & $\der[n]{x}{y}$ \\
+derivative w.r.t.	& \verb!\der{}{y}! & $\der{}{y}$ \\
 partial derivative	& \verb!\pder{x}{y}! & $\pder{x}{y}$ \\
-partial double derivative	& \verb!\pdder{x}{y}! & $\pdder{x}{y}$ \\
-$i^\text{th}$ partial derivative & \verb!\pderi{x}{y}{i}! & $\pderi{x}{y}{i}$ \\
-partial derivative w.r.t. & \verb!\pderwrt{y}! & $\pderwrt{y}$ \\
-Hessian & \verb!\hess{a}{x}{y}! & $\hes{a}{x}{y}$ \\
+$n^\text{th}$ partial derivative	& \verb!\pder[n]{x}{y}! & $\pder[n]{x}{y}$ \\
+partial derivative w.r.t. & \verb!\pder{}{y}! & $\pder{}{y}$ \\
+Hessian & \verb!\hes{x}{y}{z}! & $\hes{x}{y}{z}$ \\
+Hessian w.r.t. & \verb!\hes{}{y}{z}! & $\hes{}{y}{z}$ \\
 \bottomrule
 \etabr
 \ecent
 
-\subsection{General mathematics}
+
+\newpage
+\subsection{General probability and statistics}
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+i.i.d.	& \verb!\iid! & \iid \\
+almost sure	& \verb!\as! & \as \\
+almost everywhere	& \verb!\aev! & \aev \\
+convergence almost surely	& \verb!\convas! & $\convas$ \\
+convergence in probability	& \verb!\convp! & $\convp$ \\
+convergence in distribution	& \verb!\convd! & $\convd$ \\
+equality in distribution	& \verb!\eqd! & $\eqd$ \\
+equality almost surely	& \verb!\eqas! & $\eqas$ \\
+probability	& \verb!\P! & $\P$ \\
+expectation	& \verb!\E! & $\E$ \\
+variance	& \verb!\Var! & $\Var$ \\
+covariance	& \verb!\Cov! & $\Cov$ \\
+correlation	& \verb!\Corr! & $\Corr$ \\
+support	& \verb!\supp! & $\supp$ \\
+distributed as	& \verb!\dist! & $\dist$ \\
+distributed \iid	& \verb!\distiid! & $\distiid$ \\
+distributed independently	& \verb!\distind! & $\distind$ \\
+independent &  \verb!\indep! & $\indep$ \\
+Kullback-Leibler divergence & \verb!\KL(q||p)! & $\KL(q||p)$\\
+Total variation distance & \verb!\TV(q,p)! & $\TV(q,p)$\\
+$\nu$-Wasserstein distance & \verb!\Wass_\nu(q,p)! & $\Wass_\nu(q,p)$\\
+Hellinger distance & \verb!\Hell(q,p)! & $\Hell(q,p)$\\
+\bottomrule
+\etabr
+\ecent
+
+
+\newpage
+\subsection{Probability distributions}
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+Bernoulli	& \verb!\Bern! & $\Bern$ \\
+beta	& \verb!\Beta! & $\Beta$ \\
+beta prime	& \verb!\Beta'! & $\Beta'$ \\
+binomial	& \verb!\Binom! & $\Binom$ \\
+categorical	& \verb!\Cat! & $\Cat$ \\
+Cauchy	& \verb!\Cauchy! & $\Cauchy$ \\
+chi-squared	& \verb!\ChiSq! & $\ChiSq$ \\
+Dirichlet	& \verb!\Dir! & $\Dir$ \\
+exponential	& \verb!\Exp! & $\Exp$ \\
+gamma	& \verb!\Gam! & $\Gam$ \\
+inverse gamma	& \verb!\InvGam! & $\InvGam$ \\
+geometric	& \verb!\Geom! & $\Geom$ \\
+Gumbel	& \verb!\Gum! & $\Gum$ \\
+generalized extreme value	& \verb!\GEV! & $\GEV$ \\
+Laplace	& \verb!\Lap! & $\Lap$ \\
+multinomial	& \verb!\Multi! & $\Multi$ \\
+normal	& \verb!\Norm! & $\Norm$ \\
+Poisson	& \verb!\Poiss! & $\Poiss$ \\
+student-t	& \verb!\StudentT! & $\StudentT$ \\
+uniform	& \verb!\Unif! & $\Unif$ \\
+von Mises-Fisher	& \verb!\VMF! & $\VMF$ \\
+Wishart	& \verb!\Wish! & $\Wish$ \\
+inverse Wishart	& \verb!\InvWish! & $\InvWish$ \\
+\midrule
+Bernoulli process	& \verb!\BeP! & $\BeP$ \\
+beta process	& \verb!\BP! & $\BP$ \\
+beta prime process	& \verb!\BPP! & $\BPP$ \\
+Dirichlet process	& \verb!\DP! & $\DP$ \\
+Chinese restauarant process	& \verb!\CRP! & $\CRP$ \\
+completely random measure	& \verb!\CRM! & $\CRM$ \\
+normalized completely random measure & \verb!\NCRM! & $\NCRM$ \\
+gamma process	& \verb!\GamP! & $\GamP$ \\
+normalized gamma process	& \verb!\NGamP! & $\NGamP$ \\
+Gaussian process	& \verb!\GP! & $\GP$ \\
+Pitman-Yor process	& \verb!\PYP! & $\PYP$ \\
+Poisson process	& \verb!\PP! & $\PP$ \\
+\bottomrule
+\etabr
+\ecent
+
+\newpage
+\subsection{Text in math}
+
+\bcent
+\btabr{@{}lll@{}}
+\toprule
+Name & Syntax & Symbol  \\ \midrule
+s.t.	& \verb!x \st y! & $x\st y$ \\
+and	& \verb!x \andd y! & $x \andd y$ \\
+or	& \verb!x \orr y! & $x \orr y$ \\
+with	& \verb!x \with y! & $x \with y$ \\
+where	& \verb!x \where y! & $x \where y$ \\
+\bottomrule
+\etabr
+\ecent
+
+\subsection{Other}
 
 \bcent
 \btabr{@{}lll@{}}
@@ -454,19 +663,43 @@ argmax	& \verb!\argmax_{x\in \reals}! & $\argmax_{x\in\reals}$ \\
 argmin	& \verb!\argmin_{x\in \reals}! & $\argmin_{x\in\reals}$ \\
 esssup	& \verb!\esssup_{x\in \reals}! & $\esssup_{x\in\reals}$ \\
 essinf	& \verb!\essinf_{x\in \reals}! & $\essinf_{x\in\reals}$ \\
-indicator	& \verb!\ind[x=3]! & $\ind[x=3]$ \\
+indicator	& \verb!\1[x=3]! & $\1[x=3]$ \\
 sign	& \verb!\sgn x! & $\sgn x$ \\
-scientific notation	& \verb!\scin{3}{5}! & $\scin{3}{5}$ \\
-such that	& \verb!\st! & $\st$ \\
-given	& \verb!\given! & $\given$ \\
-defined as	& \verb!\defas! & $\defas$ \\
-defines	& \verb!\defines! & $\defines$ \\
-half	& \verb!\half! & $\half$ \\
-third	& \verb!\third! & $\third$ \\
-quarter	& \verb!\quarter! & $\quarter$ \\
+%defined as	& \verb!\defas! & $\defas$ \\
+%defines	& \verb!\defines! & $\defines$ \\
+%half	& \verb!\half! & $\half$ \\
+%third	& \verb!\third! & $\third$ \\
+%quarter	& \verb!\quarter! & $\quarter$ \\
 \bottomrule
 \etabr
 \ecent
+
+\newpage
+\subsection{Shrinking whitespace in math}
+The command \verb!\squish{<frac>}! in math mode enables you to shrink whitespace in mathematics,
+where \verb!<frac>! represents the fraction of whitespace reduction.
+Below, the first line is regularly spaced, the second line has \verb!\squish{0.5}!, and the third has \verb!\squish{0.0}!.
+\[
+	\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.5}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+	\squish{0.0}\sqrt{\frac{1^{2}}{0.111222}(0.111222\times1.111163+0.066987^{2}\times0.111222)-1}&= \sqrt{0.111222}\\
+\]
+
+The code for \verb!\squish! was taken from \url{https://tex.stackexchange.com/questions/467942/how-to-squeeze-a-long-equation}.
+
+\subsection{Wide bar}
+
+ShorTeX provides the \verb!\widebar! command to typeset a wide bar accent on top of a character (similar to the 
+usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \verb!\bar! and 
+\verb!\overline! commands:
+\[
+	\text{\texttt{widebar}:}\,\, \widebar{A} \qquad \text{\texttt{overline}:} \,\,\overline{A} \qquad \text{\texttt{bar}:} \,\,\bar{A}
+\]
+The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
+Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
+
+\newpage
+\section{Text mode macros}
 
 \subsection{Common words and names with accents}
 
@@ -489,141 +722,27 @@ quarter	& \verb!\quarter! & $\quarter$ \\
 \ecent
 
 
-\subsection{Probability and statistics}
 
-
-
-\bcent
-\btabr{@{}lll@{}}
-\toprule
-Name & Syntax & Symbol  \\ \midrule
-i.i.d.	& \verb!\iid! & \iid \\
-almost sure	& \verb!\as! & \as \\
-almost everywhere	& \verb!\aev! & \aev \\
-convergence almost surely	& \verb!\convas! & $\convas$ \\
-convergence in probability	& \verb!\convp! & $\convp$ \\
-convergence in distribution	& \verb!\convd! & $\convd$ \\
-equality in distribution	& \verb!\eqd! & $\eqd$ \\
-equality almost surely	& \verb!\eqas! & $\eqas$ \\
-probability	& \verb!\pr! & $\pr$ \\
-expectation	& \verb!\ex! & $\ex$ \\
-variance	& \verb!\var! & $\var$ \\
-covariance	& \verb!\cov! & $\cov$ \\
-correlation	& \verb!\cor! & $\cor$ \\
-support	& \verb!\supp! & $\supp$ \\
-distributed as	& \verb!\dist! & $\dist$ \\
-distributed \iid	& \verb!\distiid! & $\distiid$ \\
-distributed independently	& \verb!\distind! & $\distind$ \\
-independent &  \verb!\indep! & $\indep$ \\
-Entropy & \verb!\ent{q}! & $\ent{q}$\\
-KL divergence & \verb!\kl{q}{p}!, \verb!\kl[a]{q}{p}! & $\kl{q}{p}$, $\kl[a]{q}{p}$\\
-Hellinger distance & \verb!\hell{q}{p}!, \verb!\hell[a]{q}{p}! & $\hell{q}{p}$, $\hell[a]{q}{p}$\\
-Total variation distance & \verb!\tvd{q}{p}!, \verb!\tvd[a]{q}{p}! & $\tvd{q}{p}$, $\tvd[a]{q}{p}$\\
-\bottomrule
-\etabr
-\ecent
-
+\subsection{Abbreviations with punctuation}
 
 \bcent
 \btabr{@{}lll@{}}
 \toprule
 Name & Syntax & Symbol  \\ \midrule
-Bernoulli	& \verb!\distBern! & $\distBern$ \\
-beta	& \verb!\distBeta! & $\distBeta$ \\
-beta prime	& \verb!\distBetaPrime! & $\distBetaPrime$ \\
-binomial	& \verb!\distBinom! & $\distBinom$ \\
-categorical	& \verb!\distCat! & $\distCat$ \\
-Cauchy	& \verb!\distCauchy! & $\distCauchy$ \\
-chi-squared	& \verb!\distChiSq! & $\distChiSq$ \\
-Dirichlet	& \verb!\distDir! & $\distDir$ \\
-exponential	& \verb!\distExp! & $\distExp$ \\
-gamma	& \verb!\distGam! & $\distGam$ \\
-inverse gamma	& \verb!\distInvGam! & $\distInvGam$ \\
-geometric	& \verb!\distGeom! & $\distGeom$ \\
-Gumbel	& \verb!\distGum! & $\distGum$ \\
-generalized extreme value	& \verb!\distGEV! & $\distGEV$ \\
-Laplace	& \verb!\distLap! & $\distLap$ \\
-multinomial	& \verb!\distMulti! & $\distMulti$ \\
-normal	& \verb!\distNorm! & $\distNorm$ \\
-Poisson	& \verb!\distPoiss! & $\distPoiss$ \\
-student-t	& \verb!\distT! & $\distT$ \\
-uniform	& \verb!\distUnif! & $\distUnif$ \\
-von Mises-Fisher	& \verb!\distVMF! & $\distVMF$ \\
-Wishart	& \verb!\distWish! & $\distWish$ \\
-inverse Wishart	& \verb!\distInvWish! & $\distInvWish$ \\
-\midrule
-Bernoulli process	& \verb!\distBeP! & $\distBeP$ \\
-beta process	& \verb!\distBP! & $\distBP$ \\
-beta prime process	& \verb!\distBPP! & $\distBPP$ \\
-Dirichlet process	& \verb!\distDP! & $\distDP$ \\
-Chinese restauarant process	& \verb!\distCRP! & $\distCRP$ \\
-completely random measure	& \verb!\distCRM! & $\distCRM$ \\
-normalized completely random measure & \verb!\distNCRM! & $\distNCRM$ \\
-gamma process	& \verb!\distGamP! & $\distGamP$ \\
-normalized gamma process	& \verb!\distNGamP! & $\distNGamP$ \\
-Gaussian process	& \verb!\distGP! & $\distGP$ \\
-Pitman-Yor process	& \verb!\distPYP! & $\distPYP$ \\
-Poisson process	& \verb!\distPP! & $\distPP$ \\
+e.g.,	& \verb!\eg! & \eg \\
+et al.	& \verb!\etal! & \etal \\
+i.e.,	& \verb!\ie! & \ie \\
+a.k.a.	& \verb!\aka! & \aka \\
 \bottomrule
 \etabr
 \ecent
 
 
 
-
-\subsection{Vector spaces and operators}
-
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\toprule
-Description						& Syntax 				& Symbol \\ \midrule
-Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	\\[10pt]
-Norm  with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	\\[10pt]
-Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	\\[10pt]
-Inner prod with subscript 		& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$  \\[10pt]
-$\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 			\\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpm{2}{\mu}!	& $\Lpm{2}{\mu}$ 		\\[10pt]
-							& \verb!\Lpm*{2}{\mu}!	& $\Lpm*{2}{\mu}$ 	\\[10pt]
-							& \verb!\Lpm[\Big]{2}{\mu}!	& $\Lpm[\Big]{2}{\mu}$ 	\\[10pt]
-$\Lp{p}$ norm					& \verb!\Lpnorm{\Gamma}{2}!        & $\Lpnorm{\Gamma}{2}$ 		 \\[10pt]
-						& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ \\[10pt]
-						& \verb!\Lpnorm[\Big]{\Gamma}{2}!        & $\Lpnorm[\Big]{\Gamma}{2}$ \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmnorm{\Gamma}{2}{\mu}!        & $\Lpmnorm{\Gamma}{2}{\mu}$  \\[10pt]
-							& \verb!\Lpmnorm*{\Gamma}{2}{\mu}!        & $\Lpmnorm*{\Gamma}{2}{\mu}$ \\[10pt]
-							& \verb!\Lpmnorm[\Big]{\Gamma}{2}{\mu}!        & $\Lpmnorm[\Big]{\Gamma}{2}{\mu}$ \\[10pt]
-$\Lp{p}$ inner product				& \verb!\Lpinner{\Gamma}{\Gamma}{2}!        & $\Lpinner{\Gamma}{\Gamma}{2}$ 	\\[10pt]
-							& \verb!\Lpinner*{\Gamma}{\Gamma}{2}!        & $\Lpinner*{\Gamma}{\Gamma}{2}$  \\[10pt]
-							& \verb!\Lpinner[\Big]{\Gamma}{\Gamma}{2}!        & $\Lpinner[\Big]{\Gamma}{\Gamma}{2}$  \\[10pt]
-\begin{tabular}[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpminner{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner{\Gamma}{\Gamma}{2}{\mu}$ 	 \\[10pt]
-							& \verb!\Lpminner*{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner*{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
-							& \verb!\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
-
-\subsection{Paired delimiters}
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Description				& Example 					& Text style 				& Display style \\ \midrule
-Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
-Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
-Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
-Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
-Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
-Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-Cardinality 				& \verb!\card{\f[h]A}!       		& $\card{\f[h]A}$ 			& $\displaystyle\card{\f[h]A}$ \\[10pt]
-\bottomrule
-\end{tabular}
-\end{center}
-
-
+\newpage
 \section{Example Document}
 
-\PRB{TODO: a full example in basic latex versus shortex}
+TODO!
 
 \end{document}
 
