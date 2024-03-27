@@ -427,6 +427,30 @@ ShorTeX's shorthands \verb!\lt...! and \verb!\rt...! fix this. The code \verb!\o
 The code for the spacing fixes was taken from
 \url{https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right}).
 
+ShorTeX also provides a set of common paired delimiters:
+\bcent
+\btabr{@{}llll@{}}
+\toprule
+Description				& Syntax 					& Text style 				& Display style \\ \midrule
+Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
+Curly brackets 			& \verb!\cbra{\frac{x}{y}}!    	& $\cbra{\frac{x}{y}}$ 	& $\displaystyle\cbra{\frac{x}{y}}$ \\[10pt]
+Square brackets 		& \verb!\sbra{\frac{x}{y}}!        	& $\sbra{\frac{x}{y}}$ 	& $\displaystyle\sbra{\frac{x}{y}}$ \\[10pt]
+Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ & $\displaystyle\norm{\frac{x}{y}}$	\\[10pt]
+Inner product			& \verb!\inner{\frac{x}{y},\frac{y}{z}}!       	& $\inner{\frac{x}{y},\frac{y}{z}}$ & $\displaystyle\inner{\frac{x}{y},\frac{y}{z}}$	\\[10pt]
+Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
+Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
+Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
+\bottomrule
+\etabr
+\ecent
+These paired delimiters are defined using the \verb!\DeclarePairedDelimiter! command, so 
+one can use an asterisk for automatic sizing, or place a size specification in square brackets.
+For example, \verb!\rbra{\frac{x}{y}}!, \verb!\rbra*{\frac{x}{y}}!, and \verb!\rbra[\Bigg]{\frac{x}{y}}! typeset as
+\[
+	\rbra{\frac{x}{y}}, \quad \rbra*{\frac{x}{y}}, \quad \rbra[\Bigg]{\frac{x}{y}}.
+\]
+
+
 \newpage
 \subsection{Greek characters and variants}\label{sec:greeks}
 
@@ -670,37 +694,6 @@ usual \verb!\widehat! and \verb!\widetilde! commands). Compare to the usual \ver
 \]
 The code for \verb!\widebar! was taken from \url{https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package}.
 Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesaccents} encodes \verb!\widebar!, not \verb!\bar!.
-
-\newpage
-\subsection{Vector spaces and operators}
-
-\bcent
-\btabr{@{}lll@{}}
-\toprule
-Description						& Syntax 				& Symbol \\ \midrule
-Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	\\[10pt]
-Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	\\[10pt]
-$\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 		\\[10pt]
-\bottomrule
-\etabr
-\ecent
-
-
-\subsection{Paired delimiters}
-
-\bcent
-\btabr{@{}llll@{}}
-\toprule
-Description				& Example 					& Text style 				& Display style \\ \midrule
-Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\displaystyle\rbra{\frac{x}{y}}$ \\[10pt]
-Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
-Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
-Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
-Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
-Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-\bottomrule
-\etabr
-\ecent
 
 \newpage
 \section{Text mode macros}
