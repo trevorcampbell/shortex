@@ -370,6 +370,10 @@
 
 % define shorthand lt, rt that fixes spacing around \left \right
 % per https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
+% originally from Heiko Oberdiek, Re: spacing after \right) and before \left), newsgroup
+% comp.text.tex, Message-ID: i6jcc2$8of$1@news.eternal-september.org,
+% 2010-09-12.
+% https://groups.google.com/group/comp.text.tex/msg/257aa6119bef878b
 \newcommand{\lt}{\mathopen{}\mathclose\bgroup\left}
 \newcommand{\rt}{\aftergroup\egroup\right}
 \newcommand{\m}{\middle}

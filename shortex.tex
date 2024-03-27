@@ -425,7 +425,9 @@ ShorTeX's shorthands \verb!\lt...! and \verb!\rt...! fix this. The code \verb!\o
 	\operatorname{A}\lt(x\rt)
 \]
 The code for the spacing fixes was taken from
-\url{https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right}).
+\url{https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right}, which itself originally
+arose from Heiko Oberdiek on the \textsc{comp.text.tex} newsgroup (\url{https://groups.google.com/group/comp.text.tex/msg/257aa6119bef878b})
+and is now in the \verb!mleftright! package.
 
 ShorTeX also provides a set of common paired delimiters:
 \bcent
@@ -445,7 +447,8 @@ Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\dis
 \ecent
 These paired delimiters are defined using the \verb!\DeclarePairedDelimiter! command, so 
 one can use an asterisk for automatic sizing, or place a size specification in square brackets.
-For example, \verb!\rbra{\frac{x}{y}}!, \verb!\rbra*{\frac{x}{y}}!, and \verb!\rbra[\Bigg]{\frac{x}{y}}! typeset as
+For example, \verb!\rbra{\frac{x}{y}}!, \verb!\rbra*{\frac{x}{y}}!, and \verb!\rbra[\Bigg]{\frac{x}{y}}! typeset, 
+respectively, as
 \[
 	\rbra{\frac{x}{y}}, \quad \rbra*{\frac{x}{y}}, \quad \rbra[\Bigg]{\frac{x}{y}}.
 \]
