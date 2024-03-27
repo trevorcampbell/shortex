@@ -81,7 +81,7 @@
 % use autonum by default 
 \newif\ifusemanualnum
 \usemanualnumfalse
-\DeclareVoidOption{manualnumbering}{\usemanualnumtrue}
+\DeclareVoidOption{noautonum}{\usemanualnumtrue}
 
 % pass draft mode on to graphicx and hyperref
 \DeclareVoidOption{draft}{\PassOptionsToPackage{draft}{graphicx}\PassOptionsToPackage{draft}{hyperref}}
@@ -94,10 +94,10 @@
 % an option to specify commenter names
 \DeclareStringOption{commenters}
 
-% an option to suppress comments
-\newif\ifsuppresscomments
-\suppresscommentsfalse
-\DeclareVoidOption{suppresscomments}{\suppresscommentstrue}
+% an option to hide comments
+\newif\ifhidecomments
+\hidecommentsfalse
+\DeclareVoidOption{hidecomments}{\hidecommentstrue}
 
 % process the package options
 \ProcessKeyvalOptions*
@@ -337,8 +337,8 @@
 \expandarg\newcounter{commentcounter\thiscommenter}
 \edef\displaycounter{\noexpand\noexpand\noexpand\arabic{commentcounter\thiscommenter}}
 \edef\incdisplaycounter{\noexpand\noexpand\noexpand\stepcounter{commentcounter\thiscommenter}\noexpand\noexpand\noexpand\arabic{commentcounter\thiscommenter}}
-\ifsuppresscomments
-% if comments are suppressed, just set the commenting commands to be no-ops
+\ifhidecomments
+% if comments are hidden, just set the commenting commands to be no-ops
 \expandafter\def\csname c\thiscommenter\endcsname##1{}
 \expandafter\def\csname e\thiscommenter\endcsname##1{}
 \expandafter\def\csname h\thiscommenter\endcsname##1{##1}
@@ -434,23 +434,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\Lp}[1]{L^{#1}}
-\DeclarePairedDelimiterXPP\Lpm[2]{\Lp{#1}}{(}{)}{}{#2}
-\DeclarePairedDelimiterXPP\Lpnorm[2]{}{\lVert}{\rVert}{_{\Lp{#2}}}{#1}
-\DeclarePairedDelimiterXPP\Lpmnorm[3]{}{\lVert}{\rVert}{_{\Lpm{#2}{#3}}}{#1}
-\DeclarePairedDelimiterXPP\Lpinner[3]{}{\langle}{\rangle}{_{\Lp{#3}}}{#1,#2}
-\DeclarePairedDelimiterXPP\Lpminner[4]{}{\langle}{\rangle}{_{\Lpm{#3}{#4}}}{#1,#2}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\rbra{(}{)}
 \DeclarePairedDelimiter\cbra{\{}{\}}
 \DeclarePairedDelimiter\sbra{[}{]}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\DeclarePairedDelimiter\card{\lvert}{\rvert}
-\DeclarePairedDelimiter\set{\{}{\}}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\DeclarePairedDelimiterXPP\normsub[2]{}{\lVert}{\rVert}{_{#2}}{#1}
-\DeclarePairedDelimiterX\inner[2]{\langle}{\rangle}{#1,#2}
-\DeclarePairedDelimiterXPP\innersub[3]{}{\langle}{\rangle}{_{#3}}{#1,#2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Linear Algebra, Vectors, and Matrices

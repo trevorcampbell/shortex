@@ -55,12 +55,12 @@ includes some of these packages, we recommend editing those style files to remov
 
 The ShorTeX package has a few options:
 \bdesc
-\item[\texttt{manualnumbering}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
+\item[\texttt{noautonum}] Do not include \texttt{autonum.sty}. This disables automatic equation numbering.
 \item[\texttt{blacklinks}] Switch hyperlinks, citations, references, etc.~to be typeset in black font. The default is dark blue.
 \item[\texttt{draft}] Turn on draft mode for \texttt{graphicx}, \texttt{hyperref} (with placeholder figures etc).
 \item[\texttt{nomathfontdefaults}] Disable default font style/accent combinations (see \cref{sec:fontstylesaccents} for details).
 \item[\texttt{commenters}] Specify names of commenters for comment commands (see \cref{sec:commenting} for details).
-\item[\texttt{suppresscomments}] Suppress comments (see \cref{sec:commenting} for details).
+\item[\texttt{hidecomments}] Suppress comments (see \cref{sec:commenting} for details).
 \edesc
 
 \newpage
@@ -178,7 +178,7 @@ Style & Modifier & Example & Typeset Example \\ \midrule
 caligraphic (\verb!mathcal!) & \verb!c! & \verb!\s[c]A! & $\s[c]A$ \\
 bold (\verb!mathbf!) & \verb!k! & \verb!\s[k]A! & $\s[k]A$\\
 doublestroke (\verb!mathbb!) & \verb!d! & \verb!\s[d]A! & $\s[d]A$\\
-fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\
+fraktur (\verb!mathfrak!) & \verb!f! & \verb!\s[f]A! & $\s[f]A$\\ \midrule
 Accent & Modifier & Example & Typeset Example \\ \midrule
 hat (\verb!widehat!) & \verb!h! & \verb!\s[h]A! & $\s[h]A$\\
 tilde (\verb!widetilde!) & \verb!t! & \verb!\s[t]A! & $\s[t]A$\\
@@ -677,31 +677,13 @@ Note that the shortened style/accent code \texttt{b} in \cref{sec:fontstylesacce
 \toprule
 Description						& Syntax 				& Symbol \\ \midrule
 Norm					& \verb!\norm{\frac{x}{y}}!       	& $\norm{\frac{x}{y}}$ 	\\[10pt]
-Norm  with subscript				& \verb!\normsub*{\frac{x}{y}}{2}!       	& $\normsub*{\frac{x}{y}}{2}$ 	\\[10pt]
 Inner product			& \verb!\inner{\frac{x}{y}}{\frac{y}{z}}!       	& $\inner{\frac{x}{y}}{\frac{y}{z}}$ 	\\[10pt]
-Inner prod with subscript 		& \verb!\innersub*{\frac{x}{y}}{z}{2}!       	& $\innersub*{\frac{x}{y}}{z}{2}$  \\[10pt]
 $\Lp{p}$ space					& \verb!\Lp{2}!        		& $\Lp{2}$ 		\\[10pt]
-\btabr[c]{@{}l@{}}$\Lp{p}$ space for \\ specified measure	 \end{tabular}	& \verb!\Lpm{2}{\mu}!	& $\Lpm{2}{\mu}$ 		\\[10pt]
-							& \verb!\Lpm*{2}{\mu}!	& $\Lpm*{2}{\mu}$ 	\\[10pt]
-							& \verb!\Lpm[\Big]{2}{\mu}!	& $\Lpm[\Big]{2}{\mu}$ 	\\[10pt]
-$\Lp{p}$ norm					& \verb!\Lpnorm{\Gamma}{2}!        & $\Lpnorm{\Gamma}{2}$ 		 \\[10pt]
-						& \verb!\Lpnorm*{\Gamma}{2}!        & $\Lpnorm*{\Gamma}{2}$ \\[10pt]
-						& \verb!\Lpnorm[\Big]{\Gamma}{2}!        & $\Lpnorm[\Big]{\Gamma}{2}$ \\[10pt]
-\btabr[c]{@{}l@{}}$\Lp{p}$ norm for \\ specified measure	 \end{tabular}		& \verb!\Lpmnorm{\Gamma}{2}{\mu}!        & $\Lpmnorm{\Gamma}{2}{\mu}$  \\[10pt]
-							& \verb!\Lpmnorm*{\Gamma}{2}{\mu}!        & $\Lpmnorm*{\Gamma}{2}{\mu}$ \\[10pt]
-							& \verb!\Lpmnorm[\Big]{\Gamma}{2}{\mu}!        & $\Lpmnorm[\Big]{\Gamma}{2}{\mu}$ \\[10pt]
-$\Lp{p}$ inner product				& \verb!\Lpinner{\Gamma}{\Gamma}{2}!        & $\Lpinner{\Gamma}{\Gamma}{2}$ 	\\[10pt]
-							& \verb!\Lpinner*{\Gamma}{\Gamma}{2}!        & $\Lpinner*{\Gamma}{\Gamma}{2}$  \\[10pt]
-							& \verb!\Lpinner[\Big]{\Gamma}{\Gamma}{2}!        & $\Lpinner[\Big]{\Gamma}{\Gamma}{2}$  \\[10pt]
-\btabr[c]{@{}l@{}}$\Lp{p}$ inner product \\  for specified measure	 \end{tabular} & \verb!\Lpminner{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner{\Gamma}{\Gamma}{2}{\mu}$ 	 \\[10pt]
-							& \verb!\Lpminner*{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner*{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
-							& \verb!\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}!        & $\Lpminner[\big]{\Gamma}{\Gamma}{2}{\mu}$ 		 \\[10pt]
 \bottomrule
 \etabr
 \ecent
 
 
-\newpage
 \subsection{Paired delimiters}
 
 \bcent
@@ -712,10 +694,8 @@ Round brackets	& \verb!\rbra{\frac{x}{y}}!        	& $\rbra{\frac{x}{y}}$ 		& $\
 Curly brackets 			& \verb!\cbra*{\frac{x}{y}}!    	& $\cbra*{\frac{x}{y}}$ 	& $\displaystyle\cbra*{\frac{x}{y}}$ \\[10pt]
 Square brackets 			& \verb!\sbra[\bigg]{\frac{x}{y}}!        	& $\sbra[\bigg]{\frac{x}{y}}$ 	& $\displaystyle\sbra[\bigg]{\frac{x}{y}}$ \\[10pt]
 Absolute value 			& \verb!\abs{\frac{x}{y}}!        	& $\abs{\frac{x}{y}}$ 		& $\displaystyle\abs{\frac{x}{y}}$ \\[10pt]
-Set 					& \verb!\set{\frac{x}{y}, \frac{y}{z}}!        & $\set{\frac{x}{y}, \frac{y}{z}}$ 	& $\displaystyle\set{\frac{x}{y}, \frac{y}{z}}$ \\[10pt]
 Floor					& \verb!\floor{\frac{x}{y}}!        	& $\floor{\frac{x}{y}}$ 		& $\displaystyle\floor{\frac{x}{y}}$ \\[10pt]
 Ceiling 				& \verb!\ceil{\frac{x}{y}}!        	& $\ceil{\frac{x}{y}}$ 		& $\displaystyle\ceil{\frac{x}{y}}$ \\[10pt]
-Cardinality 				& \verb!\card{\s[h]A}!       		& $\card{\s[h]A}$ 			& $\displaystyle\card{\s[h]A}$ \\[10pt]
 \bottomrule
 \etabr
 \ecent
