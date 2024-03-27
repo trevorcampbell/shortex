@@ -124,7 +124,7 @@ items" like unions, intersections, etc. There are `\widehat` and
 ### Math macros for common functions and operations
 
 For functions and operators (e.g., trace, rank, variance, support, probability), ShorTeX should
-generally include macros that mimic the typeset appearance of the function/operator name.
+generally include lowercase macros that mimic the typeset appearance of the function/operator name.
 
 ### Math macros for unwieldy/unreadable expressions
 

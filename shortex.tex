@@ -413,6 +413,18 @@ middle bar 	& \verb!\E\lt[X \m| Y\rt]!    	& $\E\lt[X \m| Y\rt]$ 	& $\displaysty
 \etabr
 \ecent
 
+Also note that the spacing around the standard \verb!\left...! and \verb!\right...! delimiters is sometimes a bit odd. For example,
+the code \verb!\operatorname{A}\left(x\right)! adds too much space between $\operatorname{A}$ and the parentheses:
+\[
+	\operatorname{A}\left(x\right)
+\]
+ShorTeX's shorthands \verb!\lt...! and \verb!\rt...! fix this. The code \verb!\operatorname{A}\lt(x\rt)! typesets as
+\[
+	\operatorname{A}\lt(x\rt)
+\]
+The code for the spacing fixes was taken from
+\url{https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right}).
+
 \newpage
 \subsection{Greek characters and variants}\label{sec:greeks}
 
@@ -534,16 +546,16 @@ probability	& \verb!\P! & $\P$ \\
 expectation	& \verb!\E! & $\E$ \\
 variance	& \verb!\Var! & $\Var$ \\
 covariance	& \verb!\Cov! & $\Cov$ \\
-correlation	& \verb!\Cor! & $\Cor$ \\
+correlation	& \verb!\Corr! & $\Corr$ \\
 support	& \verb!\supp! & $\supp$ \\
 distributed as	& \verb!\dist! & $\dist$ \\
 distributed \iid	& \verb!\distiid! & $\distiid$ \\
 distributed independently	& \verb!\distind! & $\distind$ \\
 independent &  \verb!\indep! & $\indep$ \\
-Entropy & \verb!\ent{q}! & $\ent{q}$\\
-KL divergence & \verb!\kl{q}{p}!, \verb!\kl[a]{q}{p}! & $\kl{q}{p}$, $\kl[a]{q}{p}$\\
-Hellinger distance & \verb!\hell{q}{p}!, \verb!\hell[a]{q}{p}! & $\hell{q}{p}$, $\hell[a]{q}{p}$\\
-Total variation distance & \verb!\tvd{q}{p}!, \verb!\tvd[a]{q}{p}! & $\tvd{q}{p}$, $\tvd[a]{q}{p}$\\
+Kullback-Leibler divergence & \verb!\KL(q||p)! & $\KL(q||p)$\\
+Total variation distance & \verb!\TV(q,p)! & $\TV(q,p)$\\
+$\nu$-Wasserstein distance & \verb!\Wass_\nu(q,p)! & $\Wass_\nu(q,p)$\\
+Hellinger distance & \verb!\Hell(q,p)! & $\Hell(q,p)$\\
 \bottomrule
 \etabr
 \ecent
