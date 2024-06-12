@@ -46,10 +46,21 @@ compatibility.
 \textbf{You must compile your document 4 times when using ShorTeX} to ensure that equation
 numbers and references update properly.
 
-
-ShorTeX will include and configure many common packages for you (e.g., \texttt{graphicx}, \texttt{subcaption}, \texttt{hyperref},
-\texttt{algorithm}, \texttt{algpseudocode}, \texttt{amsmath}, among others),
-so you do not need to explicitly include and set these up yourself.
+ShorTeX will include and configure the following packages for you:
+\texttt{xcolor},
+\texttt{nicefrac},
+\texttt{cleverref},
+\texttt{hyperref},
+\texttt{graphicx},
+\texttt{autonum}.
+ShorTeX also includes the following packages (with no configuration):
+\bitem 
+\item \textbf{math-related:}  \texttt{mathrsfs}, \texttt{dsfont}, \texttt{amsmath}, \texttt{amssymb}, \texttt{amsthm}, \texttt{bm}, \texttt{bbm}, \texttt{amsfonts}, \texttt{mathtools}, \texttt{thmtools}
+\item \textbf{figures, tables, etc.:}   \texttt{caption}, \texttt{subcaption}, \texttt{wrapfig}, \texttt{algorithm}, \linebreak \texttt{algpseudocode}, \texttt{multirow}
+\item \textbf{referencing and linking:}  \texttt{xr-hyper}, \texttt{crossreftools}, \texttt{import}, \texttt{subfiles}, \texttt{url}
+\item \textbf{miscellaneous:} \texttt{microtype}, \texttt{xifthen}, \texttt{xstring}, \texttt{xspace},
+\eitem
+So, you do not need to explicitly include and/or set any of these up yourself.
 If you are writing a document that must use a specific style file (e.g., for a conference or journal) that itself
 includes some of these packages, we recommend editing those style files to remove the package imports.
 
@@ -64,6 +75,7 @@ The ShorTeX package has a few options:
 \edesc
 
 \newpage
+
 \section{Environments}
 
 \LaTeX~documents often include a lot of verbose code
@@ -291,17 +303,22 @@ below contains examples for commenter ``A''. Notice that each comment is tagged 
 Comment Type & Syntax & Example & Typeset Example\\ \midrule
 comment & \verb!\c...{comment}! & \verb~\cA{hello!}~ & \cA{hello!} \\ 
 emphasized comment & \verb!\e...{comment}! & \verb~\eA{hello!}~ & \eA{hello!} \\ 
-margin comment & \verb!\m...{comment}! & text\verb~\mA{hello!}~ & text\mA{hello!} \\ 
-highlight & \verb!\h...{text}! & \verb~\hA{hello!}~ & \hA{hello!} \\ 
+margin comment & \verb!\m...{comment}! & text\verb~\mA{hello!}~ & text\fA{hello!} \\ 
+float margin comment & \verb!\f...{comment}! & text\verb~\fA{hello!}~ & text\fA{hello!} \\ 
+highlight & \verb!\h...{text}! & \verb~\hA{text}~ & \hA{text} \\ 
 \bottomrule
 \etabr
 \ecent
+The margin comment cannot be used within a float but behaves well when there are multiple margin comments
+close together. 
+The float margin comment can be used within a float but multiple ones close together can overlap
+and become unreadable. 
 
 Note that each commenter gets their own color. Currently ShorTeX supports nine different commenter colors,
 and will wrap around back to the first color if the number of commenters exceeds nine:
 \bitem
 \setlength{\itemsep}{0pt}
-\item \cA{example}\eA{emphasized example}more text\mA{margin example}
+\item \cA{example}\eA{emphasized example}more text\mA{margin example}\mA{margin example which won't overlap}
 \item \cB{example}\eB{emphasized example}more text\mB{margin example}
 \item \cC{example}\eC{emphasized example}more text\mC{margin example}
 \item \cD{example}\eD{emphasized example}more text\mD{margin example}
@@ -310,7 +327,7 @@ and will wrap around back to the first color if the number of commenters exceeds
 \item \cG{example}\eG{emphasized example}more text\mG{margin example}
 \item \cH{example}\eH{emphasized example}more text\mH{margin example}
 \item \cI{example}\eI{emphasized example}more text\mI{margin example}
-\item Back to first color: \cJ{example}\eJ{emphasized example}more text\mJ{margin example}
+\item Back to first color: \cJ{example}\eJ{emphasized example}more text\fJ{float margin example}\fJ{second float margin example which overlaps}
 \eitem
 You can also disable all comments to see a clean version of the current 
 document using the \verb!hidecomments! package option.
