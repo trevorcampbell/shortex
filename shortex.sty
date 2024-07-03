@@ -556,6 +556,11 @@
 
 \newcommand{\1}{\mathds{1}} % indicator function
 \newcommand{\sgn}{\operatorname{sgn}} % sign function
+
+%make \c be \colon in math mode, usual definition as a cedilla accent in text mode
+\let\oldc\c
+\renewcommand\c{\relax\ifmmode\colon\else\oldc\fi} 
+
 % Words in math
 \newcommand{\st}{\ \text{s.t.}\ }
 \newcommand{\andd}{\ \text{and}\ }
