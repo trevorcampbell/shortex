@@ -349,6 +349,8 @@
 \expandafter\edef\csname e\thiscommenter\endcsname##1{\noexpand\textcolor{CommentColor\thecommentcolorcounter}{{\noexpand\bf (\thiscommenter\incdisplaycounter) ##1}}}
 \expandafter\edef\csname h\thiscommenter\endcsname##1{\noexpand\textcolor{CommentColor\thecommentcolorcounter}{##1}}
 \expandafter\edef\csname m\thiscommenter\endcsname##1{%
+\noexpand\textcolor{CommentColor\thecommentcolorcounter}{$\,^{(\noexpand\text{\thiscommenter}\incdisplaycounter)}$\noexpand\marginpar{\noexpand\tiny\noexpand\textcolor{CommentColor\thecommentcolorcounter}{(\thiscommenter\displaycounter) ##1}}}}
+\expandafter\edef\csname f\thiscommenter\endcsname##1{%
 \noexpand\textcolor{CommentColor\thecommentcolorcounter}{$\,^{(\noexpand\text{\thiscommenter}\incdisplaycounter)}$\noexpand\marginnote{\noexpand\tiny\noexpand\textcolor{CommentColor\thecommentcolorcounter}{(\thiscommenter\displaycounter) ##1}}}}
 \fi
 % if the color counter exceeded
@@ -425,15 +427,15 @@
 %%% Common Sets and Set Operations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
-\newcommand{\xreals}{\overline{\reals}}
+\newcommand{\xreals}{\overline{\reals}}  % extended reals
 \newcommand{\ints}{\ensuremath{\mathbb{Z}}}
 \newcommand{\rats}{\ensuremath{\mathbb{Q}}}
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
 \newcommand{\msrs}{\mathcal{M}}
 \newcommand{\pmsrs}{\mathcal{M}_1}
-\newcommand{\union}{\bigcup}
-\newcommand{\inter}{\bigcap}
+\DeclareMathOperator*{\union}{\mathchoice{\bigcup}{\cup}{\cup}{\cup}}
+\DeclareMathOperator*{\inter}{\mathchoice{\bigcap}{\cap}{\cap}{\cap}}
 \newcommand{\vol}{\operatorname{vol}}
 \newcommand{\diam}{\operatorname{diam}}
 \newcommand{\cl}{\operatorname{cl}}
@@ -461,7 +463,7 @@
 %%% Calculus 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\oldd\d
-\renewcommand\d{\ifmmode\mathrm{d}\else\oldd\fi} %make \d be mathrm{d} in math mode, usual defn as underdot(?) in text mode
+\renewcommand\d{\relax\ifmmode\mathrm{d}\else\oldd\fi} %make \d be mathrm{d} in math mode, usual defn as underdot(?) in text mode
 \newcommand{\pd}{\partial}
 \newcommand{\grad}{\nabla}
 \newcommand{\der}[3][]{\ensuremath{\frac{{\d}^{#1} #2}{\d {#3}^{#1}}}}
@@ -486,7 +488,7 @@
 
 % unary/functions
 \let\oldP\P
-\renewcommand\P{\ifmmode\mathbb{P}\else\oldP\fi} %make \P be mathbbP in math mode, usual defn as pilcrow in text mode
+\renewcommand\P{\relax\ifmmode\mathbb{P}\else\oldP\fi} %make \P be mathbbP in math mode, usual defn as pilcrow in text mode
 \newcommand{\E}{\mathbb{E}}	% expectation
 \newcommand{\Var}{\operatorname{Var}}	% variance
 \newcommand{\Cov}{\operatorname{Cov}}	% covariance
@@ -554,6 +556,7 @@
 
 \newcommand{\1}{\mathds{1}} % indicator function
 \newcommand{\sgn}{\operatorname{sgn}} % sign function
+
 % Words in math
 \newcommand{\st}{\ \text{s.t.}\ }
 \newcommand{\andd}{\ \text{and}\ }
@@ -569,19 +572,8 @@
 
 % Equality operators
 \mathtoolsset{centercolon}
-%\newcommand{\definedas}{:=}
-%\newcommand{\defines}{=:}
-%
-%% Fractions
-%\newcommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
-%\newcommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
-%\newcommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
-%
-%\newcommand{\prox}[2]{\ensuremath{\operatorname{prox}_{#1}\rbra{#2}}}
-%
-%\newcommand*\pFq[2]{{}_{#1}F_{#2}}
-%
-%\DeclareMathOperator{\notimplies}{\centernot\implies}
+\newcommand{\defas}{:=}
+\newcommand{\defs}{=:}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Squeezed math
