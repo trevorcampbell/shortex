@@ -22,7 +22,7 @@ See \cref{eq:foo}.
 X_n &\in \scX\\
 X_n &\convp X \label{eq:foo}\\
 \E\lt[X\rt] &= \int_0^1 6\der{4y^2}{y}\d y\\
-\P\lt(X_n \in \scA\rt) &= \sbhC\\
+\P\lt(X_n \in \scA\rt) &= \skhC\\
 X_n &\dist \Norm(\shmu, \shSigma)
 \]
 ```
